@@ -2,26 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+
+input, textarea, select {
+  @apply  w-full border border-gray-200 bg-zinc-100/40;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+table.basic{
+  @apply w-full rounded-sm shadow-md my-3;
+}
+table.basic thead tr td,
+table.basic thead tr th
+{
+  @apply text-sm text-gray-800 bg-green-100 uppercase border border-gray-200 border-gray-200 px-2 py-2;
+}
+table.basic tr td{
+  @apply px-2 py-1 border border-gray-200;
+}
+table.basic a{
+  @apply px-2 rounded-sm inline-flex mx-1 items-center gap-1 text-sm py-1;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+/* ESTILOS TRADICIONALES */
+.swym-delete-img {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(180, 44, 44, 0.636);
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  width: 1.3px;
+  height: 1.5em;
+  min-width: 1.3em;
+  right: -35px;
+  bottom: -10px;
+  z-index: 0;
+  cursor: pointer;
 }
