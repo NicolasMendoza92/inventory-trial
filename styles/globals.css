@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 
+p{
+  @apply text-green-600 text-3xl
+}
+
 input, textarea, select {
   @apply  w-full border border-gray-200 bg-zinc-100/40;
 }

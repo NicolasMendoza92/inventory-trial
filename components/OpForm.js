@@ -1,46 +1,94 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { useState } from 'react'
-import Swal from 'sweetalert2';
+import React, { useState } from 'react'
 
-export default function OperationForm({projects}) {
+export default function OpForm({
+    _id,
+    projectID: existingProjectID,
+    standar: existingStandar,
+    vintage: existingVintage,
+    volumen: existingVolumen,
+    name: existingName,
+}) {
 
+    // VALORES DEL PROYECTO SELECCIONADO 
+    const [projectID, setProjectId] = useState(existingProjectID || '');
+    const [standar, setStandar] = useState(existingStandar || '');
+    const [vintage, setVintage] = useState(existingVintage || '');
+    const [volumen, setVolumen] = useState(existingVolumen || '');
+    const [name, setName] = useState(existingName || '');
 
+    // VALORES DEL FORMULARIO DE OPERACION
+    const [transaction, setTransaction] = useState('');
     const [cliente, setCliente] = useState('');
     const [precio, setPrecio] = useState('');
-    const [transaction, setTransaction] = useState('');
-    const [volumen, setVolumen] = useState('');
-    const [proyecto, setProyecto] = useState('');
+    const [quantity, setQuantity] = useState('');
     const [status, setStatus] = useState('');
     const [payment, setPayment] = useState('');
     const [notas, setNotas] = useState('');
 
-    const router = useRouter();
 
-    async function newOperation(e) {
+    const router = useRouter()
+
+
+    async function newSale(e) {
+        e.preventDefault();
+
         try {
-            e.preventDefault();
-            const data = { cliente, precio, volumen, transaction, proyecto, status, payment, notas }
-            console.log(data)
-            await axios.post('/api/operations', data);
-            // if (_id) {
-            //     //update
-            //     await axios.put('/api/operations', { ...data, _id });
-            // } else {
-            //     //create
-            //     await axios.post('/api/operations', data);
-            // }
-            // router.push('/operations');
+            const newOperation = {
+                transaction,
+                cliente,
+                precio,
+                quantity,
+                status,
+                payment,
+                proyecto: _id,
+                notas
+            }
+            if (transaction === 'Venta') {
+                const total = Number(volumen) - Number(quantity)
+                const data = {
+                    projectID,
+                    standar,
+                    vintage,
+                    volumen: total,
+                    name
+                }
+                await axios.put('/api/projects', { ...data, _id });
+                await axios.post('/api/operations', newOperation);
+
+            }
+            else if (transaction === 'Compra') {
+                const total = Number(volumen) + Number(quantity)
+                const data = {
+                    projectID,
+                    standar,
+                    vintage,
+                    volumen: total,
+                    name
+                }
+                await axios.put('/api/projects', { ...data, _id });
+                await axios.post('/api/operations', newOperation);
+            }
+            const form = e.target;
+            form.reset();
+            router.push('/inventary');
         } catch (error) {
             console.log(error)
         }
     }
 
 
+
     return (
-        <div >
-            <form onSubmit={newOperation} className=' grid gap-3'>
-            <div className='flex-wrap'>
+        <div>
+            <div className='shadow-lg   bg-zince-300/10 flex flex-col items-start gap-2 m-3' >
+                <div> {standar} {projectID} {name}</div>
+                <div>Vintage: {vintage}</div>
+                <div>Volumen disponible: <b>{volumen}</b> </div>
+            </div>
+            <form onSubmit={newSale}>
+                <div className='flex-wrap'>
                     <label className='text-gray-400'>Transacción</label>
                     <select
                         className="flex border border-gray-200 py-2 bg-zinc-100/40"
@@ -49,7 +97,6 @@ export default function OperationForm({projects}) {
                         <option value="">-no seleccionado-</option>
                         <option value="Venta">VENTA</option>
                         <option value="Compra">COMPRA</option>
-                        <option value="Reserva">RESERVA</option>
                     </select>
                 </div>
                 <div className='flex-wrap'>
@@ -61,19 +108,7 @@ export default function OperationForm({projects}) {
                         onChange={e => setCliente(e.target.value)} />
                 </div>
                 <div className='flex-wrap'>
-                    <label className='text-gray-400'>Proyecto</label>
-                    <select
-                        className=" flex border border-gray-200 py-1 bg-zinc-100/40"
-                        value={proyecto}
-                        onChange={e => setProyecto(e.target.value)}>
-                        <option value="">-no seleccionado-</option>
-                        {projects.length > 0 && projects.map(project => (
-                        <option key={project._id} value={project._id}>{project.standar} {project.projectID} - Vintage: {project.vintage}</option>
-                    ))}
-                    </select>
-                </div>
-                <div className='flex-wrap'>
-                    <label className='text-gray-400'>Precio</label>
+                    <label className='text-gray-400'>Precio de venta</label>
                     <input
                         type='text'
                         placeholder='ej: 3.20 USD'
@@ -85,8 +120,8 @@ export default function OperationForm({projects}) {
                     <input
                         type='number'
                         placeholder='ej: 4512'
-                        value={volumen}
-                        onChange={e => setVolumen(e.target.value)} />
+                        value={quantity}
+                        onChange={e => setQuantity(e.target.value)} />
                 </div>
                 <div className='flex-wrap'>
                     <label className='text-gray-400'>Delivery Status</label>
@@ -119,6 +154,6 @@ export default function OperationForm({projects}) {
                     Save
                 </button>
             </form>
-        </div >
+        </div>
     )
 }

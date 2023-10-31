@@ -10,13 +10,13 @@ export default async function handle(req, res) {
     }
   
     if (method === 'POST') {
-      const {transaction, cliente, proyecto, precio, volumen, status, payment, notas} = req.body;
+      const {transaction, cliente, proyecto, precio, quantity, status, payment, notas} = req.body;
       const operationDoc = await Operation.create({
         transaction, 
         cliente, 
         proyecto, 
         precio, 
-        volumen, 
+        quantity, 
         status, 
         payment, 
         notas, 
@@ -25,27 +25,25 @@ export default async function handle(req, res) {
     }
   
     if (method === 'PUT') {
-      const {transaction, cliente, proyecto, precio, volumen, status, payment, notas,_id} = req.body;
+      const {transaction, cliente, proyecto, precio, quantity, status, payment, notas,_id} = req.body;
       // definimos dos parametros, definimos el objeto que lo identifica, como el id, y luego las propiedades del objeto que queremos actualizar
       const operationDoc = await Operation.updateOne({_id},{
         transaction, 
         cliente, 
         proyecto, 
         precio, 
-        volumen, 
+        quantity, 
         status, 
         payment, 
         notas, 
-
       });
       res.json(operationDoc);
     }
   
     if (method === 'DELETE') {
-      const {_id} = req.params;
-      await Operation.findByIdAndDelete(_id, {
-        deleted: true,
-      });
-      res.json({ok: true, message:'operacion eliminada'});
-    }
+      if (req.query?.id) {
+          await Operation.deleteOne({ _id: req.query?.id });
+          res.json({ok: true, message:'operacion eliminada'});
+      }
+  }
   }

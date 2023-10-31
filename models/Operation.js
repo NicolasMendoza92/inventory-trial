@@ -14,7 +14,7 @@ const operationSchema = new Schema({
     precio: {
         type: String,
     },
-    volumen: {
+    quantity: {
         type: Number,
         require: true,
     },
@@ -27,7 +27,6 @@ const operationSchema = new Schema({
     notas:{
         type: String,
     } ,  
-    deleted: {type: Boolean, default: false},
 },
     {
         timestamps: true,
