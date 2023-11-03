@@ -2,9 +2,9 @@ import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { mongooseConnect } from "@/lib/mongoose";
-import {MongoDBAdapter} from "@next-auth/mongodb-adapter";
 import User from "@/models/User";
 import clientPromise from "@/lib/mongodb";
+import { MongoDBAdapter } from "@auth/mongodb-adapter";
 
 export const authOptions = {
     providers: [
