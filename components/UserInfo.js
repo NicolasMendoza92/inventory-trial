@@ -24,7 +24,7 @@ export default function UserInfo() {
         </div>
       }
       {session &&
-        <div className="flex gird justify-end">
+        <div className="flex gird justify-start">
           <div className="shadow-lg p-3 bg-zince-300/10 flex items-center gap-2 m-3">
             <div>
               Hola <span className="font-bold">{session?.user?.name}</span>

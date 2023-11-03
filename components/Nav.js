@@ -6,20 +6,32 @@ import { useRouter } from "next/router";
 
 export default function Nav({ showNav, setShowNav }) {
 
-    const inactiveLink = 'flex gap-1 p-1';
-    const activeLink = 'flex gap-1 p-1 text-green-600 rounded';
+    const inactiveLink = 'flex gap-1 p-1 text-white';
+    const activeLink = 'flex gap-1 p-1 text-green-300 rounded';
 
     // way to create router in nextjs 
     const router = useRouter();
     const { pathname } = router;
 
-
+    const collapseData = (e) => {
+        e.preventDefault(e);
+        setShowNav(prev => !prev);
+    }
 
     return (
-        <div className='shadow-lg p-3 bg-zince-300/10 flex gap-3 px-3'>
-            <Link href={"/"} className='flex gap-1 mb-3' >
-                <img className='h-8' src='https://res.cloudinary.com/dbv6dgwez/image/upload/v1644553896/Allcot%20Trading/Allcot_Logo_horizontal_ltqc4p.png'></img>
-            </Link>
+        <div className={(showNav ? 'left-0 flex-col' : '-left-full flex-wrap ') + ' flex top-0 p-3 bg-green-600 fixed w-full h-full gap-3 p-3 md:static md:w-auto transition-all z-10 '}>
+            <div className="flex items-center justify-between ">
+                <div className="block md:hidden flex ">
+                    <button onClick={collapseData}>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                    </button>
+                </div>
+                <Link href={"/"} className='flex gap-1' >
+                    <img className='h-8' src='https://res.cloudinary.com/dbv6dgwez/image/upload/v1644553896/Allcot%20Trading/Allcot_Logo_horizontal_ltqc4p.png'></img>
+                </Link>
+            </div>
             <Link href={"/inventary"} className={pathname.includes('/inventary') ? activeLink : inactiveLink}>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0l-3-3m3 3l3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
@@ -32,7 +44,6 @@ export default function Nav({ showNav, setShowNav }) {
                 </svg>
                 Operaciones
             </Link>
-
         </div>
     );
 }

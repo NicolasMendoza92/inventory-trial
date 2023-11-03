@@ -1,17 +1,27 @@
+import { trailingSlash } from '@/next.config';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react'
 
 export default function OpForm({
     _id,
+    transaction: existingTransaction,
+    cliente: existingCliente,
+    precio: existingPrecio,
+    quantity: existingQuantity,
+    delivery: existingDelivery,
+    payment: existingPayment,
+    detalles: existingDetalles,
     projectID: existingProjectID,
     standar: existingStandar,
     vintage: existingVintage,
     volumen: existingVolumen,
     name: existingName,
+    relatedProjectID
 }) {
 
-    // VALORES DEL PROYECTO SELECCIONADO 
+
+    // VALORES DEL PROYECTO SELECCIONADO CUANDO SE EDITA
     const [projectID, setProjectId] = useState(existingProjectID || '');
     const [standar, setStandar] = useState(existingStandar || '');
     const [vintage, setVintage] = useState(existingVintage || '');
@@ -19,13 +29,13 @@ export default function OpForm({
     const [name, setName] = useState(existingName || '');
 
     // VALORES DEL FORMULARIO DE OPERACION
-    const [transaction, setTransaction] = useState('');
-    const [cliente, setCliente] = useState('');
-    const [precio, setPrecio] = useState('');
-    const [quantity, setQuantity] = useState('');
-    const [status, setStatus] = useState('');
-    const [payment, setPayment] = useState('');
-    const [notas, setNotas] = useState('');
+    const [transaction, setTransaction] = useState(existingTransaction || '');
+    const [cliente, setCliente] = useState(existingCliente || '');
+    const [precio, setPrecio] = useState(existingPrecio || '');
+    const [quantity, setQuantity] = useState(existingQuantity || '');
+    const [delivery, setDelivery] = useState(existingDelivery || '');
+    const [payment, setPayment] = useState(existingPayment || '');
+    const [detalles, setDetalles] = useState(existingDetalles || '');
 
 
     const router = useRouter()
@@ -34,48 +44,99 @@ export default function OpForm({
     async function newSale(e) {
         e.preventDefault();
 
-        try {
-            const newOperation = {
-                transaction,
-                cliente,
-                precio,
-                quantity,
-                status,
-                payment,
-                proyecto: _id,
-                notas
-            }
-            if (transaction === 'Venta') {
-                const total = Number(volumen) - Number(quantity)
-                const data = {
-                    projectID,
-                    standar,
-                    vintage,
-                    volumen: total,
-                    name
+        // EDIT 
+        if (relatedProjectID) {
+            try {
+                const operation = {
+                    transaction,
+                    cliente,
+                    precio,
+                    quantity,
+                    delivery,
+                    payment,
+                    proyecto: relatedProjectID,
+                    detalles,
                 }
-                await axios.put('/api/projects', { ...data, _id });
-                await axios.post('/api/operations', newOperation);
+                if (transaction === 'Venta') {
+                    const total = Number(volumen) - Number(quantity)
+                    const data = {
+                        projectID,
+                        standar,
+                        vintage,
+                        volumen: total,
+                        name
+                    }
+                    // le paso el _id de lo seleccionado, cuando es una vieja, edita la operacion con el ID de la operacion
+                    await axios.put('/api/projects', { ...data, _id });
+                    await axios.put('/api/operations', { ...operation, _id });
+                }
+                else if (transaction === 'Compra') {
+                    const total = Number(volumen) + Number(quantity)
+                    const data = {
+                        projectID,
+                        standar,
+                        vintage,
+                        volumen: total,
+                        name
+                    }
+                    await axios.put('/api/projects', { ...data, _id });
+                    await axios.put('/api/operations', { ...operation, _id });
 
-            }
-            else if (transaction === 'Compra') {
-                const total = Number(volumen) + Number(quantity)
-                const data = {
-                    projectID,
-                    standar,
-                    vintage,
-                    volumen: total,
-                    name
                 }
-                await axios.put('/api/projects', { ...data, _id });
-                await axios.post('/api/operations', newOperation);
+                console.log(operation)
+                console.log(_id)
             }
-            const form = e.target;
-            form.reset();
-            router.push('/inventary');
-        } catch (error) {
-            console.log(error)
+            catch (error) {
+                console.log(error)
+            }
+        } else {
+            // NEW OPERATION
+            try {
+                const newOperation = {
+                    transaction,
+                    cliente,
+                    precio,
+                    quantity,
+                    delivery,
+                    payment,
+                    proyecto: _id,
+                    detalles
+                }
+                if (transaction === 'Venta') {
+                    const total = Number(volumen) - Number(quantity)
+                    const data = {
+                        projectID,
+                        standar,
+                        vintage,
+                        volumen: total,
+                        name
+                    }
+                    await axios.put('/api/projects', { ...data, _id });
+                    await axios.post('/api/operations', newOperation);
+
+                }
+                else if (transaction === 'Compra') {
+                    const total = Number(volumen) + Number(quantity)
+                    const data = {
+                        projectID,
+                        standar,
+                        vintage,
+                        volumen: total,
+                        name
+                    }
+                    await axios.put('/api/projects', { ...data, _id });
+                    await axios.post('/api/operations', newOperation);
+                }
+                console.log(newOperation)
+            } catch (error) {
+                console.log(error)
+            }
         }
+
+        const form = e.target;
+        form.reset();
+        router.push('/inventary');
+
     }
 
 
@@ -108,10 +169,10 @@ export default function OpForm({
                         onChange={e => setCliente(e.target.value)} />
                 </div>
                 <div className='flex-wrap'>
-                    <label className='text-gray-400'>Precio de venta</label>
+                    <label className='text-gray-400'>Precio de venta (USD)</label>
                     <input
-                        type='text'
-                        placeholder='ej: 3.20 USD'
+                        type='number'
+                        placeholder='ej: 3.20 '
                         value={precio}
                         onChange={e => setPrecio(e.target.value)} />
                 </div>
@@ -127,8 +188,8 @@ export default function OpForm({
                     <label className='text-gray-400'>Delivery Status</label>
                     <select
                         className="flex border border-gray-200 py-1 bg-zinc-100/40"
-                        value={status}
-                        onChange={e => setStatus(e.target.value)}>
+                        value={delivery}
+                        onChange={e => setDelivery(e.target.value)}>
                         <option value="">-no seleccionado-</option>
                         <option value="Pendiente">Pendiente</option>
                         <option value="Entregado">Entregado</option>
@@ -147,9 +208,9 @@ export default function OpForm({
                 </div>
                 <label className='text-gray-400'>Notas</label>
                 <textarea
-                    placeholder='ej: Mexico'
-                    value={notas}
-                    onChange={e => setNotas(e.target.value)} />
+                    placeholder='ej: creditos de Misha '
+                    value={detalles}
+                    onChange={e => setDetalles(e.target.value)} />
                 <button type="submit" className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500 focus:outline-none focus:ring focus:ring-green-400">
                     Save
                 </button>

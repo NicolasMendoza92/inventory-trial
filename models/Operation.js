@@ -12,19 +12,19 @@ const operationSchema = new Schema({
     },
     proyecto: { type: mongoose.Schema.Types.ObjectId, ref: "Project"},
     precio: {
-        type: String,
+        type: Number,
     },
     quantity: {
         type: Number,
         require: true,
     },
-    status:{
+    delivery:{
         type: String,
     },
     payment:{
         type: String,
     },
-    notas:{
+    detalles:{
         type: String,
     } ,  
 },
