@@ -33,7 +33,7 @@ export default function searchProjects({ operations }) {
                 <input
                     value={operationSearched}
                     onChange={e => setOperationSearched(e.target.value)}
-                    placeholder='Busca tu proyecto'
+                    placeholder='Busca tu operación, por ID, standar, status, cliente...'
                     autoFocus />
             </div>
             <div className=' relative overflow-x-auto'>

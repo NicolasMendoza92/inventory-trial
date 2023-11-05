@@ -13,13 +13,17 @@ export default function UserInfo() {
     await signOut();
   }
 
+  function goToLogin(){
+    router.push('/login')
+  }
+
   return (
     <>
       {!session &&
         <div className="flex jusify-center">
           <div className="shadow-md p-3 bg-zince-300/10 flex items-center gap-2 m-3">
-            <div>Usuario no logeado</div>
-            <Link href={'/login'}> Login </Link>
+            <h1>Usuario no logeado</h1>
+            <button className="bg-green-600 rounded-lg text-white font-bold px-6 py-2" onClick={goToLogin}> Login </button>
           </div>
         </div>
       }

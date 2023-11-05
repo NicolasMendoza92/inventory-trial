@@ -31,35 +31,35 @@ export default function HomeStats({ operations }) {
                 <div className="board-card" >
                     <h3 className="board-title ">Delivery</h3>
                     <div className="board-number">{openDelivery.length}</div>
-                    <div className="board-desc">You have {openDelivery.length} pending delivery </div>
+                    <div className="board-desc">Tienes {openDelivery.length} entregas pendientes. </div>
                 </div>
                 <div className="board-card" >
                     <h3 className="board-title ">Payment</h3>
                     <div className="board-number">{openPayment.length}</div>
-                    <div className="board-desc">You have {openPayment.length} pending payment</div>
+                    <div className="board-desc">Tienes {openPayment.length} pagos pendientes.</div>
                 </div>
                 <div className="board-card" >
                     <h3 className="board-title ">Close Operations</h3>
                     <div className="board-number">{operationsClosed.length}</div>
-                    <div className="board-desc">You have closed {operationsClosed.length} operations.</div>
+                    <div className="board-desc">Cerraste {operationsClosed.length} operaciones.</div>
                 </div>
             </div>
             <p className="m-2"><b>Operaciones</b></p>
             <div className="board-grid">
                 <div className="board-card" >
-                    <h3 className="board-title ">Today</h3>
+                    <h3 className="board-title ">Hoy</h3>
                     <div className="board-number">{operationsToday.length}</div>
-                    <div className="board-desc">orders in a day</div>
+                    <div className="board-desc">Operaciones en el día.</div>
                 </div>
                 <div className="board-card" >
-                    <h3 className="board-title ">Week</h3>
+                    <h3 className="board-title ">Semanal</h3>
                     <div className="board-number">{operationsWeek.length}</div>
-                    <div className="board-desc">orders in this week</div>
+                    <div className="board-desc">Operaciones en la semana.</div>
                 </div>
                 <div className="board-card" >
-                    <h3 className="board-title ">Month</h3>
+                    <h3 className="board-title ">Mensual</h3>
                     <div className="board-number">{operationsMonth.length}</div>
-                    <div className="board-desc">ordres in last 30 days</div>
+                    <div className="board-desc">Operaciones en los últimos 30 días.</div>
                 </div>
             </div>          
         </div>

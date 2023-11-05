@@ -18,8 +18,6 @@ export async function getServerSideProps() {
 
 export default function Home({operations}) {
 
-  console.log(operations)
-
   return (
     <Layout>
       <UserInfo/>

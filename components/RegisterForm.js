@@ -77,7 +77,7 @@ export default function RegisterForm() {
                     )}
 
                     <Link className="text-sm mt-3 text-right" href={"/login"}>
-                        Already have an account? <span className="underline">Login</span>
+                        ¿Ya tienes una cuenta? <span className="underline">Login</span>
                     </Link>
                 </form>
             </div>

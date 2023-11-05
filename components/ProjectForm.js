@@ -35,19 +35,27 @@ export default function ProjectForm({
     const [files, setFiles] = useState(existingFiles || []);
 
     const [isUploading, setIsUploading] = useState(false);
+    // handle errors 
+    const [error, setError] = useState("");
     const router = useRouter();
 
     async function saveProject(e) {
         try {
             e.preventDefault();
-            const data = { projectID, standar, vintage, volumen, name, projectLink, tech, corsia, pais,disponible, notas, files }
+            const data = { projectID, standar, vintage, volumen, name, projectLink, tech, corsia, pais, disponible, notas, files }
+
+            if (!projectID || !standar || !vintage || !volumen || !tech || !pais || !name) {
+                setError('Faltan datos importantes');
+                return;
+            }
             if (_id) {
                 //update
                 await axios.put('/api/projects', { ...data, _id });
             } else {
                 //create
-                await axios.post('/api/projects', data);
+                const res = await axios.post('/api/projects', data);
             }
+
             router.push('/inventary');
         } catch (error) {
             console.log(error)
@@ -101,7 +109,7 @@ export default function ProjectForm({
 
     return (
         <div >
-            <form onSubmit={saveProject} className='flex grid gap-3'>
+            <form onSubmit={saveProject} className='flex grid gap-3 mb-3'>
                 <label className='text-gray-400'>Project ID</label>
                 <input
                     type='text'
@@ -193,7 +201,7 @@ export default function ProjectForm({
                     onChange={e => setDisponible(e.target.value)} />
                 <label className='text-gray-400'>Notas</label>
                 <textarea
-                    placeholder='ej: Mexico'
+                    placeholder='ej: Proyecto de TD '
                     value={notas}
                     onChange={e => setNotas(e.target.value)} />
                 <label className='text-gray-400'>Archivos</label>
@@ -229,6 +237,11 @@ export default function ProjectForm({
                 <button type="submit" className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500 focus:outline-none focus:ring focus:ring-green-400">
                     Save
                 </button>
+                {error && (
+                    <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
+                        {error}
+                    </div>
+                )}
             </form>
         </div >
     )

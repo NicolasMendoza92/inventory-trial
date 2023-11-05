@@ -30,7 +30,7 @@ export default function Layout({ children }) {
       </div>
       <div>
         <Nav showNav={showNav} setShowNav={setShowNav}/>
-        <div className="bg-white flex-grow mt-2 mr-2 mb-2 rounded-lg p-4 ">
+        <div className="bg-white flex-grow ms-2 mt-2 mr-2 mb-3 rounded-lg p-4 ">
           {children}
         </div>
       </div>
