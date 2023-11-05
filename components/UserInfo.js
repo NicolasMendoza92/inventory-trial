@@ -17,15 +17,15 @@ export default function UserInfo() {
     <>
       {!session &&
         <div className="flex jusify-center">
-          <div className="shadow-lg p-3 bg-zince-300/10 flex items-center gap-2 m-3">
+          <div className="shadow-md p-3 bg-zince-300/10 flex items-center gap-2 m-3">
             <div>Usuario no logeado</div>
             <Link href={'/login'}> Login </Link>
           </div>
         </div>
       }
       {session &&
-        <div className="flex gird justify-start">
-          <div className="shadow-lg p-3 bg-zince-300/10 flex items-center gap-2 m-3">
+        <div className="flex gird justify-end">
+          <div className="shadow-md p-3 bg-zince-300/10 flex items-center gap-2 m-3">
             <div>
               Hola <span className="font-bold">{session?.user?.name}</span>
             </div>

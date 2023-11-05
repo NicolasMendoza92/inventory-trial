@@ -7,33 +7,45 @@ import { useEffect, useState } from "react";
 
 export default function operations() {
 
+  const [pageNumber, setPageNumber] = useState(0)
+  const [numberOfPages, setNumberOfPages] = useState(0);
   const [operations, setOperations] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  const pages = new Array(numberOfPages).fill(null).map((v, i) => i);
 
   // esti actualiza la tabla - es la consulta get a las categorias. 
   useEffect(() => {
     fetchOperations();
-  }, [])
+  }, [pageNumber])
 
   function fetchOperations() {
     setIsLoading(true);
-    axios.get('/api/operations').then(result => {
-      setOperations(result.data);
+    axios.get(`/api/operations?page=${pageNumber}`).then(result => {
+      setOperations(result.data.operationDoc);
+      setNumberOfPages(result.data.totalPages);
       setIsLoading(false);
     });
   }
 
+  const gotoPrevious = () => {
+    setPageNumber(Math.max(0, pageNumber - 1));
+  };
+
+  const gotoNext = () => {
+    setPageNumber(Math.min(numberOfPages - 1, pageNumber + 1));
+  };
 
 
 
   return (
     <Layout>
       <div className="flex justify-between content-center">
-        {/* <Link className="bg-gray-300 text-white font-bold cursor-pointer px-4 py-2 rounded-md" href={'/searchOperations'}>
+        <Link className="bg-gray-300 text-white font-bold cursor-pointer px-4 py-2 rounded-md" href={'/searchOperations'}>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
             <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
           </svg>
-        </Link> */}
+        </Link>
       </div>
       <div className="relative overflow-x-auto">
         <table className=" basic my-3">
@@ -90,6 +102,25 @@ export default function operations() {
             ))}
           </tbody>
         </table>
+
+        <div className="flex  justify-center py-4 gap-2">
+          <button className="bg-gray-300 text-white p-2" onClick={gotoPrevious}>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
+            </svg>
+          </button>
+          {pages.map((pageIndex) => (
+            <button className="btn-default" key={pageIndex} onClick={() => setPageNumber(pageIndex)}>
+              {pageIndex + 1}
+            </button>
+          ))}
+          <button className="bg-gray-300 text-white p-2" onClick={gotoNext}>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
+            </svg>
+          </button>
+        </div>
+        <h1 className="text-center">Page {pageNumber + 1} of {numberOfPages}</h1>
       </div>
     </Layout>
   )

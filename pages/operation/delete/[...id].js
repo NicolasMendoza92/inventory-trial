@@ -3,13 +3,14 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Layout from "@/components/layout";
+import Swal from "sweetalert2";
 
 export default function DeleteOpertionPage() {
     const router = useRouter();
     const { id } = router.query;
 
     const [opInfo, setOpInfo] = useState('');
-    
+
     useEffect(() => {
         if (!id) {
             return;
@@ -27,9 +28,11 @@ export default function DeleteOpertionPage() {
         await axios.delete('/api/operations?id=' + id);
         router.push('/operations')
     }
+
+
     return (
         <Layout>
-            <h1 className="text-center">¿Estas seguro de eliminar la operacion  de {opInfo?.transaction} <br/> con {opInfo?.cliente} ?</h1>
+            <p className="text-center mb-2">¿Estas seguro de eliminar la operacion  de {opInfo?.transaction} <br /> con {opInfo?.cliente} ?</p>
             <div className="flex gap-2 justify-center">
                 <button
                     onClick={deleteProject}
@@ -42,6 +45,14 @@ export default function DeleteOpertionPage() {
                     NO
                 </button>
             </div>
+            <br /><hr />
+            <h1 className="text-center">Recuerda que esta operación ya impacto en el inventario, por lo que deberas ajustarlo manualmente.</h1>
+            {opInfo?.transaction === 'Venta' && (
+                <div className="text-center"> En este caso, deberias sumar <b>{opInfo?.quantity}</b> creditos al inventario</div>
+            )}
+            {opInfo?.transaction === 'Compra' && (
+                <div className="text-center">En este caso, deberias restar <b>{opInfo?.quantity}</b> creditos del inventario</div>
+            )}
         </Layout>
     );
 }

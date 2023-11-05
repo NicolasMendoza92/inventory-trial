@@ -1,7 +1,8 @@
 import { trailingSlash } from '@/next.config';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import Swal from 'sweetalert2';
 
 export default function OpForm({
     _id,
@@ -20,15 +21,28 @@ export default function OpForm({
     relatedProjectID
 }) {
 
-
-    // VALORES DEL PROYECTO SELECCIONADO CUANDO SE EDITA
+    // VALORES DEL PROYECTO SELECCIONADO CUANDO SE VA A HACER UNA NUEVA OPERACION
     const [projectID, setProjectId] = useState(existingProjectID || '');
     const [standar, setStandar] = useState(existingStandar || '');
     const [vintage, setVintage] = useState(existingVintage || '');
     const [volumen, setVolumen] = useState(existingVolumen || '');
     const [name, setName] = useState(existingName || '');
 
-    // VALORES DEL FORMULARIO DE OPERACION
+    // DEFINO ESTADO PARA MANJEAR EL PROYECTO RELACIONADO CUANDO EDITO UNA OPERACION 
+    const [relatedProjectInfo, setRelatedProjectInfo] = useState('');
+
+    // SI HAY UN PROYECTO RELACIONADO, HAGO USE EFECT Y TRAIGO DE LA BASE DE DATOS LA INFO DE ESE PROYECTO 
+    useEffect(() => {
+        if (!relatedProjectID) {
+            return;
+        }
+        axios.get('/api/projects?id=' + relatedProjectID).then(response => {
+            setRelatedProjectInfo(response.data);
+        })
+    }, [relatedProjectID]);
+
+
+    // VALORES VIEJOS DEL FORMULARIO DE OPERACION - CUANDO SE EDITA 
     const [transaction, setTransaction] = useState(existingTransaction || '');
     const [cliente, setCliente] = useState(existingCliente || '');
     const [precio, setPrecio] = useState(existingPrecio || '');
@@ -37,15 +51,17 @@ export default function OpForm({
     const [payment, setPayment] = useState(existingPayment || '');
     const [detalles, setDetalles] = useState(existingDetalles || '');
 
-
     const router = useRouter()
-
 
     async function newSale(e) {
         e.preventDefault();
-
-        // EDIT 
+        // EDITAR OPERACION  
         if (relatedProjectID) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Atención',
+                text: 'Si modificaste el volumen de la operación deberas cambiar el inventario para ajustarlo',
+            })
             try {
                 const operation = {
                     transaction,
@@ -58,39 +74,35 @@ export default function OpForm({
                     detalles,
                 }
                 if (transaction === 'Venta') {
-                    const total = Number(volumen) - Number(quantity)
+                    // const total = Number(relatedProjectInfo.volumen) - Number(quantity)
                     const data = {
-                        projectID,
-                        standar,
-                        vintage,
-                        volumen: total,
-                        name
+                        projectID: relatedProjectInfo.projectID,
+                        standar: relatedProjectInfo.standar,
+                        vintage: relatedProjectInfo.vintage,
+                        name: relatedProjectInfo.name,
                     }
-                    // le paso el _id de lo seleccionado, cuando es una vieja, edita la operacion con el ID de la operacion
-                    await axios.put('/api/projects', { ...data, _id });
+                    // le paso el _id de la seleccionado  la parte de operaciones, yy a la parte de proyectos le paso como _id el id relacionado de proyecto
+                    await axios.put('/api/projects', { ...data, _id: relatedProjectID });
                     await axios.put('/api/operations', { ...operation, _id });
                 }
                 else if (transaction === 'Compra') {
-                    const total = Number(volumen) + Number(quantity)
+                    // const total = Number(relatedProjectInfo.volumen) + Number(quantity)
                     const data = {
-                        projectID,
-                        standar,
-                        vintage,
-                        volumen: total,
-                        name
+                        projectID: relatedProjectInfo.projectID,
+                        standar: relatedProjectInfo.standar,
+                        vintage: relatedProjectInfo.vintage,
+                        name: relatedProjectInfo.name,
                     }
-                    await axios.put('/api/projects', { ...data, _id });
+                    await axios.put('/api/projects', { ...data, _id: relatedProjectID });
                     await axios.put('/api/operations', { ...operation, _id });
 
                 }
-                console.log(operation)
-                console.log(_id)
             }
             catch (error) {
                 console.log(error)
             }
         } else {
-            // NEW OPERATION
+            // NEW OPERATION - el_id que trae es el del proyecto y puede editarlo tranquilamente. 
             try {
                 const newOperation = {
                     transaction,
@@ -127,7 +139,6 @@ export default function OpForm({
                     await axios.put('/api/projects', { ...data, _id });
                     await axios.post('/api/operations', newOperation);
                 }
-                console.log(newOperation)
             } catch (error) {
                 console.log(error)
             }
@@ -135,7 +146,7 @@ export default function OpForm({
 
         const form = e.target;
         form.reset();
-        router.push('/inventary');
+        router.push('/operations');
 
     }
 

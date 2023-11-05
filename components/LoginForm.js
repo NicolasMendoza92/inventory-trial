@@ -30,7 +30,7 @@ export default function LoginForm() {
             return;
           }
     
-          router.push("/");
+          router.push("/inventary");
         } catch (error) {
           console.log(error);
         }

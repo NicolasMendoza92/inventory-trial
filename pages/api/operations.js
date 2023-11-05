@@ -6,20 +6,32 @@ export default async function handle(req, res) {
   await mongooseConnect();
 
   if (method === 'GET') {
-    if (req.query?.id) {
-      res.json(await Operation.findOne({ _id: req.query.id }));
+    try {
+      if (req.query?.id) {
+        res.json(await Operation.findOne({ _id: req.query.id }));
+      }
+      else {
+        const PAGE_SIZE = 20;
+        const page = parseInt(req.query.page || "0");
+        const total = await Operation.countDocuments({});
+        // con populate accedemos a las propiedades del objeto de referencia , con mongoose, es mas facil para relacionarlos
+        const operationDoc = await Operation.find({})
+          .populate('proyecto', {
+            projectID: 1,
+            name: 1,
+            standar: 1,
+            vintage: 1,
+          })
+          .limit(PAGE_SIZE)
+          .skip(PAGE_SIZE * page)
+        res.json({
+          operationDoc,
+          totalPages: Math.ceil(total / PAGE_SIZE)
+        })
+      }
+    } catch (error) {
+      console.log(error)
     }
-    else {
-      // con populate accedemos a las propiedades del objeto de referencia , con mongoose, es mas facil para relacionarlos
-      const operationDoc = await Operation.find({}).populate('proyecto',{
-        projectID: 1,
-        name: 1,
-        standar: 1,
-        vintage: 1, 
-      })
-      res.json(operationDoc);
-    }
-
   }
 
   if (method === 'POST') {
