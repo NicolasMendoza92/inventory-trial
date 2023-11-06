@@ -27,6 +27,7 @@ const operationSchema = new Schema({
     detalles:{
         type: String,
     } ,  
+    archivos: [{ type: String }], 
 },
     {
         timestamps: true,

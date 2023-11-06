@@ -1,8 +1,8 @@
-import { trailingSlash } from '@/next.config';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import Swal from 'sweetalert2';
+import Spinner from './Spinner';
 
 export default function OpForm({
     _id,
@@ -18,6 +18,7 @@ export default function OpForm({
     vintage: existingVintage,
     volumen: existingVolumen,
     name: existingName,
+    archivos:existingArchivos,
     relatedProjectID
 }) {
 
@@ -50,8 +51,22 @@ export default function OpForm({
     const [delivery, setDelivery] = useState(existingDelivery || '');
     const [payment, setPayment] = useState(existingPayment || '');
     const [detalles, setDetalles] = useState(existingDetalles || '');
+    const [archivos, setArchivos] = useState(existingArchivos || []);
 
-    const router = useRouter()
+    const router = useRouter();
+
+    const [isUploading, setIsUploading] = useState(false);
+
+
+    const handleTrasnsaction = (e) => {
+        const { value } = e.target;
+        const transactionType = value
+        if (transactionType === 'Sale') {
+            setTransaction('Sale')
+        } else if (transactionType === 'Purchase') {
+            setTransaction('Purchase')
+        }
+    }
 
     async function newSale(e) {
         e.preventDefault();
@@ -73,7 +88,7 @@ export default function OpForm({
                     proyecto: relatedProjectID,
                     detalles,
                 }
-                if (transaction === 'Venta') {
+                if (transaction === 'Sale') {
                     // const total = Number(relatedProjectInfo.volumen) - Number(quantity)
                     const data = {
                         projectID: relatedProjectInfo.projectID,
@@ -85,7 +100,7 @@ export default function OpForm({
                     await axios.put('/api/projects', { ...data, _id: relatedProjectID });
                     await axios.put('/api/operations', { ...operation, _id });
                 }
-                else if (transaction === 'Compra') {
+                else if (transaction === 'Purchase') {
                     // const total = Number(relatedProjectInfo.volumen) + Number(quantity)
                     const data = {
                         projectID: relatedProjectInfo.projectID,
@@ -114,7 +129,7 @@ export default function OpForm({
                     proyecto: _id,
                     detalles
                 }
-                if (transaction === 'Venta') {
+                if (transaction === 'Sale') {
                     const total = Number(volumen) - Number(quantity)
                     const data = {
                         projectID,
@@ -127,7 +142,7 @@ export default function OpForm({
                     await axios.post('/api/operations', newOperation);
 
                 }
-                else if (transaction === 'Compra') {
+                else if (transaction === 'Purchase') {
                     const total = Number(volumen) + Number(quantity)
                     const data = {
                         projectID,
@@ -151,28 +166,78 @@ export default function OpForm({
     }
 
 
+    // CONEXION CON API PARA SUBIR IMAGENES 
+    async function uploadFiles(e) {
+        e.preventDefault()
+        const files = e.target?.files;
+        if (files?.length > 0) {
+            setIsUploading(true);
+            const data = new FormData();
+            for (const file of files) {
+                data.append('file', file);
+            }
+            const res = await axios.post('/api/upload', data);
+            setArchivos(oldFiles => {
+                return [...oldFiles, ...res.data.links];
+            });
+            setIsUploading(false);
+        }
+    }
+
+    // solo saco la imagen del array images usando filter, y si el valor link es igual al del click, entonces seteo las imagenes, con la nueva lista
+    function deleteFile(e, link) {
+        e.preventDefault()
+        try {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: `Do you want delete this file?`,
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Si, borrar!',
+                confirmButtonColor: '#d55',
+                reverseButtons: true,
+            }).then(async result => {
+                // hacemos console log del result y vemos que opcion es cada una. 
+                if (result.isConfirmed) {
+                    const newOnesFiles = archivos.filter(value => value !== link)
+                    setArchivos(newOnesFiles)
+                }
+            });
+
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+
+
 
     return (
         <div>
-            <div className='shadow-lg   bg-zince-300/10 flex flex-col items-start gap-2 m-3' >
-                <div> {standar} {projectID} {name}</div>
-                <div>Vintage: {vintage}</div>
-                <div>Volumen disponible: <b>{volumen}</b> </div>
-            </div>
+            {!relatedProjectID && (
+                <div className='shadow-lg   bg-zince-300/10 flex flex-col items-start gap-2 m-3' >
+                    <div> {standar} {projectID} {name}</div>
+                    <div>Vintage: {vintage}</div>
+                    <div>Volume available: <b>{volumen}</b> </div>
+                </div>
+            )}
+            {relatedProjectID && (
+                <></>
+            )}
             <form onSubmit={newSale}>
                 <div className='flex-wrap'>
-                    <label className='text-gray-400'>Transacción</label>
+                    <label className='text-gray-400'>Transaction</label>
                     <select
                         className="flex border border-gray-200 py-2 bg-zinc-100/40"
                         value={transaction}
-                        onChange={e => setTransaction(e.target.value)}>
-                        <option value="">-no seleccionado-</option>
-                        <option value="Venta">VENTA</option>
-                        <option value="Compra">COMPRA</option>
+                        onChange={e => handleTrasnsaction(e)}>
+                        <option value="">-no selected-</option>
+                        <option value="Sale">Sale</option>
+                        <option value="Purchase">Purchase</option>
                     </select>
                 </div>
                 <div className='flex-wrap'>
-                    <label className='text-gray-400'>Cliente</label>
+                    <label className='text-gray-400'>Client</label>
                     <input
                         type='text'
                         placeholder='ej: Green story'
@@ -180,7 +245,8 @@ export default function OpForm({
                         onChange={e => setCliente(e.target.value)} />
                 </div>
                 <div className='flex-wrap'>
-                    <label className='text-gray-400'>Precio de venta (USD)</label>
+                    {transaction === 'Sale' && <label className='text-gray-400'>Sell price (USD)</label>}
+                    {transaction === 'Purchase' && <label className='text-gray-400'>Purchase price (USD)</label>}
                     <input
                         type='number'
                         placeholder='ej: 3.20 '
@@ -188,7 +254,7 @@ export default function OpForm({
                         onChange={e => setPrecio(e.target.value)} />
                 </div>
                 <div className='flex-wrap'>
-                    <label className='text-gray-400'>Volumen</label>
+                    <label className='text-gray-400'>Volume</label>
                     <input
                         type='number'
                         placeholder='ej: 4512'
@@ -202,8 +268,8 @@ export default function OpForm({
                         value={delivery}
                         onChange={e => setDelivery(e.target.value)}>
                         <option value="">-no seleccionado-</option>
-                        <option value="Pendiente">Pendiente</option>
-                        <option value="Entregado">Entregado</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Done">Delivered</option>
                     </select>
                 </div>
                 <div className='flex-wrap'>
@@ -212,16 +278,45 @@ export default function OpForm({
                         className="flex border border-gray-200 py-1 bg-zinc-100/40"
                         value={payment}
                         onChange={e => setPayment(e.target.value)}>
-                        <option value="">-no seleccionado-</option>
-                        <option value="Pendiente">Pendiente</option>
-                        <option value="Realizado">Realizado</option>
+                        <option value="">-no selected-</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Done">Done</option>
                     </select>
                 </div>
-                <label className='text-gray-400'>Notas</label>
+                <label className='text-gray-400'>Notes</label>
                 <textarea
                     placeholder='ej: creditos de Misha '
                     value={detalles}
                     onChange={e => setDetalles(e.target.value)} />
+                <div className='mb-2 flex flex-wrap gap-1'>
+                    {!!archivos?.length && archivos.map(link => (
+                        <div key={link} className='flex h-20 bg-white p-4 shadow-sm rounded-sm border border-gray-200'>
+                            <a href={link} target='_blank'>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                </svg>
+                                <span onClick={e => deleteFile(e, link)} className="swym-delete-img">x</span>
+                            </a>
+                        </div>
+                    ))}
+                    {isUploading && (
+                        <div className="h-24 flex items-center">
+                            <Spinner />
+                        </div>
+                    )}
+                    <label className="w-20 h-20 cursor-pointer text-center flex flex-col items-center justify-center text-sm gap-1 rounded-sm bg-white shadow-sm border border text-gray-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                        </svg>
+                        <div>
+                            Upload file
+                        </div>
+                        <input type="file" onChange={uploadFiles} className="hidden" />
+                    </label>
+                    {!archivos?.length && (
+                        <div className='text-gray-400'> No attached files </div>
+                    )}
+                </div>
                 <button type="submit" className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500 focus:outline-none focus:ring focus:ring-green-400">
                     Save
                 </button>
