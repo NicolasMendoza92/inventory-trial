@@ -39,14 +39,15 @@ export default function Projects() {
       <div className="flex justify-between content-center">
         <Link className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500 " href={'/projects/new'}> New project</Link>
         <div className="flex justify-end">
-        <Link className="bg-gray-300 text-white font-bold cursor-pointer px-3 py-1 ms-1 mt-1 rounded-md" href={'/searchProjects'}>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-          </svg>
-        </Link>
-        <ExportInventary/>
+          <ExportInventary />
+          <Link className="bg-gray-300 text-white font-bold cursor-pointer px-3 py-1 ms-1 mt-1 rounded-md" href={'/searchProjects'}>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+            </svg>
+          </Link>
+
         </div>
-        
+
       </div>
       <div className="relative overflow-x-auto">
         <table className="  basic my-3">
