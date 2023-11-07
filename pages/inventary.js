@@ -1,3 +1,4 @@
+import ExportInventary from "@/components/ExportInventary";
 import Spinner from "@/components/Spinner";
 import Layout from "@/components/layout";
 import axios from "axios";
@@ -36,12 +37,16 @@ export default function Projects() {
 
     <Layout>
       <div className="flex justify-between content-center">
-        <Link className="bg-green-600 text-white font-bold cursor-pointer px-6 py-2 " href={'/projects/new'}> New project</Link>
-        <Link className="bg-gray-300 text-white font-bold cursor-pointer px-4 py-2 rounded-md" href={'/searchProjects'}>
+        <Link className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500 " href={'/projects/new'}> New project</Link>
+        <div className="flex justify-end">
+        <Link className="bg-gray-300 text-white font-bold cursor-pointer px-3 py-1 ms-1 mt-1 rounded-md" href={'/searchProjects'}>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
             <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
           </svg>
         </Link>
+        <ExportInventary/>
+        </div>
+        
       </div>
       <div className="relative overflow-x-auto">
         <table className="  basic my-3">
@@ -54,6 +59,7 @@ export default function Projects() {
               <td>Tech</td>
               <td>Pais</td>
               <td>Corsia</td>
+              <td>SDG</td>
               <td>Volumen</td>
               <td>Disponible</td>
               <td></td>
@@ -62,7 +68,7 @@ export default function Projects() {
           <tbody>
             {isLoading && (
               <tr>
-                <td colSpan={9}>
+                <td colSpan={11}>
                   <div className="w-full flex justify-center py-4">
                     <Spinner />
                   </div>
@@ -78,6 +84,7 @@ export default function Projects() {
                 <td>{project.tech}</td>
                 <td>{project.pais}</td>
                 <td>{project.corsia}</td>
+                <td>{project.sdg}</td>
                 <td>{project.volumen}</td>
                 <td>{project.disponible}</td>
                 <td>
@@ -96,7 +103,6 @@ export default function Projects() {
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
                     </svg>
-
                   </Link>
                 </td>
               </tr>

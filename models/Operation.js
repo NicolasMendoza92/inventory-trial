@@ -6,6 +6,9 @@ const operationSchema = new Schema({
         type: String,
         required: true,
     },
+    equipo: {
+        type: String,
+    },
     cliente: {
         type: String,
         required: true,

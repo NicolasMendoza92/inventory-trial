@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 export default function ReservForm({
     _id,
     customer: existingCustomer,
+    team: existingTeam,
     price: existingPrice,
     quantity: existingQuantity,
     status: existingStatus,
@@ -42,6 +43,7 @@ export default function ReservForm({
 
     // VALORES VIEJOS DEL FORMULARIO DE RESERVA - CUANDO SE EDITA 
     const [customer, setCustomer] = useState(existingCustomer || '');
+    const [team, setTeam] = useState(existingTeam || '');
     const [price, setPrice] = useState(existingPrice || '');
     const [quantity, setQuantity] = useState(existingQuantity || '');
     const [status, setStatus] = useState(existingStatus || '');
@@ -71,6 +73,7 @@ export default function ReservForm({
             try {
                 const reserve = {
                     customer,
+                    team,
                     price,
                     quantity,
                     status,
@@ -97,6 +100,7 @@ export default function ReservForm({
             try {
                 const newReserve = {
                     customer,
+                    team,
                     price,
                     quantity,
                     status,
@@ -141,6 +145,18 @@ export default function ReservForm({
             )}
             <form onSubmit={newReserve}>
                 <div className='flex-wrap'>
+                    <label className='text-gray-400'>Team</label>
+                    <select
+                        className="flex border border-gray-200 py-1 bg-zinc-100/40"
+                        value={team}
+                        onChange={e => setTeam(e.target.value)}>
+                        <option value="">-no selected-</option>
+                        <option value="Trading">Trading</option>
+                        <option value="Corporate">Corporate</option>
+                        <option value="Sourcing">Sourcing</option>
+                    </select>
+                </div>
+                <div className='flex-wrap'>
                     <label className='text-gray-400'>Client</label>
                     <input
                         type='text'
@@ -174,9 +190,8 @@ export default function ReservForm({
                             value={status}
                             onChange={e => setStatus(e.target.value)}>
                             <option value="">-no selected-</option>
-                            <option value="In progress">In progress</option>
-                            <option value="Done">Done</option>
-                            <option value="Canceled">Canceled</option>
+                            <option value="Underway">Underway</option>
+                            <option value="Under negotiation">Under negotiation</option>
                         </select>
                     </div>
                     <div >

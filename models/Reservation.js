@@ -2,6 +2,9 @@ import mongoose, { Schema, model, models } from "mongoose";
 
 // creamos los modelos, para la conexion con la base de datos Mongoose-. 
 const reservationSchema = new Schema({
+    team: {
+        type: String,
+    },
     customer: {
         type: String,
         required: true,

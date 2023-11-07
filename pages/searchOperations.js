@@ -17,6 +17,7 @@ export default function searchProjects({ operations }) {
             searchedoperations = operations.filter((op) => {
                 return op.transaction.toLowerCase().includes(operationSearched.toLowerCase()) ||
                     op.cliente.toLowerCase().includes(operationSearched.toLowerCase()) ||
+                    op.equipo.toLowerCase().includes(operationSearched.toLowerCase()) ||
                     op.proyecto.projectID.toLowerCase().includes(operationSearched.toLowerCase()) ||
                     op.proyecto.standar.toLowerCase().includes(operationSearched.toLowerCase()) ||
                     op.proyecto.name.toLowerCase().includes(operationSearched.toLowerCase()) ||
@@ -40,12 +41,16 @@ export default function searchProjects({ operations }) {
                 <table className="basic my-3">
                     <thead>
                         <tr>
-                            <td>Fecha</td>
-                            <td>Tipo</td>
-                            <td>Cliente</td>
-                            <td>Proyecto</td>
-                            <td>Precio</td>
-                            <td>Volumen</td>
+                            <td>Date</td>
+                            <td>Type</td>
+                            <td>Team</td>
+                            <td>Client</td>
+                            <td>Standar</td>
+                            <td>ID</td>
+                            <td>Project name</td>
+                            <td>Vintage</td>
+                            <td>Preice (usd)</td>
+                            <td>Volume</td>
                             <td>Delivery</td>
                             <td>Payment</td>
                             <td></td>
@@ -59,8 +64,12 @@ export default function searchProjects({ operations }) {
                                 )}
                                 </td>
                                 <td>{op.transaction}</td>
+                                <td>{op.equipo}</td>
                                 <td>{op.cliente}</td>
-                                <td> {op.proyecto?.standar} {op.proyecto?.projectID} {op.proyecto?.name}</td>
+                                <td> {op.proyecto?.standar}</td>
+                                <td>{op.proyecto?.projectID}</td>
+                                <td>{op.proyecto?.name}</td>
+                                <td>{op.proyecto?.vintage}</td>
                                 <td>{op.precio}</td>
                                 <td>{op.quantity}</td>
                                 <td>{op.delivery}</td>

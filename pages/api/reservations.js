@@ -35,8 +35,9 @@ export default async function handle(req, res) {
     }
 
     if (method === 'POST') {
-        const { customer, projectRelated, price, quantity, expiration, status, comments } = req.body;
+        const { team, customer, projectRelated, price, quantity, expiration, status, comments } = req.body;
         const reservationDoc = await Reservation.create({
+            team,
             customer,
             projectRelated,
             price,
@@ -49,9 +50,10 @@ export default async function handle(req, res) {
     }
 
     if (method === 'PUT') {
-        const { customer, projectRelated, price, quantity, expiration, status, comments, _id } = req.body;
+        const { team, customer, projectRelated, price, quantity, expiration, status, comments, _id } = req.body;
         // definimos dos parametros, definimos el objeto que lo identifica, como el id, y luego las propiedades del objeto que queremos actualizar
         const reservationDoc = await Reservation.updateOne({ _id }, {
+            team,
             customer,
             projectRelated,
             price,

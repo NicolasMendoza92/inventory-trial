@@ -43,6 +43,7 @@ export default function searchProjects({ projects }) {
                             <td>Tech</td>
                             <td>Pais</td>
                             <td>Corsia</td>
+                            <td>SDG</td>
                             <td>Volumen</td>
                             <td></td>
                         </tr>
@@ -57,6 +58,7 @@ export default function searchProjects({ projects }) {
                                 <td>{project.tech}</td>
                                 <td>{project.pais}</td>
                                 <td>{project.corsia}</td>
+                                <td>{project.sdg}</td>
                                 <td>{project.volumen}</td>
                                 <td>
                                     <Link className="bg-green-600 text-white p-2" href={'/projects/operation/' + project._id}>

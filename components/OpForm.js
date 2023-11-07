@@ -7,6 +7,7 @@ import Spinner from './Spinner';
 export default function OpForm({
     _id,
     transaction: existingTransaction,
+    equipo: existingEquipo,
     cliente: existingCliente,
     precio: existingPrecio,
     quantity: existingQuantity,
@@ -45,6 +46,7 @@ export default function OpForm({
 
     // VALORES VIEJOS DEL FORMULARIO DE OPERACION - CUANDO SE EDITA 
     const [transaction, setTransaction] = useState(existingTransaction || '');
+    const [equipo, setEquipo] = useState(existingEquipo || '');
     const [cliente, setCliente] = useState(existingCliente || '');
     const [precio, setPrecio] = useState(existingPrecio || '');
     const [quantity, setQuantity] = useState(existingQuantity || '');
@@ -68,6 +70,7 @@ export default function OpForm({
         }
     }
 
+
     async function newSale(e) {
         e.preventDefault();
         // EDITAR OPERACION  
@@ -80,6 +83,7 @@ export default function OpForm({
             try {
                 const operation = {
                     transaction,
+                    equipo,
                     cliente,
                     precio,
                     quantity,
@@ -87,6 +91,7 @@ export default function OpForm({
                     payment,
                     proyecto: relatedProjectID,
                     detalles,
+                    archivos,
                 }
                 if (transaction === 'Sale') {
                     // const total = Number(relatedProjectInfo.volumen) - Number(quantity)
@@ -121,13 +126,15 @@ export default function OpForm({
             try {
                 const newOperation = {
                     transaction,
+                    equipo,
                     cliente,
                     precio,
                     quantity,
                     delivery,
                     payment,
                     proyecto: _id,
-                    detalles
+                    detalles, 
+                    archivos
                 }
                 if (transaction === 'Sale') {
                     const total = Number(volumen) - Number(quantity)
@@ -237,6 +244,18 @@ export default function OpForm({
                     </select>
                 </div>
                 <div className='flex-wrap'>
+                    <label className='text-gray-400'>Team</label>
+                    <select
+                        className="flex border border-gray-200 py-1 bg-zinc-100/40"
+                        value={equipo}
+                        onChange={e => setEquipo(e.target.value)}>
+                        <option value="">-no selected-</option>
+                        <option value="Trading">Trading</option>
+                        <option value="Corporate">Corporate</option>
+                        <option value="Sourcing">Sourcing</option>    
+                    </select>
+                </div>
+                <div className='flex-wrap'>
                     <label className='text-gray-400'>Client</label>
                     <input
                         type='text'
@@ -267,9 +286,9 @@ export default function OpForm({
                         className="flex border border-gray-200 py-1 bg-zinc-100/40"
                         value={delivery}
                         onChange={e => setDelivery(e.target.value)}>
-                        <option value="">-no seleccionado-</option>
+                        <option value="">-no selected-</option>
                         <option value="Pending">Pending</option>
-                        <option value="Done">Delivered</option>
+                        <option value="Done">Done</option>
                     </select>
                 </div>
                 <div className='flex-wrap'>

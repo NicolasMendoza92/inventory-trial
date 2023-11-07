@@ -33,6 +33,9 @@ const projectSchema = new Schema({
     corsia:{
         type: String,
     },
+    sdg:{
+        type: String,
+    },
     projectLink:{
         type: String,
     },

@@ -3,6 +3,7 @@ import Layout from "@/components/layout";
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import ExcelExports from "../components/ExcelExports"
 
 
 export default function operations() {
@@ -37,11 +38,11 @@ export default function operations() {
   };
 
 
-
   return (
     <Layout>
       <div className="flex justify-between content-center">
-        <Link className="bg-gray-300 text-white font-bold cursor-pointer px-4 py-2 rounded-md" href={'/searchOperations'}>
+        <ExcelExports />
+        <Link className="bg-gray-300 text-white font-bold cursor-pointer px-3 py-1 ms-1 mt-1 rounded-md" href={'/searchOperations'}>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
             <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
           </svg>
@@ -53,8 +54,11 @@ export default function operations() {
             <tr>
               <td>Date</td>
               <td>Type</td>
+              <td>Team</td>
               <td>Client</td>
-              <td>Project</td>
+              <td>Standar</td>
+              <td>ID</td>
+              <td>Project name</td>
               <td>Vintage</td>
               <td>Price</td>
               <td>Volume</td>
@@ -66,7 +70,7 @@ export default function operations() {
           <tbody>
             {isLoading && (
               <tr>
-                <td colSpan={9}>
+                <td colSpan={13}>
                   <div className="w-full flex justify-center py-4">
                     <Spinner />
                   </div>
@@ -76,12 +80,15 @@ export default function operations() {
             {operations.map(op => (
               <tr key={op._id}>
                 <td>{(new Date(op.createdAt)).toLocaleString(
-                "en-US",{dateStyle: "short"}
-              )}
-              </td>
+                  "en-US", { dateStyle: "short" }
+                )}
+                </td>
                 <td>{op.transaction}</td>
+                <td>{op.equipo}</td>
                 <td>{op.cliente}</td>
-                <td> {op.proyecto?.standar} {op.proyecto?.projectID} {op.proyecto?.name}</td>
+                <td> {op.proyecto?.standar}</td>
+                <td>{op.proyecto?.projectID}</td>
+                <td>{op.proyecto?.name}</td>
                 <td>{op.proyecto?.vintage}</td>
                 <td>{op.precio}</td>
                 <td>{op.quantity}</td>
