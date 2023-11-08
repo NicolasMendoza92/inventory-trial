@@ -44,7 +44,6 @@ const ExportInventary = () => {
       ) : (
         <button  disabled>
           <Spinner/>
-          <span> Exporting...</span>
         </button>
       )}
     </>
