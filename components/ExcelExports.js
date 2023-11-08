@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Spinner from "./Spinner";
 import axios from "axios";
-import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+
 
 const ExportExcel = () => {
 
@@ -25,13 +25,7 @@ const ExportExcel = () => {
     return (
         <>
             {!loading ? (
-                <ReactHTMLTableToExcel
-                    id='botonExportar'
-                    className='bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500'
-                    table='operationsTable'
-                    filename="operationsExcel"
-                    sheet='sheet 1'
-                    buttonText="Export to excel" />
+                <button>holis</button>
             ) : (
                 <button disabled>
                     <Spinner />
@@ -85,3 +79,11 @@ const ExportExcel = () => {
 };
 
 export default ExportExcel;
+
+{/* <ReactHTMLTableToExcel
+                    id='botonExportar'
+                    className='bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500'
+                    table='operationsTable'
+                    filename="operationsExcel"
+                    sheet='sheet 1'
+                    buttonText="Export to excel" /> */}
