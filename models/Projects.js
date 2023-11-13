@@ -36,6 +36,8 @@ const projectSchema = new Schema({
     sdg:{
         type: String,
     },
+    sdgSelected: [{ type: String }], 
+    sdgImages: [{ type: String }], 
     projectLink:{
         type: String,
     },

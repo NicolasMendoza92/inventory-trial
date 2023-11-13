@@ -17,7 +17,7 @@ export default function reservations() {
     // esti actualiza la tabla - es la consulta get a las categorias. 
     useEffect(() => {
         fetchReservations();
-    }, [pageNumber])
+    }, [])
 
     function fetchReservations() {
         setIsLoading(true);

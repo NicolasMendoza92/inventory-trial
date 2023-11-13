@@ -18,7 +18,7 @@ export default function operations() {
   // esti actualiza la tabla - es la consulta get a las categorias. 
   useEffect(() => {
     fetchOperations();
-  }, [pageNumber])
+  }, [])
 
   function fetchOperations() {
     setIsLoading(true);
