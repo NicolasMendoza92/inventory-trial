@@ -7,7 +7,7 @@ export default async function handle(req, res) {
 
     if (method === 'GET') {
         try {
-            const projects = await Project.find({})
+            const projects = await Project.find({}, null, { sort: { '_id': -1 } })
             res.json({
                 projects,
             })

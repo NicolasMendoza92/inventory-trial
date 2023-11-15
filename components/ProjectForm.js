@@ -151,7 +151,6 @@ export default function ProjectForm({
         setSdgImages(selectedSdgImg)
     }
 
-    console.log(sdgSelected)
 
     return (
         <div >
@@ -268,7 +267,7 @@ export default function ProjectForm({
                     <option value="YES">Yes</option>
                     <option value="N/A">N/A</option>
                 </select>
-                <SdgSelected sdgSelected={sdgSelected} sdgImages={sdgImages}/>
+                <SdgSelected  sdgImages={sdgImages}/>
                 {sdg === "YES" && (
                     <>
                         <button onClick={showAllSdg} className="flex flex-wrap align-center w-fit bg-gray-200 text-black px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-gray-100 ">
@@ -318,7 +317,7 @@ export default function ProjectForm({
                     value={notas}
                     onChange={e => setNotas(e.target.value)} />
                 <label className='text-gray-400'>Files</label>
-                <div className='mb-2 flex flex-wrap gap-1'>
+                <div className='mb-2 flex flex-wrap gap-1 items-center'>
                     {!!files?.length && files.map(link => (
                         <div key={link} className='flex h-20 bg-white p-4 shadow-sm rounded-sm border border-gray-200'>
                             <a href={link} target='_blank'>

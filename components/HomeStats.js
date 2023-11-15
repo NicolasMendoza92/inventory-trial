@@ -2,7 +2,7 @@
 import { subHours } from "date-fns";
 
 
-export default function HomeStats({ operations }) {
+export default function HomeStats({ operations}) {
 
 
     // me fijo en la documentancion de date-fns y puedo hacerlo mas facil
@@ -10,20 +10,27 @@ export default function HomeStats({ operations }) {
     const operationsWeek = operations.filter(op => new Date(op.createdAt) > subHours(new Date, 24 * 7));
     const operationsMonth = operations.filter(op => new Date(op.createdAt) > subHours(new Date, 24 * 30));
 
-    const openDelivery = operations.filter(op => op.delivery === 'Pending')
-    const openPayment = operations.filter(op => op.payment === 'Pending')
-    const operationsClosed = operations.filter(op => op.payment === 'Done' && op.delivery === 'Done')
+    const openDelivery = operations.filter(op => op.delivery === 'Pending');
+    const openPayment = operations.filter(op => op.payment === 'Pending');
+    const operationsClosed = operations.filter(op => op.payment === 'Done' && op.delivery === 'Done');
+
+    const salesOp = operations.filter(op => op.transaction === 'Sale');
+    const purchaseOp = operations.filter(op => op.transaction === 'Purchase');
+
+    const trading = operations.filter(op => op.equipo === 'Trading');
+    const corporate = operations.filter(op => op.equipo === 'Corporate');
+    const sourcing = operations.filter(op => op.equipo === 'Sourcing');
 
 
     // despues de crear el array con map de los totales, se los suma usnado reduce
-    // const revenueDay = operationsToday.map(o => o.total).reduce((count, o) => count + parseFloat(o),0);
-    // const revenueWeek = operationsWeek.map(o => o.total).reduce((count, o) => count + parseFloat(o),0);
-    // const revenueMonth = operationsMonth.map(o => o.total).reduce((count, o) => count + parseFloat(o),0)
+    const creditsSold = salesOp.map(o => o.quantity).reduce((count, o) => count + parseFloat(o), 0);
+    const creditsPurchased = purchaseOp.map(o => o.quantity).reduce((count, o) => count + parseFloat(o), 0);
+    const pendingDelivery = openDelivery.map(o => o.quantity).reduce((count, o) => count + parseFloat(o), 0);
 
 
     return (
         <div className="">
-            <p className="m-2"><b>Status</b></p>
+            <h1 className="home-stats-titles">Operation Status</h1>
             <div className="board-grid">
                 <div className="board-card" >
                     <h3 className="board-title ">Delivery</h3>
@@ -41,8 +48,7 @@ export default function HomeStats({ operations }) {
                     <div className="board-desc">You close {operationsClosed.length} operations.</div>
                 </div>
             </div>
-            <p className="m-2"><b>Operations</b></p>
-            <div className="board-grid">
+            <div className="my-3 board-grid">
                 <div className="board-card" >
                     <h3 className="board-title ">Today</h3>
                     <div className="board-number">{operationsToday.length}</div>
@@ -58,7 +64,25 @@ export default function HomeStats({ operations }) {
                     <div className="board-number">{operationsMonth.length}</div>
                     <div className="board-desc">Operations in the last 30 days.</div>
                 </div>
-            </div>          
+            </div>
+            <h1 className="home-stats-titles">Credits</h1>
+            <div className="board-grid">
+                <div className="board-card" >
+                    <h3 className="board-title ">Credits Sold</h3>
+                    <div className="board-number">{creditsSold}</div>
+                    <div className="board-desc">in {salesOp.length} operations.</div>
+                </div>
+                <div className="board-card" >
+                    <h3 className="board-title ">Credits purchased</h3>
+                    <div className="board-number">{creditsPurchased}</div>
+                    <div className="board-desc">in {purchaseOp.length} operations</div>
+                </div>
+                <div className="board-card" >
+                    <h3 className="board-title ">Pending delivery</h3>
+                    <div className="board-number">{pendingDelivery}</div>
+                    <div className="board-desc">from {openDelivery.length} operations</div>
+                </div>
+            </div>
         </div>
     )
 }

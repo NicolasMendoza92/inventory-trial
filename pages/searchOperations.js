@@ -10,6 +10,13 @@ export default function searchProjects({ operations }) {
     const [operationSearched, setOperationSearched] = useState('');
     const [operationFinded, setOperationFinded] = useState([]);
 
+    const volume = operations.map(p => p.quantity);
+    const maxVolume = Math.max(...volume);
+
+    //  Handle for rage button
+    const [vol, setVol] = useState(0);
+
+
     useEffect(() => {
         let searchedoperations = [];
         if (operationSearched.length !== '') {
@@ -28,14 +35,82 @@ export default function searchProjects({ operations }) {
         }
     }, [operationSearched, operations])
 
+
+
+    const filterByTeam = (e) => {
+        const team = e.target.value;
+        const filterTeam = operations.filter((op) => !team || op.equipo === team);
+        setOperationFinded(filterTeam)
+    }
+
+    const filterByType = (e) => {
+        const type = e.target.value;
+        const filterType = operations.filter((op) => !type || op.transaction === type);
+        setOperationFinded(filterType)
+    }
+
+    const filterByDelivery = (e) => {
+        const delivery = e.target.value;
+        const filterDelivery = operations.filter((op) => !delivery || op.delivery === delivery);
+        setOperationFinded(filterDelivery)
+    }
+
+    const filterByPayment = (e) => {
+        const payment = e.target.value;
+        const filterPayment = operations.filter((op) => !payment || op.payment === payment);
+        setOperationFinded(filterPayment)
+    }
+
+    const filterByVol = (e) => {
+        const vol = e.target.value;
+        setVol(vol)
+        const filterVol = operations.filter((op) => !vol || op.quantity >= vol);
+        setOperationFinded(filterVol)
+    }
+
     return (
         <Layout>
             <div className='flex justify-center m-4'>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                </svg>
                 <input
                     value={operationSearched}
                     onChange={e => setOperationSearched(e.target.value)}
-                    placeholder='Busca tu operación, por ID, standar, status, cliente...'
+                    placeholder='Look up your operation by ID, standar, status, customer...'
                     autoFocus />
+            </div>
+            <div className='flex flex-wrap gap-2'>
+                <label className="m-2" >TYPE</label>
+                <select onChange={(e) => filterByType(e)} className="flex w-32" >
+                    <option value="">all types</option>
+                    <option value="Sale">Sale</option>
+                    <option value="Purchase">Purchase</option>
+                </select>
+                <label className="m-2" >TEAM</label>
+                <select onChange={(e) => filterByTeam(e)} className="flex w-32" >
+                    <option value="">all types</option>
+                    <option value="Trading">Trading</option>
+                    <option value="Corporate">Corporate</option>
+                    <option value="Sourcing">Sourcing</option>
+                </select>
+                <label className="m-2" >Delivery</label>
+                <select onChange={(e) => filterByDelivery(e)} className="flex w-32" >
+                    <option value="">all</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Done">Done</option>
+                </select>
+                <label className="m-2" >Payment</label>
+                <select onChange={(e) => filterByPayment(e)} className="flex w-32" >
+                    <option value="">all</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Done">Done</option>
+                </select>
+                <div className='flex w-64 items-center'>
+                    <label className="m-2">Volume</label>
+                    <input className='range_input' type='range' min={0} max={maxVolume} step={50} value={vol} onChange={(e) => filterByVol(e)} />
+                    <span className='ms-2' >{vol}</span>
+                </div>
             </div>
             <div className=' relative overflow-x-auto'>
                 <table className="basic my-3">

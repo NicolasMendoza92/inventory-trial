@@ -15,7 +15,7 @@ export default async function handle(req, res) {
         const page = parseInt(req.query.page || "0");
         const total = await Operation.countDocuments({});
         // con populate accedemos a las propiedades del objeto de referencia , con mongoose, es mas facil para relacionarlos
-        const operationDoc = await Operation.find({})
+        const operationDoc = await Operation.find({}, null, { sort: { '_id': -1 } })
           .populate('proyecto', {
             projectID: 1,
             name: 1,
@@ -33,6 +33,7 @@ export default async function handle(req, res) {
       console.log(error)
     }
   }
+
 
   if (method === 'POST') {
     const { transaction, equipo, cliente, proyecto, precio, quantity, delivery, payment, detalles, archivos } = req.body;

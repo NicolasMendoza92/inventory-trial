@@ -23,13 +23,13 @@ export default function Nav({ showNav, setShowNav }) {
             <div className="flex items-center justify-between ">
                 <div className="block md:hidden flex ">
                     <button onClick={collapseData}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" style={{color: "white"}} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                         </svg>
                     </button>
                 </div>
                 <Link href={"/"} className='flex gap-1' >
-                    <img className='h-8' src='https://res.cloudinary.com/dbv6dgwez/image/upload/v1644553896/Allcot%20Trading/Allcot_Logo_horizontal_ltqc4p.png'></img>
+                    <img className='h-9' src='https://res.cloudinary.com/dbv6dgwez/image/upload/v1699959964/Allcot%20Trading/ALLCOT_DROP_LOGO_-_White_pafsal.png'></img>
                 </Link>
             </div>
             <Link href={"/inventary"} className={pathname.includes('/inventary') ? activeLink : inactiveLink}>

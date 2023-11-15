@@ -1,13 +1,14 @@
 import React from 'react'
 
-export default function SdgSelected({ sdgSelected, sdgImages }) {
+export default function SdgSelected({ sdgImages }) {
 
-    const mapName = sdgSelected?.map(n => n);
 
     return (
         <div className="flex flex-wrap gap-2">
             {sdgImages.map(link => (
+                <React.Fragment key={link}>
                 <img className='h-20 rounded-md' src={link}/>
+                </React.Fragment>      
             ))}
         </div>
     )

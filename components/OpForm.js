@@ -307,7 +307,7 @@ export default function OpForm({
                     placeholder='ej: creditos de Misha '
                     value={detalles}
                     onChange={e => setDetalles(e.target.value)} />
-                <div className='mb-2 flex flex-wrap gap-1'>
+                <div className='mb-2 flex flex-wrap gap-1 items-center'>
                     {!!archivos?.length && archivos.map(link => (
                         <div key={link} className='flex h-20 bg-white p-4 shadow-sm rounded-sm border border-gray-200'>
                             <a href={link} target='_blank'>

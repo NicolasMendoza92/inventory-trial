@@ -7,7 +7,7 @@ export default async function handle(req, res) {
 
     if (method === 'GET') {
         try {
-            const allOperations = await Operation.find({})
+            const allOperations = await Operation.find({}, null, { sort: { '_id': -1 } })
                 .populate('proyecto', {
                     projectID: 1,
                     name: 1,
