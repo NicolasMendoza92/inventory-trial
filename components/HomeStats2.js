@@ -20,7 +20,7 @@ export default function HomeStats2({ projects }) {
 
     return (
         <div className="">
-            <h1 className="home-stats-titles">Available by standar</h1>
+            <h1 className="home-stats-titles">Available by standard</h1>
             <div className="board-grid">
                 <div className="board-card">
                     <h3 className="board-title-std ">CDM</h3>

@@ -53,7 +53,7 @@ export default function Projects() {
           <thead>
             <tr>
               <td>ID</td>
-              <td>Standar</td>
+              <td>Standard</td>
               <td>Nombre</td>
               <td>Vintage</td>
               <td>Tech</td>

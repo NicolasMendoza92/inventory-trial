@@ -56,7 +56,7 @@ export default function operations() {
               <td>Type</td>
               <td>Team</td>
               <td>Client</td>
-              <td>Standar</td>
+              <td>Standard</td>
               <td>ID</td>
               <td>Project name</td>
               <td>Vintage</td>

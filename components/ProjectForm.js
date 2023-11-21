@@ -161,7 +161,7 @@ export default function ProjectForm({
                     placeholder='ej: 6877'
                     value={projectID}
                     onChange={e => setProjectId(e.target.value)} />
-                <label className='text-gray-400'>STANDAR</label>
+                <label className='text-gray-400'>Standard</label>
                 <select
                     className=" border border-gray-200 py-2 px-6 bg-zinc-100/40"
                     value={standar}
@@ -201,7 +201,7 @@ export default function ProjectForm({
                     value={projectLink}
                     onChange={e => setProjectLink(e.target.value)} />
 
-                <label className='text-gray-400'>TECH</label>
+                <label className='text-gray-400'>Tech</label>
                 <select
                     className=" border border-gray-200 py-2 px-6 bg-zinc-100/40"
                     value={tech}
@@ -305,7 +305,7 @@ export default function ProjectForm({
                     <></>
                 )}
 
-                <label className='text-gray-400'>AVAILABILITY</label>
+                <label className='text-gray-400'>Avaiability</label>
                 <input
                     type='text'
                     placeholder='ex: Spot - november 2024'
