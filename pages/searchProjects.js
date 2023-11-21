@@ -15,7 +15,7 @@ export default function searchProjects({ projects }) {
 
     //  Handle for rage button
     const [vol, setVol] = useState(0);
-    
+
 
     useEffect(() => {
 
@@ -29,7 +29,7 @@ export default function searchProjects({ projects }) {
                     proj.pais.toLowerCase().includes(projectSearched.toLowerCase());
             });
             setProjectFinded(searchedProjects);
-        } 
+        }
     }, [projectSearched, projects])
 
 
@@ -45,7 +45,13 @@ export default function searchProjects({ projects }) {
         setProjectFinded(filterTech)
     }
 
-    const filterByVol = (e) =>{
+    const filterBySede = (e) => {
+        const sede = e.target.value;
+        const filterSede = projects.filter((projF) => !sede || projF.sede === sede);
+        setProjectFinded(filterSede)
+    }
+
+    const filterByVol = (e) => {
         const vol = e.target.value;
         setVol(vol)
         const filterVol = projects.filter((projF) => !vol || projF.volumen >= vol);
@@ -66,8 +72,8 @@ export default function searchProjects({ projects }) {
                     autoFocus />
             </div>
             <div className='flex flex-wrap gap-2'>
-                <label className="m-2" >STANDAR</label>
-                <select onChange={(e) => filterByStd(e)}  className="flex w-32" >
+                <label className="m-2" >STANDARD</label>
+                <select onChange={(e) => filterByStd(e)} className="flex w-32" >
                     <option value="">all standar</option>
                     <option value="CDM">CDM</option>
                     <option value="VCS">VCS</option>
@@ -79,7 +85,7 @@ export default function searchProjects({ projects }) {
                     <option value="PLAN VIVO">Plan Vivo</option>
                 </select>
                 <label className="m-2" >TECH</label>
-                <select onChange={(e) => filterByTech(e)}  className="flex w-32" >
+                <select onChange={(e) => filterByTech(e)} className="flex w-32" >
                     <option value="">all tech</option>
                     <option value="AFOLU">AFOLU</option>
                     <option value="Any transportation project">Any transportation project</option>
@@ -120,6 +126,16 @@ export default function searchProjects({ projects }) {
                     <option value="Waste to compost">Waste to compost</option>
                     <option value="Wind">Wind</option>
                 </select>
+                <label className="m-2">Site</label>
+                <select
+                    onChange={(e) => filterBySede(e)} className="flex w-32">
+                    <option value="">-no selected-</option>
+                    <option value="ALLCOT AG">ALLCOT AG</option>
+                    <option value="ALLCOT COLOMBIA">ALLCOT COLOMBIA</option>
+                    <option value="ALLCOT MEXICO">ALLCOT MEXICO</option>
+                    <option value="ALLCOT SPAIN">ALLCOT SPAIN</option>
+                    <option value="ALLCOT CENTRO-AMERICA">ALLCOT CENTRO-AMERICA</option>
+                </select>
                 <div className='flex w-64 items-center'>
                     <label className="m-2">Volume</label>
                     <input className='range_input' type='range' min={0} max={maxVolume} step={50} value={vol} onChange={(e) => filterByVol(e)} />
@@ -132,13 +148,14 @@ export default function searchProjects({ projects }) {
                     <thead>
                         <tr>
                             <td>ID</td>
-                            <td>Standar</td>
-                            <td>Nombre</td>
+                            <td>Standard</td>
+                            <td>Name</td>
                             <td>Vintage</td>
                             <td>Tech</td>
-                            <td>Pais</td>
+                            <td>Country</td>
                             <td>Corsia</td>
                             <td>SDG</td>
+                            <td>Site</td>
                             <td>Volumen</td>
                             <td></td>
                         </tr>
@@ -154,6 +171,7 @@ export default function searchProjects({ projects }) {
                                 <td>{project.pais}</td>
                                 <td>{project.corsia}</td>
                                 <td>{project.sdg}</td>
+                                <td>{project.sede}</td>
                                 <td>{project.volumen}</td>
                                 <td>
                                     <Link className="bg-green-600 text-white p-2" href={'/projects/operation/' + project._id}>
@@ -164,6 +182,11 @@ export default function searchProjects({ projects }) {
                                     <Link className="bg-gray-300 text-white p-2" href={'/projects/edit/' + project._id}>
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                        </svg>
+                                    </Link>
+                                    <Link className="bg-orange-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-orange-500" href={'/projects/reservation/' + project._id}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
                                         </svg>
                                     </Link>
                                 </td>

@@ -77,8 +77,8 @@ export default function OpForm({
         if (relatedProjectID) {
             Swal.fire({
                 icon: 'warning',
-                title: 'Atención',
-                text: 'Si modificaste el volumen de la operación deberas cambiar el inventario para ajustarlo',
+                title: 'Watch out',
+                text: 'If you modified the volume of the operation, you must change the inventory to adjust it.',
             })
             try {
                 const operation = {

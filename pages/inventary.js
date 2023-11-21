@@ -54,14 +54,15 @@ export default function Projects() {
             <tr>
               <td>ID</td>
               <td>Standard</td>
-              <td>Nombre</td>
+              <td>Name</td>
               <td>Vintage</td>
               <td>Tech</td>
-              <td>Pais</td>
+              <td>Country</td>
               <td>Corsia</td>
               <td>SDG</td>
-              <td>Volumen</td>
-              <td>Disponible</td>
+              <td>Volume</td>
+              <td>Availability</td>
+              <td>Site</td>
               <td></td>
             </tr>
           </thead>
@@ -87,6 +88,7 @@ export default function Projects() {
                 <td>{project.sdg}</td>
                 <td>{project.volumen}</td>
                 <td>{project.disponible}</td>
+                <td>{project.sede}</td>
                 <td>
                   {/* aca le paso el id del proyecto, y por ende va a editar el volumen con ese id */}
                   <Link className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500" href={'/projects/operation/' + project._id}>

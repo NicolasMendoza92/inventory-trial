@@ -1,7 +1,6 @@
 
 
 import { signIn } from "next-auth/react";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
@@ -61,9 +60,6 @@ export default function LoginForm() {
                             {error}
                         </div>
                     )}
-                    <Link className="text-sm mt-3 text-right" href={"/register"}>
-                        ¿No tienes cuenta? <span className="underline">Registrate</span>
-                    </Link>
                 </form>
             </div>
         </div>

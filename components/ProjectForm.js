@@ -23,6 +23,7 @@ export default function ProjectForm({
     sdg: existingSdg,
     pais: existingPais,
     disponible: existingDisponible,
+    sede: existingSede,
     notas: existingNotas,
     sdgSelected: existingSdgSelected,
     sdgImages: existingSdgImages,
@@ -41,6 +42,7 @@ export default function ProjectForm({
     const [sdg, setSdg] = useState(existingSdg || '');
     const [pais, setPais] = useState(existingPais || '');
     const [disponible, setDisponible] = useState(existingDisponible || '');
+    const [sede, setSede] = useState(existingSede || '');
     const [notas, setNotas] = useState(existingNotas || '');
     const [files, setFiles] = useState(existingFiles || []);
     // SDG states to handle 
@@ -66,7 +68,7 @@ export default function ProjectForm({
     async function saveProject(e) {
         try {
             e.preventDefault();
-            const data = { projectID, standar, vintage, volumen, name, projectLink, tech, corsia, sdg, sdgSelected,sdgImages, pais, disponible, notas, files }
+            const data = { projectID, standar, vintage, volumen, name, projectLink, tech, corsia, sdg, sede, sdgSelected, sdgImages, pais, disponible, notas, files }
 
             if (!projectID || !standar || !vintage || !volumen || !tech || !pais || !name) {
                 setError('Faltan datos importantes');
@@ -256,7 +258,7 @@ export default function ProjectForm({
                     <option value="YES">Yes</option>
                 </select>
                 {/* Pongo los paises en un componente por que son muchos */}
-                <CountryPFSelect pais={pais} setPais={setPais}/>
+                <CountryPFSelect pais={pais} setPais={setPais} />
                 <label className='text-gray-400'>SDG</label>
                 <select
                     className=" border border-gray-200 py-2 px-6 bg-zinc-100/40"
@@ -267,7 +269,7 @@ export default function ProjectForm({
                     <option value="YES">Yes</option>
                     <option value="N/A">N/A</option>
                 </select>
-                <SdgSelected  sdgImages={sdgImages}/>
+                <SdgSelected sdgImages={sdgImages} />
                 {sdg === "YES" && (
                     <>
                         <button onClick={showAllSdg} className="flex flex-wrap align-center w-fit bg-gray-200 text-black px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-gray-100 ">
@@ -311,6 +313,18 @@ export default function ProjectForm({
                     placeholder='ex: Spot - november 2024'
                     value={disponible}
                     onChange={e => setDisponible(e.target.value)} />
+                <label className='text-gray-400'>Storage location</label>
+                <select
+                    className=" border border-gray-200 py-2 px-6 bg-zinc-100/40"
+                    value={sede}
+                    onChange={e => setSede(e.target.value)}>
+                    <option value="">-no selected-</option>
+                    <option value="ALLCOT AG">ALLCOT AG</option>
+                    <option value="ALLCOT COLOMBIA">ALLCOT COLOMBIA</option>
+                    <option value="ALLCOT MEXICO">ALLCOT MEXICO</option>
+                    <option value="ALLCOT SPAIN">ALLCOT SPAIN</option>
+                    <option value="ALLCOT CENTRO-AMERICA">ALLCOT CENTRO-AMERICA</option>
+                </select>
                 <label className='text-gray-400'>Notes</label>
                 <textarea
                     placeholder='ex: Proyecto de TD '

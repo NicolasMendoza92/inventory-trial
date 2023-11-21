@@ -29,7 +29,7 @@ export default function DeleteProjectPage() {
     }
     return (
         <Layout>
-            <h1 className="text-center">¿Estas seguro de eliminar el proyecto <br/> {projectInfo?.projectID} {projectInfo?.standar} {projectInfo?.name}?</h1>
+            <h1 className="text-center">Are you sure about delete this project? <br/> {projectInfo?.projectID} {projectInfo?.standar} {projectInfo?.name}?</h1>
             <div className="flex gap-2 justify-center">
                 <button
                     onClick={deleteProject}
@@ -39,7 +39,7 @@ export default function DeleteProjectPage() {
                 <button
                     className="bg-gray-300 text-white p-2"
                     onClick={goBack}>
-                    NO
+                    No
                 </button>
             </div>
         </Layout>
