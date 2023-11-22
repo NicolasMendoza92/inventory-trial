@@ -33,6 +33,9 @@ table.basic tr td{
 table.basic a{
   @apply px-2 rounded-sm inline-flex mx-1 items-center gap-1 text-sm py-1;
 }
+.nota-imp{
+  @apply text-gray-400 text-xs;
+}
 .range_input{
   accent-color: green;
 }

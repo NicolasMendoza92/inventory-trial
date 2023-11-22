@@ -153,6 +153,17 @@ export default function ProjectForm({
         setSdgImages(selectedSdgImg)
     }
 
+    const hanldeSdg = (e) => {
+        const ods = e.target.value;
+        if (ods === "NO" || ods === "N/A") {
+            setSdgImages([]);
+            setSdgSelected([]);
+            setSdg(ods)
+        } else {
+            setSdg(ods)
+        }
+    }
+
 
     return (
         <div >
@@ -263,43 +274,47 @@ export default function ProjectForm({
                 <select
                     className=" border border-gray-200 py-2 px-6 bg-zinc-100/40"
                     value={sdg}
-                    onChange={e => setSdg(e.target.value)}>
+                    onChange={e => hanldeSdg(e)}>
                     <option value="">-no selected-</option>
                     <option value="NO">No</option>
                     <option value="YES">Yes</option>
-                    <option value="N/A">N/A</option>
+                    <option value="N/A">Clean</option>
                 </select>
+
                 <SdgSelected sdgImages={sdgImages} />
                 {sdg === "YES" && (
                     <>
+                        <span className='nota-imp'>If you have already selected the SDGs and you want to change or add any of them, you must tap the "Clean" option and add them again.</span>
                         <button onClick={showAllSdg} className="flex flex-wrap align-center w-fit bg-gray-200 text-black px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-gray-100 ">
                             Select which ones  {showModal ? <ArrowUp /> : <ArrowDown />}
                         </button>
                         {showModal ? (
-                            <div className='flex flex-wrap'>
-                                {sdgList.map(({ name, img }, index) => {
-                                    return (
-                                        <>
-                                            <div className='flex items-center gap-2' key={index}>
-                                                <input
-                                                    className='w-4 h-4 text-blue-600 bg-white border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2'
-                                                    type='checkbox'
-                                                    name={name}
-                                                    value={name}
-                                                    checked={checkedState[index]}
-                                                    onChange={(e) => handleChangeSdg(e, index)} />
-                                                <label className='ms-2 text-sm font-medium text-gray-800'>
-                                                    <img src={img} alt="" className="flex p-2 h-28 rounded-lg" />
-                                                </label>
-                                            </div>
-
-                                        </>
+                            <>
+                                <div className='flex flex-wrap'>
+                                    {sdgList.map(({ name, img }, index) => {
+                                        return (
+                                            <>
+                                                <div className='flex items-center gap-2' key={index}>
+                                                    <input
+                                                        className='w-4 h-4 text-blue-600 bg-white border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2'
+                                                        type='checkbox'
+                                                        name={name}
+                                                        value={name}
+                                                        checked={checkedState[index]}
+                                                        onChange={(e) => handleChangeSdg(e, index)} />
+                                                    <label className='ms-2 text-sm font-medium text-gray-800'>
+                                                        <img src={img} alt="" className="flex p-2 h-28 rounded-lg" />
+                                                    </label>
+                                                </div>
+                                            </>
+                                        )
+                                    }
                                     )
-                                }
-                                )
-                                }
-                            </div>
+                                    }
 
+                                </div>
+
+                            </>
                         ) : null}
                     </>
                 )}
