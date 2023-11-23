@@ -23,6 +23,10 @@ export default function ProjectForm({
     sdg: existingSdg,
     pais: existingPais,
     disponible: existingDisponible,
+    precioVenta: existingPrecioVenta,
+    contrato: existingContrato,
+    mktDate: existingMktDate,
+    proveedor: existingProveedor,
     sede: existingSede,
     notas: existingNotas,
     sdgSelected: existingSdgSelected,
@@ -42,6 +46,10 @@ export default function ProjectForm({
     const [sdg, setSdg] = useState(existingSdg || '');
     const [pais, setPais] = useState(existingPais || '');
     const [disponible, setDisponible] = useState(existingDisponible || '');
+    const [precioVenta, setPrecioVenta] = useState(existingPrecioVenta || '');
+    const [contrato, setContrato] = useState(existingContrato || '');
+    const [mktDate, setMktDate] = useState(existingMktDate || '');
+    const [proveedor, setProveedor] = useState(existingProveedor || '');
     const [sede, setSede] = useState(existingSede || '');
     const [notas, setNotas] = useState(existingNotas || '');
     const [files, setFiles] = useState(existingFiles || []);
@@ -68,7 +76,7 @@ export default function ProjectForm({
     async function saveProject(e) {
         try {
             e.preventDefault();
-            const data = { projectID, standar, vintage, volumen, name, projectLink, tech, corsia, sdg, sede, sdgSelected, sdgImages, pais, disponible, notas, files }
+            const data = { projectID, standar, vintage, volumen, name, projectLink, tech, corsia, sdg, sede, sdgSelected, sdgImages, pais, disponible, precioVenta, contrato, mktDate, proveedor, notas, files }
 
             if (!projectID || !standar || !vintage || !volumen || !tech || !pais || !name) {
                 setError('Faltan datos importantes');
@@ -164,10 +172,65 @@ export default function ProjectForm({
         }
     }
 
+    const hanldeContrato = (e) => {
+        const contrato = e.target.value;
+        if (contrato === "MKT") {
+            setContrato(contrato)
+        } else {
+            setContrato(contrato)
+        }
+    }
+
+    // Formula para editar el datepicker
+    const disablePastDate = () => {
+        const today = new Date();
+        const dd = String(today.getDate() + 3).padStart(2, "0");
+        const mm = String(today.getMonth() + 1).padStart(2, "0");
+        const yyyy = today.getFullYear();
+        return yyyy + "-" + mm + "-" + dd;
+    };
+
+    console.log(new Date(mktDate).toLocaleString("en-US", { dateStyle: "short" }))
+
+
 
     return (
         <div >
             <form onSubmit={saveProject} className='flex grid gap-3 mb-3'>
+                <label className='text-gray-400'>Supplier</label>
+                <input
+                    type='text'
+                    placeholder='Ej: ALLCOT - Misha'
+                    value={proveedor}
+                    onChange={e => setProveedor(e.target.value)} />
+                <label className='text-gray-400'>Contract Type</label>
+                <select
+                    className=" border border-gray-200 py-2 px-6 bg-zinc-100/40"
+                    value={contrato}
+                    onChange={e => hanldeContrato(e)}>
+                    <option value="">-no selected-</option>
+                    <option value="MKT">MKT Agreement</option>
+                    <option value="Contrato">Contrato</option>
+                </select>
+                {contrato === 'MKT' && (
+                    <div className='flex gap-2'>
+                        <label className='text-gray-400'>Expiration date</label>
+                        <input
+                            type='date'
+                            className="flex border border-gray-200 py-1 bg-zinc-100/40 w-32"
+                            value={mktDate}
+                            min={disablePastDate()}
+                            onChange={e => setMktDate(e.target.value)} />
+                        
+                        {mktDate ? (
+                            <span>Date set: {new Date(mktDate).toLocaleString("GB-English", { dateStyle: "short" })}</span>
+                        ) : null}
+                    </div>
+
+                )}
+                {contrato === "Contrato" && (
+                    <></>
+                )}
                 <label className='text-gray-400'>Project ID</label>
                 <input
                     type='text'
@@ -201,6 +264,12 @@ export default function ProjectForm({
                     placeholder='ej: 4512'
                     value={volumen}
                     onChange={e => setVolumen(e.target.value)} />
+                <label className='text-gray-400'>Sell Price (USD)</label>
+                <input
+                    type='number'
+                    placeholder='ej: 1.60'
+                    value={precioVenta}
+                    onChange={e => setPrecioVenta(e.target.value)} />
                 <label className='text-gray-400'>Project's Name</label>
                 <input
                     type='text'

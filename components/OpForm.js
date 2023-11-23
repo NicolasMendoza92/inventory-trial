@@ -12,14 +12,16 @@ export default function OpForm({
     precio: existingPrecio,
     quantity: existingQuantity,
     delivery: existingDelivery,
+    deliveryDate: existingDeliveryDate,
     payment: existingPayment,
+    paymentDate: existingPaymentDate,
     detalles: existingDetalles,
     projectID: existingProjectID,
     standar: existingStandar,
     vintage: existingVintage,
     volumen: existingVolumen,
     name: existingName,
-    archivos:existingArchivos,
+    archivos: existingArchivos,
     relatedProjectID
 }) {
 
@@ -51,7 +53,9 @@ export default function OpForm({
     const [precio, setPrecio] = useState(existingPrecio || '');
     const [quantity, setQuantity] = useState(existingQuantity || '');
     const [delivery, setDelivery] = useState(existingDelivery || '');
+    const [deliveryDate, setDeliveryDate] = useState(existingDeliveryDate || '');
     const [payment, setPayment] = useState(existingPayment || '');
+    const [paymentDate, setPaymentDate] = useState(existingPaymentDate || '');
     const [detalles, setDetalles] = useState(existingDetalles || '');
     const [archivos, setArchivos] = useState(existingArchivos || []);
 
@@ -69,6 +73,34 @@ export default function OpForm({
             setTransaction('Purchase')
         }
     }
+
+    const handleDelivery = (e) => {
+        const deliver = e.target.value;
+        if (deliver === "Pending") {
+            setDelivery(deliver)
+        } else {
+            setDelivery(deliver)
+            setDeliveryDate('')
+        }
+    }
+
+    const handlePayment = (e) => {
+        const pay = e.target.value;
+        if (pay === "Pending") {
+            setPayment(pay)
+        } else {
+            setPayment(pay)
+            setPaymentDate('')
+        }
+    }
+    // Formula para editar el datepicker
+    const disablePastDate = () => {
+        const today = new Date();
+        const dd = String(today.getDate() + 3).padStart(2, "0");
+        const mm = String(today.getMonth() + 1).padStart(2, "0");
+        const yyyy = today.getFullYear();
+        return yyyy + "-" + mm + "-" + dd;
+    };
 
 
     async function newSale(e) {
@@ -88,7 +120,9 @@ export default function OpForm({
                     precio,
                     quantity,
                     delivery,
+                    deliveryDate,
                     payment,
+                    paymentDate,
                     proyecto: relatedProjectID,
                     detalles,
                     archivos,
@@ -131,9 +165,11 @@ export default function OpForm({
                     precio,
                     quantity,
                     delivery,
+                    deliveryDate,
                     payment,
+                    paymentDate,
                     proyecto: _id,
-                    detalles, 
+                    detalles,
                     archivos
                 }
                 if (transaction === 'Sale') {
@@ -252,7 +288,7 @@ export default function OpForm({
                         <option value="">-no selected-</option>
                         <option value="Trading">Trading</option>
                         <option value="Corporate">Corporate</option>
-                        <option value="Sourcing">Sourcing</option>    
+                        <option value="Sourcing">Sourcing</option>
                     </select>
                 </div>
                 <div className='flex-wrap'>
@@ -280,27 +316,70 @@ export default function OpForm({
                         value={quantity}
                         onChange={e => setQuantity(e.target.value)} />
                 </div>
-                <div className='flex-wrap'>
-                    <label className='text-gray-400'>Delivery Status</label>
-                    <select
-                        className="flex border border-gray-200 py-1 bg-zinc-100/40"
-                        value={delivery}
-                        onChange={e => setDelivery(e.target.value)}>
-                        <option value="">-no selected-</option>
-                        <option value="Pending">Pending</option>
-                        <option value="Done">Done</option>
-                    </select>
+                <div className='flex gap-2'>
+                    <div className='flex-wrap'>
+                        <label className='text-gray-400'>Delivery Status</label>
+                        <select
+                            className="flex border border-gray-200 py-1 bg-zinc-100/40"
+                            value={delivery}
+                            onChange={e => handleDelivery(e)}>
+                            <option value="">-no selected-</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Done">Done</option>
+                        </select>
+                    </div>
+                    <div>
+                        {delivery === "Pending" && (
+                            <>
+                                <label className='text-gray-400'>Delivery date</label>
+                                <input
+                                    type='date'
+                                    className="flex border border-gray-200 py-1 bg-zinc-100/40"
+                                    value={deliveryDate}
+                                    min={disablePastDate()}
+                                    onChange={e => setDeliveryDate(e.target.value)} />
+                            </>
+                        )}
+                        {delivery === "Done" && (
+                            <></>
+                        )}
+                        {deliveryDate ? (
+                            <span>Date set: {new Date(deliveryDate).toLocaleString("GB-English", { dateStyle: "short" })}</span>
+                        ) : null}
+                    </div>
+
                 </div>
-                <div className='flex-wrap'>
-                    <label className='text-gray-400'>Payment Status</label>
-                    <select
-                        className="flex border border-gray-200 py-1 bg-zinc-100/40"
-                        value={payment}
-                        onChange={e => setPayment(e.target.value)}>
-                        <option value="">-no selected-</option>
-                        <option value="Pending">Pending</option>
-                        <option value="Done">Done</option>
-                    </select>
+                <div className='flex gap-2'>
+                    <div className='flex-wrap'>
+                        <label className='text-gray-400'>Payment Status</label>
+                        <select
+                            className="flex border border-gray-200 py-1 bg-zinc-100/40"
+                            value={payment}
+                            onChange={e => handlePayment(e)}>
+                            <option value="">-no selected-</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Done">Done</option>
+                        </select>
+                    </div>
+                    <div>
+                        {payment === "Pending" && (
+                            <>
+                                <label className='text-gray-400'>Payment date</label>
+                                <input
+                                    type='date'
+                                    className="flex border border-gray-200 py-1 bg-zinc-100/40"
+                                    value={paymentDate}
+                                    min={disablePastDate()}
+                                    onChange={e => setPaymentDate(e.target.value)} />
+                            </>
+                        )}
+                        {payment === "Done" && (
+                            <></>
+                        )}
+                        {paymentDate ? (
+                            <span>Date set: {new Date(paymentDate).toLocaleString("GB-English", { dateStyle: "short" })}</span>
+                        ) : null}
+                    </div>
                 </div>
                 <label className='text-gray-400'>Notes</label>
                 <textarea

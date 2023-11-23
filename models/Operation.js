@@ -24,8 +24,14 @@ const operationSchema = new Schema({
     delivery:{
         type: String,
     },
+    deliveryDate:{
+        type:Date,
+    },
     payment:{
         type: String,
+    },
+    paymentDate:{
+        type:Date,
     },
     detalles:{
         type: String,

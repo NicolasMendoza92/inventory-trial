@@ -40,7 +40,7 @@ export default function HomeStats({ operations}) {
                 <div className="board-card" >
                     <h3 className="board-title ">Payment</h3>
                     <div className="board-number">{openPayment.length}</div>
-                    <div className="board-desc">You have {openPayment.length} pending deliveries.</div>
+                    <div className="board-desc">You have {openPayment.length} pending payments.</div>
                 </div>
                 <div className="board-card" >
                     <h3 className="board-title ">Close Operations</h3>

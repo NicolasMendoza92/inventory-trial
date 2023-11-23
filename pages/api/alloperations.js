@@ -13,6 +13,7 @@ export default async function handle(req, res) {
                     name: 1,
                     standar: 1,
                     vintage: 1,
+                    pais: 1,
                 })
             res.json({
                 allOperations,

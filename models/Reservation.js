@@ -5,6 +5,9 @@ const reservationSchema = new Schema({
     team: {
         type: String,
     },
+    reserveOwn: {
+        type: String,
+    },
     customer: {
         type: String,
         required: true,

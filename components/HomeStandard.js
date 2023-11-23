@@ -1,6 +1,6 @@
 
 
-export default function HomeStats2({ projects }) {
+export default function HomeStandard({ projects }) {
 
 
     const cdmProjects = projects.filter(p => p.standar === 'CDM')

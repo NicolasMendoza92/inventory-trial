@@ -64,7 +64,10 @@ const ExportOperations = () => {
                             <td>Price</td>
                             <td>Volume</td>
                             <td>Delivery</td>
+                            <td>Delivery Date</td>
                             <td>Payment</td>
+                            <td>Payment Date</td>
+                            <td>Notes</td>
                             <td></td>
                         </tr>
                     </thead>
@@ -82,10 +85,14 @@ const ExportOperations = () => {
                                 <td>{op.proyecto?.projectID}</td>
                                 <td>{op.proyecto?.name}</td>
                                 <td>{op.proyecto?.vintage}</td>
+                                <td>{op.proyecto?.pais}</td>
                                 <td>{op.precio}</td>
                                 <td>{op.quantity}</td>
                                 <td>{op.delivery}</td>
+                                <td>{op.deliveryDate}</td>
                                 <td>{op.payment}</td>
+                                <td>{op.paymentDate}</td>
+                                <td>{op.detalles}</td>
                             </tr>
                         ))}
                     </tbody>

@@ -7,6 +7,7 @@ export default function ReservForm({
     _id,
     customer: existingCustomer,
     team: existingTeam,
+    reserveOwn: existingReserveOwn,
     price: existingPrice,
     quantity: existingQuantity,
     status: existingStatus,
@@ -44,6 +45,7 @@ export default function ReservForm({
     // VALORES VIEJOS DEL FORMULARIO DE RESERVA - CUANDO SE EDITA 
     const [customer, setCustomer] = useState(existingCustomer || '');
     const [team, setTeam] = useState(existingTeam || '');
+    const [reserveOwn, setReserveOwn] = useState(existingReserveOwn || '');
     const [price, setPrice] = useState(existingPrice || '');
     const [quantity, setQuantity] = useState(existingQuantity || '');
     const [status, setStatus] = useState(existingStatus || '');
@@ -74,6 +76,7 @@ export default function ReservForm({
                 const reserve = {
                     customer,
                     team,
+                    reserveOwn,
                     price,
                     quantity,
                     status,
@@ -101,6 +104,7 @@ export default function ReservForm({
                 const newReserve = {
                     customer,
                     team,
+                    reserveOwn,
                     price,
                     quantity,
                     status,
@@ -144,17 +148,33 @@ export default function ReservForm({
                 <></>
             )}
             <form onSubmit={newReserve}>
-                <div className='flex-wrap'>
-                    <label className='text-gray-400'>Team</label>
-                    <select
-                        className="flex border border-gray-200 py-1 bg-zinc-100/40"
-                        value={team}
-                        onChange={e => setTeam(e.target.value)}>
-                        <option value="">-no selected-</option>
-                        <option value="Trading">Trading</option>
-                        <option value="Corporate">Corporate</option>
-                        <option value="Sourcing">Sourcing</option>
-                    </select>
+                <div className='grid grid-cols-1 md:grid-cols-6 gap-2'>
+                    <div>
+                        <label className='text-gray-400'>Team</label>
+                        <select
+                            className="flex border border-gray-200 py-1 bg-zinc-100/40"
+                            value={team}
+                            onChange={e => setTeam(e.target.value)}>
+                            <option value="">-no selected-</option>
+                            <option value="Trading">Trading</option>
+                            <option value="Corporate">Corporate</option>
+                            <option value="Sourcing">Sourcing</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label className='text-gray-400'>Own</label>
+                        <select
+                            className="flex border border-gray-200 py-1 bg-zinc-100/40"
+                            value={reserveOwn}
+                            onChange={e => setReserveOwn(e.target.value)}>
+                            <option value="">-no selected-</option>
+                            <option value="Danna">Danna</option>
+                            <option value="Helibeth">Helibeth</option>
+                            <option value="Mary">Mary</option>
+                            <option value="Monica">Monica</option>
+                            <option value="William">William</option>
+                        </select>
+                    </div>
                 </div>
                 <div className='flex-wrap'>
                     <label className='text-gray-400'>Client</label>
@@ -202,6 +222,9 @@ export default function ReservForm({
                             value={expiration}
                             min={disablePastDate()}
                             onChange={e => setExpiration(e.target.value)} />
+                        {expiration ? (
+                            <span>Date set: {new Date(expiration).toLocaleString("GB-English", { dateStyle: "short" })}</span>
+                        ) : null}
                     </div>
                 </div>
 

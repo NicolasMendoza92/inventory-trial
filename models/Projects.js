@@ -36,11 +36,23 @@ const projectSchema = new Schema({
     sdg:{
         type: String,
     },
+    sdgSelected: [{ type: String }], 
+    sdgImages: [{ type: String }], 
     sede:{
         type: String,
     },
-    sdgSelected: [{ type: String }], 
-    sdgImages: [{ type: String }], 
+    contrato:{
+        type: String,
+    },
+    mktDate:{
+        type: Date,
+    },
+    proveedor:{
+        type: String,
+    },
+    precioVenta: {
+        type: Number,
+    },
     projectLink:{
         type: String,
     },

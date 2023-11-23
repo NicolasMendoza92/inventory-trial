@@ -45,6 +45,7 @@ export default function reservations() {
                         <tr>
                             <td>Date</td>
                             <td>Team</td>
+                            <td>Reserve Own</td>
                             <td>Client</td>
                             <td>Project</td>
                             <td>Vintage</td>
@@ -69,10 +70,11 @@ export default function reservations() {
                         {reservations.map(r => (
                             <tr key={r._id}>
                                 <td>{(new Date(r.createdAt)).toLocaleString(
-                                    "en-US", { dateStyle: "short" }
+                                    "GB-English", { dateStyle: "short" }
                                 )}
                                 </td>
                                 <td>{r.team}</td>
+                                <td>{r.reserveOwn}</td>
                                 <td>{r.customer}</td>
                                 <td>{r.projectRelated?.standar} {r.projectRelated?.projectID} {r.projectRelated?.name}</td>
                                 <td> {r.projectRelated?.vintage}</td>
@@ -80,7 +82,7 @@ export default function reservations() {
                                 <td>{r.price}</td>
                                 <td>{r.status}</td>
                                 <td>{(new Date(r.expiration)).toLocaleString(
-                                    "en-US", { dateStyle: "short" }
+                                    "GB-English", { dateStyle: "short" }
                                 )}
                                 </td>
                                 <td>{r.comments}</td>

@@ -1,6 +1,7 @@
 import ReservForm from '@/components/ReservForm';
 import Spinner from '@/components/Spinner';
 import Layout from '@/components/layout';
+import isEnableUser from '@/lib/enableUser';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
@@ -12,6 +13,7 @@ import Swal from 'sweetalert2';
 export default function EditReservePage() {
 
     const { data: session } = useSession();
+    const enable = isEnableUser(session)
 
     const router = useRouter();
     function goToLogin() {
@@ -133,19 +135,38 @@ export default function EditReservePage() {
                             <p> Edit reservation </p>
                         </div>
                         <div className='flex gap-2'>
-                            <button className="bg-gray-300 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-gray-200" >
-                                <Link href={'/reservations'}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
-                                    </svg>
-                                </Link>
-                            </button>
-                            <button className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500" onClick={() => createOperation(id)} >
-                                Convert into a sale
-                            </button>
-                            <button onClick={() => deleteReserve(id)} className="bg-red-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-red-500" >
-                                Delete
-                            </button>
+                            {enable === false && (
+                                <>
+                                    <button className="bg-gray-300 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-gray-200" >
+                                        <Link href={'/reservations'}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+                                            </svg>
+                                        </Link>
+                                    </button>
+                                    <button onClick={() => deleteReserve(id)} className="bg-red-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-red-500" >
+                                        Delete
+                                    </button>
+                                </>
+                            )}
+                            {enable === true && (
+                                <>
+                                    <button className="bg-gray-300 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-gray-200" >
+                                        <Link href={'/reservations'}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+                                            </svg>
+                                        </Link>
+                                    </button>
+                                    <button className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500" onClick={() => createOperation(id)} >
+                                        Convert into a sale
+                                    </button>
+                                    <button onClick={() => deleteReserve(id)} className="bg-red-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-red-500" >
+                                        Delete
+                                    </button>
+                                </>
+                            )}
+
                         </div>
                     </div>
                     {
