@@ -34,6 +34,14 @@ export default function OpForm({
 
     // DEFINO ESTADO PARA MANJEAR EL PROYECTO RELACIONADO CUANDO EDITO UNA OPERACION 
     const [relatedProjectInfo, setRelatedProjectInfo] = useState('');
+       
+    const [allClients, setAllClients] = useState([]);
+    // necesito usar useefect para traer los clientes de otro lugar, guardarlas en un estado con useState y poder plasmarlas en el select del project form
+    useEffect(() => {
+        axios.get('/api/clientes').then(result => {
+            setAllClients(result.data.clients);
+        })
+    }, []);
 
     // SI HAY UN PROYECTO RELACIONADO, HAGO USE EFECT Y TRAIGO DE LA BASE DE DATOS LA INFO DE ESE PROYECTO 
     useEffect(() => {
@@ -293,11 +301,18 @@ export default function OpForm({
                 </div>
                 <div className='flex-wrap'>
                     <label className='text-gray-400'>Client</label>
-                    <input
+                    <select className="flex border border-gray-200 py-1 bg-zinc-100/40" value={cliente} onChange={e => setCliente(e.target.value)}>
+                    <option value="">-no selected-</option>
+                    {allClients.length > 0 && allClients.map(cli => (
+                        <option key={cli._id} value={cli.nombreCliente}>{cli.nombreCliente}</option>
+                    ))}
+                    </select>
+                    {/* <input
                         type='text'
                         placeholder='ej: Green story'
                         value={cliente}
-                        onChange={e => setCliente(e.target.value)} />
+                        onChange={e => setCliente(e.target.value)} /> */}
+
                 </div>
                 <div className='flex-wrap'>
                     {transaction === 'Sale' && <label className='text-gray-400'>Sell price (USD)</label>}

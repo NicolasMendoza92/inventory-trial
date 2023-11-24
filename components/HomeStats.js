@@ -1,9 +1,15 @@
 
 import { subHours } from "date-fns";
+import { useRouter } from "next/router";
 
 
 export default function HomeStats({ operations}) {
 
+    const router = useRouter();
+
+    const goToOps = () =>{
+        router.push('/searchOperations')
+    }
 
     // me fijo en la documentancion de date-fns y puedo hacerlo mas facil
     const operationsToday = operations.filter(op => new Date(op.createdAt) > subHours(new Date, 24));
@@ -32,14 +38,14 @@ export default function HomeStats({ operations}) {
         <div className="">
             <h1 className="home-stats-titles">Operation Status</h1>
             <div className="board-grid">
-                <div className="board-card" >
-                    <h3 className="board-title ">Delivery</h3>
-                    <div className="board-number">{openDelivery.length}</div>
+                <div className="board-card-alert" onClick={goToOps} >
+                    <h3 className="board-title-alert">Delivery</h3>
+                    <div className="board-number-alert">{openDelivery.length}</div>
                     <div className="board-desc">You have {openDelivery.length} pending deliveries. </div>
                 </div>
-                <div className="board-card" >
-                    <h3 className="board-title ">Payment</h3>
-                    <div className="board-number">{openPayment.length}</div>
+                <div className="board-card-alert" onClick={goToOps} >
+                    <h3 className="board-title-alert">Payment</h3>
+                    <div className="board-number-alert">{openPayment.length}</div>
                     <div className="board-desc">You have {openPayment.length} pending payments.</div>
                 </div>
                 <div className="board-card" >

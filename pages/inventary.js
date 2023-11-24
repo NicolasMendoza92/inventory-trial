@@ -65,8 +65,6 @@ export default function Projects() {
             </div>
           </>
         )}
-
-
       </div>
       <div className="relative overflow-x-auto">
         <table className="  basic my-3">
