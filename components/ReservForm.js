@@ -31,6 +31,14 @@ export default function ReservForm({
     // DEFINO ESTADO PARA MANJEAR EL PROYECTO RELACIONADO CUANDO EDITO UNA OPERACION 
     const [relatedProjectInfo, setRelatedProjectInfo] = useState('');
 
+    const [allClients, setAllClients] = useState([]);
+    // necesito usar useefect para traer los clientes de otro lugar, guardarlas en un estado con useState y poder plasmarlas en el select del project form
+    useEffect(() => {
+        axios.get('/api/clientes').then(result => {
+            setAllClients(result.data.clients);
+        })
+    }, []);
+
     // SI HAY UN PROYECTO RELACIONADO, HAGO USE EFECT Y TRAIGO DE LA BASE DE DATOS LA INFO DE ESE PROYECTO 
     useEffect(() => {
         if (!relatedProjectID) {
@@ -177,12 +185,13 @@ export default function ReservForm({
                     </div>
                 </div>
                 <div className='flex-wrap'>
-                    <label className='text-gray-400'>Client</label>
-                    <input
-                        type='text'
-                        placeholder='ej: Green story'
-                        value={customer}
-                        onChange={e => setCustomer(e.target.value)} />
+                <label className='text-gray-400'>Client</label>
+                    <select className="flex border border-gray-200 py-1 bg-zinc-100/40" value={customer} onChange={e => setCustomer(e.target.value)}>
+                    <option value="">-no selected-</option>
+                    {allClients.length > 0 && allClients.map(cli => (
+                        <option key={cli._id} value={cli.nombreCliente}>{cli.nombreCliente}</option>
+                    ))}
+                    </select>
                 </div>
                 <div className='grid grid-cols-1 md:grid-cols-6 gap-2'>
                     <div >

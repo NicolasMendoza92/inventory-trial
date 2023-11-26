@@ -9,12 +9,11 @@ import { useEffect, useState } from "react";
 // TRAIGO LOS CLIENTES CON GET SERVER SIDE PROPS PARA PODER USARLOS 
 export async function getServerSideProps() {
     await mongooseConnect();
-    const clients = await Client.find({}, null, { sort: { '_id': -1 } })
+    const clients = await Client.find({}, null, { sort: { 'nombreCliente': 1 } })
 
     return {
         props: {
             clients: JSON.parse(JSON.stringify(clients)),
-
         }
     };
 }
@@ -34,8 +33,9 @@ export default function clients({ clients }) {
             customerserch = clients.filter((cl) => {
                 return cl.nombreCliente.toLowerCase().includes(clientSearched.toLowerCase()) ||
                     cl.mainContact?.toLowerCase().includes(clientSearched.toLowerCase()) ||
-                    cl.paisCliente.toLowerCase().includes(clientSearched.toLowerCase()) ||
-                    cl.tipoCliente.toLowerCase().includes(clientSearched.toLowerCase())
+                    cl.paisCliente?.toLowerCase().includes(clientSearched.toLowerCase()) ||
+                    cl.tipoCliente?.toLowerCase().includes(clientSearched.toLowerCase()) ||
+                    cl.division?.toLowerCase().includes(clientSearched.toLowerCase())
             });
             setClientsFinded(customerserch);
         }
@@ -68,6 +68,7 @@ export default function clients({ clients }) {
                             <td>Main Contact</td>
                             <td>Country</td>
                             <td>Type</td>
+                            <td>Division</td>
                             <td>Notes</td>
                             <td></td>
                         </tr>
@@ -92,6 +93,7 @@ export default function clients({ clients }) {
                                 <td>{c.mainContact}</td>
                                 <td>{c.paisCliente}</td>
                                 <td>{c.tipoCliente}</td>
+                                <td>{c.division}</td>
                                 <td>{c.comentarios}</td>
                                 <td>
                                     <div className="flex gap-1">

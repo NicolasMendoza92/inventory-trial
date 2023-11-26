@@ -190,9 +190,6 @@ export default function ProjectForm({
         return yyyy + "-" + mm + "-" + dd;
     };
 
-    console.log(new Date(mktDate).toLocaleString("en-US", { dateStyle: "short" }))
-
-
 
     return (
         <div >

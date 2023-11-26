@@ -14,6 +14,23 @@ const operationSchema = new Schema({
         required: true,
     },
     proyecto: { type: mongoose.Schema.Types.ObjectId, ref: "Project"},
+    projectData:{
+        idProject: {
+            type: String,
+        },
+        standardOp: {
+            type: String,
+        },
+        nameProject: {
+            type: String,
+        },
+        vintageOp: {
+            type: String,
+        },
+        countryProject: {
+            type: String,
+        },
+    },
     precio: {
         type: Number,
     },
@@ -37,6 +54,7 @@ const operationSchema = new Schema({
         type: String,
     } ,  
     archivos: [{ type: String }], 
+
 },
     {
         timestamps: true,

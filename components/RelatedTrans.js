@@ -45,7 +45,7 @@ export default function RelatedTrans({
                         <td>Name</td>
                         <td>Vintage</td>
                         <td>Volume</td>
-                        <td>Price</td>
+                        <td>Price (USD)</td>
                         <td>Status delivery</td>
                         <td>Status payemnt</td>
                         <td></td>
@@ -69,9 +69,9 @@ export default function RelatedTrans({
                             </td>
                             <td>{o.transaction}</td>
                             <td>{o.equipo}</td>
-                            <td>{o.proyecto?.projectID} {o.proyecto?.standar}</td>
-                            <td>{o.proyecto?.name}</td>
-                            <td>{o.proyecto?.vintage}</td>
+                            <td>{o.projectData?.idProject} {o.projectData?.standardOp}</td>
+                            <td>{o.projectData?.nameProject}</td>
+                            <td>{o.projectData?.vintageOp}</td>
                             <td>{o.quantity}</td>
                             <td>{o.precio}</td>
                             <td>{o.delivery}</td>

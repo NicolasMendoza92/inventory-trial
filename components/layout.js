@@ -17,19 +17,18 @@ export default function Layout({ children }) {
       {/* el hmaburgesa estara d-block en pantallas md  */}
       <div className="block md:hidden flex items-center p-4">
         <button onClick={collapseData}>
-          <svg xmlns="http://www.w3.org/2000/svg" style={{color: "white"}} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
+          <svg xmlns="http://www.w3.org/2000/svg" style={{ color: "white" }} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
             <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
           </svg>
         </button>
         <div className="flex grow justify-center align-center">
-        <Link href={"/"} className='flex gap-1 mb-3' >
-          <img className='h-10' src='https://res.cloudinary.com/dbv6dgwez/image/upload/v1699960770/Allcot%20Trading/ALLCOT_ALL_white_ljdbcr.png'></img>
-        </Link>
+          <Link href={"/"} className='flex gap-1 mb-3' >
+            <img className='h-10' src='https://res.cloudinary.com/dbv6dgwez/image/upload/v1699960770/Allcot%20Trading/ALLCOT_ALL_white_ljdbcr.png'></img>
+          </Link>
         </div>
-        
       </div>
       <div>
-        <Nav showNav={showNav} setShowNav={setShowNav}/>
+        <Nav showNav={showNav} setShowNav={setShowNav} />
         <div className="bg-white flex-grow ms-2 mt-2 mr-2 mb-3 rounded-lg p-4 ">
           {children}
         </div>

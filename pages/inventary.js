@@ -89,7 +89,7 @@ export default function Projects() {
           <tbody>
             {isLoading && (
               <tr>
-                <td colSpan={11}>
+                <td colSpan={14}>
                   <div className="w-full flex justify-center py-4">
                     <Spinner />
                   </div>

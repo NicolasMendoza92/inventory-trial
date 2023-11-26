@@ -12,7 +12,7 @@ export default async function handle(req, res) {
                 res.json(await Client.findOne({ _id: req.query.id }));
             }
             else {
-                const clients = await Client.find({}, null, { sort: { '_id': -1 } })
+                const clients = await Client.find({}, null, { sort: { 'nombreCliente': 1 } })
                 res.json({
                     clients,
                 })
@@ -24,7 +24,7 @@ export default async function handle(req, res) {
 
 
     if (method === 'POST') {
-        const { nombreCliente, contacto, paisCliente, tipoCliente, comentarios, mainContact } = req.body;
+        const { nombreCliente, contacto, paisCliente, tipoCliente, comentarios, mainContact, division } = req.body;
 
         let clientfind = await Client.findOne({ nombreCliente });
         if (clientfind) {
@@ -38,6 +38,7 @@ export default async function handle(req, res) {
                 tipoCliente,
                 comentarios,
                 mainContact,
+                division, 
             });
             res.json(clienteDoc);
         }
@@ -45,7 +46,7 @@ export default async function handle(req, res) {
     }
 
     if (method === 'PUT') {
-        const { nombreCliente, contacto, paisCliente, tipoCliente, comentarios, mainContact, _id } = req.body;
+        const { nombreCliente, contacto, paisCliente, tipoCliente, comentarios, mainContact, _id, division} = req.body;
         // definimos dos parametros, definimos el objeto que lo identifica, como el id, y luego las propiedades del objeto que queremos actualizar
         const clienteDoc = await Client.updateOne({ _id }, {
             nombreCliente,
@@ -54,6 +55,7 @@ export default async function handle(req, res) {
             tipoCliente,
             comentarios,
             mainContact,
+            division,
         });
         res.json(clienteDoc);
     }

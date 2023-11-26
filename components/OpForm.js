@@ -21,6 +21,7 @@ export default function OpForm({
     vintage: existingVintage,
     volumen: existingVolumen,
     name: existingName,
+    pais:existingPais,
     archivos: existingArchivos,
     relatedProjectID
 }) {
@@ -30,6 +31,7 @@ export default function OpForm({
     const [standar, setStandar] = useState(existingStandar || '');
     const [vintage, setVintage] = useState(existingVintage || '');
     const [volumen, setVolumen] = useState(existingVolumen || '');
+    const [pais, setPais] = useState(existingPais || '');
     const [name, setName] = useState(existingName || '');
 
     // DEFINO ESTADO PARA MANJEAR EL PROYECTO RELACIONADO CUANDO EDITO UNA OPERACION 
@@ -70,7 +72,6 @@ export default function OpForm({
     const router = useRouter();
 
     const [isUploading, setIsUploading] = useState(false);
-
 
     const handleTrasnsaction = (e) => {
         const { value } = e.target;
@@ -141,6 +142,7 @@ export default function OpForm({
                         projectID: relatedProjectInfo.projectID,
                         standar: relatedProjectInfo.standar,
                         vintage: relatedProjectInfo.vintage,
+                        pais: relatedProjectInfo.pais,
                         name: relatedProjectInfo.name,
                     }
                     // le paso el _id de la seleccionado  la parte de operaciones, yy a la parte de proyectos le paso como _id el id relacionado de proyecto
@@ -153,6 +155,7 @@ export default function OpForm({
                         projectID: relatedProjectInfo.projectID,
                         standar: relatedProjectInfo.standar,
                         vintage: relatedProjectInfo.vintage,
+                        pais: relatedProjectInfo.pais,
                         name: relatedProjectInfo.name,
                     }
                     await axios.put('/api/projects', { ...data, _id: relatedProjectID });
@@ -177,6 +180,7 @@ export default function OpForm({
                     payment,
                     paymentDate,
                     proyecto: _id,
+                    projectData:{idProject:projectID, standardOp:standar, vintageOp:vintage, nameProject:name, countryProject:pais},
                     detalles,
                     archivos
                 }
@@ -186,6 +190,7 @@ export default function OpForm({
                         projectID,
                         standar,
                         vintage,
+                        pais,
                         volumen: total,
                         name
                     }
@@ -199,6 +204,7 @@ export default function OpForm({
                         projectID,
                         standar,
                         vintage,
+                        pais,
                         volumen: total,
                         name
                     }
@@ -267,7 +273,7 @@ export default function OpForm({
         <div>
             {!relatedProjectID && (
                 <div className='shadow-lg   bg-zince-300/10 flex flex-col items-start gap-2 m-3' >
-                    <div> {standar} {projectID} {name}</div>
+                    <div> {standar} {projectID} {name} - {pais}</div>
                     <div>Vintage: {vintage}</div>
                     <div>Volume available: <b>{volumen}</b> </div>
                 </div>

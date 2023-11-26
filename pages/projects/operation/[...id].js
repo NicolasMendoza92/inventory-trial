@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-export default function newSale() {
+export default function newOperation() {
 
     const { data: session } = useSession();
     // traemos la informacion del producto 

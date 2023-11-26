@@ -11,6 +11,7 @@ export default function ClientForm({
     tipoCliente: existingTipoCliente,
     comentarios: existingComentarios,
     mainContact: existingMainContact,
+    division: existingDivision,
 }) {
 
     const [nombreCliente, setNombreCliente] = useState(existingNombreCliente || '');
@@ -19,6 +20,7 @@ export default function ClientForm({
     const [tipoCliente, setTipoCliente] = useState(existingTipoCliente || '');
     const [comentarios, setComentarios] = useState(existingComentarios || '');
     const [mainContact, setMainContact] = useState(existingMainContact || '');
+    const [division, setDivision] = useState(existingDivision || '');
 
     const router = useRouter();
 
@@ -32,6 +34,7 @@ export default function ClientForm({
                 tipoCliente,
                 comentarios,
                 mainContact,
+                division,
             }
             if (_id) {
                 //update
@@ -89,13 +92,26 @@ export default function ClientForm({
                             onChange={e => setTipoCliente(e.target.value)}>
                             <option value="">-no selected-</option>
                             <option value="Trading">Trading</option>
-                            <option value="Corporate">Project Owner</option>
+                            <option value="Project Owner">Project Owner</option>
                             <option value="Consulting">Consulting</option>
                             <option value="Final">Final</option>
                             <option value="Broker">Broker</option>
                             <option value="Developer">Developer</option>
                             <option value="Investor">Investor</option>
                             <option value="Plataform">Plataform</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label className='text-gray-400'>Division</label>
+                        <select
+                            className="flex border border-gray-200 py-1 bg-zinc-100/40"
+                            value={division}
+                            onChange={e => setDivision(e.target.value)}>
+                            <option value="">-no selected-</option>
+                            <option value="Trading">Trading</option>
+                            <option value="Corporate">Corporate</option>
+                            <option value="Sourcing">Sourcing</option>
+                            <option value="BD">BD</option>
                         </select>
                     </div>
                     <div>

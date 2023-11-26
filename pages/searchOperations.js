@@ -146,10 +146,10 @@ export default function searchProjects({ operations }) {
                                 <td>{op.transaction}</td>
                                 <td>{op.equipo}</td>
                                 <td>{op.cliente}</td>
-                                <td> {op.proyecto?.standar}</td>
-                                <td>{op.proyecto?.projectID}</td>
-                                <td>{op.proyecto?.name}</td>
-                                <td>{op.proyecto?.vintage}</td>
+                                <td>{op.projectData?.standardOp}</td>
+                                <td>{op.projectData?.idProject}</td>
+                                <td>{op.projectData?.nameProject}</td>
+                                <td>{op.projectData?.vintageOp}</td>
                                 <td>{op.precio}</td>
                                 <td>{op.quantity}</td>
                                 <td>{op.delivery}</td>

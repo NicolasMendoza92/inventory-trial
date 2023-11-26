@@ -19,6 +19,9 @@ const clientSchema = new Schema(
       tipoCliente: {
         type: String,
       },
+      division: {
+        type: String,
+      },
       comentarios: {
         type: String,
       },
