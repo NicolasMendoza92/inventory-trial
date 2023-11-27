@@ -5,34 +5,33 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import Operation from '@/models/Operation';
 import { mongooseConnect } from '@/lib/mongoose';
-import Spinner from '@/components/Spinner';
 
 
 export default function calendar({ operations }) {
 
-  const [isLoading, setIsLoading] = useState(false);
   const openStatus = operations.filter(op => op.delivery === 'Pending' || op.payment === 'Pending');
 
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [events, setEvents] = useState([
-    {
-      title: 'Sample Event',
-      start: new Date(), // Set the start date of the event
-      end: new Date(), // Set the end date of the event
-    },
-    // Add more events as needed
-  ]);
+  const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "" });
+  const [allEvents, setAllEvents] = useState('');
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-    // Additional logic if needed
+  // const [selectedDate, setSelectedDate] = useState(new Date());
+  // const [events, setEvents] = useState([
+  //   {
+  //     title: 'Sample Event',
+  //     start: new Date(), // Set the start date of the event
+  //     end: new Date(), // Set the end date of the event
+  //   },
+  //   // Add more events as needed
+  // ]);
+
+  function handleAddEvent(){
+    setAllEvents([...allEvents, newEvent]);
   };
 
   return (
     <Layout>
-      <div>
-        <h1>Pending </h1>
-        <table className=" basic my-3">
+      <div className='relative overflow-x-auto'>
+        <table className=" basic  my-3">
           <thead>
             <tr>
               <td>Client</td>
@@ -44,15 +43,6 @@ export default function calendar({ operations }) {
             </tr>
           </thead>
           <tbody>
-            {isLoading && (
-              <tr>
-                <td colSpan={6}>
-                  <div className="w-full flex justify-center py-4">
-                    <Spinner />
-                  </div>
-                </td>
-              </tr>
-            )}
             {openStatus?.map(o => (
               <tr key={o._id}>
                 <td>{o.cliente}</td>
@@ -73,19 +63,25 @@ export default function calendar({ operations }) {
             ))}
           </tbody>
         </table>
-        <div>
-          <label>Select Date:</label>
-          <DatePicker selected={selectedDate} onChange={handleDateChange} />
+        <div className='m-3'>
+          <h2>Add New Event</h2>
+          <div>
+            <input type="text" placeholder="Add Title" style={{ width: "20%", marginRight: "10px" }} value={newEvent.title} onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })} />
+            <DatePicker placeholderText="Due Date" style={{ marginRight: "10px" }} selected={newEvent.start} onChange={(start) => setNewEvent({ ...newEvent, start })} />
+            {/* <DatePicker placeholderText="End Date" selected={newEvent.end} onChange={(end) => setNewEvent({ ...newEvent, end })} /> */}
+            <button stlye={{ marginTop: "10px" }} onClick={handleAddEvent}>
+              Add Event
+            </button>
+          </div>
         </div>
 
-        <div style={{ height: '500px' }}>
+        <div className='mt-5' style={{ height: '500px' }}>
           <Calendar
             localizer={momentLocalizer(moment)}
-            events={events}
+            events={allEvents}
             startAccessor="start"
-            endAccessor="end"
+            endAccessor="start"
             views={['month']}
-            defaultDate={selectedDate}
           />
         </div>
       </div>

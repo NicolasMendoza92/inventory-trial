@@ -35,6 +35,7 @@ export default function RelatedTrans({
                 <div className='text-center'> This customer has no related operations.</div>
             )}
             <CustomerData trasnsRelated={trasnsRelated}/>
+            <div className='relative overflow-x-auto'>
             <table className=" basic my-3">
                 <thead>
                     <tr>
@@ -90,6 +91,8 @@ export default function RelatedTrans({
                     ))}
                 </tbody>
             </table>
+            </div>
+            
         </div>
     )
 }
