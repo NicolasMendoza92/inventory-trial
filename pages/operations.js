@@ -20,19 +20,15 @@ export default function operations() {
 
   const pages = new Array(numberOfPages).fill(null).map((v, i) => i);
 
-  // esti actualiza la tabla - es la consulta get a las categorias. 
   useEffect(() => {
-    fetchOperations();
-  }, [])
-
-  function fetchOperations() {
-    setIsLoading(true);
+    setIsLoading(true)
     axios.get(`/api/operations?page=${pageNumber}`).then(result => {
       setOperations(result.data.operationDoc);
       setNumberOfPages(result.data.totalPages);
       setIsLoading(false);
     });
-  }
+  }, [pageNumber]);
+
 
   const gotoPrevious = () => {
     setPageNumber(Math.max(0, pageNumber - 1));
