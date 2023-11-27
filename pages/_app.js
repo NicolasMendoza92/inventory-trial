@@ -2,8 +2,8 @@ import '@/styles/globals.css'
 import 'tailwindcss/tailwind.css'
 import { SessionProvider } from "next-auth/react";
 import Head from 'next/head';
-
-
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+import 'react-datepicker/dist/react-datepicker.css';
 
 export default function App({
     Component, pageProps: { session, ...pageProps }
