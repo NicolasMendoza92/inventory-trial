@@ -63,7 +63,7 @@ export default function Nav({ showNav, setShowNav }) {
                 Calendar
             </Link>
             <div className=" flex items-center text-white ms-auto ">
-                <span>{hoy}</span>
+                {hoy}
             </div>
         </div>
 

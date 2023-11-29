@@ -248,8 +248,8 @@ export default function OpForm({
                 title: 'Are you sure?',
                 text: `Do you want delete this file?`,
                 showCancelButton: true,
-                cancelButtonText: 'Cancelar',
-                confirmButtonText: 'Si, borrar!',
+                cancelButtonText: 'Cancel',
+                confirmButtonText: 'Yes, delete!',
                 confirmButtonColor: '#d55',
                 reverseButtons: true,
             }).then(async result => {

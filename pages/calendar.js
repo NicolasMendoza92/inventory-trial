@@ -1,94 +1,102 @@
 import Layout from '@/components/layout'
-import React, { useState } from 'react';
-import { Calendar, momentLocalizer } from 'react-big-calendar';
+import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
-import Operation from '@/models/Operation';
+import axios from 'axios';
+import Spinner from '@/components/Spinner';
+import BigCalendar from '@/components/BigCalendar';
+import PendingOps from '@/components/PendingOps';
 import { mongooseConnect } from '@/lib/mongoose';
+import Operation from '@/models/Operation';
 
 
-export default function calendar({ operations }) {
+export default function Calendar({operations}) {
 
-  const openStatus = operations.filter(op => op.delivery === 'Pending' || op.payment === 'Pending');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "" });
-  const [allEvents, setAllEvents] = useState('');
+  const [title, setTitle] = useState('');
+  const [start, setStart] = useState(new Date());
 
-  // const [selectedDate, setSelectedDate] = useState(new Date());
-  // const [events, setEvents] = useState([
-  //   {
-  //     title: 'Sample Event',
-  //     start: new Date(), // Set the start date of the event
-  //     end: new Date(), // Set the end date of the event
-  //   },
-  //   // Add more events as needed
-  // ]);
+  const [allEvents, setAllEvents] = useState([]);
 
-  function handleAddEvent(){
-    setAllEvents([...allEvents, newEvent]);
+
+  // Filtro de las los que tiene pendiente hoy
+  const eventsToday = allEvents?.filter(
+    event =>
+      moment(event.start).isSame(new Date(), 'day') ||
+      moment(event.end).isSame(new Date(), 'day') ||
+      (moment(event.start).isBefore(new Date()) &&
+        moment(event.end).isAfter(new Date()))
+  );
+
+  async function handleAddEvent() {
+    try {
+      const newEvent = { title, start, end: start }
+      const response = await axios.post('/api/events', newEvent);
+      setTitle('');
+      setStart('');
+      getEventsMade()
+
+    } catch (error) {
+      console.log(error)
+    }
+    setAllEvents([...allEvents]);
   };
+
+  const getEventsMade = async () => {
+    setIsLoading(true);
+    axios.get('/api/events').then(res => {
+      setAllEvents(res.data.calendar);
+      setIsLoading(false);
+    })
+  }
+
+  useEffect(() => {
+    getEventsMade();
+  }, []);
+
+
+  
 
   return (
     <Layout>
-      <div className='relative overflow-x-auto'>
-        <table className=" basic  my-3">
-          <thead>
-            <tr>
-              <td>Client</td>
-              <td>Transaction</td>
-              <td>Project</td>
-              <td>Volume</td>
-              <td>Delivery Date</td>
-              <td>Payment Date</td>
-            </tr>
-          </thead>
-          <tbody>
-            {openStatus?.map(o => (
-              <tr key={o._id}>
-                <td>{o.cliente}</td>
-                <td>{o.transaction}</td>
-                <td>{o.projectData?.idProject} {o.projectData?.standardOp} {o.projectData?.nameProject} {o.projectData?.vintageOp}</td>
-                <td>{o.quantity}</td>
-                {o.delivery === 'Done' && <td> Done </td>}
-                {o.delivery === 'Pending' && <td>{(new Date(o.deliveryDate)).toLocaleString(
-                  "GB-English", { dateStyle: "short" }
-                )}
-                </td>}
-                {o.payment === 'Done' && <td> Done </td>}
-                {o.payment === 'Pending' && <td>{(new Date(o.paymentDate)).toLocaleString(
-                  "GB-English", { dateStyle: "short" }
-                )}
-                </td>}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div>
+        {isLoading && (
+          <>
+            <div className='flex justify-center m-auto'>
+              <Spinner />
+            </div>
+          </>
+        )}
+        {allEvents.length === 0 && (
+
+          <h1 className='text-center'>You have no events in your agenda</h1>
+
+        )}
+        {allEvents.length > 0 && (
+          <h1 className='text-center'>You have <b style={{ color: 'green', fontSize: '25px' }} >{allEvents.length}</b> events to be managed and <b style={{ color: 'red', fontSize: '25px' }} >{eventsToday.length}</b> are from today</h1>
+        )}
         <div className='m-3'>
-          <h2>Add New Event</h2>
-          <div>
-            <input type="text" placeholder="Add Title" style={{ width: "20%", marginRight: "10px" }} value={newEvent.title} onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })} />
-            <DatePicker placeholderText="Due Date" style={{ marginRight: "10px" }} selected={newEvent.start} onChange={(start) => setNewEvent({ ...newEvent, start })} />
-            {/* <DatePicker placeholderText="End Date" selected={newEvent.end} onChange={(end) => setNewEvent({ ...newEvent, end })} /> */}
-            <button stlye={{ marginTop: "10px" }} onClick={handleAddEvent}>
-              Add Event
+          <div className='flex flex-col gap-2'>
+            <input type="text" placeholder="Add Title" value={title} onChange={(e) => setTitle(e.target.value)} />
+            <DatePicker
+              showIcon
+              popperClassName="z-10"
+              placeholderText="Due Date"
+              dateFormat="dd/MM/yyyy"
+              selected={start}
+              onChange={(date) => setStart(date)} />
+            <button className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500 focus:outline-none focus:ring focus:ring-green-400" onClick={handleAddEvent}>
+              Add reminder
             </button>
           </div>
         </div>
-
-        <div className='mt-5' style={{ height: '500px' }}>
-          <Calendar
-            localizer={momentLocalizer(moment)}
-            events={allEvents}
-            startAccessor="start"
-            endAccessor="start"
-            views={['month']}
-          />
-        </div>
+        <BigCalendar allEvents={allEvents} getEventsMade={getEventsMade}/>
+       <PendingOps operations={operations}/>
       </div>
     </Layout>
   )
 }
-
 
 // TRAIGO LOS PROYECTOS CON GET SERVER SIDE PROPS PARA PODER USARLOS 
 export async function getServerSideProps() {

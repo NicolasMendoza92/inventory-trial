@@ -97,8 +97,18 @@ export default function operations() {
                 <td>{op.projectData?.vintageOp}</td>
                 <td>{op.precio}</td>
                 <td>{op.quantity}</td>
-                <td>{op.delivery}</td>
-                <td>{op.payment}</td>
+                {op.delivery === 'Done' &&
+                  <td><b style={{ color: 'green', fontSize: '15px' }} >Done</b></td>
+                }
+                {op.delivery === 'Pending' &&
+                  <td><b style={{ color: 'red', fontSize: '15px' }} >Pending</b></td>
+                }
+                {op.payment === 'Done' &&
+                  <td><b style={{ color: 'green', fontSize: '15px' }} >Done</b></td>
+                }
+                {op.payment === 'Pending' &&
+                  <td><b style={{ color: 'red', fontSize: '15px' }} >Pending</b></td>
+                }
                 {enable === false && (
                   <td>
 
