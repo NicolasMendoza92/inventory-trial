@@ -88,3 +88,8 @@ table.basic a{
   z-index: 0;
   cursor: pointer;
 }
+
+.rbc-event{
+  background-color:rgba(180, 44, 44, 0.636) !important ;
+
+}

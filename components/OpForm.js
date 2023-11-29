@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react'
 import Swal from 'sweetalert2';
 import Spinner from './Spinner';
 
+
+
 export default function OpForm({
     _id,
     transaction: existingTransaction,
@@ -21,7 +23,7 @@ export default function OpForm({
     vintage: existingVintage,
     volumen: existingVolumen,
     name: existingName,
-    pais:existingPais,
+    pais: existingPais,
     archivos: existingArchivos,
     relatedProjectID
 }) {
@@ -36,7 +38,7 @@ export default function OpForm({
 
     // DEFINO ESTADO PARA MANJEAR EL PROYECTO RELACIONADO CUANDO EDITO UNA OPERACION 
     const [relatedProjectInfo, setRelatedProjectInfo] = useState('');
-       
+
     const [allClients, setAllClients] = useState([]);
     // necesito usar useefect para traer los clientes de otro lugar, guardarlas en un estado con useState y poder plasmarlas en el select del project form
     useEffect(() => {
@@ -111,7 +113,6 @@ export default function OpForm({
         return yyyy + "-" + mm + "-" + dd;
     };
 
-
     async function newSale(e) {
         e.preventDefault();
         // EDITAR OPERACION  
@@ -160,7 +161,6 @@ export default function OpForm({
                     }
                     await axios.put('/api/projects', { ...data, _id: relatedProjectID });
                     await axios.put('/api/operations', { ...operation, _id });
-
                 }
             }
             catch (error) {
@@ -180,7 +180,7 @@ export default function OpForm({
                     payment,
                     paymentDate,
                     proyecto: _id,
-                    projectData:{idProject:projectID, standardOp:standar, vintageOp:vintage, nameProject:name, countryProject:pais},
+                    projectData: { idProject: projectID, standardOp: standar, vintageOp: vintage, nameProject: name, countryProject: pais },
                     detalles,
                     archivos
                 }
@@ -196,7 +196,6 @@ export default function OpForm({
                     }
                     await axios.put('/api/projects', { ...data, _id });
                     await axios.post('/api/operations', newOperation);
-
                 }
                 else if (transaction === 'Purchase') {
                     const total = Number(volumen) + Number(quantity)
@@ -249,8 +248,8 @@ export default function OpForm({
                 title: 'Are you sure?',
                 text: `Do you want delete this file?`,
                 showCancelButton: true,
-                cancelButtonText: 'Cancelar',
-                confirmButtonText: 'Si, borrar!',
+                cancelButtonText: 'Cancel',
+                confirmButtonText: 'Yes, delete!',
                 confirmButtonColor: '#d55',
                 reverseButtons: true,
             }).then(async result => {
@@ -308,17 +307,11 @@ export default function OpForm({
                 <div className='flex-wrap'>
                     <label className='text-gray-400'>Client</label>
                     <select className="flex border border-gray-200 py-1 bg-zinc-100/40" value={cliente} onChange={e => setCliente(e.target.value)}>
-                    <option value="">-no selected-</option>
-                    {allClients.length > 0 && allClients.map(cli => (
-                        <option key={cli._id} value={cli.nombreCliente}>{cli.nombreCliente}</option>
-                    ))}
+                        <option value="">-no selected-</option>
+                        {allClients.length > 0 && allClients.map(cli => (
+                            <option key={cli._id} value={cli.nombreCliente}>{cli.nombreCliente}</option>
+                        ))}
                     </select>
-                    {/* <input
-                        type='text'
-                        placeholder='ej: Green story'
-                        value={cliente}
-                        onChange={e => setCliente(e.target.value)} /> */}
-
                 </div>
                 <div className='flex-wrap'>
                     {transaction === 'Sale' && <label className='text-gray-400'>Sell price (USD)</label>}
@@ -365,7 +358,9 @@ export default function OpForm({
                             <></>
                         )}
                         {deliveryDate ? (
-                            <span>Date set: {new Date(deliveryDate).toLocaleString("GB-English", { dateStyle: "short" })}</span>
+                            <>
+                                <span>Date set: {new Date(deliveryDate).toLocaleString("GB-English", { dateStyle: "short" })}</span>
+                            </>
                         ) : null}
                     </div>
 
