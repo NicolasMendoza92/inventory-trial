@@ -10,7 +10,7 @@ import { mongooseConnect } from '@/lib/mongoose';
 import Operation from '@/models/Operation';
 
 
-export default function Calendar({operations}) {
+export default function Calendar({ operations }) {
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -56,7 +56,7 @@ export default function Calendar({operations}) {
   }, []);
 
 
-  
+
 
   return (
     <Layout>
@@ -87,12 +87,12 @@ export default function Calendar({operations}) {
               selected={start}
               onChange={(date) => setStart(date)} />
             <button className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500 focus:outline-none focus:ring focus:ring-green-400" onClick={handleAddEvent}>
-              Add reminder
+              Add an event
             </button>
           </div>
         </div>
-        <BigCalendar allEvents={allEvents} getEventsMade={getEventsMade}/>
-       <PendingOps operations={operations}/>
+        <BigCalendar allEvents={allEvents} getEventsMade={getEventsMade} />
+        <PendingOps operations={operations} />
       </div>
     </Layout>
   )
@@ -101,7 +101,7 @@ export default function Calendar({operations}) {
 // TRAIGO LOS PROYECTOS CON GET SERVER SIDE PROPS PARA PODER USARLOS 
 export async function getServerSideProps() {
   await mongooseConnect();
-  const operations = await Operation.find({}, null, { sort: { '_id': -1 } })
+  const operations = await Operation.find({}, null, { sort: { 'deliveryDate': 1 } })
     .populate('proyecto', {
       projectID: 1,
       name: 1,

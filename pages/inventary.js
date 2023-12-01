@@ -5,6 +5,7 @@ import isEnableUser from "@/lib/enableUser";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import React from 'react';
 import { useEffect, useState } from "react";
 
 
@@ -98,7 +99,11 @@ export default function Projects() {
             )}
             {projects.map(project => (
               <tr key={project._id}>
-                <td>{project.contrato}</td>
+                <td>{project.contrato}
+                {project.contrato === "MKT" ? (
+                  <> - ({new Date(project.mktDate).toLocaleString("GB-English", { dateStyle: "short" })}) </>
+                ) : null}
+                 </td>
                 <td>{project.proveedor}</td>
                 <td>{project.name}</td>
                 <td>{project.standar}</td>
@@ -110,7 +115,7 @@ export default function Projects() {
                 <td>{project.volumen}</td>
                 <td>{project.precioVenta}</td>
                 <td>
-                  {project.sdgSelected.map(ods => <>{ods}-</>)}
+                  {project.sdgSelected.map(ods => <React.Fragment key={ods}>{ods}-</React.Fragment>)}
                 </td>
                 <td>{project.disponible}</td>
                 {enable === false && (

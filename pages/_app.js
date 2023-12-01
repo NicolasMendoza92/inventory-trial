@@ -12,7 +12,7 @@ export default function App({
     return (
         <>
             <Head>
-                <title>APP ALLCOT Inventary</title>
+                <title>APP ALLCOT Inventory</title>
                 <link rel="icon" href="/allcot_icon.png" sizes="any" />
             </Head>
             <SessionProvider session={session}>

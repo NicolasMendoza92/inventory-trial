@@ -22,30 +22,70 @@ const ExportInventary = () => {
 
   const handleDownload = () => {
     setLoading(true);
+    const table_projects = document.getElementById("my-projects-table");
 
-    const libro = XLSX.utils.book_new();
-
-    const hoja = XLSX.utils.json_to_sheet(allprojects);
-
-    XLSX.utils.book_append_sheet(libro, hoja, "Projects");
+    const workbook = XLSX.utils.table_to_book(table_projects);
+    const worksheet = workbook.Sheets["Sheet1"];
+    XLSX.utils.sheet_to_html(worksheet, "Projects");
 
     setTimeout(() => {
-      XLSX.writeFile(libro, "ProjectsDefault.xlsx");
+      XLSX.writeFile(workbook, "InventoryTable.xlsx");
       setLoading(false);
     }, 1000);
   };
+
 
   return (
     <>
       {!loading ? (
         <button className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500 " onClick={handleDownload}>
-          Export excel 
+          Export excel
         </button>
       ) : (
-        <button  disabled>
-          <Spinner/>
+        <button disabled>
+          <Spinner />
         </button>
       )}
+      <div className="hidden">
+        <table id="my-projects-table">
+          <thead>
+            <tr>
+              <td>SUPPLIER</td>
+              <td>TYPE</td>
+              <td>STANDARD</td>
+              <td>ID</td>
+              <td>LOCATION</td>
+              <td>TECH</td>
+              <td>VINTAGE</td>
+              <td>VOLUME</td>
+              <td>DELIVERY</td>
+              <td>PRICE</td>
+              <td>SDG</td>
+              <td>NOTES</td>
+            </tr>
+          </thead>
+          <tbody>
+            {allprojects.map(pr => (
+              <tr key={pr._id}>
+                <td>{pr.proveedor}</td>
+                <td>{pr.contrato}</td>
+                <td>{pr.standar}</td>
+                <td>{pr.projectID}</td>
+                <td>{pr.pais}</td>
+                <td>{pr.tech}</td>
+                <td>{pr.vintage}</td>
+                <td>{pr.volumen}</td>
+                <td>{pr.disponible}</td>
+                <td>{pr.precioVenta}</td>
+                <td>
+                  {pr.sdgSelected.map(s => <React.Fragment key={s}>{s}*</React.Fragment>)}
+                </td>
+                <td>{pr.notas}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 };

@@ -10,6 +10,9 @@ body {
 .home-stats-titles{
   @apply text-green-600 text-2xl text-center m-2 uppercase font-semibold;
 }
+.adverts-pending{
+  @apply text-black text-2xl text-center m-2 font-semibold;
+}
 
 p{
   @apply text-green-600 text-3xl;
@@ -46,7 +49,10 @@ table.basic a{
   @apply bg-white shadow-md p-4 text-green-600 text-center;
 }
 .board-card-alert{
-  @apply bg-red-100 shadow-md p-4 text-green-600 text-center cursor-pointer hover:bg-red-200;
+  @apply bg-red-100 shadow-md p-1 text-black text-center;
+}
+.board-card-link{
+  @apply  shadow-md p-4 text-green-600 text-center cursor-pointer hover:bg-green-200;
 }
 .board-title{
   @apply uppercase text-gray-500 font-bold text-xs text-center;

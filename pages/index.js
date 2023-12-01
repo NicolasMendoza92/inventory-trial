@@ -26,7 +26,7 @@ export default function Home({operations, projects}) {
   return (
     <Layout>
       <UserInfo/>
-      <HomeStandard projects={projects}/>
+      <HomeStandard projects={projects} operations={operations}/>
       <HomeStats operations={operations}/>
     </Layout>
   )

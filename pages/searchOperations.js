@@ -7,7 +7,7 @@ import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 
-export default function searchProjects({ operations }) {
+export default function SearchOperations({ operations }) {
 
     const { data: session } = useSession();
     const enable = isEnableUser(session)
@@ -22,6 +22,7 @@ export default function searchProjects({ operations }) {
     const [vol, setVol] = useState(0);
 
 
+    // Use Effect para el buscador 
     useEffect(() => {
         let searchedoperations = [];
         if (operationSearched.length !== '') {
@@ -41,6 +42,19 @@ export default function searchProjects({ operations }) {
     }, [operationSearched, operations])
 
 
+    const filterByMonth = (e) => {
+        const selectedMonth = e.target.value;
+        if (selectedMonth === 'all') {
+            const all = operations.map(op => op);
+            setOperationFinded(all)
+        } else {
+            const filterMonth = operations.filter(op => {
+                const itemMonth = new Date(op.createdAt).getMonth() + 1;
+                return itemMonth === parseInt(selectedMonth, 10);
+            });
+            setOperationFinded(filterMonth)
+        }
+    }
 
     const filterByTeam = (e) => {
         const team = e.target.value;
@@ -66,6 +80,7 @@ export default function searchProjects({ operations }) {
         setOperationFinded(filterPayment)
     }
 
+
     const filterByVol = (e) => {
         const vol = e.target.value;
         setVol(vol)
@@ -86,15 +101,31 @@ export default function searchProjects({ operations }) {
                     autoFocus />
             </div>
             <div className='flex flex-wrap gap-2'>
-                <label className="m-2" >TYPE</label>
+                <label className="m-2" >Create</label>
+                <select onChange={(e) => filterByMonth(e)} className="flex w-32" >
+                    <option value="all">all</option>
+                    <option value="1">Jan</option>
+                    <option value="2">Feb</option>
+                    <option value="3">Mar</option>
+                    <option value="4">Apr</option>
+                    <option value="5">May</option>
+                    <option value="6">Jun</option>
+                    <option value="7">Jul</option>
+                    <option value="8">Ago</option>
+                    <option value="9">Sep</option>
+                    <option value="10">Oct</option>
+                    <option value="11">Nov</option>
+                    <option value="12">Dic</option>
+                </select>
+                <label className="m-2" >Transaction</label>
                 <select onChange={(e) => filterByType(e)} className="flex w-32" >
-                    <option value="">all types</option>
+                    <option value="">all</option>
                     <option value="Sale">Sale</option>
                     <option value="Purchase">Purchase</option>
                 </select>
-                <label className="m-2" >TEAM</label>
+                <label className="m-2" >Team</label>
                 <select onChange={(e) => filterByTeam(e)} className="flex w-32" >
-                    <option value="">all types</option>
+                    <option value="">all</option>
                     <option value="Trading">Trading</option>
                     <option value="Corporate">Corporate</option>
                     <option value="Sourcing">Sourcing</option>
@@ -127,7 +158,7 @@ export default function searchProjects({ operations }) {
                             <td>Client</td>
                             <td>Standard</td>
                             <td>ID</td>
-                            <td>Project name</td>
+                            <td>Project Name</td>
                             <td>Vintage</td>
                             <td>Preice (usd)</td>
                             <td>Volume</td>
@@ -152,8 +183,16 @@ export default function searchProjects({ operations }) {
                                 <td>{op.projectData?.vintageOp}</td>
                                 <td>{op.precio}</td>
                                 <td>{op.quantity}</td>
-                                <td>{op.delivery}</td>
-                                <td>{op.payment}</td>
+                                {op.delivery === 'Done' && <td><b style={{ color: 'green', fontSize: '18px' }} >Done</b> </td>}
+                                {op.delivery === 'Pending' && <td> <b style={{ color: 'red' }}> Pending </b> {(new Date(op.deliveryDate)).toLocaleString(
+                                    "GB-English", { dateStyle: "short" }
+                                )}
+                                </td>}
+                                {op.payment === 'Done' && <td> <b style={{ color: 'green', fontSize: '18px' }} >Done</b> </td>}
+                                {op.payment === 'Pending' && <td> <b style={{ color: 'red' }}> Pending </b> {(new Date(op.paymentDate)).toLocaleString(
+                                    "GB-English", { dateStyle: "short" }
+                                )}
+                                </td>}
                                 {enable === false && (
                                     <td>
 
@@ -212,7 +251,6 @@ export async function getServerSideProps() {
     return {
         props: {
             operations: JSON.parse(JSON.stringify(operations)),
-
         }
     };
 }

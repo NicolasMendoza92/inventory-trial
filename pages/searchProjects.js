@@ -7,7 +7,7 @@ import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 
-export default function searchProjects({ projects }) {
+export default function SearchProjects({ projects }) {
 
     const { data: session } = useSession();
     const enable = isEnableUser(session)
@@ -77,7 +77,7 @@ export default function searchProjects({ projects }) {
                     autoFocus />
             </div>
             <div className='flex flex-wrap gap-2'>
-                <label className="m-2" >STANDARD</label>
+                <label className="m-2" >Standard</label>
                 <select onChange={(e) => filterByStd(e)} className="flex w-32" >
                     <option value="">all standar</option>
                     <option value="CDM">CDM</option>
@@ -89,7 +89,7 @@ export default function searchProjects({ projects }) {
                     <option value="CSA">CSA</option>
                     <option value="PLAN VIVO">Plan Vivo</option>
                 </select>
-                <label className="m-2" >TECH</label>
+                <label className="m-2" >Tech</label>
                 <select onChange={(e) => filterByTech(e)} className="flex w-32" >
                     <option value="">all tech</option>
                     <option value="AFOLU">AFOLU</option>
@@ -183,7 +183,7 @@ export default function searchProjects({ projects }) {
                                 <td>{project.volumen}</td>
                                 <td>{project.precioVenta}</td>
                                 <td>
-                                    {project.sdgSelected.map(ods => <>{ods}-</>)}
+                                {project.sdgSelected.map(ods => <React.Fragment key={ods}>{ods}-</React.Fragment>)}
                                 </td>
                                 <td>{project.disponible}</td>
                                 {enable === false && (

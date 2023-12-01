@@ -1,14 +1,16 @@
 
 import { subHours } from "date-fns";
+import moment from "moment";
 import { useRouter } from "next/router";
+import CountdownDeli from "./CountdownDeli";
+import CountdownPay from "./CountdownPay";
 
 
-export default function HomeStats({ operations}) {
+export default function HomeStats({ operations }) {
 
     const router = useRouter();
-
-    const goToOps = () =>{
-        router.push('/searchOperations')
+    const goToOps = () => {
+        router.push('/calendar')
     }
 
     // me fijo en la documentancion de date-fns y puedo hacerlo mas facil
@@ -34,16 +36,24 @@ export default function HomeStats({ operations}) {
     const pendingDelivery = openDelivery.map(o => o.quantity).reduce((count, o) => count + parseFloat(o), 0);
 
 
+    // LISTA PARA MANDAR AL COUNTDOWN
+    const deliveryDatesList = openDelivery.map(op => new Date(op.deliveryDate))
+    const paymentDatesList = openPayment.map(op => new Date(op.paymentDate))
+   
+
+
     return (
         <div className="">
+            <CountdownDeli deliveryDatesList={deliveryDatesList}/>
+            <CountdownPay paymentDatesList={paymentDatesList}/>
             <h1 className="home-stats-titles">Operation Status</h1>
             <div className="board-grid">
-                <div className="board-card-alert" onClick={goToOps} >
+                <div className="board-card-link" onClick={goToOps} >
                     <h3 className="board-title-alert">Delivery</h3>
                     <div className="board-number-alert">{openDelivery.length}</div>
                     <div className="board-desc">You have {openDelivery.length} pending deliveries. </div>
                 </div>
-                <div className="board-card-alert" onClick={goToOps} >
+                <div className="board-card-link" onClick={goToOps} >
                     <h3 className="board-title-alert">Payment</h3>
                     <div className="board-number-alert">{openPayment.length}</div>
                     <div className="board-desc">You have {openPayment.length} pending payments.</div>

@@ -1,6 +1,11 @@
+import moment from "moment";
 
 
-export default function HomeStandard({ projects }) {
+export default function HomeStandard({ projects, operations }) {
+
+    // Deliveries and payment del dia de hoy 
+    const deliverToday = operations.filter(op => moment(op.deliveryDate).isSame(new Date(), 'day'));
+    const payToday = operations.filter(op => moment(op.paymentDate).isSame(new Date(), 'day'));
 
 
     const cdmProjects = projects.filter(p => p.standar === 'CDM')
@@ -20,6 +25,9 @@ export default function HomeStandard({ projects }) {
 
     return (
         <div className="">
+            {(deliverToday.length > 0 || payToday.length > 0) ? (
+                <h1 className='board-card-alert adverts-pending text-center my-3'>You have <b style={{ color: 'red', fontSize: '25px' }}>{deliverToday.length}</b> deliveries and <b style={{ color: 'red', fontSize: '25px' }} >{payToday.length}</b> payments pendings that require your action TODAY</h1>
+            ) : null}
             <h1 className="home-stats-titles">Available by standard</h1>
             <div className="board-grid">
                 <div className="board-card">
