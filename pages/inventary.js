@@ -81,7 +81,8 @@ export default function Projects() {
               <td>Country</td>
               <td>Corsia</td>
               <td>Volume</td>
-              <td>Price(USD)</td>
+              <td>Trading Price(USD)</td>
+              <td>Corp. Price(USD)</td>
               <td>SDG</td>
               <td>Availability</td>
               <td></td>
@@ -114,6 +115,7 @@ export default function Projects() {
                 <td>{project.corsia}</td>
                 <td>{project.volumen}</td>
                 <td>{project.precioVenta}</td>
+                <td>{project.precioCorp}</td>
                 <td>
                   {project.sdgSelected.map(ods => <React.Fragment key={ods}>{ods}-</React.Fragment>)}
                 </td>

@@ -59,7 +59,8 @@ const ExportInventary = () => {
               <td>VINTAGE</td>
               <td>VOLUME</td>
               <td>DELIVERY</td>
-              <td>PRICE</td>
+              <td>TRADING PRICE</td>
+              <td>CORP. PRICE</td>
               <td>SDG</td>
               <td>NOTES</td>
             </tr>
@@ -77,6 +78,7 @@ const ExportInventary = () => {
                 <td>{pr.volumen}</td>
                 <td>{pr.disponible}</td>
                 <td>{pr.precioVenta}</td>
+                <td>{pr.precioCorp}</td>
                 <td>
                   {pr.sdgSelected.map(s => <React.Fragment key={s}>{s}*</React.Fragment>)}
                 </td>

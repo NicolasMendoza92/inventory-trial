@@ -24,6 +24,7 @@ export default function ProjectForm({
     pais: existingPais,
     disponible: existingDisponible,
     precioVenta: existingPrecioVenta,
+    precioCorp: existingPrecioCorp,
     contrato: existingContrato,
     mktDate: existingMktDate,
     proveedor: existingProveedor,
@@ -47,6 +48,7 @@ export default function ProjectForm({
     const [pais, setPais] = useState(existingPais || '');
     const [disponible, setDisponible] = useState(existingDisponible || '');
     const [precioVenta, setPrecioVenta] = useState(existingPrecioVenta || '');
+    const [precioCorp, setPrecioCorp] = useState(existingPrecioCorp || '');
     const [contrato, setContrato] = useState(existingContrato || '');
     const [mktDate, setMktDate] = useState(existingMktDate || '');
     const [proveedor, setProveedor] = useState(existingProveedor || '');
@@ -76,7 +78,7 @@ export default function ProjectForm({
     async function saveProject(e) {
         try {
             e.preventDefault();
-            const data = { projectID, standar, vintage, volumen, name, projectLink, tech, corsia, sdg, sede, sdgSelected, sdgImages, pais, disponible, precioVenta, contrato, mktDate, proveedor, notas, files }
+            const data = { projectID, standar, vintage, volumen, name, projectLink, tech, corsia, sdg, sede, sdgSelected, sdgImages, pais, disponible, precioVenta, precioCorp, contrato, mktDate, proveedor, notas, files }
 
             if (!projectID || !standar || !vintage || !volumen || !tech || !pais || !name) {
                 setError('Faltan datos importantes');
@@ -218,7 +220,7 @@ export default function ProjectForm({
                             value={mktDate}
                             min={disablePastDate()}
                             onChange={e => setMktDate(e.target.value)} />
-                        
+
                         {mktDate ? (
                             <span>Date set: {new Date(mktDate).toLocaleString("GB-English", { dateStyle: "short" })}</span>
                         ) : null}
@@ -228,45 +230,70 @@ export default function ProjectForm({
                 {contrato === "Contrato" && (
                     <></>
                 )}
-                <label className='text-gray-400'>Project ID</label>
-                <input
-                    type='text'
-                    placeholder='ej: 6877'
-                    value={projectID}
-                    onChange={e => setProjectId(e.target.value)} />
-                <label className='text-gray-400'>Standard</label>
-                <select
-                    className=" border border-gray-200 py-2 px-6 bg-zinc-100/40"
-                    value={standar}
-                    onChange={e => setStandar(e.target.value)}>
-                    <option value="">-no seleccionado-</option>
-                    <option value="CDM">CDM</option>
-                    <option value="VCS">VCS</option>
-                    <option value="GS">GS</option>
-                    <option value="CERCARBONO">CERCARBONO</option>
-                    <option value="I-RECs">I-RECs</option>
-                    <option value="CAR">CAR</option>
-                    <option value="CSA">CSA</option>
-                    <option value="PLAN VIVO">Plan Vivo</option>
-                </select>
-                <label className='text-gray-400'>Vintage</label>
-                <input
-                    type='text'
-                    placeholder='ej: 2022'
-                    value={vintage}
-                    onChange={e => setVintage(e.target.value)} />
-                <label className='text-gray-400'>Volume</label>
-                <input
-                    type='number'
-                    placeholder='ej: 4512'
-                    value={volumen}
-                    onChange={e => setVolumen(e.target.value)} />
-                <label className='text-gray-400'>Sell Price (USD)</label>
-                <input
-                    type='number'
-                    placeholder='ej: 1.60'
-                    value={precioVenta}
-                    onChange={e => setPrecioVenta(e.target.value)} />
+                <div className='flex flex-wrap gap-2'>
+                    <div className='w-auto'>
+                        <label className='text-gray-400'>Project ID</label>
+                        <input
+                            type='text'
+                            placeholder='ej: 6877'
+                            value={projectID}
+                            onChange={e => setProjectId(e.target.value)} />
+                    </div>
+                    <div>
+                        <label className='text-gray-400'>Standard</label>
+                        <select
+                            className=" border border-gray-200 py-2 px-6 bg-zinc-100/40"
+                            value={standar}
+                            onChange={e => setStandar(e.target.value)}>
+                            <option value="">-no seleccionado-</option>
+                            <option value="CDM">CDM</option>
+                            <option value="VCS">VCS</option>
+                            <option value="GS">GS</option>
+                            <option value="CERCARBONO">CERCARBONO</option>
+                            <option value="I-RECs">I-RECs</option>
+                            <option value="CAR">CAR</option>
+                            <option value="CSA">CSA</option>
+                            <option value="PLAN VIVO">Plan Vivo</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label className='text-gray-400'>Vintage</label>
+                        <input
+                            type='text'
+                            placeholder='ej: 2022'
+                            value={vintage}
+                            onChange={e => setVintage(e.target.value)} />
+                    </div>
+                </div>
+                <div className='flex flex-wrap gap-2 '>
+                    <div className='w-auto'>
+                        <label className='text-gray-400'>Volume</label>
+                        <input
+                            type='number'
+                            placeholder='ej: 4512'
+                            value={volumen}
+                            onChange={e => setVolumen(e.target.value)} />
+                    </div>
+
+                    <div className='w-auto'>
+                        <label className='text-gray-400'>Sell Trading Price (USD)</label>
+                        <input
+                            type='number'
+                            placeholder='ej: 1.60'
+                            value={precioVenta}
+                            onChange={e => setPrecioVenta(e.target.value)} />
+                    </div>
+                    <div className='w-auto'>
+                        <label className='text-gray-400'>Sell Corporate Price (USD)</label>
+                        <input
+                            type='number'
+                            placeholder='ej: 3.60'
+                            value={precioCorp}
+                            onChange={e => setPrecioCorp(e.target.value)} />
+                    </div>
+
+                </div>
+
                 <label className='text-gray-400'>Project's Name</label>
                 <input
                     type='text'

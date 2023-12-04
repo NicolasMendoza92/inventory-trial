@@ -53,6 +53,9 @@ const projectSchema = new Schema({
     precioVenta: {
         type: Number,
     },
+    precioCorp: {
+        type: Number,
+    },
     projectLink:{
         type: String,
     },
