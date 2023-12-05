@@ -183,10 +183,13 @@ export default function SearchProjects({ projects }) {
                                 <td>{project.volumen}</td>
                                 <td>{project.precioVenta}</td>
                                 <td>
-                                {project.sdgSelected.map(ods => <React.Fragment key={ods}>{ods}-</React.Fragment>)}
+                                    {project.sdgSelected.map(ods => <React.Fragment key={ods}>{ods}-</React.Fragment>)}
                                 </td>
                                 <td>{project.disponible}</td>
                                 {enable === false && (
+                                    <td></td>
+                                )}
+                                {session?.user.email === 'wp.co@allcot.com' ? (
                                     <td>
                                         <Link className="bg-orange-600 text-white px-3  ms-1 mt-1 rounded shadow-sm hover:bg-orange-500" href={'/projects/reservation/' + project._id}>
                                             <div className="group relative w-max">
@@ -201,7 +204,7 @@ export default function SearchProjects({ projects }) {
                                             </div>
                                         </Link>
                                     </td>
-                                )}
+                                ): null}
                                 {enable === true &&
                                     <td>
                                         {/* aca le paso el id del proyecto, y por ende va a editar el volumen con ese id */}

@@ -1,5 +1,6 @@
 import ClientForm from "@/components/ClientForm";
 import Layout from "@/components/layout";
+
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
@@ -7,7 +8,6 @@ import { useRouter } from "next/router";
 export default function NewClient() {
 
     const { data: session } = useSession();
-
     const router = useRouter();
     function goToLogin() {
         router.push('/login')
@@ -40,11 +40,13 @@ export default function NewClient() {
                             </button>
                         </div>
                     </div>
+
                     <ClientForm />
+
                 </>
             }
 
-            
+
         </Layout>
     );
 }

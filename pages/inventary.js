@@ -121,6 +121,9 @@ export default function Projects() {
                 </td>
                 <td>{project.disponible}</td>
                 {enable === false && (
+                  <></>
+                )}
+                {session.user.email === 'wp.co@allcot.com' && (
                   <td>
                     <Link className="bg-orange-600 text-white px-3  ms-1 mt-1 rounded shadow-sm hover:bg-orange-500" href={'/projects/reservation/' + project._id}>
                       <div className="group relative w-max">
