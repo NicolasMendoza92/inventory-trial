@@ -1,11 +1,14 @@
 import Spinner from "@/components/Spinner";
 import Layout from "@/components/layout";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 
-export default function reservations() {
+export default function Reservations() {
+
+    const { data: session } = useSession();
 
     const [pageNumber, setPageNumber] = useState(0)
     const [numberOfPages, setNumberOfPages] = useState(0);
@@ -86,7 +89,9 @@ export default function reservations() {
                                 )}
                                 </td>
                                 <td>{r.comments}</td>
-                                <td>
+                                {session?.user?.email === 'tn@allcot.com' ? (
+                                    <td></td>
+                                ) : <td>
                                     <div className="flex gap-1">
                                         {/* aca le paso el id de la operacion para poder traers los datos */}
                                         <Link className="bg-gray-300 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-gray-200" href={'/reservation/edit/' + r._id}>
@@ -96,7 +101,8 @@ export default function reservations() {
                                             </svg>
                                         </Link>
                                     </div>
-                                </td>
+                                </td>}
+
                             </tr>
                         ))}
                     </tbody>

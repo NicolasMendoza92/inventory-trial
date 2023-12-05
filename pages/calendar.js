@@ -8,9 +8,18 @@ import BigCalendar from '@/components/BigCalendar';
 import PendingOps from '@/components/PendingOps';
 import { mongooseConnect } from '@/lib/mongoose';
 import Operation from '@/models/Operation';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 
 export default function Calendar({ operations }) {
+
+  const { data: session } = useSession();
+
+  const router = useRouter();
+  function goToLogin() {
+      router.push('/login')
+  }
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -60,40 +69,55 @@ export default function Calendar({ operations }) {
 
   return (
     <Layout>
-      <div>
-        {isLoading && (
-          <>
-            <div className='flex justify-center m-auto'>
-              <Spinner />
-            </div>
-          </>
-        )}
-        {allEvents.length === 0 && (
-
-          <h1 className='text-center'>You have no events in your agenda</h1>
-
-        )}
-        {allEvents.length > 0 && (
-          <h1 className='text-center'>You have <b style={{ color: 'green', fontSize: '25px' }} >{allEvents.length}</b> events to be managed and <b style={{ color: 'red', fontSize: '25px' }} >{eventsToday.length}</b> are from today</h1>
-        )}
-        <div className='m-3'>
-          <div className='flex flex-col gap-2'>
-            <input type="text" placeholder="Add Title" value={title} onChange={(e) => setTitle(e.target.value)} />
-            <DatePicker
-              showIcon
-              popperClassName="z-10"
-              placeholderText="Due Date"
-              dateFormat="dd/MM/yyyy"
-              selected={start}
-              onChange={(date) => setStart(date)} />
-            <button className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500 focus:outline-none focus:ring focus:ring-green-400" onClick={handleAddEvent}>
-              Add an event
-            </button>
+      {!session &&
+        <div className="flex justify-center">
+          <div className="shadow-md p-3 bg-zince-300/10 flex items-center gap-2 m-3">
+            <h1>You must be logged in to handle the calendar</h1>
+            <button className="bg-green-600 rounded-lg text-white font-bold px-6 py-2" onClick={goToLogin}> Login </button>
           </div>
         </div>
-        <BigCalendar allEvents={allEvents} getEventsMade={getEventsMade} />
-        <PendingOps operations={operations} />
-      </div>
+      }
+      {session &&
+        <>
+          <div>
+            {isLoading && (
+              <>
+                <div className='flex justify-center m-auto'>
+                  <Spinner />
+                </div>
+              </>
+            )}
+            {allEvents.length === 0 && (
+
+              <h1 className='text-center'>You have no events in your agenda</h1>
+
+            )}
+            {allEvents.length > 0 && (
+              <h1 className='text-center'>You have <b style={{ color: 'green', fontSize: '25px' }} >{allEvents.length}</b> events to be managed and <b style={{ color: 'red', fontSize: '25px' }} >{eventsToday.length}</b> are from today</h1>
+            )}
+            {session?.user?.email === 'tn@allcot.com' ? (
+              <></>
+            ) : <div className='m-3'>
+              <div className='flex flex-col gap-2'>
+                <input type="text" placeholder="Add Title" value={title} onChange={(e) => setTitle(e.target.value)} />
+                <DatePicker
+                  showIcon
+                  popperClassName="z-10"
+                  placeholderText="Due Date"
+                  dateFormat="dd/MM/yyyy"
+                  selected={start}
+                  onChange={(date) => setStart(date)} />
+                <button className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500 focus:outline-none focus:ring focus:ring-green-400" onClick={handleAddEvent}>
+                  Add an event
+                </button>
+              </div>
+            </div>}
+
+            <BigCalendar allEvents={allEvents} getEventsMade={getEventsMade} />
+            <PendingOps operations={operations} />
+          </div>
+        </>}
+
     </Layout>
   )
 }

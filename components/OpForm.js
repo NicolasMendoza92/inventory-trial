@@ -120,7 +120,7 @@ export default function OpForm({
             Swal.fire({
                 icon: 'warning',
                 title: 'Watch out',
-                text: 'If you modified the volume of the operation, you must change the inventory to adjust it.',
+                text: 'If you modified the VOLUME of the operation, you MUST change the inventory to adjust it.',
             })
             try {
                 const operation = {

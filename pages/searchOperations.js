@@ -183,7 +183,19 @@ export default function SearchOperations({ operations }) {
                                 <td>{op.projectData?.vintageOp}</td>
                                 <td>{op.precio}</td>
                                 <td>{op.quantity}</td>
-                                {op.delivery === 'Done' && <td><b style={{ color: 'green', fontSize: '18px' }} >Done</b> </td>}
+                                {op.delivery === 'Done' &&
+                                    <td><b style={{ color: 'green', fontSize: '15px' }} >Done</b></td>
+                                }
+                                {op.delivery === 'Pending' &&
+                                    <td><b style={{ color: 'red', fontSize: '15px' }} >Pending</b></td>
+                                }
+                                {op.payment === 'Done' &&
+                                    <td><b style={{ color: 'green', fontSize: '15px' }} >Done</b></td>
+                                }
+                                {op.payment === 'Pending' &&
+                                    <td><b style={{ color: 'red', fontSize: '15px' }} >Pending</b></td>
+                                }
+                                {/* {op.delivery === 'Done' && <td><b style={{ color: 'green', fontSize: '18px' }} >Done</b> </td>}
                                 {op.delivery === 'Pending' && <td> <b style={{ color: 'red' }}> Pending </b> {(new Date(op.deliveryDate)).toLocaleString(
                                     "GB-English", { dateStyle: "short" }
                                 )}
@@ -192,7 +204,7 @@ export default function SearchOperations({ operations }) {
                                 {op.payment === 'Pending' && <td> <b style={{ color: 'red' }}> Pending </b> {(new Date(op.paymentDate)).toLocaleString(
                                     "GB-English", { dateStyle: "short" }
                                 )}
-                                </td>}
+                                </td>} */}
                                 {enable === false && (
                                     <td>
 

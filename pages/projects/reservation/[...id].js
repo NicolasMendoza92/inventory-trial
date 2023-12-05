@@ -46,35 +46,42 @@ export default function newReserve() {
             }
             {session &&
                 <>
-                    <div className="flex justify-between content-center">
-                        <div>
-                            <p> New credit reserve </p>
-                        </div>
-                        <div className='flex gap-2'>
-                            <button className="bg-gray-300 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-gray-200" >
-                                <Link href={'/inventary'}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
-                                    </svg>
-                                </Link>
-                            </button>
-                        </div>
-                    </div>
-                    {
-                        isLoading && (
-                            <div className='flex justify-center w-full'>
-                                <Spinner />
+                    {session?.user.email === 'tn@allcot.com' ? (
+                        <div className='text-center'> Your User not have permission to make reservations </div>
+                    ) :
+                        <>
+                            <div className="flex justify-between content-center">
+                                <div>
+                                    <p> New credit reserve </p>
+                                </div>
+                                <div className='flex gap-2'>
+                                    <button className="bg-gray-300 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-gray-200" >
+                                        <Link href={'/inventary'}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+                                            </svg>
+                                        </Link>
+                                    </button>
+                                </div>
                             </div>
+                            {
+                                isLoading && (
+                                    <div className='flex justify-center w-full'>
+                                        <Spinner />
+                                    </div>
 
-                        )
-                    }
-                    {
-                        projectInfo && (
-                            <ReservForm {...projectInfo} />
-                        )
+                                )
+                            }
+                            {
+                                projectInfo && (
+                                    <ReservForm {...projectInfo} />
+                                )
+                            }
+                        </>
                     }
                 </>
             }
+
 
 
         </Layout >

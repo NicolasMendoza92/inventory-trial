@@ -27,7 +27,6 @@ export default function EditReservePage() {
     // DEFINO ESTADO PARA MANJEAR EL PROYECTO RELACIONADO CUANDO EDITO UNA OPERACION 
     const [relatedProjectInfo, setRelatedProjectInfo] = useState('');
 
-
     // traemos la propiedad id, de router.query, ya que nos fiamos previamente con un console log donde estaba el file [...id]  que creamos con console.log({router});
     const { id } = router.query;
     const relatedProjectID = reservInfo?.projectRelated

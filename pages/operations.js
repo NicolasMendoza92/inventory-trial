@@ -125,7 +125,7 @@ export default function operations() {
                         </span>
                       </div>
                     </Link>
-                    <Link className="bg-red-300 text-white px-3  ms-1 mt-1 rounded shadow-sm hover:bg-red-200" href={'/operation/delete/' + op._id}>
+                    {/* <Link className="bg-red-300 text-white px-3  ms-1 mt-1 rounded shadow-sm hover:bg-red-200" href={'/operation/delete/' + op._id}>
                       <div className="group relative w-max">
                         <button>
                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
@@ -136,7 +136,7 @@ export default function operations() {
                           Delete
                         </span>
                       </div>
-                    </Link>
+                    </Link> */}
                   </td>
                 )}
               </tr>
