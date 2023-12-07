@@ -33,6 +33,12 @@ const projectSchema = new Schema({
     corsia:{
         type: String,
     },
+    ccb:{
+        type:String,
+    },
+    colombianTax:{
+        type:String,
+    },
     sdg:{
         type: String,
     },

@@ -50,10 +50,20 @@ export default function SearchProjects({ projects }) {
         setProjectFinded(filterTech)
     }
 
-    const filterBySede = (e) => {
-        const sede = e.target.value;
-        const filterSede = projects.filter((projF) => !sede || projF.sede === sede);
-        setProjectFinded(filterSede)
+    const filterByCorsia = (e) => {
+        const corsia = e.target.value;
+        const filterCorsia = projects.filter((projF) => !corsia || projF.corsia === corsia);
+        setProjectFinded(filterCorsia)
+    }
+    const filterByCcb = (e) => {
+        const ccb = e.target.value;
+        const filterCcb = projects.filter((projF) => !ccb || projF.ccb === ccb);
+        setProjectFinded(filterCcb)
+    }
+    const filterByColombianTax = (e) => {
+        const colombianTax = e.target.value;
+        const filterColombianTax = projects.filter((projF) => !colombianTax || projF.colombianTax === colombianTax);
+        setProjectFinded(filterColombianTax)
     }
 
     const filterByVol = (e) => {
@@ -131,22 +141,32 @@ export default function SearchProjects({ projects }) {
                     <option value="Waste to compost">Waste to compost</option>
                     <option value="Wind">Wind</option>
                 </select>
-                <label className="m-2">Site</label>
+                <label className="m-2">CORSIA</label>
                 <select
-                    onChange={(e) => filterBySede(e)} className="flex w-32">
+                    onChange={(e) => filterByCorsia(e)} className="flex w-32">
                     <option value="">-no selected-</option>
-                    <option value="ALLCOT AG">ALLCOT AG</option>
-                    <option value="ALLCOT COLOMBIA">ALLCOT COLOMBIA</option>
-                    <option value="ALLCOT MEXICO">ALLCOT MEXICO</option>
-                    <option value="ALLCOT SPAIN">ALLCOT SPAIN</option>
-                    <option value="ALLCOT CENTRO-AMERICA">ALLCOT CENTRO-AMERICA</option>
+                    <option value="YES">Yes</option>
+                    <option value="NO">No</option>
+                </select>
+                <label className="m-2">CCB</label>
+                <select
+                    onChange={(e) => filterByCcb(e)} className="flex w-32">
+                    <option value="">-no selected-</option>
+                    <option value="YES">Yes</option>
+                    <option value="NO">No</option>
+                </select>
+                <label className="m-2">Colombian Tax</label>
+                <select
+                    onChange={(e) => filterByColombianTax(e)} className="flex w-32">
+                    <option value="">-no selected-</option>
+                    <option value="YES">Yes</option>
+                    <option value="NO">No</option>
                 </select>
                 <div className='flex w-64 items-center'>
                     <label className="m-2">Volume</label>
                     <input className='range_input' type='range' min={0} max={maxVolume} step={50} value={vol} onChange={(e) => filterByVol(e)} />
                     <span className='ms-2' >{vol}</span>
                 </div>
-
             </div>
             <div className=' relative overflow-x-auto'>
                 <table className="basic my-3">
@@ -174,7 +194,10 @@ export default function SearchProjects({ projects }) {
                                 <td>{project.contrato}</td>
                                 <td>{project.proveedor}</td>
                                 <td>{project.name}</td>
-                                <td>{project.standar}</td>
+                                <td>{project.standar} {project.ccb === 'YES' ? (
+                                    <> CCB </>
+                                ) : null}
+                                </td>
                                 <td>{project.projectID}</td>
                                 <td>{project.vintage}</td>
                                 <td>{project.tech}</td>
@@ -204,7 +227,7 @@ export default function SearchProjects({ projects }) {
                                             </div>
                                         </Link>
                                     </td>
-                                ): null}
+                                ) : null}
                                 {enable === true &&
                                     <td>
                                         {/* aca le paso el id del proyecto, y por ende va a editar el volumen con ese id */}

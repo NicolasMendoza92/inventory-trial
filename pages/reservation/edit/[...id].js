@@ -30,6 +30,7 @@ export default function EditReservePage() {
     // traemos la propiedad id, de router.query, ya que nos fiamos previamente con un console log donde estaba el file [...id]  que creamos con console.log({router});
     const { id } = router.query;
     const relatedProjectID = reservInfo?.projectRelated
+   
 
     // SI HAY UN PROYECTO RELACIONADO, HAGO USE EFFECT Y TRAIGO DE LA BASE DE DATOS LA INFO DE ESE PROYECTO 
     useEffect(() => {
@@ -101,7 +102,10 @@ export default function EditReservePage() {
                         equipo: reservInfo?.team,
                         cliente: reservInfo?.customer,
                         proyecto: relatedProjectID,
+                        projectData: { idProject:relatedProjectInfo?.projectID, standardOp:relatedProjectInfo?.standar, vintageOp:relatedProjectInfo?.vintage, nameProject:relatedProjectInfo?.name, countryProject:relatedProjectInfo?.pais},
                         precio: reservInfo?.price,
+                        delivery:"Pending",
+                        payment:"Pending",
                         quantity: reservInfo?.quantity,
                     }
                     await axios.post('/api/operations', newOper);

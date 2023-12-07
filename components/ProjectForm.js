@@ -30,6 +30,8 @@ export default function ProjectForm({
     proveedor: existingProveedor,
     sede: existingSede,
     notas: existingNotas,
+    ccb: existingCcb,
+    colombianTax: existingColombianTax,
     sdgSelected: existingSdgSelected,
     sdgImages: existingSdgImages,
     files: existingFiles,
@@ -52,6 +54,8 @@ export default function ProjectForm({
     const [contrato, setContrato] = useState(existingContrato || '');
     const [mktDate, setMktDate] = useState(existingMktDate || '');
     const [proveedor, setProveedor] = useState(existingProveedor || '');
+    const [ccb, setCcb] = useState(existingCcb || '');
+    const [colombianTax, setColombianTax] = useState(existingColombianTax || '');
     const [sede, setSede] = useState(existingSede || '');
     const [notas, setNotas] = useState(existingNotas || '');
     const [files, setFiles] = useState(existingFiles || []);
@@ -78,7 +82,7 @@ export default function ProjectForm({
     async function saveProject(e) {
         try {
             e.preventDefault();
-            const data = { projectID, standar, vintage, volumen, name, projectLink, tech, corsia, sdg, sede, sdgSelected, sdgImages, pais, disponible, precioVenta, precioCorp, contrato, mktDate, proveedor, notas, files }
+            const data = { projectID, standar, vintage, volumen, name, projectLink, tech, corsia, sdg, sede, sdgSelected, sdgImages, pais, disponible, precioVenta, precioCorp, contrato, mktDate, proveedor, ccb, colombianTax, notas, files }
 
             if (!projectID || !standar || !vintage || !volumen || !tech || !pais || !name) {
                 setError('Faltan datos importantes');
@@ -231,7 +235,7 @@ export default function ProjectForm({
                     <></>
                 )}
                 <div className='flex flex-wrap gap-2'>
-                    <div className='w-auto'>
+                    <div>
                         <label className='text-gray-400'>Project ID</label>
                         <input
                             type='text'
@@ -257,6 +261,17 @@ export default function ProjectForm({
                         </select>
                     </div>
                     <div>
+                        <label className='text-gray-400'>CCB</label>
+                        <select
+                            className=" border border-gray-200 py-2 px-6 bg-zinc-100/40"
+                            value={ccb}
+                            onChange={e => setCcb(e.target.value)}>
+                            <option value="">-no seleccionado-</option>
+                            <option value="YES">Yes</option>
+                            <option value="NO">No</option>
+                        </select>
+                    </div>
+                    <div>
                         <label className='text-gray-400'>Vintage</label>
                         <input
                             type='text'
@@ -274,7 +289,6 @@ export default function ProjectForm({
                             value={volumen}
                             onChange={e => setVolumen(e.target.value)} />
                     </div>
-
                     <div className='w-auto'>
                         <label className='text-gray-400'>Sell Trading Price (USD)</label>
                         <input
@@ -291,7 +305,6 @@ export default function ProjectForm({
                             value={precioCorp}
                             onChange={e => setPrecioCorp(e.target.value)} />
                     </div>
-
                 </div>
 
                 <label className='text-gray-400'>Project's Name</label>
@@ -352,15 +365,31 @@ export default function ProjectForm({
                     <option value="Waste to compost">Waste to compost</option>
                     <option value="Wind">Wind</option>
                 </select>
-                <label className='text-gray-400'>CORSIA</label>
-                <select
-                    className=" border border-gray-200 py-2 px-6 bg-zinc-100/40"
-                    value={corsia}
-                    onChange={e => setCorsia(e.target.value)}>
-                    <option value="">-no selected-</option>
-                    <option value="NO">No</option>
-                    <option value="YES">Yes</option>
-                </select>
+                <div className='flex flex-wrap gap-2'>
+                    <div className='w-32'>
+                        <label className='text-gray-400'>CORSIA</label>
+                        <select
+                            className=" border border-gray-200 py-2 px-6 bg-zinc-100/40"
+                            value={corsia}
+                            onChange={e => setCorsia(e.target.value)}>
+                            <option value="">-no selected-</option>
+                            <option value="NO">No</option>
+                            <option value="YES">Yes</option>
+                        </select>
+                    </div>
+                    <div className='w-32'>
+                        <label className='text-gray-400'>Colombian Tax</label>
+                        <select
+                            className=" border border-gray-200 py-2 px-6 bg-zinc-100/40"
+                            value={colombianTax}
+                            onChange={e => setColombianTax(e.target.value)}>
+                            <option value="">-no selected-</option>
+                            <option value="NO">No</option>
+                            <option value="YES">Yes</option>
+                        </select>
+                    </div>
+                </div>
+
                 {/* Pongo los paises en un componente por que son muchos */}
                 <CountryPFSelect pais={pais} setPais={setPais} />
                 <label className='text-gray-400'>SDG</label>

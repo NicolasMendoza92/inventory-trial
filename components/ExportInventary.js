@@ -56,6 +56,7 @@ const ExportInventary = () => {
               <td>ID</td>
               <td>LOCATION</td>
               <td>TECH</td>
+              <td>CORSIA</td>
               <td>VINTAGE</td>
               <td>VOLUME</td>
               <td>DELIVERY</td>
@@ -63,6 +64,7 @@ const ExportInventary = () => {
               <td>CORP. PRICE</td>
               <td>SDG</td>
               <td>NOTES</td>
+              <td>SITE</td>
             </tr>
           </thead>
           <tbody>
@@ -70,10 +72,13 @@ const ExportInventary = () => {
               <tr key={pr._id}>
                 <td>{pr.proveedor}</td>
                 <td>{pr.contrato}</td>
-                <td>{pr.standar}</td>
+                <td>{pr.standar} {pr.ccb === 'YES' ? (
+                  <> CCB </>
+                ): null}</td>
                 <td>{pr.projectID}</td>
                 <td>{pr.pais}</td>
                 <td>{pr.tech}</td>
+                <td>{pr.corsia}</td>
                 <td>{pr.vintage}</td>
                 <td>{pr.volumen}</td>
                 <td>{pr.disponible}</td>
@@ -83,6 +88,7 @@ const ExportInventary = () => {
                   {pr.sdgSelected.map(s => <React.Fragment key={s}>{s}*</React.Fragment>)}
                 </td>
                 <td>{pr.notas}</td>
+                <td>{pr.sede}</td>
               </tr>
             ))}
           </tbody>

@@ -107,7 +107,9 @@ export default function Projects() {
                  </td>
                 <td>{project.proveedor}</td>
                 <td>{project.name}</td>
-                <td>{project.standar}</td>
+                <td>{project.standar}{project.ccb === 'YES' ? (
+                  <> CCB </>
+                ): null}</td>
                 <td>{project.projectID}</td>
                 <td>{project.vintage}</td>
                 <td>{project.tech}</td>

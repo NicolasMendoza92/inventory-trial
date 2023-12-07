@@ -33,9 +33,9 @@ export default async function handle(req, res) {
 
     if (method === 'POST') {
         try {
-            const { projectID, standar, vintage, volumen, name, projectLink, tech, corsia,sdg, sdgSelected,sdgImages,sede, pais, disponible, precioVenta, contrato, mktDate, proveedor, notas, precioCorp, files } = req.body;
+            const { projectID, standar, vintage, volumen, name, projectLink, tech, corsia,sdg, sdgSelected,sdgImages,sede, pais, disponible, precioVenta, contrato, mktDate, proveedor, ccb, colombianTax, notas, precioCorp, files } = req.body;
             const projectDoc = await Project.create({
-                projectID, standar, vintage, volumen, name, projectLink, tech, corsia, sdg, sdgSelected,sdgImages, sede, pais, notas, files, disponible, precioVenta, contrato, mktDate, precioCorp, proveedor
+                projectID, standar, vintage, volumen, name, projectLink, tech, corsia, sdg, sdgSelected,sdgImages, sede, pais, notas, files, disponible, precioVenta, contrato, mktDate, precioCorp, ccb, colombianTax, proveedor
             })
             res.json(projectDoc);
         } catch (error) {
@@ -45,9 +45,9 @@ export default async function handle(req, res) {
     }
 
     if (method === 'PUT') {
-        const { projectID, standar, vintage, volumen, name, projectLink, tech, corsia, sdg, sdgSelected,sdgImages, sede, pais, disponible, precioVenta, contrato, mktDate, proveedor, precioCorp, notas,files, _id} = req.body;
+        const { projectID, standar, vintage, volumen, name, projectLink, tech, corsia, sdg, sdgSelected,sdgImages, sede, pais, disponible, precioVenta, contrato, mktDate, proveedor, ccb, colombianTax, precioCorp, notas,files, _id} = req.body;
         // los nombres de las propiedades son las mismas que las vbles, ahi ponogo lo que quiere actualizar (definimos dos parametros, el ID (identifica) y las prop que queremos cambiar)
-        await Project.updateOne({ _id }, { projectID, standar, vintage, volumen, name, projectLink, tech, corsia, sdg, sdgSelected, sdgImages, sede, pais, disponible, precioVenta, precioCorp, contrato, mktDate, proveedor, notas, files });
+        await Project.updateOne({ _id }, { projectID, standar, vintage, volumen, name, projectLink, tech, corsia, sdg, sdgSelected, sdgImages, sede, pais, disponible, precioVenta, precioCorp, contrato, mktDate, proveedor, ccb, colombianTax, notas, files });
         res.json(true);
     }
 
