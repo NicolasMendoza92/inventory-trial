@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-export default function newOperation() {
+export default function NewOperation() {
 
     const { data: session } = useSession();
     // traemos la informacion del producto 
@@ -48,7 +48,7 @@ export default function newOperation() {
                 <>
                     <div className="flex justify-between content-center">
                         <div>
-                            <p> Nueva Operación </p>
+                            <p> New Operation</p>
                         </div>
                         <div className='flex gap-2'>
                             <button className="bg-gray-300 text-white p-2" >

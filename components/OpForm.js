@@ -5,7 +5,6 @@ import Swal from 'sweetalert2';
 import Spinner from './Spinner';
 
 
-
 export default function OpForm({
     _id,
     transaction: existingTransaction,
@@ -137,31 +136,7 @@ export default function OpForm({
                     detalles,
                     archivos,
                 }
-                if (transaction === 'Sale') {
-                    // const total = Number(relatedProjectInfo.volumen) - Number(quantity)
-                    const data = {
-                        projectID: relatedProjectInfo.projectID,
-                        standar: relatedProjectInfo.standar,
-                        vintage: relatedProjectInfo.vintage,
-                        pais: relatedProjectInfo.pais,
-                        name: relatedProjectInfo.name,
-                    }
-                    // le paso el _id de la seleccionado  la parte de operaciones, yy a la parte de proyectos le paso como _id el id relacionado de proyecto
-                    await axios.put('/api/projects', { ...data, _id: relatedProjectID });
-                    await axios.put('/api/operations', { ...operation, _id });
-                }
-                else if (transaction === 'Purchase') {
-                    // const total = Number(relatedProjectInfo.volumen) + Number(quantity)
-                    const data = {
-                        projectID: relatedProjectInfo.projectID,
-                        standar: relatedProjectInfo.standar,
-                        vintage: relatedProjectInfo.vintage,
-                        pais: relatedProjectInfo.pais,
-                        name: relatedProjectInfo.name,
-                    }
-                    await axios.put('/api/projects', { ...data, _id: relatedProjectID });
-                    await axios.put('/api/operations', { ...operation, _id });
-                }
+                await axios.put('/api/operations', { ...operation, _id });
             }
             catch (error) {
                 console.log(error)
