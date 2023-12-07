@@ -4,7 +4,6 @@ import Layout from "@/components/layout";
 import isEnableUser from "@/lib/enableUser";
 import axios from "axios";
 import { useSession } from "next-auth/react";
-import { ErrorBoundaryHandler } from "next/dist/client/components/error-boundary";
 import Link from "next/link";
 import React from 'react';
 import { useEffect, useState } from "react";
@@ -41,7 +40,6 @@ export default function Projects() {
 
 
   return (
-    <ErrorBoundaryHandler>
       <Layout>
         <div className="flex justify-between content-center">
           {enable === false && (
@@ -209,7 +207,6 @@ export default function Projects() {
         </div>
         <h1 className="text-center">Page {pageNumber + 1} of {numberOfPages}</h1>
       </Layout>
-    </ErrorBoundaryHandler>
   );
 }
 
