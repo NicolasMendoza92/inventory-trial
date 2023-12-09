@@ -31,9 +31,9 @@ export default function SearchOperations({ operations }) {
                 return op.transaction.toLowerCase().includes(operationSearched.toLowerCase()) ||
                     op.cliente.toLowerCase().includes(operationSearched.toLowerCase()) ||
                     op.equipo.toLowerCase().includes(operationSearched.toLowerCase()) ||
-                    op.proyecto.projectID.toLowerCase().includes(operationSearched.toLowerCase()) ||
-                    op.proyecto.standar.toLowerCase().includes(operationSearched.toLowerCase()) ||
-                    op.proyecto.name.toLowerCase().includes(operationSearched.toLowerCase()) ||
+                    op.projectData?.idProject.toLowerCase().includes(operationSearched.toLowerCase()) ||
+                    op.projectData?.standardOp.toLowerCase().includes(operationSearched.toLowerCase()) ||
+                    op.projectData?.nameProject.toLowerCase().includes(operationSearched.toLowerCase()) ||
                     op.delivery.toLowerCase().includes(operationSearched.toLowerCase()) ||
                     op.payment.toLowerCase().includes(operationSearched.toLowerCase());
             });
@@ -41,6 +41,19 @@ export default function SearchOperations({ operations }) {
         }
     }, [operationSearched, operations])
 
+    const filterByYear = (e) => {
+        const selectedYear = e.target.value;
+        if (selectedYear === 'all') {
+            const all = operations.map(op => op);
+            setOperationFinded(all)
+        } else {
+            const filterYear = operations.filter(op => {
+                const itemYear = new Date(op.createdAt).getFullYear();
+                return itemYear === parseInt(selectedYear, 10);
+            });
+            setOperationFinded(filterYear)
+        }
+    }
 
     const filterByMonth = (e) => {
         const selectedMonth = e.target.value;
@@ -101,6 +114,12 @@ export default function SearchOperations({ operations }) {
                     autoFocus />
             </div>
             <div className='flex flex-wrap gap-2'>
+                <label className="m-2" >Year</label>
+                <select onChange={(e) => filterByYear(e)} className="flex w-32" >
+                    <option value="all">-no selected-</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                </select>
                 <label className="m-2" >Create</label>
                 <select onChange={(e) => filterByMonth(e)} className="flex w-32" >
                     <option value="all">all</option>
