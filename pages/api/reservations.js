@@ -11,7 +11,7 @@ export default async function handle(req, res) {
                 res.json(await Reservation.findOne({ _id: req.query.id }));
             }
             else {
-                const PAGE_SIZE = 20;
+                const PAGE_SIZE = 10;
                 const page = parseInt(req.query.page || "0");
                 const total = await Reservation.countDocuments({});
                 // con populate accedemos a las propiedades del objeto de referencia , con mongoose, es mas facil para relacionarlos

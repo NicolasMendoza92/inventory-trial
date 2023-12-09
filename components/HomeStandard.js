@@ -1,6 +1,5 @@
 import moment from "moment";
 
-
 export default function HomeStandard({ projects, operations }) {
 
     // Deliveries and payment del dia de hoy 

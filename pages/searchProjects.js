@@ -168,7 +168,7 @@ export default function SearchProjects({ projects }) {
                     <span className='ms-2' >{vol}</span>
                 </div>
             </div>
-            <div className=' relative overflow-x-auto'>
+            <div className='relative overflow-x-auto'>
                 <table className="basic my-3">
                     <thead>
                         <tr>
@@ -191,7 +191,11 @@ export default function SearchProjects({ projects }) {
                     <tbody>
                         {projectFinded.map(project => (
                             <tr key={project._id}>
-                                <td>{project.contrato}</td>
+                                <td>{project.contrato}
+                                    {project.contrato === "MKT" ? (
+                                        <> - ({new Date(project.mktDate).toLocaleString("GB-English", { dateStyle: "short" })}) </>
+                                    ) : null}
+                                </td>
                                 <td>{project.proveedor}</td>
                                 <td>{project.name}</td>
                                 <td>{project.standar} {project.ccb === 'YES' ? (

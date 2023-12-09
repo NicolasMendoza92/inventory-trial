@@ -1,6 +1,5 @@
 
 import { subHours } from "date-fns";
-import moment from "moment";
 import { useRouter } from "next/router";
 import CountdownDeli from "./CountdownDeli";
 import CountdownPay from "./CountdownPay";
@@ -40,7 +39,6 @@ export default function HomeStats({ operations }) {
     const deliveryDatesList = openDelivery.map(op => new Date(op.deliveryDate))
     const paymentDatesList = openPayment.map(op => new Date(op.paymentDate))
    
-
 
     return (
         <div className="">
