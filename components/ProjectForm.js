@@ -261,6 +261,7 @@ export default function ProjectForm({
                             <option value="CAR">CAR</option>
                             <option value="CSA">CSA</option>
                             <option value="PLAN VIVO">Plan Vivo</option>
+                            <option value="BioCarbon">BioCarbon</option>
                         </select>
                     </div>
                     <div>
