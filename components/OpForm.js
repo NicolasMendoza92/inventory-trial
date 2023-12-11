@@ -259,7 +259,7 @@ export default function OpForm({
                 <div className='flex-wrap'>
                     <label className='text-gray-400'>Transaction</label>
                     <select
-                        className="flex border border-gray-200 py-2 bg-zinc-100/40"
+                        className="flex border border-gray-200 bg-zinc-100/40"
                         value={transaction}
                         onChange={e => handleTrasnsaction(e)}>
                         <option value="">-no selected-</option>
@@ -270,7 +270,7 @@ export default function OpForm({
                 <div className='flex-wrap'>
                     <label className='text-gray-400'>Team</label>
                     <select
-                        className="flex border border-gray-200 py-1 bg-zinc-100/40"
+                        className="flex border border-gray-200 bg-zinc-100/40"
                         value={equipo}
                         onChange={e => setEquipo(e.target.value)}>
                         <option value="">-no selected-</option>
@@ -281,7 +281,7 @@ export default function OpForm({
                 </div>
                 <div className='flex-wrap'>
                     <label className='text-gray-400'>Client</label>
-                    <select className="flex border border-gray-200 py-1 bg-zinc-100/40" value={cliente} onChange={e => setCliente(e.target.value)}>
+                    <select className="flex border border-gray-200 bg-zinc-100/40" value={cliente} onChange={e => setCliente(e.target.value)}>
                         <option value="">-no selected-</option>
                         {allClients.length > 0 && allClients.map(cli => (
                             <option key={cli._id} value={cli.nombreCliente}>{cli.nombreCliente}</option>
@@ -309,7 +309,7 @@ export default function OpForm({
                     <div className='flex-wrap'>
                         <label className='text-gray-400'>Delivery Status</label>
                         <select
-                            className="flex border border-gray-200 py-1 bg-zinc-100/40"
+                            className="flex border border-gray-200 bg-zinc-100/40"
                             value={delivery}
                             onChange={e => handleDelivery(e)}>
                             <option value="">-no selected-</option>
@@ -323,7 +323,7 @@ export default function OpForm({
                                 <label className='text-gray-400'>Delivery date</label>
                                 <input
                                     type='date'
-                                    className="flex border border-gray-200 py-1 bg-zinc-100/40"
+                                    className="flex border border-gray-200 bg-zinc-100/40"
                                     value={deliveryDate}
                                     min={disablePastDate()}
                                     onChange={e => setDeliveryDate(e.target.value)} />
@@ -344,7 +344,7 @@ export default function OpForm({
                     <div className='flex-wrap'>
                         <label className='text-gray-400'>Payment Status</label>
                         <select
-                            className="flex border border-gray-200 py-1 bg-zinc-100/40"
+                            className="flex border border-gray-200 bg-zinc-100/40"
                             value={payment}
                             onChange={e => handlePayment(e)}>
                             <option value="">-no selected-</option>
@@ -358,7 +358,7 @@ export default function OpForm({
                                 <label className='text-gray-400'>Payment date</label>
                                 <input
                                     type='date'
-                                    className="flex border border-gray-200 py-1 bg-zinc-100/40"
+                                    className="flex border border-gray-200 bg-zinc-100/40"
                                     value={paymentDate}
                                     min={disablePastDate()}
                                     onChange={e => setPaymentDate(e.target.value)} />

@@ -42,6 +42,7 @@ export default function ClientForm({
             } else {
                 //create
                 const res = await axios.post('/api/clientes', newClient);
+                console.log(res.statusText)
             }
 
         } catch (error) {
@@ -87,7 +88,7 @@ export default function ClientForm({
                     <div>
                         <label className='text-gray-400'>Type</label>
                         <select
-                            className="flex border border-gray-200 py-1 bg-zinc-100/40"
+                            className="flex border border-gray-200 bg-zinc-100/40"
                             value={tipoCliente}
                             onChange={e => setTipoCliente(e.target.value)}>
                             <option value="">-no selected-</option>
@@ -104,7 +105,7 @@ export default function ClientForm({
                     <div>
                         <label className='text-gray-400'>Division</label>
                         <select
-                            className="flex border border-gray-200 py-1 bg-zinc-100/40"
+                            className="flex border border-gray-200 bg-zinc-100/40"
                             value={division}
                             onChange={e => setDivision(e.target.value)}>
                             <option value="">-no selected-</option>

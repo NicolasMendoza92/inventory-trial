@@ -31,11 +31,11 @@ export default function RegisterForm() {
                 })
             })
 
-            if(response.ok){
+            if (response.ok) {
                 const form = e.target;
                 router.push("/login")
                 form.reset();
-            } else{
+            } else {
                 console.log('Registro fallido')
             }
         } catch (error) {
@@ -52,16 +52,19 @@ export default function RegisterForm() {
 
                 <form onSubmit={handleSubmit} className="flex flex-col gap-3">
                     <input
+                        className="px-2 py-2"
                         onChange={(e) => setName(e.target.value)}
                         type="text"
                         placeholder="Full Name"
                     />
                     <input
+                        className="px-2 py-2"
                         onChange={(e) => setEmail(e.target.value)}
                         type="text"
                         placeholder="Email"
                     />
                     <input
+                        className="px-2 py-2"
                         onChange={(e) => setPassword(e.target.value)}
                         type="password"
                         placeholder="Password"
@@ -76,7 +79,7 @@ export default function RegisterForm() {
                         </div>
                     )}
 
-                    <Link className="text-sm mt-3 text-right" href={"/login"}>
+                    <Link className="text-sm m-auto" href={"/login"}>
                         ¿Ya tienes una cuenta? <span className="underline">Login</span>
                     </Link>
                 </form>

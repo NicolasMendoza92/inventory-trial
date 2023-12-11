@@ -174,6 +174,7 @@ export default function SearchProjects({ projects }) {
                         <tr>
                             <td>Type</td>
                             <td>Supplier</td>
+                            <td>Floor Price (USD)</td>
                             <td>Name</td>
                             <td>Standard</td>
                             <td>ID</td>
@@ -197,7 +198,8 @@ export default function SearchProjects({ projects }) {
                                     ) : null}
                                 </td>
                                 <td>{project.proveedor}</td>
-                                <td>{project.name}</td>
+                                <td>{project.floorPrice}</td>
+                                <td>{(project.name).slice(0,25)}</td>
                                 <td>{project.standar} {project.ccb === 'YES' ? (
                                     <> CCB </>
                                 ) : null}
@@ -218,7 +220,7 @@ export default function SearchProjects({ projects }) {
                                 )}
                                 {session?.user.email === 'wp.co@allcot.com' ? (
                                     <td>
-                                        <Link className="bg-orange-600 text-white px-3  ms-1 mt-1 rounded shadow-sm hover:bg-orange-500" href={'/projects/reservation/' + project._id}>
+                                        <Link className="bg-orange-600 text-white px-1 ms-1 rounded shadow-sm hover:bg-orange-500" href={'/projects/reservation/' + project._id}>
                                             <div className="group relative w-max">
                                                 <button>
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -235,7 +237,7 @@ export default function SearchProjects({ projects }) {
                                 {enable === true &&
                                     <td>
                                         {/* aca le paso el id del proyecto, y por ende va a editar el volumen con ese id */}
-                                        <Link className="bg-green-600 text-white px-3 ms-1 mt-1 rounded shadow-sm hover:bg-green-500" href={'/projects/operation/' + project._id}>
+                                        <Link className="bg-green-600 text-white px-1 ms-1 rounded shadow-sm hover:bg-green-500" href={'/projects/operation/' + project._id}>
                                             <div className="group relative w-max">
                                                 <button>
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -247,7 +249,7 @@ export default function SearchProjects({ projects }) {
                                                 </span>
                                             </div>
                                         </Link>
-                                        <Link className="bg-gray-300 text-white px-3  ms-1 mt-1 rounded shadow-sm hover:bg-gray-200" href={'/projects/edit/' + project._id}>
+                                        <Link className="bg-gray-300 text-white px-1 ms-1 rounded shadow-sm hover:bg-gray-200" href={'/projects/edit/' + project._id}>
                                             <div className="group relative w-max">
                                                 <button>
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
@@ -259,7 +261,7 @@ export default function SearchProjects({ projects }) {
                                                 </span>
                                             </div>
                                         </Link>
-                                        <Link className="bg-orange-600 text-white px-3  ms-1 mt-1 rounded shadow-sm hover:bg-orange-500" href={'/projects/reservation/' + project._id}>
+                                        <Link className="bg-orange-600 text-white px-1 ms-1 rounded shadow-sm hover:bg-orange-500" href={'/projects/reservation/' + project._id}>
                                             <div className="group relative w-max">
                                                 <button>
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

@@ -42,11 +42,13 @@ export default function LoginForm() {
 
                 <form onSubmit={handleSubmit} className="flex flex-col gap-3">
                     <input
+                    className="px-2 py-2"
                         onChange={(e) => setEmail(e.target.value)}
                         type="text"
                         placeholder="Email"
                     />
                     <input
+                    className="px-2 py-2"
                         onChange={(e) => setPassword(e.target.value)}
                         type="password"
                         placeholder="Password"

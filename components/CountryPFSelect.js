@@ -5,7 +5,7 @@ export default function CountryPFSelect({ pais, setPais }) {
         <div>
             <label className='text-gray-400'>Country</label>
             <select
-                className=" border border-gray-200 py-2 px-6 bg-zinc-100/40"
+                className=" border border-gray-200 bg-zinc-100/40"
                 value={pais}
                 onChange={e => setPais(e.target.value)}>
                 <option value="">-no selected-</option>

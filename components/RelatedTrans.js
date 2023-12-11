@@ -28,7 +28,6 @@ export default function RelatedTrans({
     // FILTRO LAS OPERACIONES QUE SON DEL NOMBRE IGUAL AL CLIENTE 
     const trasnsRelated = clientOps.filter((op) => !nombreCliente || op.cliente === nombreCliente)
 
-
     return (
         <>
             <div className='relative overflow-x-auto '>
@@ -73,7 +72,7 @@ export default function RelatedTrans({
                                         <td>{o.transaction}</td>
                                         <td>{o.equipo}</td>
                                         <td>{o.projectData?.idProject} {o.projectData?.standardOp}</td>
-                                        <td>{o.projectData?.nameProject}</td>
+                                        <td>{(o.projectData?.nameProject).slice(0,20)}</td>
                                         <td>{o.projectData?.vintageOp}</td>
                                         <td>{o.quantity}</td>
                                         <td>{o.precio}</td>

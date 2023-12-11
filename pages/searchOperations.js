@@ -190,7 +190,7 @@ export default function SearchOperations({ operations }) {
                         {operationFinded.map(op => (
                             <tr key={op._id}>
                                 <td>{(new Date(op.createdAt)).toLocaleString(
-                                    "en-US", { dateStyle: "short" }
+                                    "GB-English", { dateStyle: "short" }
                                 )}
                                 </td>
                                 <td>{op.transaction}</td>
@@ -198,7 +198,7 @@ export default function SearchOperations({ operations }) {
                                 <td>{op.cliente}</td>
                                 <td>{op.projectData?.standardOp}</td>
                                 <td>{op.projectData?.idProject}</td>
-                                <td>{op.projectData?.nameProject}</td>
+                                <td>{(op.projectData?.nameProject).slice(0,25)}</td>
                                 <td>{op.projectData?.vintageOp}</td>
                                 <td>{op.precio}</td>
                                 <td>{op.quantity}</td>
@@ -232,7 +232,7 @@ export default function SearchOperations({ operations }) {
                                 {enable === true && (
                                     <td>
                                         {/* aca le paso el id de la operacion para poder traers los datos */}
-                                        <Link className="bg-gray-300 text-white px-3  ms-1 mt-1 rounded shadow-sm hover:bg-gray-200" href={'/operation/edit/' + op._id}>
+                                        <Link className="bg-gray-300 text-white px-1 ms-1 rounded shadow-sm hover:bg-gray-200" href={'/operation/edit/' + op._id}>
                                             <div className="group relative w-max">
                                                 <button>
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">

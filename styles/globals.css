@@ -19,7 +19,7 @@ p{
 }
 
 input, textarea, select {
-  @apply  w-full bg-zinc-100/40 border border-gray-200;
+  @apply py-2 w-full bg-zinc-100/40 border border-gray-200 ;
 }
 
 table.basic{
@@ -31,10 +31,10 @@ table.basic thead tr th
   @apply text-sm text-gray-800 bg-green-100 uppercase border border-gray-200 border-gray-200 px-2 py-2;
 }
 table.basic tr td{
-  @apply px-2 py-1 border border-gray-200;
+  @apply py-1 px-1 border border-gray-200;
 }
 table.basic a{
-  @apply px-2 rounded-sm inline-flex mx-1 items-center gap-1 text-sm py-1;
+  @apply py-1 rounded-sm inline-flex items-center gap-1 text-sm;
 }
 .nota-imp{
   @apply text-gray-400 text-xs;

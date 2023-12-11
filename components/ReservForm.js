@@ -160,7 +160,7 @@ export default function ReservForm({
                     <div>
                         <label className='text-gray-400'>Team</label>
                         <select
-                            className="flex border border-gray-200 py-1 bg-zinc-100/40"
+                            className="flex border border-gray-200 bg-zinc-100/40"
                             value={team}
                             onChange={e => setTeam(e.target.value)}>
                             <option value="">-no selected-</option>
@@ -172,7 +172,7 @@ export default function ReservForm({
                     <div>
                         <label className='text-gray-400'>Own</label>
                         <select
-                            className="flex border border-gray-200 py-1 bg-zinc-100/40"
+                            className="flex border border-gray-200 bg-zinc-100/40"
                             value={reserveOwn}
                             onChange={e => setReserveOwn(e.target.value)}>
                             <option value="">-no selected-</option>
@@ -186,7 +186,7 @@ export default function ReservForm({
                 </div>
                 <div className='flex-wrap'>
                 <label className='text-gray-400'>Client</label>
-                    <select className="flex border border-gray-200 py-1 bg-zinc-100/40" value={customer} onChange={e => setCustomer(e.target.value)}>
+                    <select className="flex border border-gray-200 bg-zinc-100/40" value={customer} onChange={e => setCustomer(e.target.value)}>
                     <option value="">-no selected-</option>
                     {allClients.length > 0 && allClients.map(cli => (
                         <option key={cli._id} value={cli.nombreCliente}>{cli.nombreCliente}</option>
@@ -215,7 +215,7 @@ export default function ReservForm({
                     <div >
                         <label className='text-gray-400'>Status</label>
                         <select
-                            className="flex border border-gray-200 py-1 bg-zinc-100/40"
+                            className="flex border border-gray-200 bg-zinc-100/40"
                             value={status}
                             onChange={e => setStatus(e.target.value)}>
                             <option value="">-no selected-</option>
@@ -227,7 +227,7 @@ export default function ReservForm({
                         <label className='text-gray-400'>Expiration date</label>
                         <input
                             type='date'
-                            className="flex border border-gray-200 py-1 bg-zinc-100/40"
+                            className="flex border border-gray-200 bg-zinc-100/40"
                             value={expiration}
                             min={disablePastDate()}
                             onChange={e => setExpiration(e.target.value)} />
