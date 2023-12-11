@@ -70,6 +70,8 @@ export default function OpForm({
     const [detalles, setDetalles] = useState(existingDetalles || '');
     const [archivos, setArchivos] = useState(existingArchivos || []);
 
+    // handle errors 
+    const [error, setError] = useState("");
     const router = useRouter();
 
     const [isUploading, setIsUploading] = useState(false);
@@ -114,6 +116,10 @@ export default function OpForm({
 
     async function newSale(e) {
         e.preventDefault();
+        if (!transaction || !quantity || !cliente || !precio) {
+            setError('Important data are missing');
+            return;
+        }
         // EDITAR OPERACION  
         if (relatedProjectID) {
             Swal.fire({
@@ -406,6 +412,11 @@ export default function OpForm({
                         <div className='text-gray-400'> No attached files </div>
                     )}
                 </div>
+                {error && (
+                    <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
+                        {error}
+                    </div>
+                )}
                 <button type="submit" className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500 focus:outline-none focus:ring focus:ring-green-400">
                     Save
                 </button>

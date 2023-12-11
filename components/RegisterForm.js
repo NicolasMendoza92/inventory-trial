@@ -16,10 +16,9 @@ export default function RegisterForm() {
         e.preventDefault();
 
         if (!name || !email || !password) {
-            setError('completa campos');
+            setError('Complete the fields');
             return;
         }
-        //  ANTES HAGO QUE VERIFIQUE EL EMIAL
         try {
             const response = await fetch('api/register', {
                 method: "POST",
@@ -36,7 +35,7 @@ export default function RegisterForm() {
                 router.push("/login")
                 form.reset();
             } else {
-                console.log('Registro fallido')
+                console.log('Register falied')
             }
         } catch (error) {
             console.log('Error', error)

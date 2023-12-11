@@ -28,7 +28,7 @@ export default async function handle(req, res) {
 
         let clientfind = await Client.findOne({ nombreCliente });
         if (clientfind) {
-            return res.status(400).send('Client already exists');
+            return res.status(400).send('Client name already exists');
         }
         else {
             const clienteDoc = await Client.create({

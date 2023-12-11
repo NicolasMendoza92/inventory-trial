@@ -87,7 +87,7 @@ export default function ProjectForm({
             const data = { projectID, standar, vintage, volumen, name, projectLink, tech, corsia, sdg, sede, sdgSelected, sdgImages, pais, disponible, precioVenta, precioCorp, floorPrice, contrato, mktDate, proveedor, ccb, colombianTax, notas, files }
 
             if (!projectID || !standar || !vintage || !volumen || !tech || !pais || !name) {
-                setError('Faltan datos importantes');
+                setError('Important data are missing');
                 return;
             }
             if (_id) {

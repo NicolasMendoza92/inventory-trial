@@ -61,6 +61,8 @@ export default function ReservForm({
     const [comments, setComments] = useState(existingComments || '');
 
     const router = useRouter();
+    // handle errors 
+    const [error, setError] = useState("");
 
     // Formula para editar el datepicker
     const disablePastDate = () => {
@@ -73,6 +75,10 @@ export default function ReservForm({
 
     async function newReserve(e) {
         e.preventDefault();
+        if (!customer || !team || !quantity) {
+            setError('Important data are missing');
+            return;
+        }
         // EDITAR OPERACION  
         if (relatedProjectID) {
             Swal.fire({
@@ -185,12 +191,12 @@ export default function ReservForm({
                     </div>
                 </div>
                 <div className='flex-wrap'>
-                <label className='text-gray-400'>Client</label>
+                    <label className='text-gray-400'>Client</label>
                     <select className="flex border border-gray-200 bg-zinc-100/40" value={customer} onChange={e => setCustomer(e.target.value)}>
-                    <option value="">-no selected-</option>
-                    {allClients.length > 0 && allClients.map(cli => (
-                        <option key={cli._id} value={cli.nombreCliente}>{cli.nombreCliente}</option>
-                    ))}
+                        <option value="">-no selected-</option>
+                        {allClients.length > 0 && allClients.map(cli => (
+                            <option key={cli._id} value={cli.nombreCliente}>{cli.nombreCliente}</option>
+                        ))}
                     </select>
                 </div>
                 <div className='grid grid-cols-1 md:grid-cols-6 gap-2'>
@@ -236,12 +242,16 @@ export default function ReservForm({
                         ) : null}
                     </div>
                 </div>
-
                 <label className='text-gray-400'>Comments</label>
                 <textarea
                     placeholder='ej: creditos de Misha '
                     value={comments}
                     onChange={e => setComments(e.target.value)} />
+                {error && (
+                    <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
+                        {error}
+                    </div>
+                )}
                 <button type="submit" className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500 focus:outline-none focus:ring focus:ring-green-400">
                     Save
                 </button>

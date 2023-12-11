@@ -14,6 +14,9 @@ export default function ClientForm({
     division: existingDivision,
 }) {
 
+    // handle errors 
+    const [error, setError] = useState("");
+
     const [nombreCliente, setNombreCliente] = useState(existingNombreCliente || '');
     const [contacto, setContacto] = useState(existingContacto || '');
     const [paisCliente, setPaisCliente] = useState(existingPaisCliente || '');
@@ -26,6 +29,11 @@ export default function ClientForm({
 
     async function newClient(e) {
         e.preventDefault();
+        if (!nombreCliente) {
+            setError('Complete the fields');
+            return;
+        }
+
         try {
             const newClient = {
                 nombreCliente,
@@ -42,11 +50,10 @@ export default function ClientForm({
             } else {
                 //create
                 const res = await axios.post('/api/clientes', newClient);
-                console.log(res.statusText)
             }
 
         } catch (error) {
-            console.log(error)
+            setError(error.response.data)
         }
         const form = e.target;
         form.reset();
@@ -124,6 +131,11 @@ export default function ClientForm({
                     placeholder='ej: account number, SAP ID, more contacts... etc '
                     value={comentarios}
                     onChange={e => setComentarios(e.target.value)} />
+                {error && (
+                    <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
+                        {error}
+                    </div>
+                )}
                 <button type="submit" className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500 focus:outline-none focus:ring focus:ring-green-400">
                     Save
                 </button>
