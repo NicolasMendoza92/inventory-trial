@@ -6,7 +6,7 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from 'react';
+import React, { use } from 'react';
 import { useEffect, useState } from "react";
 
 
@@ -20,29 +20,42 @@ export default function Projects() {
     router.push('/login')
   }
 
-  const [pageNumber, setPageNumber] = useState(0)
   const [projects, setProjects] = useState([]);
-  const [numberOfPages, setNumberOfPages] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-
-  const pages = new Array(numberOfPages).fill(null).map((v, i) => i);
+  const [projectFinded, setProjectFinded] = useState([]);
 
   useEffect(() => {
+    getProjects();
+  }, [])
+
+  function getProjects() {
     setIsLoading(true)
-    axios.get(`/api/projects?page=${pageNumber}`).then(response => {
-      setProjects(response.data.projects);
-      setNumberOfPages(response.data.totalPages);
-      setIsLoading(false);
-    });
-  }, [pageNumber]);
+    axios.get('/api/projects').then(res => {
+      setProjects(res.data.projects);
+      setIsLoading(false)
+    })
+  }
 
-  const gotoPrevious = () => {
-    setPageNumber(Math.max(0, pageNumber - 1));
-  };
+  // para el filtro
+  const [projectSearched, setProjectSearched] = useState('');
 
-  const gotoNext = () => {
-    setPageNumber(Math.min(numberOfPages - 1, pageNumber + 1));
-  };
+  useEffect(() => {
+    let searchedProjects = [];
+    if (projectSearched.length !== '') {
+
+      searchedProjects = projects.filter((proj) => {
+        return proj.name.toLowerCase().includes(projectSearched.toLowerCase()) ||
+          proj.projectID.toLowerCase().includes(projectSearched.toLowerCase()) ||
+          proj.standar.toLowerCase().includes(projectSearched.toLowerCase()) ||
+          proj.vintage.toLowerCase().includes(projectSearched.toLowerCase()) ||
+          proj.tech.toLowerCase().includes(projectSearched.toLowerCase()) ||
+          proj.disponible.toLowerCase().includes(projectSearched.toLowerCase()) ||
+          proj.contrato.toLowerCase().includes(projectSearched.toLowerCase()) ||
+          proj.pais.toLowerCase().includes(projectSearched.toLowerCase());
+      });
+      setProjectFinded(searchedProjects);
+    }
+  }, [projectSearched, projects])
 
 
   return (
@@ -62,7 +75,7 @@ export default function Projects() {
               <div className="flex justify-end">
                 <Link className="bg-gray-300 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-gray-200" href={'/searchProjects'}>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z" />
                   </svg>
                 </Link>
                 <ExportInventary />
@@ -72,9 +85,17 @@ export default function Projects() {
               <>
                 <Link className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500 " href={'/projects/new'}> New project</Link>
                 <div className="flex justify-end">
+                  <div className="flex justify-start items-center">
+                    <input
+                      value={projectSearched}
+                      className="flex w-96 max-md:w-32"
+                      onChange={e => setProjectSearched(e.target.value)}
+                      placeholder='Look up your project by ID, STD, Name...'
+                      autoFocus />
+                  </div>
                   <Link className="bg-gray-300 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-gray-200" href={'/searchProjects'}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z" />
                     </svg>
                   </Link>
                   <ExportInventary />
@@ -114,7 +135,7 @@ export default function Projects() {
                     </td>
                   </tr>
                 )}
-                {projects.map(project => (
+                {projectFinded.map(project => (
                   <tr key={project._id}>
                     <td>{project.contrato}
                       {project.contrato === "MKT" ? (
@@ -123,7 +144,7 @@ export default function Projects() {
                     </td>
                     <td>{project.proveedor}</td>
                     <td>{project.floorPrice}</td>
-                    <td>{(project.name).slice(0,25)}</td>
+                    <td>{(project.name).slice(0, 25)}</td>
                     <td>{project.standar}{project.ccb === 'YES' ? (
                       <> CCB </>
                     ) : null}</td>
@@ -205,24 +226,6 @@ export default function Projects() {
               </tbody>
             </table>
           </div>
-          <div className="flex justify-center py-4 gap-2">
-            <button className="bg-gray-300 text-white p-2" onClick={gotoPrevious}>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
-              </svg>
-            </button>
-            {pages.map((pageIndex) => (
-              <button className="btn-default" key={pageIndex} onClick={() => setPageNumber(pageIndex)}>
-                {pageIndex + 1}
-              </button>
-            ))}
-            <button className="bg-gray-300 text-white p-2" onClick={gotoNext}>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
-              </svg>
-            </button>
-          </div>
-          <h1 className="text-center">Page {pageNumber + 1} of {numberOfPages}</h1>
         </>
       )}
 

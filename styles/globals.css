@@ -99,3 +99,51 @@ table.basic a{
   background-color:rgba(180, 44, 44, 0.636) !important ;
 
 }
+
+.checkboxes {
+  background-color: white;
+  border: 1px #dadada solid;
+  position: absolute;
+  z-index: 3;
+}
+
+.checkboxes .label {
+  display: block;
+}
+
+.checkboxes >label:hover {
+  background-color: #1e90ff;
+}
+
+/* The container */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+}

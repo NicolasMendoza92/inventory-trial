@@ -345,7 +345,7 @@ export default function ProjectForm({
                     <option value="Biomas to heat">Biomas to heat</option>
                     <option value="Cogeneration">Cogeneration</option>
                     <option value="Combined cycle">Combined cycle</option>
-                    <option value="Cookstove">Solar Cookstove</option>
+                    <option value="Cookstove">Cookstove</option>
                     <option value="Energy Efficiency - Agriculture Sector">Energy Efficiency - Agriculture Sector</option>
                     <option value="Energy Efficiency - Commercial Sector">Energy Efficiency - Commercial Sector</option>
                     <option value="Energy Efficiency - Domestic">Energy Efficiency - Domestic</option>
@@ -422,7 +422,7 @@ export default function ProjectForm({
                 {sdg === "YES" && (
                     <>
                         <span className='nota-imp'>If you have already selected the SDGs and you want to change or add any of them, you must tap the "Clean" option and add them again.</span>
-                        <button onClick={showAllSdg} className="flex flex-wrap align-center w-fit bg-gray-200 text-black px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-gray-100 ">
+                        <button onClick={showAllSdg} className="flex flex-wrap align-center w-fit bg-zinc-100/40 text-black px-3 py-1 ms-1 mt-1 rounded  ">
                             Select which ones  {showModal ? <ArrowUp /> : <ArrowDown />}
                         </button>
                         {showModal ? (

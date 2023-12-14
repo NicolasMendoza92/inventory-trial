@@ -12,34 +12,13 @@ export default function SearchOperations({ operations }) {
     const { data: session } = useSession();
     const enable = isEnableUser(session)
 
-    const [operationSearched, setOperationSearched] = useState('');
-    const [operationFinded, setOperationFinded] = useState([]);
+    const [operationFinded, setOperationFinded] = useState(operations);
 
     const volume = operations.map(p => p.quantity);
     const maxVolume = Math.max(...volume);
 
-    //  Handle for rage button
+    //  Handle for selected buttons 
     const [vol, setVol] = useState(0);
-
-
-    // Use Effect para el buscador 
-    useEffect(() => {
-        let searchedoperations = [];
-        if (operationSearched.length !== '') {
-
-            searchedoperations = operations.filter((op) => {
-                return op.transaction.toLowerCase().includes(operationSearched.toLowerCase()) ||
-                    op.cliente.toLowerCase().includes(operationSearched.toLowerCase()) ||
-                    op.equipo.toLowerCase().includes(operationSearched.toLowerCase()) ||
-                    op.projectData?.idProject.toLowerCase().includes(operationSearched.toLowerCase()) ||
-                    op.projectData?.standardOp.toLowerCase().includes(operationSearched.toLowerCase()) ||
-                    op.projectData?.nameProject.toLowerCase().includes(operationSearched.toLowerCase()) ||
-                    op.delivery.toLowerCase().includes(operationSearched.toLowerCase()) ||
-                    op.payment.toLowerCase().includes(operationSearched.toLowerCase());
-            });
-            setOperationFinded(searchedoperations);
-        }
-    }, [operationSearched, operations])
 
     const filterByYear = (e) => {
         const selectedYear = e.target.value;
@@ -103,26 +82,16 @@ export default function SearchOperations({ operations }) {
 
     return (
         <Layout>
-            <div className='flex justify-center m-4'>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                </svg>
-                <input
-                    value={operationSearched}
-                    onChange={e => setOperationSearched(e.target.value)}
-                    placeholder='Look up your operation by ID, standar, status, customer...'
-                    autoFocus />
-            </div>
             <div className='flex flex-wrap gap-2'>
                 <label className="m-2" >Year</label>
                 <select onChange={(e) => filterByYear(e)} className="flex w-32" >
-                    <option value="all">-no selected-</option>
+                    <option value="all">All</option>
                     <option value="2023">2023</option>
                     <option value="2024">2024</option>
                 </select>
                 <label className="m-2" >Create</label>
                 <select onChange={(e) => filterByMonth(e)} className="flex w-32" >
-                    <option value="all">all</option>
+                    <option value="all">All</option>
                     <option value="1">Jan</option>
                     <option value="2">Feb</option>
                     <option value="3">Mar</option>
@@ -138,26 +107,26 @@ export default function SearchOperations({ operations }) {
                 </select>
                 <label className="m-2" >Transaction</label>
                 <select onChange={(e) => filterByType(e)} className="flex w-32" >
-                    <option value="">all</option>
+                    <option value="">All</option>
                     <option value="Sale">Sale</option>
                     <option value="Purchase">Purchase</option>
                 </select>
                 <label className="m-2" >Team</label>
                 <select onChange={(e) => filterByTeam(e)} className="flex w-32" >
-                    <option value="">all</option>
+                    <option value="">All</option>
                     <option value="Trading">Trading</option>
                     <option value="Corporate">Corporate</option>
                     <option value="Sourcing">Sourcing</option>
                 </select>
                 <label className="m-2" >Delivery</label>
                 <select onChange={(e) => filterByDelivery(e)} className="flex w-32" >
-                    <option value="">all</option>
+                    <option value="">All</option>
                     <option value="Pending">Pending</option>
                     <option value="Done">Done</option>
                 </select>
                 <label className="m-2" >Payment</label>
                 <select onChange={(e) => filterByPayment(e)} className="flex w-32" >
-                    <option value="">all</option>
+                    <option value="">All</option>
                     <option value="Pending">Pending</option>
                     <option value="Done">Done</option>
                 </select>
