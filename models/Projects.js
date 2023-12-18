@@ -74,6 +74,9 @@ const projectSchema = new Schema({
     notas:{
         type: String,
     } ,  
+    notasExtra:{
+        type: String,
+    } , 
     files: [{ type: String }], 
 },
     {

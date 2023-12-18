@@ -31,6 +31,7 @@ export default function ProjectForm({
     proveedor: existingProveedor,
     sede: existingSede,
     notas: existingNotas,
+    notasExtra: existingNotasExtra,
     ccb: existingCcb,
     colombianTax: existingColombianTax,
     sdgSelected: existingSdgSelected,
@@ -60,6 +61,7 @@ export default function ProjectForm({
     const [colombianTax, setColombianTax] = useState(existingColombianTax || '');
     const [sede, setSede] = useState(existingSede || '');
     const [notas, setNotas] = useState(existingNotas || '');
+    const [notasExtra, setNotasExtra] = useState(existingNotasExtra || '');
     const [files, setFiles] = useState(existingFiles || []);
     // SDG states to handle 
     const [sdgSelected, setSdgSelected] = useState(existingSdgSelected || []);
@@ -84,7 +86,7 @@ export default function ProjectForm({
     async function saveProject(e) {
         try {
             e.preventDefault();
-            const data = { projectID, standar, vintage, volumen, name, projectLink, tech, corsia, sdg, sede, sdgSelected, sdgImages, pais, disponible, precioVenta, precioCorp, floorPrice, contrato, mktDate, proveedor, ccb, colombianTax, notas, files }
+            const data = { projectID, standar, vintage, volumen, name, projectLink, tech, corsia, sdg, sede, sdgSelected, sdgImages, pais, disponible, precioVenta, precioCorp, floorPrice, contrato, mktDate, proveedor, ccb, colombianTax, notas, files, notasExtra }
 
             if (!projectID || !standar || !vintage || !volumen || !tech || !pais || !name) {
                 setError('Important data are missing');
@@ -203,12 +205,23 @@ export default function ProjectForm({
     return (
         <div >
             <form onSubmit={saveProject} className='flex grid gap-3 mb-3'>
-                <label className='text-gray-400'>Supplier</label>
-                <input
-                    type='text'
-                    placeholder='Ej: ALLCOT - Misha'
-                    value={proveedor}
-                    onChange={e => setProveedor(e.target.value)} />
+                <div className='grid md:grid-cols-2 gap-2 items-center'>
+                    <div>
+                        <label className='text-gray-400'>Supplier</label>
+                        <input
+                            type='text'
+                            placeholder='Ej: ALLCOT - Misha'
+                            value={proveedor}
+                            onChange={e => setProveedor(e.target.value)} />
+                    </div>
+                    <div>
+                        <label className='text-gray-400'>Internal Notes</label>
+                        <textarea
+                            placeholder='ex:Some info about prices '
+                            value={notas}
+                            onChange={e => setNotas(e.target.value)} />
+                    </div>
+                </div>
                 <label className='text-gray-400'>Contract Type</label>
                 <select
                     className=" border border-gray-200 bg-zinc-100/40"
@@ -403,18 +416,18 @@ export default function ProjectForm({
                         </select>
                     </div>
                     <div className='w-32'>
-                    <label className='text-gray-400'>SDG</label>
-                    <select
-                        className=" border border-gray-200 bg-zinc-100/40"
-                        value={sdg}
-                        onChange={e => hanldeSdg(e)}>
-                        <option value="">-no selected-</option>
-                        <option value="NO">No</option>
-                        <option value="YES">Yes</option>
-                        <option value="N/A">Clean</option>
-                    </select>
+                        <label className='text-gray-400'>SDG</label>
+                        <select
+                            className=" border border-gray-200 bg-zinc-100/40"
+                            value={sdg}
+                            onChange={e => hanldeSdg(e)}>
+                            <option value="">-no selected-</option>
+                            <option value="NO">No</option>
+                            <option value="YES">Yes</option>
+                            <option value="N/A">Clean</option>
+                        </select>
                     </div>
-                    
+
                 </div>
 
 
@@ -468,9 +481,9 @@ export default function ProjectForm({
                 <label className='text-gray-400'>Notes</label>
                 <textarea
                     placeholder='ex: Proyecto de TD '
-                    value={notas}
-                    onChange={e => setNotas(e.target.value)} />
-                    <label className='text-gray-400'>Storage location</label>
+                    value={notasExtra}
+                    onChange={e => setNotasExtra(e.target.value)} />
+                <label className='text-gray-400'>Storage location</label>
                 <select
                     className=" border border-gray-200 bg-zinc-100/40"
                     value={sede}
