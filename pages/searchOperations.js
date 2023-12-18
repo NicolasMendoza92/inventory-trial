@@ -19,34 +19,34 @@ export default function SearchOperations({ operations }) {
 
     //  Handle for selected buttons 
     const [vol, setVol] = useState(0);
+    const [selectedYear, setSelectedYear] = useState('');
+    const [selectedMonth, setSelectedMonth] = useState('');
 
-    const filterByYear = (e) => {
-        const selectedYear = e.target.value;
-        if (selectedYear === 'all') {
-            const all = operations.map(op => op);
-            setOperationFinded(all)
-        } else {
-            const filterYear = operations.filter(op => {
-                const itemYear = new Date(op.createdAt).getFullYear();
-                return itemYear === parseInt(selectedYear, 10);
-            });
-            setOperationFinded(filterYear)
-        }
-    }
+    const handleYearChange = e => {
+        const year = parseInt(e.target.value, 10);
+        setSelectedYear(year);
+    };
 
-    const filterByMonth = (e) => {
-        const selectedMonth = e.target.value;
-        if (selectedMonth === 'all') {
-            const all = operations.map(op => op);
-            setOperationFinded(all)
-        } else {
-            const filterMonth = operations.filter(op => {
-                const itemMonth = new Date(op.createdAt).getMonth() + 1;
-                return itemMonth === parseInt(selectedMonth, 10);
-            });
-            setOperationFinded(filterMonth)
-        }
-    }
+    const handleMonthChange = e => {
+        const month = parseInt(e.target.value, 10);
+        setSelectedMonth(month);
+    };
+
+    useEffect(() => {
+        // Filter data based on selectedYear and selectedMonth
+        const filteredResults = operations.filter(item => {
+            const itemDate = new Date(item.createdAt);
+            const itemYear = itemDate.getFullYear();
+            const itemMonth = itemDate.getMonth() + 1; // Months are zero-based
+
+            return (
+                (!selectedYear || itemYear === selectedYear) &&
+                (!selectedMonth || itemMonth === selectedMonth)
+            );
+        });
+
+        setOperationFinded(filteredResults);
+    }, [selectedYear, selectedMonth]);
 
     const filterByTeam = (e) => {
         const team = e.target.value;
@@ -84,26 +84,26 @@ export default function SearchOperations({ operations }) {
         <Layout>
             <div className='flex flex-wrap gap-2'>
                 <label className="m-2" >Year</label>
-                <select onChange={(e) => filterByYear(e)} className="flex w-32" >
-                    <option value="all">All</option>
-                    <option value="2023">2023</option>
-                    <option value="2024">2024</option>
+                <select value={selectedYear || ''} onChange={handleYearChange} className="flex w-32" >
+                    <option value="">All</option>
+                    <option value={2023}>2023</option>
+                    <option value={2024}>2024</option>
                 </select>
-                <label className="m-2" >Create</label>
-                <select onChange={(e) => filterByMonth(e)} className="flex w-32" >
-                    <option value="all">All</option>
-                    <option value="1">Jan</option>
-                    <option value="2">Feb</option>
-                    <option value="3">Mar</option>
-                    <option value="4">Apr</option>
-                    <option value="5">May</option>
-                    <option value="6">Jun</option>
-                    <option value="7">Jul</option>
-                    <option value="8">Ago</option>
-                    <option value="9">Sep</option>
-                    <option value="10">Oct</option>
-                    <option value="11">Nov</option>
-                    <option value="12">Dic</option>
+                <label className="m-2" >Month</label>
+                <select value={selectedMonth || ''} onChange={handleMonthChange} className="flex w-32" >
+                    <option value="">All</option>
+                    <option value={1}>Jan</option>
+                    <option value={2}>Feb</option>
+                    <option value={3}>Mar</option>
+                    <option value={4}>Apr</option>
+                    <option value={5}>May</option>
+                    <option value={6}>Jun</option>
+                    <option value={7}>Jul</option>
+                    <option value={8}>Ago</option>
+                    <option value={9}>Sep</option>
+                    <option value={10}>Oct</option>
+                    <option value={11}>Nov</option>
+                    <option value={12}>Dic</option>
                 </select>
                 <label className="m-2" >Transaction</label>
                 <select onChange={(e) => filterByType(e)} className="flex w-32" >
@@ -167,7 +167,7 @@ export default function SearchOperations({ operations }) {
                                 <td>{op.cliente}</td>
                                 <td>{op.projectData?.standardOp}</td>
                                 <td>{op.projectData?.idProject}</td>
-                                <td>{(op.projectData?.nameProject).slice(0,25)}</td>
+                                <td>{(op.projectData?.nameProject).slice(0, 25)}</td>
                                 <td>{op.projectData?.vintageOp}</td>
                                 <td>{op.precio}</td>
                                 <td>{op.quantity}</td>

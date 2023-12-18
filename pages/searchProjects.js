@@ -35,14 +35,11 @@ export default function SearchProjects({ projects }) {
 
     useEffect(() => {
         const filteredByStd = projects.filter(item => !selectedStd || item.standar === selectedStd);
-        const filteredByTech = projects.filter(item => !selectedTech || item.tech === selectedTech);
+        const filteredByTech = filteredByStd.filter(item => !selectedTech || item.tech === selectedTech);
         const filteredByVintage = filteredByTech.filter(item => !selectedVintage || item.vintage === selectedVintage);
         const filteredByCountry = filteredByVintage.filter(item => !selectedCountry || item.pais === selectedCountry);
         setFilteredData(filteredByCountry)
     }, [selectedStd, selectedVintage, selectedCountry, selectedTech])
-
-
-
 
     // FILTROS INDEPENDIENTES 
 
