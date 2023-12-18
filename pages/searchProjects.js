@@ -14,11 +14,6 @@ export default function SearchProjects({ projects }) {
     const { data: session } = useSession();
     const enable = isEnableUser(session)
 
-    const technos = ['AFOLU', 'Any transportation project', 'ARR', 'Biomas to Electricity', 'Biomas to heat', 'Cogeneration', 'Combined cycle', 'Cookstove', 'Energy Efficiency - Agriculture Sector',
-        'Energy Efficiency - Commercial Sector', 'Energy Efficiency - Domestic', 'Energy Efficiency - Industrial', 'Energy Efficiency - Public Sector', 'Gheotermal', 'HFC', 'Hydro',
-        'IFM', 'Landfill gas', 'Landfill to energy', 'Mangroves', 'Manufacturing industries', 'Manure management', 'Methane Recovery', 'Mine Methane Utilization Project', 'N20 destrutction',
-        'Oil Management', 'Run of river', 'REDD', 'REDD+', 'SF6', 'Small Renewable energy projects', 'Small Hydro', 'Solar', 'Solar Cookstove', 'Waste', 'Waste to compost', 'Wind']
-
     const [filteredData, setFilteredData] = useState(projects);
 
     const [selectedStd, setSelectedStd] = useState('');
@@ -26,12 +21,46 @@ export default function SearchProjects({ projects }) {
     const [selectedCountry, setSelectedCountry] = useState('');
     const [selectedVintage, setSelectedVintage] = useState('');
 
-    // Select para mostrar las tech
-    // const [showTecnos, setShowTecnos] = useState(false);
-    // const showTechs = (e) => {
-    //     e.preventDefault(e);
-    //     setShowTecnos(prev => !prev);
-    // }
+    // LOGICA DEL MULTISELECT PARA TECHs
+
+    const [showTecnos, setShowTecnos] = useState(false);
+    const showTechs = (e) => {
+        e.preventDefault(e);
+        setShowTecnos(prev => !prev);
+    }
+
+    const [selectedTecnos, setSelectedTecnos] = useState([]);
+
+    const handleCheckboxChange = (tech) => {
+        // Check if the option is already selected
+        if (selectedTecnos.includes(tech)) {
+            // If selected, remove it
+            setSelectedTecnos(selectedTecnos.filter((item) => item !== tech));
+        } else {
+            // If not selected, add it
+            setSelectedTecnos([...selectedTecnos, tech]);
+        }
+    };
+
+    const filterTecnos = () => {
+
+        if (selectedTecnos.length > 0) {
+            const newArray = projects.filter((item) =>
+                selectedTecnos.includes(item.tech)
+            );
+            setFilteredData(newArray);
+            setShowTecnos(false)
+        } else {
+            setFilteredData(projects);
+            setShowTecnos(false)
+        }
+    };
+
+    const clearTecnos = () => {
+        setSelectedTecnos([])
+        setFilteredData(projects);
+        setShowTecnos(false)
+    };
 
     useEffect(() => {
         const filteredByStd = projects.filter(item => !selectedStd || item.standar === selectedStd);
@@ -76,49 +105,55 @@ export default function SearchProjects({ projects }) {
                     <option value="CSA">CSA</option>
                     <option value="PLAN VIVO">Plan Vivo</option>
                 </select>
-                <label className="m-2" >Tech</label>
-                {/* <div>
-                    <div className='multiselect'>
-                        <button onClick={showTechs} className="flex flex-wrap align-center w-fit bg-gray-100 border border-gray-200 text-black px-3 py-2 ms-1 mt-1  hover:bg-gray-100 ">
-                            Select which ones  {showTecnos ? <ArrowUp /> : <ArrowDown />}
-                        </button>
-                        {showTecnos === true ? (
-                            <div className='checkboxes'>
-                                {technos.map(tech => (
-                                    <label className='container' key={tech}>
-                                        {tech}
-                                        <input
-                                            type="checkbox"
-                                            checked={selectedTech.includes(tech)}
-                                            onChange={() => handleTypeSelection(tech)}
-                                        />
-                                        <span className="checkmark"></span>
-                                    </label>
-                                ))}
-                            </div>
-                        ) : null}
-                    </div>
-                </div> */}
-                <select value={selectedTech} onChange={(e) => setSelectedTech(e.target.value)} className="flex w-32">
-                    <option value="">All</option>
-                    {Array.from(new Set(projects.map(item => item.tech))).map(tech => (
-                        <option key={tech} value={tech}>{`${tech}`}</option>
-                    ))}
-                </select>
-                <label className="m-2">VINTAGE</label>
+                <label className="m-2">Vintage</label>
                 <select value={selectedVintage} onChange={(e) => setSelectedVintage(e.target.value)} className="flex w-32">
                     <option value="">All</option>
                     {Array.from(new Set(projects.map(item => item.vintage))).map(vintage => (
                         <option key={vintage} value={vintage}>{`${vintage}`}</option>
                     ))}
                 </select>
-                <label className="m-2">COUNTRY</label>
+                <label className="m-2">Country</label>
                 <select value={selectedCountry} onChange={(e) => setSelectedCountry(e.target.value)} className="flex w-32">
                     <option value="">All</option>
                     {Array.from(new Set(projects.map(item => item.pais))).map(pais => (
                         <option key={pais} value={pais}>{`${pais}`}</option>
                     ))}
                 </select>
+                <label className="m-2" >Tech</label>
+                <div>
+                    <div className='multiselect'>
+                        <button onClick={showTechs} className="flex flex-wrap align-center w-fit bg-zinc-100/40 border border-gray-200 text-black px-3 py-2 ">
+                            -No Selected-  {showTecnos ? <ArrowUp /> : <ArrowDown />}
+                        </button>
+                        {showTecnos === true ? (
+                            <>
+                                <div className='checkboxes'>
+                                    {Array.from(new Set(projects.map(item => item.tech))).map(tech => (
+                                        <label className='container' key={tech}>
+                                            {`${tech}`}
+                                            <input value={tech} type="checkbox" checked={selectedTecnos.includes(tech)} onChange={() => handleCheckboxChange(tech)} />
+                                            <span className='checkmark'></span>
+                                        </label>
+
+                                    ))}
+                                    <div className=' flex justify-between mb-1 ms-1'>
+                                        <button className='bg-green-600 text-white px-1 ms-1 rounded shadow-sm hover:bg-green-500' onClick={filterTecnos}>Filter</button>
+                                        <button className='bg-gray-600 text-white px-1 me-1 rounded shadow-sm hover:bg-gray-500' onClick={clearTecnos}>Clear</button>
+                                    </div>
+                                </div>
+
+                            </>
+
+                        ) : null}
+                    </div>
+                </div>
+                {/* <select value={selectedTech} onChange={(e) => setSelectedTech(e.target.value)} className="flex w-32">
+                    <option value="">All</option>
+                    {Array.from(new Set(projects.map(item => item.tech))).map(tech => (
+                        <option key={tech} value={tech}>{`${tech}`}</option>
+                    ))}
+                </select> */}
+
                 <label className="m-2">CORSIA</label>
                 <select
                     onChange={(e) => filterByCorsia(e)} className="flex w-32">
