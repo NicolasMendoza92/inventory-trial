@@ -27,6 +27,8 @@ export default function Calendar({ operations }) {
 
   const [title, setTitle] = useState('');
   const [start, setStart] = useState(new Date());
+  // handle errors 
+  const [error, setError] = useState("");
 
   const [allEvents, setAllEvents] = useState([]);
 
@@ -41,6 +43,10 @@ export default function Calendar({ operations }) {
   );
 
   async function handleAddEvent() {
+    if (!title || !start) {
+      setError('Complete the fields');
+      return;
+    }
     try {
       const newEvent = { title, start, end: start }
       const response = await axios.post('/api/events', newEvent);
@@ -115,6 +121,11 @@ export default function Calendar({ operations }) {
                     Add an event
                   </button>
                 </div>
+                {error && (
+                  <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
+                    {error}
+                  </div>
+                )}
               </div>
             )}
             {session?.user.email === 'wp.co@allcot.com' && (
@@ -132,6 +143,11 @@ export default function Calendar({ operations }) {
                     Add an event
                   </button>
                 </div>
+                {error && (
+                  <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
+                    {error}
+                  </div>
+                )}
               </div>
             )}
 

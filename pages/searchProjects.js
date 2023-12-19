@@ -17,7 +17,7 @@ export default function SearchProjects({ projects }) {
     const [filteredData, setFilteredData] = useState(projects);
 
     const [selectedStd, setSelectedStd] = useState('');
-    const [selectedTech, setSelectedTech] = useState('');
+    const [selectedTech, setSelectedTech] = useState([]);
     const [selectedCountry, setSelectedCountry] = useState('');
     const [selectedVintage, setSelectedVintage] = useState('');
 
@@ -29,24 +29,22 @@ export default function SearchProjects({ projects }) {
         setShowTecnos(prev => !prev);
     }
 
-    const [selectedTecnos, setSelectedTecnos] = useState([]);
-
     const handleCheckboxChange = (tech) => {
         // Check if the option is already selected
-        if (selectedTecnos.includes(tech)) {
+        if (selectedTech.includes(tech)) {
             // If selected, remove it
-            setSelectedTecnos(selectedTecnos.filter((item) => item !== tech));
+            setSelectedTech(selectedTech.filter((item) => item !== tech));
         } else {
             // If not selected, add it
-            setSelectedTecnos([...selectedTecnos, tech]);
+            setSelectedTech([...selectedTech, tech]);
         }
     };
 
     const filterTecnos = () => {
 
-        if (selectedTecnos.length > 0) {
+        if (selectedTech.length > 0) {
             const newArray = projects.filter((item) =>
-                selectedTecnos.includes(item.tech)
+                selectedTech.includes(item.tech)
             );
             setFilteredData(newArray);
             setShowTecnos(false)
@@ -57,18 +55,18 @@ export default function SearchProjects({ projects }) {
     };
 
     const clearTecnos = () => {
-        setSelectedTecnos([])
+        setSelectedTech([])
         setFilteredData(projects);
         setShowTecnos(false)
     };
 
     useEffect(() => {
+        // const filteredByTech = filteredByStd.filter(item => !selectedTech || item.tech === selectedTech);
         const filteredByStd = projects.filter(item => !selectedStd || item.standar === selectedStd);
-        const filteredByTech = filteredByStd.filter(item => !selectedTech || item.tech === selectedTech);
-        const filteredByVintage = filteredByTech.filter(item => !selectedVintage || item.vintage === selectedVintage);
+        const filteredByVintage = filteredByStd.filter(item => !selectedVintage || item.vintage === selectedVintage);
         const filteredByCountry = filteredByVintage.filter(item => !selectedCountry || item.pais === selectedCountry);
         setFilteredData(filteredByCountry)
-    }, [selectedStd, selectedVintage, selectedCountry, selectedTech])
+    }, [selectedStd, selectedVintage, selectedCountry])
 
     // FILTROS INDEPENDIENTES 
 
@@ -123,7 +121,8 @@ export default function SearchProjects({ projects }) {
                 <div>
                     <div className='multiselect'>
                         <button onClick={showTechs} className="flex flex-wrap align-center w-fit bg-zinc-100/40 border border-gray-200 text-black px-3 py-2 ">
-                            -No Selected-  {showTecnos ? <ArrowUp /> : <ArrowDown />}
+                            {selectedTech.length > 0 ? <h1>Selected techs</h1> : <h1>No tech Selected</h1>}
+                            {showTecnos ? <ArrowUp /> : <ArrowDown />}
                         </button>
                         {showTecnos === true ? (
                             <>
@@ -131,7 +130,11 @@ export default function SearchProjects({ projects }) {
                                     {Array.from(new Set(projects.map(item => item.tech))).map(tech => (
                                         <label className='container' key={tech}>
                                             {`${tech}`}
-                                            <input value={tech} type="checkbox" checked={selectedTecnos.includes(tech)} onChange={() => handleCheckboxChange(tech)} />
+                                            <input
+                                                value={tech}
+                                                type="checkbox"
+                                                checked={selectedTech.includes(tech)}
+                                                onChange={() => handleCheckboxChange(tech)} />
                                             <span className='checkmark'></span>
                                         </label>
 
