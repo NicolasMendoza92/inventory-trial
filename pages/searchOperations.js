@@ -8,7 +8,6 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 
 export default function SearchOperations({ operations }) {
-
     const { data: session } = useSession();
     const enable = isEnableUser(session)
 
@@ -21,6 +20,10 @@ export default function SearchOperations({ operations }) {
     const [vol, setVol] = useState(0);
     const [selectedYear, setSelectedYear] = useState('');
     const [selectedMonth, setSelectedMonth] = useState('');
+    const [selectedDelivery, setSelectedDelivery] = useState('');
+    const [selectedPayment, setSelectedPayment] = useState('');
+    const [selectedType, setSelectedType] = useState('');
+    const [selectedTeam, setSelectedTeam] = useState('');
 
     const handleYearChange = e => {
         const year = parseInt(e.target.value, 10);
@@ -48,30 +51,14 @@ export default function SearchOperations({ operations }) {
         setOperationFinded(filteredResults);
     }, [selectedYear, selectedMonth]);
 
-    const filterByTeam = (e) => {
-        const team = e.target.value;
-        const filterTeam = operations.filter((op) => !team || op.equipo === team);
-        setOperationFinded(filterTeam)
-    }
-
-    const filterByType = (e) => {
-        const type = e.target.value;
-        const filterType = operations.filter((op) => !type || op.transaction === type);
-        setOperationFinded(filterType)
-    }
-
-    const filterByDelivery = (e) => {
-        const delivery = e.target.value;
-        const filterDelivery = operations.filter((op) => !delivery || op.delivery === delivery);
-        setOperationFinded(filterDelivery)
-    }
-
-    const filterByPayment = (e) => {
-        const payment = e.target.value;
-        const filterPayment = operations.filter((op) => !payment || op.payment === payment);
-        setOperationFinded(filterPayment)
-    }
-
+    
+    useEffect(() => {
+        const filteredByDelivery = operations.filter(item => !selectedDelivery || item.delivery === selectedDelivery);
+        const filteredByPayment = filteredByDelivery.filter(item => !selectedPayment || item.payment === selectedPayment);
+        const filteredByType = filteredByPayment.filter(item => !selectedType || item.transaction === selectedType);
+        const filteredByTeam = filteredByType.filter(item => !selectedTeam || item.equipo === selectedTeam);
+        setOperationFinded(filteredByTeam)
+    }, [selectedDelivery, selectedPayment, selectedType, selectedTeam])
 
     const filterByVol = (e) => {
         const vol = e.target.value;
@@ -80,9 +67,10 @@ export default function SearchOperations({ operations }) {
         setOperationFinded(filterVol)
     }
 
+
     return (
         <Layout>
-            <div className='flex flex-wrap gap-2'>
+             <div className='flex flex-wrap gap-2'>
                 <label className="m-2" >Year</label>
                 <select value={selectedYear || ''} onChange={handleYearChange} className="flex w-32" >
                     <option value="">All</option>
@@ -106,26 +94,26 @@ export default function SearchOperations({ operations }) {
                     <option value={12}>Dic</option>
                 </select>
                 <label className="m-2" >Transaction</label>
-                <select onChange={(e) => filterByType(e)} className="flex w-32" >
+                <select value={selectedType} onChange={(e) => setSelectedType(e.target.value)} className="flex w-32" >
                     <option value="">All</option>
                     <option value="Sale">Sale</option>
                     <option value="Purchase">Purchase</option>
                 </select>
                 <label className="m-2" >Team</label>
-                <select onChange={(e) => filterByTeam(e)} className="flex w-32" >
+                <select value={selectedTeam} onChange={(e) => setSelectedTeam(e.target.value)} className="flex w-32" >
                     <option value="">All</option>
                     <option value="Trading">Trading</option>
                     <option value="Corporate">Corporate</option>
                     <option value="Sourcing">Sourcing</option>
                 </select>
                 <label className="m-2" >Delivery</label>
-                <select onChange={(e) => filterByDelivery(e)} className="flex w-32" >
+                <select value={selectedDelivery} onChange={(e) => setSelectedDelivery(e.target.value)} className="flex w-32" >
                     <option value="">All</option>
                     <option value="Pending">Pending</option>
                     <option value="Done">Done</option>
                 </select>
                 <label className="m-2" >Payment</label>
-                <select onChange={(e) => filterByPayment(e)} className="flex w-32" >
+                <select value={selectedPayment} onChange={(e) => setSelectedPayment(e.target.value)} className="flex w-32" >
                     <option value="">All</option>
                     <option value="Pending">Pending</option>
                     <option value="Done">Done</option>
