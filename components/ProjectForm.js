@@ -354,8 +354,9 @@ export default function ProjectForm({
                     <option value="AFOLU">AFOLU</option>
                     <option value="Any transportation project">Any transportation project</option>
                     <option value="ARR">ARR</option>
-                    <option value="Biomas to Electricity">Biomas to Electricity</option>
-                    <option value="Biomas to heat">Biomas to heat</option>
+                    <option value="Biomass to Electricity">Biomass to Electricity</option>
+                    <option value="Biomass to heat">Biomass to heat</option>
+                    <option value="Biogas">Biogas</option>
                     <option value="Cogeneration">Cogeneration</option>
                     <option value="Combined cycle">Combined cycle</option>
                     <option value="Cookstove">Cookstove</option>
