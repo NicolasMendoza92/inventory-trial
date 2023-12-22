@@ -348,7 +348,7 @@ export default function OpForm({
                                 <input
                                     type='date'
                                     className="flex border border-gray-200 bg-zinc-100/40"
-                                    value={deliveryDate}
+                                    value={deliveryDate? new Date (deliveryDate).toISOString().slice(0, 10):deliveryDate}
                                     min={disablePastDate()}
                                     onChange={e => setDeliveryDate(e.target.value)} />
                             </>
@@ -356,11 +356,6 @@ export default function OpForm({
                         {delivery === "Done" && (
                             <></>
                         )}
-                        {deliveryDate ? (
-                            <>
-                                <span>Date set: {new Date(deliveryDate).toLocaleString("GB-English", { dateStyle: "short" })}</span>
-                            </>
-                        ) : null}
                     </div>
 
                 </div>
@@ -383,7 +378,7 @@ export default function OpForm({
                                 <input
                                     type='date'
                                     className="flex border border-gray-200 bg-zinc-100/40"
-                                    value={paymentDate}
+                                    value={paymentDate ? new Date (paymentDate).toISOString().slice(0, 10):paymentDate}
                                     min={disablePastDate()}
                                     onChange={e => setPaymentDate(e.target.value)} />
                             </>
@@ -391,9 +386,6 @@ export default function OpForm({
                         {payment === "Done" && (
                             <></>
                         )}
-                        {paymentDate ? (
-                            <span>Date set: {new Date(paymentDate).toLocaleString("GB-English", { dateStyle: "short" })}</span>
-                        ) : null}
                     </div>
                 </div>
                 <label className='text-gray-400'>Notes</label>

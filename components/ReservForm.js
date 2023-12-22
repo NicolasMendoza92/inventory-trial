@@ -234,12 +234,9 @@ export default function ReservForm({
                         <input
                             type='date'
                             className="flex border border-gray-200 bg-zinc-100/40"
-                            value={expiration}
+                            value={expiration? new Date (expiration).toISOString().slice(0, 10): expiration}
                             min={disablePastDate()}
                             onChange={e => setExpiration(e.target.value)} />
-                        {expiration ? (
-                            <span>Date set: {new Date(expiration).toLocaleString("GB-English", { dateStyle: "short" })}</span>
-                        ) : null}
                     </div>
                 </div>
                 <label className='text-gray-400'>Comments</label>

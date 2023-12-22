@@ -1,12 +1,18 @@
 
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 export default function Nav({ showNav, setShowNav }) {
 
     const inactiveLink = 'flex gap-1 p-1 text-white';
     const activeLink = 'flex gap-1 p-1 text-green-300 rounded';
-    const hoy = new Date().toLocaleString("GB-English", { dateStyle: "long", timeStyle: 'short' });
+    const [hoy, setHoy] = useState(null)
+   
+    useEffect(() => {
+        setHoy(new Date().toLocaleString("GB-English", { dateStyle: "long", timeStyle: 'short' }))
+    }, [])
+    
 
 
     // way to create router in nextjs 

@@ -237,13 +237,9 @@ export default function ProjectForm({
                         <input
                             type='date'
                             className="flex border border-gray-200 bg-zinc-100/40 w-32"
-                            value={mktDate}
+                            value={mktDate? new Date (mktDate).toISOString().slice(0, 10): mktDate}
                             min={disablePastDate()}
                             onChange={e => setMktDate(e.target.value)} />
-
-                        {mktDate ? (
-                            <span>Date set: {new Date(mktDate).toLocaleString("GB-English", { dateStyle: "short" })}</span>
-                        ) : null}
                     </div>
 
                 )}
