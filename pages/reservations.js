@@ -99,7 +99,7 @@ export default function Reservations() {
                                         <td>{r.customer}</td>
                                         <td>{r.projectRelated?.standar} {r.projectRelated?.projectID} {r.projectRelated?.name}</td>
                                         <td> {r.projectRelated?.vintage}</td>
-                                        <td>{r.quantity}</td>
+                                        <td>{(r.quantity).toLocaleString('es-ES')}</td>
                                         <td>{r.price}</td>
                                         <td>{r.status}</td>
                                         <td>{(new Date(r.expiration)).toLocaleString(

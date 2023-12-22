@@ -101,7 +101,7 @@ export default function PendingOps({ operations }) {
                                 <td>{o.cliente}</td>
                                 <td>{o.transaction}</td>
                                 <td>{o.projectData?.idProject} {o.projectData?.standardOp} {o.projectData?.nameProject} {o.projectData?.vintageOp}</td>
-                                <td>{o.quantity}</td>
+                                <td>{(o.quantity).toLocaleString('es-ES')}</td>
                                 {o.delivery === 'Done' && <td><b style={{ color: 'green', fontSize: '18px' }} >Done</b> </td>}
                                 {o.delivery === 'Pending' && <td>{(new Date(o.deliveryDate)).toLocaleString(
                                     "GB-English", { dateStyle: "short" }

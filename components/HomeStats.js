@@ -83,17 +83,17 @@ export default function HomeStats({ operations }) {
             <div className="board-grid">
                 <div className="board-card" >
                     <h3 className="board-title ">Credits Sold</h3>
-                    <div className="board-number">{creditsSold}</div>
+                    <div className="board-number">{creditsSold.toLocaleString('es-ES')}</div>
                     <div className="board-desc">in {salesOp.length} operations.</div>
                 </div>
                 <div className="board-card" >
                     <h3 className="board-title ">Credits purchased</h3>
-                    <div className="board-number">{creditsPurchased}</div>
+                    <div className="board-number">{creditsPurchased.toLocaleString('es-ES')}</div>
                     <div className="board-desc">in {purchaseOp.length} operations</div>
                 </div>
                 <div className="board-card" >
                     <h3 className="board-title ">Pending delivery</h3>
-                    <div className="board-number">{pendingDelivery}</div>
+                    <div className="board-number">{pendingDelivery.toLocaleString('es-ES')}</div>
                     <div className="board-desc">from {openDelivery.length} operations</div>
                 </div>
             </div>

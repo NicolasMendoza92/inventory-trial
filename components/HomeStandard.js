@@ -13,6 +13,9 @@ export default function HomeStandard({ projects, operations }) {
     const irecsProjects = projects.filter(p => p.standar === 'I-RECs')
     const cercarbonoProjects = projects.filter(p => p.standar === 'CERCARBONO')
     const csaProjects = projects.filter(p => p.standar === 'CSA')
+    const carProjects = projects.filter(p => p.standar === 'CAR')
+    const bioCarbonProjects = projects.filter(p => p.standar === 'BioCarbon')
+    const planVivoProjects = projects.filter(p => p.standar === 'PLAN VIVO')
 
     // despues de crear el array con map de los totales, se los suma usnado reduce
     const cdmVolume = cdmProjects.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
@@ -21,6 +24,9 @@ export default function HomeStandard({ projects, operations }) {
     const irecsVolume = irecsProjects.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const cercarbonoVolume = cercarbonoProjects.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const csaVolume = csaProjects.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
+    const carVolume  = carProjects .map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
+    const bioCarbonVolume = bioCarbonProjects.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
+    const planVivoVolume = planVivoProjects.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
 
     return (
         <div className="">
@@ -31,34 +37,49 @@ export default function HomeStandard({ projects, operations }) {
             <div className="board-grid">
                 <div className="board-card">
                     <h3 className="board-title-std ">CDM</h3>
-                    <div className="board-number">{cdmVolume}</div>
+                    <div className="board-number">{cdmVolume.toLocaleString('es-ES')}</div>
                     <div className="board-desc">belonging to {cdmProjects.length} projects. </div>
                 </div>
                 <div className="board-card">
                     <h3 className="board-title-std ">VCS</h3>
-                    <div className="board-number">{vcsVolume}</div>
+                    <div className="board-number">{vcsVolume.toLocaleString('es-ES')}</div>
                     <div className="board-desc">belonging to {vcsProjects.length} projects. </div>
                 </div>
                 <div className="board-card">
                     <h3 className="board-title-std">GS</h3>
-                    <div className="board-number">{gsVolume}</div>
+                    <div className="board-number">{gsVolume.toLocaleString('es-ES')}</div>
                     <div className="board-desc">belonging to {gsProjects.length} projects. </div>
                 </div>
                 <div className="board-card">
                     <h3 className="board-title-std">CERCARBONO</h3>
-                    <div className="board-number">{cercarbonoVolume}</div>
+                    <div className="board-number">{cercarbonoVolume.toLocaleString('es-ES')}</div>
                     <div className="board-desc">belonging to {cercarbonoProjects.length} projects. </div>
                 </div>
                 <div className="board-card">
-                    <h3 className="board-title-std">CSA</h3>
-                    <div className="board-number">{csaVolume}</div>
+                    <h3 className="board-title-std">CAR</h3>
+                    <div className="board-number">{carVolume.toLocaleString('es-ES')}</div>
                     <div className="board-desc">belonging to {csaProjects.length} projects. </div>
                 </div>
                 <div className="board-card">
                     <h3 className="board-title-std">I-RECs</h3>
-                    <div className="board-number">{irecsVolume}</div>
+                    <div className="board-number">{irecsVolume.toLocaleString('es-ES')}</div>
                     <div className="board-desc">belonging to {irecsProjects.length} projects. </div>
                 </div>
+                <div className="board-card">
+                    <h3 className="board-title-std">BIO CARBON</h3>
+                    <div className="board-number">{bioCarbonVolume.toLocaleString('es-ES')}</div>
+                    <div className="board-desc">belonging to {bioCarbonProjects.length} projects. </div>
+                </div>
+                <div className="board-card">
+                    <h3 className="board-title-std">CSA</h3>
+                    <div className="board-number">{csaVolume.toLocaleString('es-ES')}</div>
+                    <div className="board-desc">belonging to {csaProjects.length} projects. </div>
+                </div>
+                <div className="board-card">
+                    <h3 className="board-title-std">PLAN VIVO</h3>
+                    <div className="board-number">{planVivoVolume.toLocaleString('es-ES')}</div>
+                    <div className="board-desc">belonging to {planVivoProjects.length} projects. </div>
+                </div>    
             </div>
         </div>
 

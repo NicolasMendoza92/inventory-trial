@@ -74,7 +74,7 @@ export default function RelatedTrans({
                                         <td>{o.projectData?.idProject} {o.projectData?.standardOp}</td>
                                         <td>{(o.projectData?.nameProject).slice(0,20)}</td>
                                         <td>{o.projectData?.vintageOp}</td>
-                                        <td>{o.quantity}</td>
+                                        <td>{(o.quantity).toLocaleString('es-ES')}</td>
                                         <td>{o.precio}</td>
                                         <td>{o.delivery}</td>
                                         <td>{o.payment}</td>
