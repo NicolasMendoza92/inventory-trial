@@ -11,6 +11,7 @@ export default function OpForm({
     equipo: existingEquipo,
     cliente: existingCliente,
     precio: existingPrecio,
+    versusPrice: existingVersusPrice,
     quantity: existingQuantity,
     delivery: existingDelivery,
     deliveryDate: existingDeliveryDate,
@@ -62,6 +63,7 @@ export default function OpForm({
     const [equipo, setEquipo] = useState(existingEquipo || '');
     const [cliente, setCliente] = useState(existingCliente || '');
     const [precio, setPrecio] = useState(existingPrecio || '');
+    const [versusPrice, setVersusPrice] = useState(existingVersusPrice || '');
     const [quantity, setQuantity] = useState(existingQuantity || '');
     const [delivery, setDelivery] = useState(existingDelivery || '');
     const [deliveryDate, setDeliveryDate] = useState(existingDeliveryDate || '');
@@ -133,6 +135,7 @@ export default function OpForm({
                     equipo,
                     cliente,
                     precio,
+                    versusPrice,
                     quantity,
                     delivery,
                     deliveryDate,
@@ -155,6 +158,7 @@ export default function OpForm({
                     equipo,
                     cliente,
                     precio,
+                    versusPrice,
                     quantity,
                     delivery,
                     deliveryDate,
@@ -294,14 +298,28 @@ export default function OpForm({
                         ))}
                     </select>
                 </div>
-                <div className='flex-wrap'>
-                    {transaction === 'Sale' && <label className='text-gray-400'>Sell price (USD)</label>}
-                    {transaction === 'Purchase' && <label className='text-gray-400'>Purchase price (USD)</label>}
-                    <input
-                        type='number'
-                        placeholder='ej: 3.20 '
-                        value={precio}
-                        onChange={e => setPrecio(e.target.value)} />
+                <div className='grid md:grid-cols-2 gap-2 items-center'>
+                    <div>
+                        {transaction === 'Sale' && <label className='text-gray-400'>Sell price (USD)</label>}
+                        {transaction === 'Purchase' && <label className='text-gray-400'>Purchase price (USD)</label>}
+                        <input
+                            type='number'
+                            placeholder='ex: 3.20 '
+                            value={precio}
+                            onChange={e => setPrecio(e.target.value)} />
+                    </div>
+
+                    {transaction === 'Sale' &&
+                        <div>
+                            <label className='text-gray-400'>Vs price (USD)</label>
+                            <input
+                                type='number'
+                                placeholder='Place here the purchase price, ex: 1.60 '
+                                value={versusPrice}
+                                onChange={e => setVersusPrice(e.target.value)} />
+                            <span className='text-gray-400 text-xs'>To calculate the net profit, place here, the price at which this project was purchased.</span>
+                        </div>
+                    }
                 </div>
                 <div className='flex-wrap'>
                     <label className='text-gray-400'>Volume</label>

@@ -34,6 +34,9 @@ const operationSchema = new Schema({
     precio: {
         type: Number,
     },
+    versusPrice: {
+        type: Number,
+    },
     quantity: {
         type: Number,
         require: true,
