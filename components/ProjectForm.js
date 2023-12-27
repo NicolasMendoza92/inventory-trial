@@ -8,6 +8,8 @@ import ArrowDown from './ArrowDown';
 import { sdgList } from './SdgOptions';
 import SdgSelected from './SdgSelected';
 import CountryPFSelect from './CountryPFSelect';
+import { useSession } from 'next-auth/react';
+
 
 
 export default function ProjectForm({
@@ -69,6 +71,8 @@ export default function ProjectForm({
     const [checkedState, setCheckedState] = useState(
         new Array(sdgList.length).fill(false)
     );
+
+    const { data: session } = useSession();
 
     const [isUploading, setIsUploading] = useState(false);
 
@@ -237,7 +241,7 @@ export default function ProjectForm({
                         <input
                             type='date'
                             className="flex border border-gray-200 bg-zinc-100/40 w-32"
-                            value={mktDate? new Date (mktDate).toISOString().slice(0, 10): mktDate}
+                            value={mktDate ? new Date(mktDate).toISOString().slice(0, 10) : mktDate}
                             min={disablePastDate()}
                             onChange={e => setMktDate(e.target.value)} />
                     </div>
@@ -492,39 +496,49 @@ export default function ProjectForm({
                     <option value="ALLCOT SPAIN">ALLCOT SPAIN</option>
                     <option value="ALLCOT CENTRO-AMERICA">ALLCOT CENTRO-AMERICA</option>
                 </select>
-                <label className='text-gray-400'>Files</label>
-                <div className='mb-2 flex flex-wrap gap-1 items-center'>
-                    {!!files?.length && files.map(link => (
-                        <div key={link} className='flex h-20 bg-white p-4 shadow-sm rounded-sm border border-gray-200'>
-                            <a href={link} target='_blank'>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-                                </svg>
-                                <span onClick={e => deleteFile(e, link)} className="swym-delete-img">x</span>
-                            </a>
-                        </div>
-                    ))}
-                    {isUploading && (
-                        <div className="h-24 flex items-center">
-                            <Spinner />
-                        </div>
-                    )}
-                    <label className="w-20 h-20 cursor-pointer text-center flex flex-col items-center justify-center text-sm gap-1 rounded-sm bg-white shadow-sm border border text-gray-400">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
-                        </svg>
-                        <div>
-                            Upload file
-                        </div>
-                        <input type="file" onChange={uploadFiles} className="hidden" />
-                    </label>
-                    {!files?.length && (
-                        <div className='text-gray-400'> No attached files </div>
-                    )}
-                </div>
-                <button type="submit" className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500 focus:outline-none focus:ring focus:ring-green-400">
-                    Save
-                </button>
+                {session.user.email === 'demo@gmail.com' ? (
+                    <> </>
+                ) : <>
+                    <label className='text-gray-400'>Files</label>
+                    <div className='mb-2 flex flex-wrap gap-1 items-center'>
+                        {!!files?.length && files.map(link => (
+                            <div key={link} className='flex h-20 bg-white p-4 shadow-sm rounded-sm border border-gray-200'>
+                                <a href={link} target='_blank'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                    </svg>
+                                    <span onClick={e => deleteFile(e, link)} className="swym-delete-img">x</span>
+                                </a>
+                            </div>
+                        ))}
+                        {isUploading && (
+                            <div className="h-24 flex items-center">
+                                <Spinner />
+                            </div>
+                        )}
+                        <label className="w-20 h-20 cursor-pointer text-center flex flex-col items-center justify-center text-sm gap-1 rounded-sm bg-white shadow-sm border border text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                            </svg>
+                            <div>
+                                Upload file
+                            </div>
+                            <input type="file" onChange={uploadFiles} className="hidden" />
+                        </label>
+                        {!files?.length && (
+                            <div className='text-gray-400'> No attached files </div>
+                        )}
+                    </div>
+                </>}
+
+                {session.user.email === 'demo@gmail.com' ? (
+                    <h1 className='bg-red-300 text-center'>you are not enabled to save changes </h1>
+                ) :
+                    <button type="submit" className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500 focus:outline-none focus:ring focus:ring-green-400">
+                        Save
+                    </button>
+                }
+
                 {error && (
                     <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
                         {error}
