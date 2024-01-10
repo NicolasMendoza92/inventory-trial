@@ -62,9 +62,13 @@ export const TableProjects = () => {
         {
             name: 'name',
             label: 'Name',
+            width: 200 ,
             options: {
                 filter: false,
-            }
+                customBodyRender: (value) => (
+                    value.length > 20 ? `${value.slice(0, 25)}...` : value
+                  ),
+            }, 
         },
         {
             name: 'standar',
@@ -169,6 +173,7 @@ export const TableProjects = () => {
                 data={allprojects}
                 columns={columns}
                 options={options}
+                maxHeight={15}
             />
         </>
 

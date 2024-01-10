@@ -60,19 +60,17 @@ export default function Projects() {
 
   return (
     <Layout>
-      {!session &&
-        <div className="flex justify-center">
-          <div className="shadow-md p-3 bg-zince-300/10 flex items-center gap-2 m-3">
-            <h1>You must be logged in to handle the inventory</h1>
-            <button className="bg-green-600 rounded-lg text-white font-bold px-6 py-2" onClick={goToLogin}> Login </button>
-          </div>
-        </div>
-      }
-      {session && (
-        <>
           <div className="flex justify-between content-center">
             {enable === false && (
               <div className="flex justify-end">
+                <div className="flex justify-start items-center">
+                    <input
+                      value={projectSearched}
+                      className="flex w-96 max-md:w-32"
+                      onChange={e => setProjectSearched(e.target.value)}
+                      placeholder='Look up your project by ID, STD, Name...'
+                      autoFocus />
+                  </div>
                 <Link className="bg-gray-300 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-gray-200" href={'/searchProjects'}>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z" />
@@ -163,7 +161,7 @@ export default function Projects() {
                     {enable === false && (
                       <></>
                     )}
-                    {session.user.email === 'wp.co@allcot.com' && (
+                    {session?.user.email === 'wp.co@allcot.com' && (
                       <td>
                         <Link className="bg-orange-600 text-white px-1 ms-1 rounded shadow-sm hover:bg-orange-500" href={'/projects/reservation/' + project._id}>
                           <div className="group relative w-max">
@@ -179,7 +177,7 @@ export default function Projects() {
                         </Link>
                       </td>
                     )}
-                    {session.user.email === 'demo@gmail.com' && (
+                    {session?.user.email === 'demo@gmail.com' && (
                       <td>
                         {/* aca le paso el id del proyecto, y por ende va a editar el volumen con ese id */}
                         <Link className="bg-green-600 text-white px-1 ms-1 rounded shadow-sm hover:bg-green-500" href={'/projects/operation/' + project._id}>
@@ -249,15 +247,11 @@ export default function Projects() {
                         </Link>
                       </td>
                     }
-
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-        </>
-      )}
-
     </Layout>
   );
 }

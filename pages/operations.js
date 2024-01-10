@@ -57,16 +57,14 @@ export default function Operations() {
 
   return (
     <Layout>
-      {!session &&
+      {/* {!session &&
         <div className="flex justify-center">
           <div className="shadow-md p-3 bg-zince-300/10 flex items-center gap-2 m-3">
             <h1>You must be logged in to handle the operations</h1>
             <button className="bg-green-600 rounded-lg text-white font-bold px-6 py-2" onClick={goToLogin}> Login </button>
           </div>
         </div>
-      }
-      {session && (
-        <>
+      } */}
           <div className="flex justify-between content-center">
             <ExportOperations />
             <div className="flex justify-end content-center">
@@ -169,8 +167,6 @@ export default function Operations() {
               </tbody>
             </table>
           </div>
-        </>
-      )}
     </Layout>
   )
 }

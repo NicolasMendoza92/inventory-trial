@@ -28,13 +28,13 @@ table.basic{
 table.basic thead tr td,
 table.basic thead tr th
 {
-  @apply text-sm text-gray-800 bg-green-100 uppercase border border-gray-200 border-gray-200 px-2 py-2;
+  @apply text-xs text-gray-800 bg-green-100 uppercase border border-gray-200 border-gray-200 px-1 ;
 }
 table.basic tr td{
-  @apply py-1 px-1 border border-gray-200;
+  @apply px-1  border border-gray-200;
 }
 table.basic a{
-  @apply py-1 rounded-sm inline-flex items-center gap-1 text-sm;
+  @apply px-1 rounded-sm inline-flex items-center gap-1 text-xs;
 }
 .nota-imp{
   @apply text-gray-400 text-xs;
