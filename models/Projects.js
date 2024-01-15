@@ -68,6 +68,9 @@ const projectSchema = new Schema({
     projectLink:{
         type: String,
     },
+    firstCPDate:{
+        type: String,
+    },
     disponible:{
         type: String,
     },

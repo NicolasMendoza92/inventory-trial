@@ -137,6 +137,13 @@ export const TableProjects = () => {
             },
         },
         {
+            name: 'firstCPDate',
+            options: {
+                filter: true,
+                display: 'false',
+            },
+        },
+        {
             name: "Action",
             options: {
                 filter: false,

@@ -32,6 +32,7 @@ export default function ProjectForm({
     mktDate: existingMktDate,
     proveedor: existingProveedor,
     sede: existingSede,
+    firstCPDate: existingFirstCPDate,
     notas: existingNotas,
     notasExtra: existingNotasExtra,
     ccb: existingCcb,
@@ -62,6 +63,7 @@ export default function ProjectForm({
     const [ccb, setCcb] = useState(existingCcb || '');
     const [colombianTax, setColombianTax] = useState(existingColombianTax || '');
     const [sede, setSede] = useState(existingSede || '');
+    const [firstCPDate, setFirstCPDate] = useState(existingFirstCPDate || '');
     const [notas, setNotas] = useState(existingNotas || '');
     const [notasExtra, setNotasExtra] = useState(existingNotasExtra || '');
     const [files, setFiles] = useState(existingFiles || []);
@@ -90,7 +92,7 @@ export default function ProjectForm({
     async function saveProject(e) {
         try {
             e.preventDefault();
-            const data = { projectID, standar, vintage, volumen, name, projectLink, tech, corsia, sdg, sede, sdgSelected, sdgImages, pais, disponible, precioVenta, precioCorp, floorPrice, contrato, mktDate, proveedor, ccb, colombianTax, notas, files, notasExtra }
+            const data = { projectID, standar, vintage, volumen, name, projectLink, tech, corsia, sdg, sede, sdgSelected, sdgImages, pais, disponible, firstCPDate, precioVenta, precioCorp, floorPrice, contrato, mktDate, proveedor, ccb, colombianTax, notas, files, notasExtra }
 
             if (!projectID || !standar || !vintage || !volumen || !tech || !pais || !name) {
                 setError('Important data are missing');
@@ -427,6 +429,14 @@ export default function ProjectForm({
                             <option value="YES">Yes</option>
                             <option value="N/A">Clean</option>
                         </select>
+                    </div>
+                    <div className='w-32'>
+                        <label className='text-gray-400'>First CP date</label>
+                        <input
+                            type='date'
+                            className="flex border border-gray-200 bg-zinc-100/40 w-32"
+                            value={firstCPDate ? new Date(firstCPDate).toISOString().slice(0, 10) : firstCPDate}
+                            onChange={e => setFirstCPDate(e.target.value)} />
                     </div>
 
                 </div>
