@@ -2,6 +2,8 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react'
 import CountryClient from './CountryClient';
+import Swal from 'sweetalert2';
+import Spinner from './Spinner';
 
 export default function ClientForm({
     _id,
@@ -16,6 +18,7 @@ export default function ClientForm({
 
     // handle errors 
     const [error, setError] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
     const [nombreCliente, setNombreCliente] = useState(existingNombreCliente || '');
     const [contacto, setContacto] = useState(existingContacto || '');
@@ -35,6 +38,7 @@ export default function ClientForm({
         }
 
         try {
+            setIsLoading(true);
             const newClient = {
                 nombreCliente,
                 contacto,
@@ -47,17 +51,38 @@ export default function ClientForm({
             if (_id) {
                 //update
                 await axios.put('/api/clientes', { ...newClient, _id });
+                const form = e.target;
+                form.reset();
+                router.push('/clients');
+                setIsLoading(false);
             } else {
                 //create
                 const res = await axios.post('/api/clientes', newClient);
-            }
+                const clientfind = res.data.clientfind;
+                if (clientfind) {
+                    Swal.fire({
+                        title: "Oops",
+                        text: "Customer already has exists",
+                        icon: "warning"
+                    });
+                    setError('There is already a customer with this name')
+                    setIsLoading(false);
+                } else {
+                    Swal.fire({
+                        title: "Great",
+                        text: "Customer create correctly",
+                        icon: "success"
+                    });
+                    const form = e.target;
+                    form.reset();
+                    router.push('/clients');
+                    setIsLoading(false);
+                }
 
+            }
         } catch (error) {
-            setError(error.response.data)
+            console.log(error)
         }
-        const form = e.target;
-        form.reset();
-        router.push('/clients');
 
     }
 
@@ -139,6 +164,12 @@ export default function ClientForm({
                 <button type="submit" className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500 focus:outline-none focus:ring focus:ring-green-400">
                     Save
                 </button>
+                {isLoading && (
+                    <div className="flex flex-col justify-center">
+                        <h1 className='text-2xl text-white'>Consultando disponibilidad</h1>
+                        <Spinner />
+                    </div>
+                )}
             </form>
         </div>
     )
