@@ -60,6 +60,7 @@ const ExportOperations = () => {
                             <td>ID</td>
                             <td>Project name</td>
                             <td>Vintage</td>
+                            <td>Tech</td>
                             <td>Country</td>
                             <td>Price</td>
                             <td>Vs Price</td>
@@ -86,6 +87,7 @@ const ExportOperations = () => {
                                 <td>{op.projectData?.idProject}</td>
                                 <td>{op.projectData?.nameProject}</td>
                                 <td>{op.projectData?.vintageOp}</td>
+                                <td>{op.projectData?.techProject}</td>
                                 <td>{op.projectData?.countryProject}</td>
                                 <td>{op.precio}</td>
                                 <td>{op.versusPrice}</td>

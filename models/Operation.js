@@ -30,6 +30,9 @@ const operationSchema = new Schema({
         countryProject: {
             type: String,
         },
+        techProject: {
+            type: String,
+        },
     },
     precio: {
         type: Number,

@@ -19,6 +19,7 @@ export default async function handle(req, res) {
             standar: 1,
             vintage: 1,
             pais: 1,
+            tech:1,
           })
         res.json({
           operationDoc,
@@ -31,7 +32,7 @@ export default async function handle(req, res) {
 
 
   if (method === 'POST') {
-    const { transaction, equipo, cliente, proyecto, precio, versusPrice, quantity, delivery, deliveryDate, payment, paymentDate, detalles, archivos, projectData:{idProject, standardOp, vintageOp, nameProject, countryProject}} = req.body;
+    const { transaction, equipo, cliente, proyecto, precio, versusPrice, quantity, delivery, deliveryDate, payment, paymentDate, detalles, archivos, projectData:{idProject, standardOp, vintageOp, nameProject, countryProject, techProject}} = req.body;
     const operationDoc = await Operation.create({
       transaction,
       equipo,
@@ -45,7 +46,7 @@ export default async function handle(req, res) {
       payment,
       paymentDate,
       detalles,
-      projectData:{idProject, standardOp, vintageOp, nameProject, countryProject},
+      projectData:{idProject, standardOp, vintageOp, nameProject, countryProject, techProject},
       archivos
     });
     res.json(operationDoc);

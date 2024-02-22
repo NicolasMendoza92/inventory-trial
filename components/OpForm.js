@@ -25,6 +25,7 @@ export default function OpForm({
     volumen: existingVolumen,
     name: existingName,
     pais: existingPais,
+    tech: existingTech,
     archivos: existingArchivos,
     relatedProjectID
 }) {
@@ -34,6 +35,7 @@ export default function OpForm({
     const [standar, setStandar] = useState(existingStandar || '');
     const [vintage, setVintage] = useState(existingVintage || '');
     const [volumen, setVolumen] = useState(existingVolumen || '');
+    const [tech, setTech] = useState(existingTech || '');
     const [pais, setPais] = useState(existingPais || '');
     const [name, setName] = useState(existingName || '');
 
@@ -168,7 +170,7 @@ export default function OpForm({
                     payment,
                     paymentDate,
                     proyecto: _id,
-                    projectData: { idProject: projectID, standardOp: standar, vintageOp: vintage, nameProject: name, countryProject: pais },
+                    projectData: { idProject: projectID, standardOp: standar, vintageOp: vintage, nameProject: name, countryProject: pais, techProject: tech },
                     detalles,
                     archivos
                 }

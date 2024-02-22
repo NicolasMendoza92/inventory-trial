@@ -166,6 +166,9 @@ export const TableProjects = () => {
 
     const options = {
         filterType: 'multiselect',
+        selectableRows: 'none', 
+        responsive: 'simple', 
+        searchOpen: false, 
     };
 
     return (

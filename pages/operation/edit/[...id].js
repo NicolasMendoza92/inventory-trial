@@ -20,6 +20,10 @@ export default function EditOperationPage() {
   const [relatedProjectInfo, setRelatedProjectInfo] = useState('');
 
   const router = useRouter();
+
+  function goBack() {
+    router.back()
+  }
   // traemos la propiedad id, de router.query, ya que nos fiamos previamente con un console log donde estaba el file [...id]  que creamos con console.log({router});
   const { id } = router.query;
 
@@ -104,7 +108,7 @@ export default function EditOperationPage() {
             </div>
             <div className='flex gap-2'>
               <button className="bg-gray-300 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-gray-200" >
-                <Link href={'/operations'}>
+                <Link href={goBack}>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
                   </svg>
