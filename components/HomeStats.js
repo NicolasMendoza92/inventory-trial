@@ -9,7 +9,7 @@ export default function HomeStats({ operations }) {
 
     const router = useRouter();
     const goToOps = () => {
-        router.push('/alloperations')
+        router.push('/searchOperations')
     }
 
     // me fijo en la documentancion de date-fns y puedo hacerlo mas facil
