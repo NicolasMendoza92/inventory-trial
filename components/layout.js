@@ -23,7 +23,7 @@ export default function Layout({ children }) {
         </button>
         <div className="flex grow justify-center align-center">
           <Link href={"/"} className='flex gap-1 mb-3' >
-            <img className='h-10' src='https://res.cloudinary.com/dbv6dgwez/image/upload/v1699960770/Allcot%20Trading/ALLCOT_ALL_white_ljdbcr.png'></img>
+            <img className='h-10' src='icons/allcot_icon.png'></img>
           </Link>
         </div>
       </div>

@@ -13,7 +13,7 @@ export default function App({
         <>
             <Head>
                 <title>APP ALLCOT Inventory</title>
-                <link rel="icon" href="/allcot_icon.png" sizes="any" />
+                <link rel="icon" href="icons/allcot_icon.png" sizes="any" />
             </Head>
             <SessionProvider session={session}>
                 <Component {...pageProps} />

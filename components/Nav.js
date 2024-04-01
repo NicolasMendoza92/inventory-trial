@@ -35,7 +35,7 @@ export default function Nav({ showNav, setShowNav }) {
                     </button>
                 </div>
                 <Link href={"/"} className='flex gap-1' >
-                    <img className='h-9' src='https://res.cloudinary.com/dbv6dgwez/image/upload/v1699959964/Allcot%20Trading/ALLCOT_DROP_LOGO_-_White_pafsal.png'></img>
+                    <img className='h-9' src='icons/allcot_icon.png'></img>
                 </Link>
             </div>
             <Link  href={"/"} className={pathname === ('/') ? activeLink : inactiveLink}>
