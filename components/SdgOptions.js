@@ -3,71 +3,71 @@
 export const sdgList = [
     {
         name: "1",
-        img: "https://res.cloudinary.com/dbv6dgwez/image/upload/v1699867314/Allcot%20Trading/S-WEB-Goal-01_wkhpyw.png"
+        img: "/icons/1_ODS.png"
     },
     {
         name: "2",
-        img: "https://res.cloudinary.com/dbv6dgwez/image/upload/v1699867314/Allcot%20Trading/S-WEB-Goal-02_myyvxc.png",
+        img: "/icons/2_ODS.png",
     },
     {
         name: "3",
-        img: "https://res.cloudinary.com/dbv6dgwez/image/upload/v1699867315/Allcot%20Trading/S-WEB-Goal-03_o8zdeq.png"
+        img: "/icons/3_ODS.png"
     },
     {
         name: "4",
-        img: "https://res.cloudinary.com/dbv6dgwez/image/upload/v1699867315/Allcot%20Trading/S-WEB-Goal-04_bmoolz.png"
+        img: "/icons/4_ODS.png"
     },
     {
         name: "5",
-        img: "https://res.cloudinary.com/dbv6dgwez/image/upload/v1699867315/Allcot%20Trading/S-WEB-Goal-05_ndyslm.png"
+        img: "/icons/5_ODS.png"
     },
     {
         name: "6",
-        img: "https://res.cloudinary.com/dbv6dgwez/image/upload/v1699867318/Allcot%20Trading/S-WEB-Goal-06_hyolkj.png"
+        img: "/icons/6_ODS.png"
     },
     {
         name: "7",
-        img: "https://res.cloudinary.com/dbv6dgwez/image/upload/v1699867318/Allcot%20Trading/S-WEB-Goal-07_ajt0e2.png"
+        img: "/icons/7_ODS.png"
     },
     {
         name: "8",
-        img: "https://res.cloudinary.com/dbv6dgwez/image/upload/v1699867318/Allcot%20Trading/S-WEB-Goal-08_wa3ys5.png"
+        img: "/icons/8_ODS.png"
     },
     {
         name: "9",
-        img: "https://res.cloudinary.com/dbv6dgwez/image/upload/v1699867318/Allcot%20Trading/S-WEB-Goal-09_bmd39w.png"
+        img: "/icons/9_ODS.png"
     },
     {
         name: "10",
-        img: "https://res.cloudinary.com/dbv6dgwez/image/upload/v1699867318/Allcot%20Trading/S-WEB-Goal-10_lwk21v.png"
+        img: "/icons/10_ODS.png"
     },
     {
         name: "11",
-        img: "https://res.cloudinary.com/dbv6dgwez/image/upload/v1699867320/Allcot%20Trading/S-WEB-Goal-11_ni2fiw.png"
+        img: "/icons/11_ODS.png"
     },
     {
         name: "12",
-        img: "https://res.cloudinary.com/dbv6dgwez/image/upload/v1699867320/Allcot%20Trading/S-WEB-Goal-12_awfkba.png"
+        img: "/icons/12_ODS.png"
     },
     {
         name: "13",
-        img: "https://res.cloudinary.com/dbv6dgwez/image/upload/v1699867320/Allcot%20Trading/S-WEB-Goal-13_wgwvwz.png"
+        img: "/icons/13_ODS.png"
     },
     {
         name: "14",
-        img: "https://res.cloudinary.com/dbv6dgwez/image/upload/v1699867320/Allcot%20Trading/S-WEB-Goal-14_nd8aas.png"
+        img: "/icons/14_ODS.png"
     },
     {
         name: "15",
-        img: "https://res.cloudinary.com/dbv6dgwez/image/upload/v1699867321/Allcot%20Trading/S-WEB-Goal-15_cy02wp.png"
+        img: "/icons/15_ODS.png"
     },
     {
         name: "16",
-        img: "https://res.cloudinary.com/dbv6dgwez/image/upload/v1699867321/Allcot%20Trading/S-WEB-Goal-16_mmz9yd.png"
+        img: "/icons/16_ODS.png"
     },
     {
         name: "17",
-        img: "https://res.cloudinary.com/dbv6dgwez/image/upload/v1699867322/Allcot%20Trading/S-WEB-Goal-17_d8xyjl.png"
+        img: "/icons/17_ODS.png"
     }
 ]
 
