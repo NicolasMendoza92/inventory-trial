@@ -371,6 +371,7 @@ export default function ProjectForm({
                     <option value="HFC">HFC</option>
                     <option value="Hydro">Hydro</option>
                     <option value="IFM">Improved Forest Managment</option>
+                    <option value="ILM">Improved Land Management</option>
                     <option value="Landfill gas">Landfill gas</option>
                     <option value="Landfill to energy">Landfill to energy</option>
                     <option value="Mangroves">Mangroeves</option>
