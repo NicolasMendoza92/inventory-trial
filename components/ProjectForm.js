@@ -32,10 +32,12 @@ export default function ProjectForm({
     mktDate: existingMktDate,
     proveedor: existingProveedor,
     sede: existingSede,
+    misha: existingMisha,
     firstCPDate: existingFirstCPDate,
     notas: existingNotas,
     notasExtra: existingNotasExtra,
     ccb: existingCcb,
+    ccp: existingCcp,
     colombianTax: existingColombianTax,
     sdgSelected: existingSdgSelected,
     sdgImages: existingSdgImages,
@@ -60,7 +62,9 @@ export default function ProjectForm({
     const [contrato, setContrato] = useState(existingContrato || '');
     const [mktDate, setMktDate] = useState(existingMktDate || '');
     const [proveedor, setProveedor] = useState(existingProveedor || '');
+    const [misha, setMisha] = useState(existingMisha || '');
     const [ccb, setCcb] = useState(existingCcb || '');
+    const [ccp, setCcp] = useState(existingCcp || '');
     const [colombianTax, setColombianTax] = useState(existingColombianTax || '');
     const [sede, setSede] = useState(existingSede || '');
     const [firstCPDate, setFirstCPDate] = useState(existingFirstCPDate || '');
@@ -92,7 +96,7 @@ export default function ProjectForm({
     async function saveProject(e) {
         try {
             e.preventDefault();
-            const data = { projectID, standar, vintage, volumen, name, projectLink, tech, corsia, sdg, sede, sdgSelected, sdgImages, pais, disponible, firstCPDate, precioVenta, precioCorp, floorPrice, contrato, mktDate, proveedor, ccb, colombianTax, notas, files, notasExtra }
+            const data = { projectID, standar, vintage, volumen, name, projectLink, tech, corsia, sdg, sede, sdgSelected, sdgImages, pais, disponible, firstCPDate, precioVenta, precioCorp, floorPrice, contrato, mktDate, proveedor, ccb, ccp, misha, colombianTax, notas, files, notasExtra }
 
             if (!projectID || !standar || !vintage || !volumen || !tech || !pais || !name) {
                 setError('Important data are missing');
@@ -211,16 +215,25 @@ export default function ProjectForm({
     return (
         <div >
             <form onSubmit={saveProject} className='flex grid gap-3 mb-3'>
-                <div className='grid md:grid-cols-2 gap-2 items-center'>
-                    <div>
+                <div className='grid grid-cols-1 md:grid-cols-2 md:gap-2 items-center'>
+                    <div className='flex flex-wrap w-full gap-2'>
                         <label className='text-gray-400'>Supplier</label>
                         <input
                             type='text'
+                            className='flex flex-wrap '
                             placeholder='Ej: ALLCOT - Misha'
                             value={proveedor}
                             onChange={e => setProveedor(e.target.value)} />
+                        <label className='text-gray-400'>Misha</label>
+                        <select
+                            className="flex flex-wrap border border-gray-200 bg-zinc-100/40 w-2/5 "
+                            value={misha}
+                            onChange={e => setMisha(e.target.value)}>
+                            <option value="">-select-</option>
+                            <option value="YES">YES</option>
+                        </select>
                     </div>
-                    <div>
+                    <div className=' w-full'>
                         <label className='text-gray-400'>Internal Notes</label>
                         <textarea
                             placeholder='ex:Some info about prices '
@@ -286,8 +299,19 @@ export default function ProjectForm({
                             value={ccb}
                             onChange={e => setCcb(e.target.value)}>
                             <option value="">-no seleccionado-</option>
-                            <option value="YES">Yes</option>
-                            <option value="NO">No</option>
+                            <option value="YES">YES</option>
+                            <option value="NO">NO</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label className='text-gray-400'>CCP</label>
+                        <select
+                            className=" border border-gray-200 bg-zinc-100/40"
+                            value={ccp}
+                            onChange={e => setCcp(e.target.value)}>
+                            <option value="">-no seleccionado-</option>
+                            <option value="Eligible">Eligible</option>
+                            <option value="Approved">Approved</option>
                         </select>
                     </div>
                     <div>

@@ -36,8 +36,14 @@ const projectSchema = new Schema({
     ccb:{
         type:String,
     },
+    ccp:{
+        type:String,
+    },
     colombianTax:{
         type:String,
+    },
+    misha:{
+        type: String,
     },
     sdg:{
         type: String,

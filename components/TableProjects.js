@@ -123,7 +123,21 @@ export const TableProjects = () => {
             label: 'Availability',
         },
         {
+            name: 'ccp',
+            options: {
+                filter: true,
+                display: 'false',
+            },
+        },
+        {
             name: 'ccb',
+            options: {
+                filter: true,
+                display: 'false',
+            },
+        },
+        {
+            name: 'misha',
             options: {
                 filter: true,
                 display: 'false',
