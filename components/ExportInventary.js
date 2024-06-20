@@ -69,8 +69,10 @@ const ExportInventary = () => {
               <td>SDG</td>
               <td>MISHA</td>
               <td>NOTES</td>
-              <td>SITE</td>
+              <td>P.TYPE</td>
+              <td>MARKET</td>
               <td>AVAILABILITY</td>
+              <td>SITE</td>
             </tr>
           </thead>
           <tbody>
@@ -82,7 +84,7 @@ const ExportInventary = () => {
                 <td>{pr.floorPrice}</td>
                 <td>{pr.standar} {pr.ccb === 'YES' ? (
                   <> CCB </>
-                ): null}</td>
+                ) : null}</td>
                 <td>{pr.projectID}</td>
                 <td>{pr.name}</td>
                 <td>{pr.pais}</td>
@@ -99,8 +101,10 @@ const ExportInventary = () => {
                 </td>
                 <td>{pr.misha}</td>
                 <td>{pr.notasExtra}</td>
-                <td>{pr.sede}</td>
+                <td>{pr.projectType}</td>
+                <td>{pr.regulatedMarket}</td>
                 <td>{pr.stock}</td>
+                <td>{pr.sede}</td>
               </tr>
             ))}
           </tbody>
