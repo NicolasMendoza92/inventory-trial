@@ -30,6 +30,7 @@ export default function ProjectForm({
     precioVenta: existingPrecioVenta,
     precioCorp: existingPrecioCorp,
     floorPrice: existingFloorPrice,
+    purchasePrice: existingPurchasePrice,
     contrato: existingContrato,
     mktDate: existingMktDate,
     proveedor: existingProveedor,
@@ -41,7 +42,6 @@ export default function ProjectForm({
     ccb: existingCcb,
     ccp: existingCcp,
     projectType: existingProjectType,
-    colombianTax: existingColombianTax,
     regulatedMarket: existingRegulatedMarket,
     sdgSelected: existingSdgSelected,
     sdgImages: existingSdgImages,
@@ -65,6 +65,7 @@ export default function ProjectForm({
     const [precioVenta, setPrecioVenta] = useState(existingPrecioVenta || '');
     const [precioCorp, setPrecioCorp] = useState(existingPrecioCorp || '');
     const [floorPrice, setFloorPrice] = useState(existingFloorPrice || '');
+    const [purchasePrice, setPurchasePrice] = useState(existingPurchasePrice || '');
     const [contrato, setContrato] = useState(existingContrato || '');
     const [mktDate, setMktDate] = useState(existingMktDate || '');
     const [proveedor, setProveedor] = useState(existingProveedor || '');
@@ -72,7 +73,6 @@ export default function ProjectForm({
     const [ccb, setCcb] = useState(existingCcb || '');
     const [ccp, setCcp] = useState(existingCcp || '');
     const [projectType, setProjectType] = useState(existingProjectType || '');
-    const [colombianTax, setColombianTax] = useState(existingColombianTax || '');
     const [regulatedMarket, setRegulatedMarket] = useState(existingRegulatedMarket || '');
     const [sede, setSede] = useState(existingSede || '');
     const [firstCPDate, setFirstCPDate] = useState(existingFirstCPDate || '');
@@ -105,12 +105,7 @@ export default function ProjectForm({
     async function saveProject(e) {
         try {
             e.preventDefault();
-            const data = { projectID, standar, vintage, volumen, name, projectLink, tech, corsia, sdg, sede, sdgSelected, sdgImages, pais, continente, disponible, stock, firstCPDate, precioVenta, precioCorp, floorPrice, contrato, mktDate, proveedor, ccb, ccp, projectType, misha, colombianTax, regulatedMarket, notas, files, notasExtra }
-
-            // if (!projectID || !standar || !vintage || !volumen || !tech || !pais || !name || !stock) {
-            //     setError('Important data are missing');
-            //     return;
-            // }
+            const data = { projectID, standar, vintage, volumen, name, projectLink, tech, corsia, sdg, sede, sdgSelected, sdgImages, pais, continente, disponible, stock, firstCPDate, precioVenta, precioCorp, floorPrice, purchasePrice, contrato, mktDate, proveedor, ccb, ccp, projectType, misha, regulatedMarket, notas, files, notasExtra }
 
             let hasError = false;
             let newErrorFields = {};
@@ -352,6 +347,8 @@ export default function ProjectForm({
                             <option value="CSA">CSA</option>
                             <option value="PLAN VIVO">Plan Vivo</option>
                             <option value="BioCarbon">BioCarbon</option>
+                            <option value="A6.4">A6.4</option>
+                            <option value="A6.2">A6.2</option>
                         </select>
                     </div>
                     <div>
@@ -432,6 +429,14 @@ export default function ProjectForm({
                             value={floorPrice}
                             onChange={e => setFloorPrice(e.target.value)} />
                     </div>
+                    <div className='w-auto'>
+                        <label className='text-gray-400'>Purchase Price (USD)</label>
+                        <input
+                            type='number'
+                            placeholder='ej: 2.00'
+                            value={purchasePrice}
+                            onChange={e => setPurchasePrice(e.target.value)} />
+                    </div>
                 </div>
 
                 <label className='text-gray-400'>Project's Name</label>
@@ -504,17 +509,6 @@ export default function ProjectForm({
                             className=" border border-gray-200 bg-zinc-100/40"
                             value={corsia}
                             onChange={e => setCorsia(e.target.value)}>
-                            <option value="">-no selected-</option>
-                            <option value="NO">No</option>
-                            <option value="YES">Yes</option>
-                        </select>
-                    </div>
-                    <div className='w-32'>
-                        <label className='text-gray-400'>Colombian Tax</label>
-                        <select
-                            className=" border border-gray-200 bg-zinc-100/40"
-                            value={colombianTax}
-                            onChange={e => setColombianTax(e.target.value)}>
                             <option value="">-no selected-</option>
                             <option value="NO">No</option>
                             <option value="YES">Yes</option>

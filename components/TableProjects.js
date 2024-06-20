@@ -165,13 +165,6 @@ export const TableProjects = () => {
             },
         },
         {
-            name: 'colombianTax',
-            options: {
-                filter: true,
-                display: 'false',
-            },
-        },
-        {
             name: 'firstCPDate',
             options: {
                 filter: true,

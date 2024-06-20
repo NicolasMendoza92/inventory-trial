@@ -1,6 +1,17 @@
+import { ProjectSearchContext } from "@/context/ProjectSearchContext";
 import moment from "moment";
+import { useRouter } from "next/navigation";
+import { useContext } from "react";
 
 export default function HomeStandard({ projects, operations }) {
+
+    const { setProjectSearched } = useContext(ProjectSearchContext);
+    const router = useRouter();
+
+    const handleBtnCdm = () => {
+        setProjectSearched('cdm');
+        router.push('/inventary'); // Ajusta la ruta según tu configuración de enrutamiento
+      };
 
     // Deliveries and payment del dia de hoy 
     const deliverToday = operations.filter(op => moment(op.deliveryDate).isSame(new Date(), 'day'));
@@ -35,7 +46,7 @@ export default function HomeStandard({ projects, operations }) {
             ) : null}
             <h1 className="home-stats-titles">Available by standard</h1>
             <div className="board-grid">
-                <div className="board-card">
+                <div onClick={handleBtnCdm} className="board-card-link">
                     <h3 className="board-title-std ">CDM</h3>
                     <div className="board-number">{cdmVolume.toLocaleString('es-ES')}</div>
                     <div className="board-desc">belonging to {cdmProjects.length} projects. </div>

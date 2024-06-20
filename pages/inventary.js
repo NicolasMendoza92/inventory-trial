@@ -1,12 +1,13 @@
 import ExportInventary from "@/components/ExportInventary";
 import Spinner from "@/components/Spinner";
 import Layout from "@/components/layout";
+import { ProjectSearchContext } from "@/context/ProjectSearchContext";
 import isEnableUser from "@/lib/enableUser";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from 'react';
+import React, { useContext } from 'react';
 import { useEffect, useState } from "react";
 
 
@@ -37,7 +38,8 @@ export default function Projects() {
   }
 
   // para el filtro
-  const [projectSearched, setProjectSearched] = useState('');
+  const { projectSearched, setProjectSearched } = useContext(ProjectSearchContext);
+  // const [projectSearched, setProjectSearched] = useState('');
 
   useEffect(() => {
     let searchedProjects = [];
@@ -118,6 +120,7 @@ export default function Projects() {
               <td>Volume</td>
               <td>Trading Price(USD)</td>
               <td>Corp. Price(USD)</td>
+              <td>Purch. Price(USD)</td>
               <td>CCP</td>
               <td>Availability</td>
               <td></td>
@@ -157,6 +160,7 @@ export default function Projects() {
                 <td>{(project.volumen).toLocaleString('es-ES')}</td>
                 <td>{project.precioVenta}</td>
                 <td>{project.precioCorp}</td>
+                <td>{project.purchasePrice}</td>
                 <td>{project.ccp}</td>
                 {/* <td>
                       {project.sdgSelected.map(ods => <React.Fragment key={ods}>{ods}-</React.Fragment>)}

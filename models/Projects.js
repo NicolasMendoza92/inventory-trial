@@ -80,6 +80,9 @@ const projectSchema = new Schema({
     floorPrice: {
         type: Number,
     },
+    purchasePrice: {
+        type: Number,
+    },
     projectLink:{
         type: String,
     },
