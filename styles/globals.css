@@ -95,6 +95,16 @@ table.basic a{
   cursor: pointer;
 }
 
+/* Handle errors en los missing inputs  */
+.input-error {
+  border: 2px solid red;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
+
 /* .rbc-event{
   background-color:rgba(180, 44, 44, 0.636) !important ;
 

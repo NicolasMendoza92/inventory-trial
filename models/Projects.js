@@ -30,6 +30,9 @@ const projectSchema = new Schema({
         type: String,
         require: true,
     },
+    continente:{
+        type: String,
+    },
     corsia:{
         type: String,
     },
@@ -39,7 +42,13 @@ const projectSchema = new Schema({
     ccp:{
         type:String,
     },
+    projectType:{
+        type: String,
+    },
     colombianTax:{
+        type:String,
+    },
+    regulatedMarket:{
         type:String,
     },
     misha:{
@@ -78,6 +87,9 @@ const projectSchema = new Schema({
         type: String,
     },
     disponible:{
+        type: String,
+    },
+    stock:{
         type: String,
     },
     notas:{

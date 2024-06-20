@@ -1,263 +1,281 @@
 import React from 'react'
 
-export default function CountryPFSelect({ pais, setPais }) {
+export default function CountryPFSelect({ pais, setPais, setContinente, continente, errorFields }) {
+
+    // Mapeo de países a continentes
+    const countryToContinent = {
+        "Afghanistan": "Asia",
+        "Åland (Finland)": "Europe",
+        "Albania": "Europe",
+        "Algeria": "Africa",
+        "American Samoa (US)": "Oceania",
+        "Andorra": "Europe",
+        "Angola": "Africa",
+        "Anguilla (BOT)": "North America",
+        "Antigua and Barbuda": "North America",
+        "Argentina": "South America",
+        "Armenia": "Asia",
+        "Artsakh": "Asia",
+        "Aruba (Netherlands)": "North America",
+        "Australia": "Oceania",
+        "Austria": "Europe",
+        "Azerbaijan": "Asia",
+        "Bahamas": "North America",
+        "Bahrain": "Asia",
+        "Bangladesh": "Asia",
+        "Barbados": "North America",
+        "Belarus": "Europe",
+        "Belgium": "Europe",
+        "Belize": "Central America",
+        "Benin": "Africa",
+        "Bermuda (BOT)": "North America",
+        "Bhutan": "Asia",
+        "Bolivia": "South America",
+        "Bonaire (Netherlands)": "North America",
+        "Bosnia and Herzegovina": "Europe",
+        "Botswana": "Africa",
+        "Brazil": "South America",
+        "British Virgin Islands (BOT)": "North America",
+        "Brunei": "Asia",
+        "Bulgaria": "Europe",
+        "Burkina Faso": "Africa",
+        "Burundi": "Africa",
+        "Cambodia": "Asia",
+        "Cameroon": "Africa",
+        "Canada": "North America",
+        "Cape Verde": "Africa",
+        "Cayman Islands (BOT)": "North America",
+        "Central African Republic": "Africa",
+        "Chad": "Africa",
+        "Chile": "South America",
+        "China": "Asia",
+        "Christmas Island (Australia)": "Oceania",
+        "Cocos (Keeling) Islands (Australia)": "Oceania",
+        "Colombia": "South America",
+        "Comoros": "Africa",
+        "Congo": "Africa",
+        "Cook Islands": "Oceania",
+        "Costa Rica": "Central America",
+        "Croatia": "Europe",
+        "Cuba": "North America",
+        "Curaçao (Netherlands)": "North America",
+        "Cyprus": "Asia",
+        "Czech Republic": "Europe",
+        "Denmark": "Europe",
+        "Djibouti": "Africa",
+        "Dominica": "North America",
+        "Dominican Republic": "North America",
+        "DR Congo": "Africa",
+        "East Timor": "Asia",
+        "Ecuador": "South America",
+        "Egypt": "Africa",
+        "El Salvador": "North America",
+        "Equatorial Guinea": "Africa",
+        "Eritrea": "Africa",
+        "Estonia": "Europe",
+        "Eswatini": "Africa",
+        "Ethiopia": "Africa",
+        "Falkland Islands (BOT)": "South America",
+        "Faroe Islands (Denmark)": "Europe",
+        "Fiji": "Oceania",
+        "Finland": "Europe",
+        "France": "Europe",
+        "French Guiana (France)": "South America",
+        "French Polynesia (France)": "Oceania",
+        "Gabon": "Africa",
+        "Gambia": "Africa",
+        "Georgia": "Asia",
+        "Germany": "Europe",
+        "Ghana": "Africa",
+        "Gibraltar (BOT)": "Europe",
+        "Greece": "Europe",
+        "Greenland (Denmark)": "North America",
+        "Grenada": "North America",
+        "Guadeloupe (France)": "North America",
+        "Guam (US)": "Oceania",
+        "Guatemala": "Central America",
+        "Guernsey (Crown Dependency)": "Europe",
+        "Guinea": "Africa",
+        "Guinea-Bissau": "Africa",
+        "Guyana": "South America",
+        "Haiti": "North America",
+        "Honduras": "Central America",
+        "Hong Kong": "Asia",
+        "Hungary": "Europe",
+        "Iceland": "Europe",
+        "India": "Asia",
+        "Indonesia": "Asia",
+        "Iran": "Asia",
+        "Iraq": "Asia",
+        "Ireland": "Europe",
+        "Isle of Man (Crown Dependency)": "Europe",
+        "Israel": "Asia",
+        "Italy": "Europe",
+        "Ivory Coast": "Africa",
+        "Jamaica": "North America",
+        "Japan": "Asia",
+        "Jersey (Crown Dependency)": "Europe",
+        "Jordan": "Asia",
+        "Kazakhstan": "Asia",
+        "Kenya": "Africa",
+        "Kiribati": "Oceania",
+        "Kosovo": "Europe",
+        "Kuwait": "Asia",
+        "Kyrgyzstan": "Asia",
+        "Laos": "Asia",
+        "Latvia": "Europe",
+        "Lebanon": "Asia",
+        "Lesotho": "Africa",
+        "Liberia": "Africa",
+        "Libya": "Africa",
+        "Liechtenstein": "Europe",
+        "Lithuania": "Europe",
+        "Luxembourg": "Europe",
+        "Macau": "Asia",
+        "Madagascar": "Africa",
+        "Malawi": "Africa",
+        "Malaysia": "Asia",
+        "Maldives": "Asia",
+        "Mali": "Africa",
+        "Malta": "Europe",
+        "Marshall Islands": "Oceania",
+        "Martinique (France)": "North America",
+        "Mauritania": "Africa",
+        "Mauritius": "Africa",
+        "Mayotte (France)": "Africa",
+        "Mexico": "North America",
+        "Micronesia": "Oceania",
+        "Moldova": "Europe",
+        "Monaco": "Europe",
+        "Mongolia": "Asia",
+        "Montenegro": "Europe",
+        "Montserrat (BOT)": "North America",
+        "Morocco": "Africa",
+        "Mozambique": "Africa",
+        "Myanmar": "Asia",
+        "Namibia": "Africa",
+        "Nauru": "Oceania",
+        "Nepal": "Asia",
+        "Netherlands": "Europe",
+        "New Caledonia (France)": "Oceania",
+        "New Zealand": "Oceania",
+        "Nicaragua": "Central America",
+        "Niger": "Africa",
+        "Nigeria": "Africa",
+        "Niue": "Oceania",
+        "Norfolk Island (Australia)": "Oceania",
+        "North Korea": "Asia",
+        "North Macedonia": "Europe",
+        "Northern Cyprus": "Asia",
+        "Northern Mariana Islands (US)": "Oceania",
+        "Norway": "Europe",
+        "Oman": "Asia",
+        "Pakistan": "Asia",
+        "Palau": "Oceania",
+        "Palestine": "Asia",
+        "Panama": "Central America",
+        "Papua New Guinea": "Oceania",
+        "Paraguay": "South America",
+        "Peru": "South America",
+        "Philippines": "Asia",
+        "Pitcairn Islands (BOT)": "Oceania",
+        "Poland": "Europe",
+        "Portugal": "Europe",
+        "Puerto Rico (US)": "North America",
+        "Qatar": "Asia",
+        "Réunion (France)": "Africa",
+        "Romania": "Europe",
+        "Russia": "Europe",
+        "Rwanda": "Africa",
+        "Saba (Netherlands)": "North America",
+        "Saint Barthélemy (France)": "North America",
+        "Saint Helena, Ascension and Tristan da Cunha (BOT)": "Africa",
+        "Saint Kitts and Nevis": "North America",
+        "Saint Lucia": "North America",
+        "Saint Martin (France)": "North America",
+        "Saint Pierre and Miquelon (France)": "North America",
+        "Saint Vincent and the Grenadines": "North America",
+        "Samoa": "Oceania",
+        "San Marino": "Europe",
+        "São Tomé and Príncipe": "Africa",
+        "Saudi Arabia": "Asia",
+        "Senegal": "Africa",
+        "Serbia": "Europe",
+        "Seychelles": "Africa",
+        "Sierra Leone": "Africa",
+        "Singapore": "Asia",
+        "Sint Eustatius (Netherlands)": "North America",
+        "Sint Maarten (Netherlands)": "North America",
+        "Slovakia": "Europe",
+        "Slovenia": "Europe",
+        "Solomon Islands": "Oceania",
+        "Somalia": "Africa",
+        "South Africa": "Africa",
+        "South Korea": "Asia",
+        "South Sudan": "Africa",
+        "Spain": "Europe",
+        "Sri Lanka": "Asia",
+        "Sudan": "Africa",
+        "Suriname": "South America",
+        "Sweden": "Europe",
+        "Switzerland": "Europe",
+        "Syria": "Asia",
+        "Taiwan": "Asia",
+        "Tajikistan": "Asia",
+        "Tanzania": "Africa",
+        "Thailand": "Asia",
+        "Togo": "Africa",
+        "Tonga": "Oceania",
+        "Trinidad and Tobago": "North America",
+        "Tunisia": "Africa",
+        "Turkey": "Asia",
+        "Turkmenistan": "Asia",
+        "Turks and Caicos Islands (BOT)": "North America",
+        "Tuvalu": "Oceania",
+        "Uganda": "Africa",
+        "Ukraine": "Europe",
+        "United Arab Emirates": "Asia",
+        "United Kingdom": "Europe",
+        "United States": "North America",
+        "Uruguay": "South America",
+        "Uzbekistan": "Asia",
+        "Vanuatu": "Oceania",
+        "Vatican City": "Europe",
+        "Venezuela": "South America",
+        "Vietnam": "Asia",
+        "Wallis and Futuna (France)": "Oceania",
+        "Western Sahara": "Africa",
+        "Yemen": "Asia",
+        "Zambia": "Africa",
+        "Zimbabwe": "Africa"
+    };
+
+    const handleCountryChange = (e) => {
+        const country = e.target.value;
+        setPais(country);
+        setContinente(countryToContinent[country] || "");
+    };
+
+
     return (
         <div>
-            <label className='text-gray-400'>Country</label>
-            <select
-                className=" border border-gray-200 bg-zinc-100/40"
-                value={pais}
-                onChange={e => setPais(e.target.value)}>
-                <option value="">-no selected-</option>
-                <option value="Afghanistan">Afghanistan</option>
-                <option value="Åland (Finland)">Åland (Finland)</option>
-                <option value="Albania">Albania</option>
-                <option value="Algeria">Algeria</option>
-                <option value="American Samoa (US)">American Samoa (US)</option>
-                <option value="Andorra">Andorra</option>
-                <option value="Angola">Angola</option>
-                <option value="Anguilla (BOT)">Anguilla (BOT)</option>
-                <option value="Antigua and Barbuda">Antigua and Barbuda</option>
-                <option value="Argentina">Argentina</option>
-                <option value="Armenia">Armenia</option>
-                <option value="Artsakh">Artsakh</option>
-                <option value="Aruba (Netherlands)">Aruba (Netherlands)</option>
-                <option value="Australia">Australia</option>
-                <option value="Austria">Austria</option>
-                <option value="Azerbaijan">Azerbaijan</option>
-                <option value="Bahamas">Bahamas</option>
-                <option value="Bahrain">Bahrain</option>
-                <option value="Bangladesh">Bangladesh</option>
-                <option value="Barbados">Barbados</option>
-                <option value="Belarus">Belarus</option>
-                <option value="Belgium">Belgium</option>
-                <option value="Belize">Belize</option>
-                <option value="Benin">Benin</option>
-                <option value="Bermuda (BOT)">Bermuda (BOT)</option>
-                <option value="Bhutan">Bhutan</option>
-                <option value="Bolivia">Bolivia</option>
-                <option value="Bonaire (Netherlands)">Bonaire (Netherlands)</option>
-                <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
-                <option value="Botswana">Botswana</option>
-                <option value="Brazil">Brazil</option>
-                <option value="British Virgin Islands (BOT)">British Virgin Islands (BOT)</option>
-                <option value="Brunei">Brunei</option>
-                <option value="Bulgaria">Bulgaria</option>
-                <option value="Burkina Faso">Burkina Faso</option>
-                <option value="Burundi">Burundi</option>
-                <option value="Cambodia">Cambodia</option>
-                <option value="Cameroon">Cameroon</option>
-                <option value="Canada">Canada</option>
-                <option value="Cape Verde">Cape Verde</option>
-                <option value="Cayman Islands (BOT)">Cayman Islands (BOT)</option>
-                <option value="Central African Republic">Central African Republic</option>
-                <option value="Chad">Chad</option>
-                <option value="Chile">Chile</option>
-                <option value="China">China</option>
-                <option value="Christmas Island (Australia)">Christmas Island (Australia)</option>
-                <option value="Cocos (Keeling) Islands (Australia)">Cocos (Keeling) Islands (Australia)</option>
-                <option value="Colombia">Colombia</option>
-                <option value="Comoros">Comoros</option>
-                <option value="Congo">Congo</option>
-                <option value="Cook Islands">Cook Islands</option>
-                <option value="Costa Rica">Costa Rica</option>
-                <option value="Croatia">Croatia</option>
-                <option value="Cuba">Cuba</option>
-                <option value="Curaçao (Netherlands)">Curaçao (Netherlands)</option>
-                <option value="Cyprus">Cyprus</option>
-                <option value="Czech Republic">Czech Republic</option>
-                <option value="Denmark">Denmark</option>
-                <option value="Djibouti">Djibouti</option>
-                <option value="Dominica">Dominica</option>
-                <option value="Dominican Republic">Dominican Republic</option>
-                <option value="DR Congo">DR Congo</option>
-                <option value="East Timor">East Timor</option>
-                <option value="Ecuador">Ecuador</option>
-                <option value="Egypt">Egypt</option>
-                <option value="El Salvador">El Salvador</option>
-                <option value="Equatorial Guinea">Equatorial Guinea</option>
-                <option value="Eritrea">Eritrea</option>
-                <option value="Estonia">Estonia</option>
-                <option value="Eswatini">Eswatini</option>
-                <option value="Ethiopia">Ethiopia</option>
-                <option value="Falkland Islands (BOT)">Falkland Islands (BOT)</option>
-                <option value="Faroe Islands (Denmark)">Faroe Islands (Denmark)</option>
-                <option value="Fiji">Fiji</option>
-                <option value="Finland">Finland</option>
-                <option value="France">France</option>
-                <option value="French Guiana (France)">French Guiana (France)</option>
-                <option value="French Polynesia (France)">French Polynesia (France)</option>
-                <option value="Gabon">Gabon</option>
-                <option value="Gambia">Gambia</option>
-                <option value="Georgia">Georgia</option>
-                <option value="Germany">Germany</option>
-                <option value="Ghana">Ghana</option>
-                <option value="Gibraltar (BOT)">Gibraltar (BOT)</option>
-                <option value="Greece">Greece</option>
-                <option value="Greenland (Denmark)">Greenland (Denmark)</option>
-                <option value="Grenada">Grenada</option>
-                <option value="Guadeloupe (France)">Guadeloupe (France)</option>
-                <option value="Guam (US)">Guam (US)</option>
-                <option value="Guatemala">Guatemala</option>
-                <option value="Guernsey (Crown Dependency)">Guernsey (Crown Dependency)</option>
-                <option value="Guinea">Guinea</option>
-                <option value="Guinea-Bissau">Guinea-Bissau</option>
-                <option value="Guyana">Guyana</option>
-                <option value="Haiti">Haiti</option>
-                <option value="Honduras">Honduras</option>
-                <option value="Hong Kong">Hong Kong</option>
-                <option value="Hungary">Hungary</option>
-                <option value="Iceland">Iceland</option>
-                <option value="India">India</option>
-                <option value="Indonesia">Indonesia</option>
-                <option value="Iran">Iran</option>
-                <option value="Iraq">Iraq</option>
-                <option value="Ireland">Ireland</option>
-                <option value="Isle of Man (Crown Dependency)">Isle of Man (Crown Dependency)</option>
-                <option value="Israel">Israel</option>
-                <option value="Italy">Italy</option>
-                <option value="Ivory Coast">Ivory Coast</option>
-                <option value="Jamaica">Jamaica</option>
-                <option value="Japan">Japan</option>
-                <option value="Jersey (Crown Dependency)">Jersey (Crown Dependency)</option>
-                <option value="Jordan">Jordan</option>
-                <option value="Kazakhstan">Kazakhstan</option>
-                <option value="Kenya">Kenya</option>
-                <option value="Kiribati">Kiribati</option>
-                <option value="Kosovo">Kosovo</option>
-                <option value="Kuwait">Kuwait</option>
-                <option value="Kyrgyzstan">Kyrgyzstan</option>
-                <option value="Laos">Laos</option>
-                <option value="Latvia">Latvia</option>
-                <option value="Lebanon">Lebanon</option>
-                <option value="Lesotho">Lesotho</option>
-                <option value="Liberia">Liberia</option>
-                <option value="Libya">Libya</option>
-                <option value="Liechtenstein">Liechtenstein</option>
-                <option value="Lithuania">Lithuania</option>
-                <option value="Luxembourg">Luxembourg</option>
-                <option value="Macau">Macau</option>
-                <option value="Madagascar">Madagascar</option>
-                <option value="Malawi">Malawi</option>
-                <option value="Malaysia">Malaysia</option>
-                <option value="Maldives">Maldives</option>
-                <option value="Mali">Mali</option>
-                <option value="Malta">Malta</option>
-                <option value="Marshall Islands">Marshall Islands</option>
-                <option value="Martinique (France)">Martinique (France)</option>
-                <option value="Mauritania">Mauritania</option>
-                <option value="Mauritius">Mauritius</option>
-                <option value="Mayotte (France)">Mayotte (France)</option>
-                <option value="Mexico">Mexico</option>
-                <option value="Micronesia">Micronesia</option>
-                <option value="Moldova">Moldova</option>
-                <option value="Monaco">Monaco</option>
-                <option value="Mongolia">Mongolia</option>
-                <option value="Montenegro">Montenegro</option>
-                <option value="Montserrat (BOT)">Montserrat (BOT)</option>
-                <option value="Morocco">Morocco</option>
-                <option value="Mozambique">Mozambique</option>
-                <option value="Myanmar">Myanmar</option>
-                <option value="Namibia">Namibia</option>
-                <option value="Nauru">Nauru</option>
-                <option value="Nepal">Nepal</option>
-                <option value="Netherlands">Netherlands</option>
-                <option value="New Caledonia (France)">New Caledonia (France)</option>
-                <option value="New Zealand">New Zealand</option>
-                <option value="Nicaragua">Nicaragua</option>
-                <option value="Niger">Niger</option>
-                <option value="Nigeria">Nigeria</option>
-                <option value="Niue">Niue</option>
-                <option value="Norfolk Island (Australia)">Norfolk Island (Australia)</option>
-                <option value="North Korea">North Korea</option>
-                <option value="North Macedonia">North Macedonia</option>
-                <option value="Northern Cyprus">Northern Cyprus</option>
-                <option value="Northern Mariana Islands (US)">Northern Mariana Islands (US)</option>
-                <option value="Norway">Norway</option>
-                <option value="Oman">Oman</option>
-                <option value="Pakistan">Pakistan</option>
-                <option value="Palau">Palau</option>
-                <option value="Palestine">Palestine</option>
-                <option value="Panama">Panama</option>
-                <option value="Papua New Guinea">Papua New Guinea</option>
-                <option value="Paraguay">Paraguay</option>
-                <option value="Peru">Peru</option>
-                <option value="Philippines">Philippines</option>
-                <option value="Pitcairn Islands (BOT)">Pitcairn Islands (BOT)</option>
-                <option value="Poland">Poland</option>
-                <option value="Portugal">Portugal</option>
-                <option value="Puerto Rico (US)">Puerto Rico (US)</option>
-                <option value="Qatar">Qatar</option>
-                <option value="Réunion (France)">Réunion (France)</option>
-                <option value="Romania">Romania</option>
-                <option value="Russia">Russia</option>
-                <option value="Rwanda">Rwanda</option>
-                <option value="Saba (Netherlands)">Saba (Netherlands)</option>
-                <option value="Saint Barthélemy (France)">Saint Barthélemy (France)</option>
-                <option value="Saint Helena, Ascension and Tristan da Cunha (BOT)">Saint Helena, Ascension and Tristan da Cunha (BOT)</option>
-                <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
-                <option value="Saint Lucia">Saint Lucia</option>
-                <option value="Saint Martin (France)">Saint Martin (France)</option>
-                <option value="Saint Pierre and Miquelon (France)">Saint Pierre and Miquelon (France)</option>
-                <option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
-                <option value="Samoa">Samoa</option>
-                <option value="San Marino">San Marino</option>
-                <option value="São Tomé and Príncipe">São Tomé and Príncipe</option>
-                <option value="Saudi Arabia">Saudi Arabia</option>
-                <option value="Senegal">Senegal</option>
-                <option value="Serbia">Serbia</option>
-                <option value="Seychelles">Seychelles</option>
-                <option value="Sierra Leone">Sierra Leone</option>
-                <option value="Singapore">Singapore</option>
-                <option value="Sint Eustatius (Netherlands)">Sint Eustatius (Netherlands)</option>
-                <option value="Sint Maarten (Netherlands)">Sint Maarten (Netherlands)</option>
-                <option value="Slovakia">Slovakia</option>
-                <option value="Slovenia">Slovenia</option>
-                <option value="Solomon Islands">Solomon Islands</option>
-                <option value="Somalia">Somalia</option>
-                <option value="South Africa">South Africa</option>
-                <option value="South Korea">South Korea</option>
-                <option value="South Sudan">South Sudan</option>
-                <option value="Spain">Spain</option>
-                <option value="Sri Lanka">Sri Lanka</option>
-                <option value="Sudan">Sudan</option>
-                <option value="Suriname">Suriname</option>
-                <option value="Svalbard and Jan Mayen (Norway)">Svalbard and Jan Mayen (Norway)</option>
-                <option value="Sweden">Sweden</option>
-                <option value="Switzerland">Switzerland</option>
-                <option value="Syria">Syria</option>
-                <option value="Taiwan">Taiwan</option>
-                <option value="Tajikistan">Tajikistan</option>
-                <option value="Tanzania">Tanzania</option>
-                <option value="Thailand">Thailand</option>
-                <option value="Togo">Togo</option>
-                <option value="Tokelau (NZ)">Tokelau (NZ)</option>
-                <option value="Tonga">Tonga</option>
-                <option value="Transnistria">Transnistria</option>
-                <option value="Trinidad and Tobago">Trinidad and Tobago</option>
-                <option value="Tunisia">Tunisia</option>
-                <option value="Turkey">Turkey</option>
-                <option value="Turkmenistan">Turkmenistan</option>
-                <option value="Turks and Caicos Islands (BOT)">Turks and Caicos Islands (BOT)</option>
-                <option value="Tuvalu">Tuvalu</option>
-                <option value="U.S. Virgin Islands (US)">U.S. Virgin Islands (US)</option>
-                <option value="Uganda">Uganda</option>
-                <option value="Ukraine">Ukraine</option>
-                <option value="United Arab Emirates">United Arab Emirates</option>
-                <option value="United Kingdom">United Kingdom</option>
-                <option value="United States">United States</option>
-                <option value="Uruguay">Uruguay</option>
-                <option value="Uzbekistan">Uzbekistan</option>
-                <option value="Vanuatu">Vanuatu</option>
-                <option value="Vatican City">Vatican City</option>
-                <option value="Venezuela">Venezuela</option>
-                <option value="Vietnam">Vietnam</option>
-                <option value="Wallis and Futuna (France)">Wallis and Futuna (France)</option>
-                <option value="Western Sahara">Western Sahara</option>
-                <option value="Yemen">Yemen</option>
-                <option value="Zambia">Zambia</option>
-                <option value="Zimbabwe">Zimbabwe</option>
-            </select>
+            <div>
+                <label className='text-gray-400'>Country</label>
+                <select
+                    className={errorFields.pais ? "input-error" : "border border-gray-200 bg-zinc-100/40"}
+                    value={pais}
+                    
+                    onChange={handleCountryChange}>
+                    <option value="">Select a country</option>
+                    {Object.keys(countryToContinent).map(country => (
+                        <option key={country} value={country}>{country}</option>
+                    ))}
+                </select>
+            </div>
+            <div>
+                <label className='text-gray-400' >Continent </label>
+                <input type="text" value={continente} readOnly />
+            </div>
         </div>
     )
 }

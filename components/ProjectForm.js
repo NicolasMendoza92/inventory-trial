@@ -24,7 +24,9 @@ export default function ProjectForm({
     corsia: existingCorsia,
     sdg: existingSdg,
     pais: existingPais,
+    continente: existingContinente,
     disponible: existingDisponible,
+    stock: existingStock,
     precioVenta: existingPrecioVenta,
     precioCorp: existingPrecioCorp,
     floorPrice: existingFloorPrice,
@@ -38,7 +40,9 @@ export default function ProjectForm({
     notasExtra: existingNotasExtra,
     ccb: existingCcb,
     ccp: existingCcp,
+    projectType: existingProjectType,
     colombianTax: existingColombianTax,
+    regulatedMarket: existingRegulatedMarket,
     sdgSelected: existingSdgSelected,
     sdgImages: existingSdgImages,
     files: existingFiles,
@@ -55,7 +59,9 @@ export default function ProjectForm({
     const [corsia, setCorsia] = useState(existingCorsia || '');
     const [sdg, setSdg] = useState(existingSdg || '');
     const [pais, setPais] = useState(existingPais || '');
+    const [continente, setContinente] = useState(existingContinente || '');
     const [disponible, setDisponible] = useState(existingDisponible || '');
+    const [stock, setStock] = useState(existingStock || '');
     const [precioVenta, setPrecioVenta] = useState(existingPrecioVenta || '');
     const [precioCorp, setPrecioCorp] = useState(existingPrecioCorp || '');
     const [floorPrice, setFloorPrice] = useState(existingFloorPrice || '');
@@ -65,7 +71,9 @@ export default function ProjectForm({
     const [misha, setMisha] = useState(existingMisha || '');
     const [ccb, setCcb] = useState(existingCcb || '');
     const [ccp, setCcp] = useState(existingCcp || '');
+    const [projectType, setProjectType] = useState(existingProjectType || '');
     const [colombianTax, setColombianTax] = useState(existingColombianTax || '');
+    const [regulatedMarket, setRegulatedMarket] = useState(existingRegulatedMarket || '');
     const [sede, setSede] = useState(existingSede || '');
     const [firstCPDate, setFirstCPDate] = useState(existingFirstCPDate || '');
     const [notas, setNotas] = useState(existingNotas || '');
@@ -91,17 +99,66 @@ export default function ProjectForm({
 
     // handle errors 
     const [error, setError] = useState("");
+    const [errorFields, setErrorFields] = useState({});
     const router = useRouter();
 
     async function saveProject(e) {
         try {
             e.preventDefault();
-            const data = { projectID, standar, vintage, volumen, name, projectLink, tech, corsia, sdg, sede, sdgSelected, sdgImages, pais, disponible, firstCPDate, precioVenta, precioCorp, floorPrice, contrato, mktDate, proveedor, ccb, ccp, misha, colombianTax, notas, files, notasExtra }
+            const data = { projectID, standar, vintage, volumen, name, projectLink, tech, corsia, sdg, sede, sdgSelected, sdgImages, pais, continente, disponible, stock, firstCPDate, precioVenta, precioCorp, floorPrice, contrato, mktDate, proveedor, ccb, ccp, projectType, misha, colombianTax, regulatedMarket, notas, files, notasExtra }
 
-            if (!projectID || !standar || !vintage || !volumen || !tech || !pais || !name) {
+            // if (!projectID || !standar || !vintage || !volumen || !tech || !pais || !name || !stock) {
+            //     setError('Important data are missing');
+            //     return;
+            // }
+
+            let hasError = false;
+            let newErrorFields = {};
+
+            // Validación
+            if (!projectID) {
+                hasError = true;
+                newErrorFields.projectID = true;
+            }
+            if (!standar) {
+                hasError = true;
+                newErrorFields.standar = true;
+            }
+            if (!vintage) {
+                hasError = true;
+                newErrorFields.vintage = true;
+            }
+            if (!volumen) {
+                hasError = true;
+                newErrorFields.volumen = true;
+            }
+            if (!tech) {
+                hasError = true;
+                newErrorFields.tech = true;
+            }
+            if (!pais) {
+                hasError = true;
+                newErrorFields.pais = true;
+            }
+            if (!name) {
+                hasError = true;
+                newErrorFields.name = true;
+            }
+            if (!stock) {
+                hasError = true;
+                newErrorFields.stock = true;
+            }
+            if (!contrato) {
+                hasError = true;
+                newErrorFields.stock = true;
+            }
+
+            if (hasError) {
                 setError('Important data are missing');
+                setErrorFields(newErrorFields);
                 return;
             }
+
             if (_id) {
                 //update
                 await axios.put('/api/projects', { ...data, _id });
@@ -109,6 +166,10 @@ export default function ProjectForm({
                 //create
                 const res = await axios.post('/api/projects', data);
             }
+
+            // Limpiar errores si la validación es exitosa
+            setError('');
+            setErrorFields({});
 
             router.push('/inventary');
         } catch (error) {
@@ -243,7 +304,7 @@ export default function ProjectForm({
                 </div>
                 <label className='text-gray-400'>Contract Type</label>
                 <select
-                    className=" border border-gray-200 bg-zinc-100/40"
+                    className={errorFields.contrato ? 'input-error' : "border border-gray-200 bg-zinc-100/40"}
                     value={contrato}
                     onChange={e => hanldeContrato(e)}>
                     <option value="">-no selected-</option>
@@ -255,7 +316,7 @@ export default function ProjectForm({
                         <label className='text-gray-400'>Expiration date</label>
                         <input
                             type='date'
-                            className="flex border border-gray-200 bg-zinc-100/40 w-32"
+                            className="flex border border-gray-200 bg-zinc-100/40 w-48"
                             value={mktDate ? new Date(mktDate).toISOString().slice(0, 10) : mktDate}
                             min={disablePastDate()}
                             onChange={e => setMktDate(e.target.value)} />
@@ -272,12 +333,13 @@ export default function ProjectForm({
                             type='text'
                             placeholder='ej: 6877'
                             value={projectID}
+                            className={errorFields.projectID ? 'input-error' : ''}
                             onChange={e => setProjectId(e.target.value)} />
                     </div>
                     <div>
                         <label className='text-gray-400'>Standard</label>
                         <select
-                            className=" border border-gray-200 bg-zinc-100/40"
+                            className={ errorFields.standar ? "input-error" :" border border-gray-200 bg-zinc-100/40"}
                             value={standar}
                             onChange={e => setStandar(e.target.value)}>
                             <option value="">-no seleccionado-</option>
@@ -315,11 +377,24 @@ export default function ProjectForm({
                         </select>
                     </div>
                     <div>
+                        <label className='text-gray-400'>TYPE</label>
+                        <select
+                            className=" border border-gray-200 bg-zinc-100/40"
+                            value={projectType}
+                            onChange={e => setProjectType(e.target.value)}>
+                            <option value="">-no seleccionado-</option>
+                            <option value="NBS">NBS</option>
+                            <option value="TBS">TBS</option>
+                        </select>
+                    </div>
+                    <div>
                         <label className='text-gray-400'>Vintage</label>
                         <input
                             type='text'
                             placeholder='ej: 2022'
                             value={vintage}
+                            
+                            className={errorFields.vintage ? 'input-error' : ''}
                             onChange={e => setVintage(e.target.value)} />
                     </div>
                 </div>
@@ -330,6 +405,7 @@ export default function ProjectForm({
                             type='number'
                             placeholder='ej: 4512'
                             value={volumen}
+                            className={errorFields.volumen ? 'input-error' : ''}
                             onChange={e => setVolumen(e.target.value)} />
                     </div>
                     <div className='w-auto'>
@@ -361,6 +437,7 @@ export default function ProjectForm({
                 <label className='text-gray-400'>Project's Name</label>
                 <input
                     type='text'
+                    className={errorFields.name ? 'input-error' : ''}
                     placeholder='ej: piedra larga II'
                     value={name}
                     onChange={e => setName(e.target.value)} />
@@ -373,7 +450,7 @@ export default function ProjectForm({
 
                 <label className='text-gray-400'>Tech</label>
                 <select
-                    className=" border border-gray-200 bg-zinc-100/40"
+                    className={errorFields.tech ? "input-error" : "border border-gray-200 bg-zinc-100/40"}
                     value={tech}
                     onChange={e => setTech(e.target.value)}>
                     <option value="">-no selected-</option>
@@ -419,7 +496,7 @@ export default function ProjectForm({
                     <option value="Wind">Wind</option>
                 </select>
                 {/* Pongo los paises en un componente por que son muchos */}
-                <CountryPFSelect pais={pais} setPais={setPais} />
+                <CountryPFSelect pais={pais} setPais={setPais} continente={continente} setContinente={setContinente} errorFields={errorFields} />
                 <div className='flex flex-wrap gap-2'>
                     <div className='w-32'>
                         <label className='text-gray-400'>CORSIA</label>
@@ -441,6 +518,18 @@ export default function ProjectForm({
                             <option value="">-no selected-</option>
                             <option value="NO">No</option>
                             <option value="YES">Yes</option>
+                        </select>
+                    </div>
+                    <div className='w-32'>
+                        <label className='text-gray-400'>Regulated MKT</label>
+                        <select
+                            className=" border border-gray-200 bg-zinc-100/40"
+                            value={regulatedMarket}
+                            onChange={e => setRegulatedMarket(e.target.value)}>
+                            <option value="">-no selected-</option>
+                            <option value="Colombia">Colombia</option>
+                            <option value="Chile">Chile</option>
+                            <option value="Queretaro">Queretaro</option>
                         </select>
                     </div>
                     <div className='w-32'>
@@ -507,13 +596,28 @@ export default function ProjectForm({
                 {sdg === "NO" || sdg === "N/A" && (
                     <></>
                 )}
+                <div className='grid grid-cols-1 md:grid-cols-3 md:gap-2 items-center'>
+                    <div className='col-span-2'>
+                        <label className='text-gray-400'>Avaiability</label>
+                        <input
+                            type='text'
+                            placeholder='ex: Spot - november 2024'
+                            value={disponible}
+                            onChange={e => setDisponible(e.target.value)} />
 
-                <label className='text-gray-400'>Avaiability</label>
-                <input
-                    type='text'
-                    placeholder='ex: Spot - november 2024'
-                    value={disponible}
-                    onChange={e => setDisponible(e.target.value)} />
+                    </div>
+                    <div className='col-span-1'>
+                        <label className='text-gray-400'>Stock</label>
+                        <select
+                            className={errorFields.stock ? "input-error" : "border border-gray-200 bg-zinc-100/40"}
+                            value={stock}
+                            onChange={e => setStock(e.target.value)}>
+                            <option value="">-no selected-</option>
+                            <option value="Now">Now</option>
+                            <option value="Future">Future</option>
+                        </select>
+                    </div>
+                </div>
                 <label className='text-gray-400'>Notes</label>
                 <textarea
                     placeholder='ex: Proyecto de TD '

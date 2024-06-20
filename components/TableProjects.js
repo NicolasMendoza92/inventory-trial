@@ -144,6 +144,27 @@ export const TableProjects = () => {
             },
         },
         {
+            name: 'stock',
+            options: {
+                filter: true,
+                display: 'false',
+            },
+        },
+        {
+            name: 'regulatedMarket',
+            options: {
+                filter: true,
+                display: 'false',
+            },
+        },
+        {
+            name: 'projectType',
+            options: {
+                filter: true,
+                display: 'false',
+            },
+        },
+        {
             name: 'colombianTax',
             options: {
                 filter: true,

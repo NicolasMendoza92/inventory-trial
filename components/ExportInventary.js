@@ -70,6 +70,7 @@ const ExportInventary = () => {
               <td>MISHA</td>
               <td>NOTES</td>
               <td>SITE</td>
+              <td>AVAILABILITY</td>
             </tr>
           </thead>
           <tbody>
@@ -99,6 +100,7 @@ const ExportInventary = () => {
                 <td>{pr.misha}</td>
                 <td>{pr.notasExtra}</td>
                 <td>{pr.sede}</td>
+                <td>{pr.stock}</td>
               </tr>
             ))}
           </tbody>
