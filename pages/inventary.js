@@ -39,7 +39,7 @@ export default function Projects() {
 
   // para el filtro
   const { projectSearched, setProjectSearched } = useContext(ProjectSearchContext);
-  // const [projectSearched, setProjectSearched] = useState('');
+
 
   useEffect(() => {
     let searchedProjects = [];
@@ -53,6 +53,10 @@ export default function Projects() {
           proj.tech.toLowerCase().includes(projectSearched.toLowerCase()) ||
           proj.disponible.toLowerCase().includes(projectSearched.toLowerCase()) ||
           proj.contrato.toLowerCase().includes(projectSearched.toLowerCase()) ||
+          proj.stock.toLowerCase().includes(projectSearched.toLowerCase()) ||
+          proj.projectType.toLowerCase().includes(projectSearched.toLowerCase()) ||
+          proj.proveedor.toLowerCase().includes(projectSearched.toLowerCase()) ||
+          proj.ccp.toLowerCase().includes(projectSearched.toLowerCase()) ||
           proj.pais.toLowerCase().includes(projectSearched.toLowerCase());
       });
       setProjectFinded(searchedProjects);
@@ -162,6 +166,8 @@ export default function Projects() {
                 <td>{project.precioCorp}</td>
                 <td>{project.purchasePrice}</td>
                 <td>{project.ccp}</td>
+                <td className="hidden">{project.stock}</td>
+                <td className="hidden">{project.projectType}</td>
                 {/* <td>
                       {project.sdgSelected.map(ods => <React.Fragment key={ods}>{ods}-</React.Fragment>)}
                     </td> */}

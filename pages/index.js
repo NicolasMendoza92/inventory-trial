@@ -6,6 +6,8 @@ import { mongooseConnect } from "@/lib/mongoose";
 import Operation from "@/models/Operation";
 import Project from "@/models/Projects";
 import HomeStandard from "@/components/HomeStandard";
+import HomeRegulated from "@/components/HomeRegulated";
+import HomeButtons from "@/components/HomeButtons";
 
 
 // TRAIGO LOS PROYECTOS CON GET SERVER SIDE PROPS PARA PODER USARLOS 
@@ -26,7 +28,9 @@ export default function Home({operations, projects}) {
   return (
     <Layout>
       <UserInfo/>
-      <HomeStandard projects={projects} operations={operations}/>
+       <HomeStandard projects={projects} operations={operations}/>
+      <HomeButtons projects={projects}/>
+      <HomeRegulated projects={projects} />
       <HomeStats operations={operations}/>
     </Layout>
   )

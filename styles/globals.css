@@ -48,11 +48,14 @@ table.basic a{
 .board-card{
   @apply bg-white shadow-md p-4 text-green-600 text-center;
 }
+.board-card-2{
+  @apply bg-green-100 rounded-md shadow-md p-4 text-green-600 text-center cursor-pointer hover:bg-green-200;
+}
 .board-card-alert{
   @apply bg-red-100 shadow-md p-1 text-black text-center;
 }
 .board-card-link{
-  @apply  shadow-md p-4 text-green-600 text-center cursor-pointer hover:bg-green-200;
+  @apply  shadow-md p-4 text-center cursor-pointer hover:bg-green-200;
 }
 .board-title{
   @apply uppercase text-gray-500 font-bold text-xs text-center;
@@ -61,10 +64,10 @@ table.basic a{
   @apply uppercase text-gray-500 font-bold text-base text-center;
 }
 .board-title-std{
-  @apply uppercase text-gray-500 font-bold text-xl text-center;
+  @apply uppercase bg-green-100 text-gray-500 font-bold text-xl rounded-md text-center cursor-pointer hover:bg-green-200;
 }
 .board-number{
-  @apply text-4xl text-center  font-bold my-1;
+  @apply text-3xl text-center text-green-600 font-bold my-1;
 }
 .board-number-alert{
   @apply text-4xl text-center text-red-600  font-bold my-1;
@@ -104,6 +107,7 @@ table.basic a{
   color: red;
   margin-top: 10px;
 }
+
 
 /* .rbc-event{
   background-color:rgba(180, 44, 44, 0.636) !important ;
