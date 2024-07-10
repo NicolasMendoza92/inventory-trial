@@ -459,7 +459,7 @@ export default function ProjectForm({
                     value={tech}
                     onChange={e => setTech(e.target.value)}>
                     <option value="">-no selected-</option>
-                    <option value="AFOLU">AFOLU</option>
+                    <option value="ALM">Agricultural land management</option>
                     <option value="Any transportation project">Any transportation project</option>
                     <option value="ARR">ARR</option>
                     <option value="Biomass to Electricity">Biomass to Electricity</option>
