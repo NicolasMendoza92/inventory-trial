@@ -8,7 +8,7 @@ export default function SdgSelected({ sdgImages }) {
         <div className="flex flex-wrap gap-2">
             {sdgImages.map(link => (
                 <React.Fragment key={link}>
-                <Image className='h-20 rounded-md' src={link} alt='logo sdg'/>
+                <Image className='h-20 rounded-md' src={link} alt='logo sdg' width={72} height={24}/>
                 </React.Fragment>      
             ))}
         </div>

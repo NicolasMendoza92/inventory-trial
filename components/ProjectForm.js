@@ -9,6 +9,7 @@ import { sdgList } from './SdgOptions';
 import SdgSelected from './SdgSelected';
 import CountryPFSelect from './CountryPFSelect';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 
 
 
@@ -576,14 +577,14 @@ export default function ProjectForm({
                     </div>
                 </div>
 
-                <label className='text-gray-400'>Project's Name</label>
+                <label className='text-gray-400'>Project&apos;s Name</label>
                 <input
                     type='text'
                     className={errorFields.name ? 'input-error' : ''}
                     placeholder='ej: piedra larga II'
                     value={name}
                     onChange={e => setName(e.target.value)} />
-                <label className='text-gray-400'>Project's Link</label>
+                <label className='text-gray-400'>Project&apos;s Link</label>
                 <input
                     type='text'
                     placeholder='ej: https://cdm.unfccc.int/Projects/DB/AENOR1343375362.2/view'
@@ -690,7 +691,7 @@ export default function ProjectForm({
                 <SdgSelected sdgImages={sdgImages} />
                 {sdg === "YES" && (
                     <>
-                        <span className='nota-imp'>If you have already selected the SDGs and you want to change or add any of them, you must tap the "Clean" option and add them again.</span>
+                        <span className='nota-imp'>If you have already selected the SDGs and you want to change or add any of them, you must tap the &apos;Clean&apos; option and add them again.</span>
                         <button onClick={showAllSdg} className="flex flex-wrap align-center w-fit bg-zinc-100/40 text-black px-3 py-1 ms-1 mt-1 rounded  ">
                             Select which ones  {showModal ? <ArrowUp /> : <ArrowDown />}
                         </button>
@@ -709,7 +710,7 @@ export default function ProjectForm({
                                                         checked={checkedState[index]}
                                                         onChange={(e) => handleChangeSdg(e, index)} />
                                                     <label className='ms-2 text-sm font-medium text-gray-800'>
-                                                        <img src={img} alt="" className="flex p-2 h-28 rounded-lg" />
+                                                        <Image src={img} alt="" className="flex p-2 h-28 rounded-lg" width={72} height={24} />
                                                     </label>
                                                 </div>
                                             </>

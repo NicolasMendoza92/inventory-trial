@@ -36,7 +36,7 @@ export default function Nav({ showNav, setShowNav }) {
                     </button>
                 </div>
                 <Link href={"/"} className='flex gap-1' >
-                    <Image className='h-9' src='icons/allcot_icon.png' alt="logo allcot"></Image>
+                    <Image className='h-9' src='/icons/allcot_icon.png' alt="logo allcot"  width={32} height={24}></Image>
                 </Link>
             </div>
             <Link  href={"/"} className={pathname === ('/') ? activeLink : inactiveLink}>
