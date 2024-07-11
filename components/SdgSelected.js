@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import React from 'react'
 
 export default function SdgSelected({ sdgImages }) {
@@ -7,7 +8,7 @@ export default function SdgSelected({ sdgImages }) {
         <div className="flex flex-wrap gap-2">
             {sdgImages.map(link => (
                 <React.Fragment key={link}>
-                <img className='h-20 rounded-md' src={link}/>
+                <Image className='h-20 rounded-md' src={link} alt='logo sdg'/>
                 </React.Fragment>      
             ))}
         </div>

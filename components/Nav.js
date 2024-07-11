@@ -1,4 +1,5 @@
 
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -35,7 +36,7 @@ export default function Nav({ showNav, setShowNav }) {
                     </button>
                 </div>
                 <Link href={"/"} className='flex gap-1' >
-                    <img className='h-9' src='icons/allcot_icon.png'></img>
+                    <Image className='h-9' src='icons/allcot_icon.png' alt="logo allcot"></Image>
                 </Link>
             </div>
             <Link  href={"/"} className={pathname === ('/') ? activeLink : inactiveLink}>

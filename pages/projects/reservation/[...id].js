@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-export default function newReserve() {
+export default function NewReserve() {
 
     const { data: session } = useSession();
     const enable = isEnableUser(session);

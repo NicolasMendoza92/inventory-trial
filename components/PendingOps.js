@@ -7,6 +7,7 @@ export default function PendingOps({ operations }) {
 
     useEffect(() => {
         getPendingOps();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [operations]);
 
     const getPendingOps = async () => {
