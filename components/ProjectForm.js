@@ -36,6 +36,13 @@ export default function ProjectForm({
     proveedor: existingProveedor,
     sede: existingSede,
     misha: existingMisha,
+    mailingList: existingMailingList,
+    equipo: existingEquipo,
+    sectorTD: existingSectorTD,
+    status: existingStatus,
+    stage: existingStage,
+    rpStartDate: existingRpStartDate,
+    rpEndDate: existingRpEndDate,
     firstCPDate: existingFirstCPDate,
     notas: existingNotas,
     notasExtra: existingNotasExtra,
@@ -69,13 +76,21 @@ export default function ProjectForm({
     const [contrato, setContrato] = useState(existingContrato || '');
     const [mktDate, setMktDate] = useState(existingMktDate || '');
     const [proveedor, setProveedor] = useState(existingProveedor || '');
+    const [mailingList, setMailingList] = useState(existingMailingList || '');
     const [misha, setMisha] = useState(existingMisha || '');
+    const [equipo, setEquipo] = useState(existingEquipo || '');
+    // CAMPOS DE TD
+    const [sectorTD, setSectorTD] = useState(existingSectorTD || '');
+    const [status, setStatus] = useState(existingStatus || '');
+    const [stage, setStage] = useState(existingStage || '');
+    const [rpStartDate, setRpStartDate] = useState(existingRpStartDate || '');
+    const [rpEndDate, setRpEndDate] = useState(existingRpEndDate || '');
+    const [firstCPDate, setFirstCPDate] = useState(existingFirstCPDate || '');
     const [ccb, setCcb] = useState(existingCcb || '');
     const [ccp, setCcp] = useState(existingCcp || '');
     const [projectType, setProjectType] = useState(existingProjectType || '');
     const [regulatedMarket, setRegulatedMarket] = useState(existingRegulatedMarket || '');
     const [sede, setSede] = useState(existingSede || '');
-    const [firstCPDate, setFirstCPDate] = useState(existingFirstCPDate || '');
     const [notas, setNotas] = useState(existingNotas || '');
     const [notasExtra, setNotasExtra] = useState(existingNotasExtra || '');
     const [files, setFiles] = useState(existingFiles || []);
@@ -105,7 +120,7 @@ export default function ProjectForm({
     async function saveProject(e) {
         try {
             e.preventDefault();
-            const data = { projectID, standar, vintage, volumen, name, projectLink, tech, corsia, sdg, sede, sdgSelected, sdgImages, pais, continente, disponible, stock, firstCPDate, precioVenta, precioCorp, floorPrice, purchasePrice, contrato, mktDate, proveedor, ccb, ccp, projectType, misha, regulatedMarket, notas, files, notasExtra }
+            const data = { projectID, standar, vintage, volumen, name, projectLink, tech, corsia, sdg, sede, sdgSelected, sdgImages, pais, continente, disponible, stock, firstCPDate, precioVenta, precioCorp, floorPrice, purchasePrice, contrato, mktDate, proveedor, equipo, status, stage, rpStartDate, rpEndDate, mailingList, sectorTD, ccb, ccp, projectType, misha, regulatedMarket, notas, files, notasExtra }
 
             let hasError = false;
             let newErrorFields = {};
@@ -114,6 +129,10 @@ export default function ProjectForm({
             if (!projectID) {
                 hasError = true;
                 newErrorFields.projectID = true;
+            }
+            if (!equipo) {
+                hasError = true;
+                newErrorFields.equipo = true;
             }
             if (!standar) {
                 hasError = true;
@@ -258,6 +277,24 @@ export default function ProjectForm({
         }
     }
 
+    const hanldeEquipo = (e) => {
+        const equipo = e.target.value;
+        if (equipo === "TD") {
+            setEquipo(equipo)
+        } else {
+            setEquipo(equipo)
+        }
+    }
+
+    const hanldeStatus = (e) => {
+        const status = e.target.value;
+        if (status === "Ongoing") {
+            setStatus(status)
+        } else {
+            setStatus(status)
+        }
+    }
+
     // Formula para editar el datepicker
     const disablePastDate = () => {
         const today = new Date();
@@ -280,14 +317,28 @@ export default function ProjectForm({
                             placeholder='Ej: ALLCOT - Misha'
                             value={proveedor}
                             onChange={e => setProveedor(e.target.value)} />
-                        <label className='text-gray-400'>Misha</label>
-                        <select
-                            className="flex flex-wrap border border-gray-200 bg-zinc-100/40 w-2/5 "
-                            value={misha}
-                            onChange={e => setMisha(e.target.value)}>
-                            <option value="">-select-</option>
-                            <option value="YES">YES</option>
-                        </select>
+                        <div className="flex flex-wrap  w-2/5 ">
+                            <label className='text-gray-400'>Misha</label>
+                            <select
+
+                                value={misha}
+                                onChange={e => setMisha(e.target.value)}>
+                                <option value="">-select-</option>
+                                <option value="YES">YES</option>
+                            </select>
+                        </div>
+                        <div className="flex flex-wrap w-2/5 ">
+                            <label className='text-gray-400'>Mailing</label>
+                            <select
+
+                                value={mailingList}
+                                onChange={e => setMailingList(e.target.value)}>
+                                <option value="">-select-</option>
+                                <option value="SEND">SEND</option>
+                                <option value="NOT SEND">NOT SEND</option>
+                            </select>
+                        </div>
+
                     </div>
                     <div className=' w-full'>
                         <label className='text-gray-400'>Internal Notes</label>
@@ -297,6 +348,15 @@ export default function ProjectForm({
                             onChange={e => setNotas(e.target.value)} />
                     </div>
                 </div>
+                <label className='text-gray-400'>Team</label>
+                <select
+                    className={errorFields.equipo ? 'input-error' : "border border-gray-200 bg-zinc-100/40"}
+                    value={equipo}
+                    onChange={e => hanldeEquipo(e)}>
+                    <option value="">-no selected-</option>
+                    <option value="Commercial">Commercial</option>
+                    <option value="TD">TD</option>
+                </select>
                 <label className='text-gray-400'>Contract Type</label>
                 <select
                     className={errorFields.contrato ? 'input-error' : "border border-gray-200 bg-zinc-100/40"}
@@ -321,6 +381,83 @@ export default function ProjectForm({
                 {contrato === "Contrato" && (
                     <></>
                 )}
+                {/*  si selecciono equipo TD */}
+                {equipo === 'TD' && (
+                    <>
+                    <label className='text-sm text-green-600 font-bold'>TD Filds</label>
+                        <div className='flex flex-wrap gap-2 border border-green-600 p-2'>
+                            <div>
+                                <label className='text-gray-400'>Sector</label>
+                                <select
+                                    className="border border-gray-200 bg-zinc-100/40"
+                                    value={sectorTD}
+                                    onChange={e => setSectorTD(e.target.value)}>
+                                    <option value="">-no seleccionado-</option>
+                                    <option value="NBS AFRICA">NBS AFRICA</option>
+                                    <option value="NBS LAC">NBS LAC</option>
+                                    <option value="NBS SPAIN">NBS SPAIN</option>
+                                    <option value="PLASTIC">PLASTIC</option>
+                                    <option value="TBS">TBS</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label className='text-gray-400'>Status</label>
+                                <select
+                                    className=" border border-gray-200 bg-zinc-100/40"
+                                    value={status}
+                                    onChange={e => hanldeStatus(e)}>
+                                    <option value="">-no seleccionado-</option>
+                                    <option value="Ongoing">Ongoing</option>
+                                    <option value="Completed">Completed</option>
+                                    <option value="Cancelled">Cancelled</option>
+                                    <option value="Forecasted">Forecasted</option>
+                                    <option value="On hold">On hold</option>
+                                </select>
+                            </div>
+                            {status === 'Ongoing' && (
+                                <div>
+                                    <label className='text-gray-400'>Stage</label>
+                                    <select
+                                        className=" border border-gray-200 bg-zinc-100/40"
+                                        value={stage}
+                                        onChange={e => setStage(e.target.value)}>
+                                        <option value="">-no seleccionado-</option>
+                                        <option value="Stage 1 - Elaboration of documentation">Stage 1 - Elaboration of documentation</option>
+                                        <option value="Stage 2 - Validation/Verification process">Stage 2 - Validation/Verification process</option>
+                                        <option value="Stage 3 - Standard Assessment">Stage 3 - Standard Assessment</option>
+                                        <option value="Under implementation">Under implementation</option>
+                                        <option value="Feasibility Study">Feasibility Study</option>
+                                    </select>
+                                </div>
+
+                            )}
+                            {status != "Ongoing" && (
+                                <></>
+                            )}
+                            <div>
+                                <label className='text-gray-400'>Reporting Start Period</label>
+                                <input
+                                    type='date'
+                                    className="flex border border-gray-200 bg-zinc-100/40 w-48"
+                                    value={rpStartDate ? new Date(rpStartDate).toISOString().slice(0, 10) : rpStartDate}
+                                    onChange={e => setRpStartDate(e.target.value)} />
+                            </div>
+                            <div>
+                                <label className='text-gray-400'>Reporting End Period</label>
+                                <input
+                                    type='date'
+                                    className="flex border border-gray-200 bg-zinc-100/40 w-48"
+                                    value={rpEndDate ? new Date(rpEndDate).toISOString().slice(0, 10) : rpEndDate}
+                                    onChange={e => setRpEndDate(e.target.value)} />
+                            </div>
+                        </div>
+                    </>
+
+                )}
+                {equipo === "Commercial" && (
+                    <></>
+                )}
+
                 <div className='flex flex-wrap gap-2'>
                     <div>
                         <label className='text-gray-400'>Project ID</label>
@@ -334,7 +471,7 @@ export default function ProjectForm({
                     <div>
                         <label className='text-gray-400'>Standard</label>
                         <select
-                            className={ errorFields.standar ? "input-error" :" border border-gray-200 bg-zinc-100/40"}
+                            className={errorFields.standar ? "input-error" : " border border-gray-200 bg-zinc-100/40"}
                             value={standar}
                             onChange={e => setStandar(e.target.value)}>
                             <option value="">-no seleccionado-</option>
@@ -390,7 +527,7 @@ export default function ProjectForm({
                             type='text'
                             placeholder='ej: 2022'
                             value={vintage}
-                            
+
                             className={errorFields.vintage ? 'input-error' : ''}
                             onChange={e => setVintage(e.target.value)} />
                     </div>
@@ -595,7 +732,7 @@ export default function ProjectForm({
                         <label className='text-gray-400'>Avaiability</label>
                         <input
                             type='text'
-                            placeholder='ex: Spot - november 2024'
+                            placeholder='ex: Spot or november 2024'
                             value={disponible}
                             onChange={e => setDisponible(e.target.value)} />
 

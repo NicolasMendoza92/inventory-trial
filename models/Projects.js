@@ -54,6 +54,9 @@ const projectSchema = new Schema({
     misha:{
         type: String,
     },
+    mailingList:{
+        type: String,
+    },
     sdg:{
         type: String,
     },
@@ -65,9 +68,29 @@ const projectSchema = new Schema({
     contrato:{
         type: String,
     },
+    equipo:{
+        type: String,
+    },
+    // TD fields
+    sectorTD:{
+        type: String,
+    },
+    status:{
+        type: String,
+    },
+    stage:{
+        type: String,
+    },  
+    rpStartDate:{
+        type: String,
+    },
+    rpEndDate:{
+        type: String,
+    },
     mktDate:{
         type: Date,
     },
+    // Cambia a financial partner cuando se selecciona TD
     proveedor:{
         type: String,
     },
@@ -86,6 +109,7 @@ const projectSchema = new Schema({
     projectLink:{
         type: String,
     },
+    // compartido con td
     firstCPDate:{
         type: String,
     },
