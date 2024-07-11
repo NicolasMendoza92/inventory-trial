@@ -366,6 +366,7 @@ export default function ProjectForm({
                     <option value="">-no selected-</option>
                     <option value="MKT">MKT Agreement</option>
                     <option value="Contrato">Contract</option>
+                    <option value="Indicative">Indicative</option>
                 </select>
                 {contrato === 'MKT' && (
                     <div className='flex gap-2'>
@@ -710,7 +711,7 @@ export default function ProjectForm({
                                                         checked={checkedState[index]}
                                                         onChange={(e) => handleChangeSdg(e, index)} />
                                                     <label className='ms-2 text-sm font-medium text-gray-800'>
-                                                        <Image src={img} alt="" className="flex p-2 h-28 rounded-lg" width={72} height={24} />
+                                                        <Image src={img} alt="" className="flex p-2 h-28 rounded-lg" width={92} height={24} />
                                                     </label>
                                                 </div>
                                             </>

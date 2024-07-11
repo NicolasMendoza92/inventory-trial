@@ -50,6 +50,8 @@ const ExportInventary = () => {
         <table id="my-projects-table">
           <thead>
             <tr>
+              <td>TEAM</td>
+              <td>MAILING</td>
               <td>SUPPLIER</td>
               <td>TYPE</td>
               <td>INETRNAL NOTES</td>
@@ -79,6 +81,8 @@ const ExportInventary = () => {
           <tbody>
             {allprojects.map(pr => (
               <tr key={pr._id}>
+                <td>{pr.mailingList}</td>
+                <td>{pr.equipo}</td>
                 <td>{pr.proveedor}</td>
                 <td>{pr.contrato}</td>
                 <td>{pr.notas}</td>

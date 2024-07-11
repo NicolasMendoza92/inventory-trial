@@ -111,6 +111,7 @@ export default function Projects() {
         <table className="basic my-3">
           <thead>
             <tr>
+            <td>Source</td>
               <td>Type</td>
               <td>Supplier</td>
               <td>Floor Price(USD)</td>
@@ -133,7 +134,7 @@ export default function Projects() {
           <tbody>
             {isLoading && (
               <tr>
-                <td colSpan={16}>
+                <td colSpan={17}>
                   <div className="w-full flex justify-center py-4">
                     <Spinner />
                   </div>
@@ -142,6 +143,7 @@ export default function Projects() {
             )}
             {projectFinded.map(project => (
               <tr key={project._id}>
+                <td className="text-xs">{project.equipo}</td>
                 <td>{project.contrato}
                   {project.contrato === "MKT" ? (
                     <> - ({new Date(project.mktDate).toLocaleString("GB-English", { dateStyle: "short" })}) </>
@@ -149,7 +151,7 @@ export default function Projects() {
                 </td>
                 <td>{project.proveedor}</td>
                 <td>{project.floorPrice}</td>
-                <td>{(project.name).slice(0, 25)}</td>
+                <td className="text-xs">{(project.name).slice(0, 25)}</td>
                 <td>{project.standar}{project.ccb === 'YES' ? (
                   <span className="text-xs"> CCB </span>
                 ) : null}

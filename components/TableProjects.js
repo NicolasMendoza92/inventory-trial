@@ -67,6 +67,10 @@ export const TableProjects = () => {
             },
         },
         {
+            name: 'equipo',
+            label: 'Team',
+        },
+        {
             name: 'contrato',
             label: 'Type',
         },
