@@ -1,4 +1,5 @@
 import Nav from "@/components/Nav"
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -23,7 +24,7 @@ export default function Layout({ children }) {
         </button>
         <div className="flex grow justify-center align-center">
           <Link href={"/"} className='flex gap-1 mb-3' >
-            <img className='h-10' src='icons/allcot_icon.png'></img>
+            <Image className='h-10' src='icons/allcot_icon.png' alt="icono allcot" width={32} height={24}></Image>
           </Link>
         </div>
       </div>

@@ -25,9 +25,10 @@ export default function Reservations() {
 
     const pages = new Array(numberOfPages).fill(null).map((v, i) => i);
 
-    // esti actualiza la tabla - es la consulta get a las categorias. 
+    // esto actualiza la tabla - es la consulta get a las categorias. 
     useEffect(() => {
         fetchReservations();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     function fetchReservations() {

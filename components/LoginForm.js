@@ -1,6 +1,7 @@
 
 
 import { signIn } from "next-auth/react";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
@@ -69,7 +70,10 @@ export default function LoginForm() {
                             id="password"
                             placeholder="Password"
                         />
-                        <img src={'/icons/eye-slash.png'} 
+                        <Image src={'/icons/eye-slash.png'} 
+                        alt="eye icon"
+                        width={24}
+                        height={24}
                         id="pass-icon" 
                         className="flex ms-1 w-8 cursor-pointer " 
                         onClick={showPass} />

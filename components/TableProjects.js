@@ -54,6 +54,7 @@ export const TableProjects = () => {
         return () => {
             setFiltersMui([[], [], []]); // Restablecer a los filtros iniciales
         };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
 
