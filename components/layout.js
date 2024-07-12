@@ -23,9 +23,9 @@ export default function Layout({ children }) {
           </svg>
         </button>
         <div className="flex grow justify-center align-center">
-          <Link href={"/"} className='flex gap-1 mb-3' >
+          <div className='flex gap-1 mb-3' >
             <Image className='h-10' src='/icons/allcot_icon.png' alt="icono allcot" width={32} height={24}></Image>
-          </Link>
+          </div>
         </div>
       </div>
       <div>
