@@ -154,7 +154,7 @@ export default function TdProjects() {
                   ) : null}</td>
                 <td>{project.proveedor}</td>
                 <td>{project.tdService}</td>
-                <td>{project.typeOfcontract}</td>
+                <td>{project.typeOfContract}</td>
                 <td>{project.status}</td>
                 <td>{project.stage}</td>
                 <td>{project.corsia}</td>
