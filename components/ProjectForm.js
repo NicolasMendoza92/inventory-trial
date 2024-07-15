@@ -38,7 +38,12 @@ export default function ProjectForm({
     sede: existingSede,
     misha: existingMisha,
     mailingList: existingMailingList,
+    brokerList: existingBrokerList,
     equipo: existingEquipo,
+    tdService: existingTdService,
+    typeOfContract: existingTypeOfContract,
+    actualDataVolume: existingActualDataVolume,
+    netVolume: existingNetVolume,
     sectorTD: existingSectorTD,
     status: existingStatus,
     stage: existingStage,
@@ -53,6 +58,7 @@ export default function ProjectForm({
     regulatedMarket: existingRegulatedMarket,
     sdgSelected: existingSdgSelected,
     sdgImages: existingSdgImages,
+    tdInfo: existingTdInfo,
     files: existingFiles,
 }) {
 
@@ -78,9 +84,14 @@ export default function ProjectForm({
     const [mktDate, setMktDate] = useState(existingMktDate || '');
     const [proveedor, setProveedor] = useState(existingProveedor || '');
     const [mailingList, setMailingList] = useState(existingMailingList || '');
+    const [brokerList, setBrokerList] = useState(existingBrokerList || '');
     const [misha, setMisha] = useState(existingMisha || '');
     const [equipo, setEquipo] = useState(existingEquipo || '');
     // CAMPOS DE TD
+    const [tdService, setTdService] = useState(existingTdService || '');
+    const [typeOfContract, setTypeOfContract] = useState(existingTypeOfContract || '');
+    const [actualDataVolume, setActualDataVolume] = useState(existingActualDataVolume || '');
+    const [netVolume, setNetVolume] = useState(existingNetVolume || '');
     const [sectorTD, setSectorTD] = useState(existingSectorTD || '');
     const [status, setStatus] = useState(existingStatus || '');
     const [stage, setStage] = useState(existingStage || '');
@@ -95,6 +106,7 @@ export default function ProjectForm({
     const [notas, setNotas] = useState(existingNotas || '');
     const [notasExtra, setNotasExtra] = useState(existingNotasExtra || '');
     const [files, setFiles] = useState(existingFiles || []);
+    const [tdInfo, setTdInfo] = useState(existingTdInfo || "");
     // SDG states to handle 
     const [sdgSelected, setSdgSelected] = useState(existingSdgSelected || []);
     const [sdgImages, setSdgImages] = useState(existingSdgImages || []);
@@ -119,9 +131,26 @@ export default function ProjectForm({
     const router = useRouter();
 
     async function saveProject(e) {
+        e.preventDefault();
+
         try {
-            e.preventDefault();
-            const data = { projectID, standar, vintage, volumen, name, projectLink, tech, corsia, sdg, sede, sdgSelected, sdgImages, pais, continente, disponible, stock, firstCPDate, precioVenta, precioCorp, floorPrice, purchasePrice, contrato, mktDate, proveedor, equipo, status, stage, rpStartDate, rpEndDate, mailingList, sectorTD, ccb, ccp, projectType, misha, regulatedMarket, notas, files, notasExtra }
+            
+            const data = {
+                projectID,
+                cretorUser:session?.user?.email,
+                standar, vintage, volumen,
+                name, projectLink, tech, corsia,
+                sdg, sede, sdgSelected, sdgImages,
+                pais, continente, disponible, stock,
+                firstCPDate, precioVenta, precioCorp,
+                floorPrice, purchasePrice, contrato,
+                mktDate, proveedor, equipo, tdService,
+                typeOfContract, actualDataVolume, netVolume,
+                brokerList, status, stage, rpStartDate,
+                rpEndDate, mailingList, sectorTD, ccb, ccp,
+                projectType, misha, regulatedMarket,
+                notas, files, notasExtra, tdInfo
+            }
 
             let hasError = false;
             let newErrorFields = {};
@@ -186,7 +215,7 @@ export default function ProjectForm({
             setError('');
             setErrorFields({});
 
-            router.push('/inventary');
+            router.back();
         } catch (error) {
             console.log(error)
         }
@@ -296,6 +325,28 @@ export default function ProjectForm({
         }
     }
 
+    const hanldeTdService = (e) => {
+        const tdService = e.target.value;
+        if (tdService !== "") {
+            setTdInfo("Yes")
+            setTdService(tdService)
+        } else {
+            setTdService(tdService)
+            setTdInfo("")         
+        }
+    }
+
+    const hanldeSectorTd= (e) => {
+        const sectorTD = e.target.value;
+        if (sectorTD !== "") {
+            setTdInfo("Yes")
+            setSectorTD(sectorTD)
+        } else {
+            setSectorTD(sectorTD)
+            setTdInfo("")         
+        }
+    }
+
     // Formula para editar el datepicker
     const disablePastDate = () => {
         const today = new Date();
@@ -305,20 +356,28 @@ export default function ProjectForm({
         return yyyy + "-" + mm + "-" + dd;
     };
 
-
     return (
         <div >
             <form onSubmit={saveProject} className='flex grid gap-3 mb-3'>
-                <div className='grid grid-cols-1 md:grid-cols-2 md:gap-2 items-center'>
+                <label className='text-gray-400'>Team *</label>
+                <select
+                    className={errorFields.equipo ? 'input-error' : "border border-gray-200 bg-zinc-100/40"}
+                    value={equipo}
+                    onChange={e => hanldeEquipo(e)}>
+                    <option value="">-no selected-</option>
+                    <option value="Commercial">Commercial</option>
+                    <option value="TD">TD</option>
+                </select>
+                <div className='grid grid-cols-1 md:grid-cols-2 md:gap-2 items-start'>
                     <div className='flex flex-wrap w-full gap-2'>
-                        <label className='text-gray-400'>Supplier</label>
+                        <label className='text-gray-400'>{equipo === "TD" ? 'Financial Partner' : 'Supplier'}</label>
                         <input
                             type='text'
                             className='flex flex-wrap '
                             placeholder='Ej: ALLCOT - Misha'
                             value={proveedor}
                             onChange={e => setProveedor(e.target.value)} />
-                        <div className="flex flex-wrap  w-2/5 ">
+                        <div className="flex flex-wrap  w-1/5 ">
                             <label className='text-gray-400'>Misha</label>
                             <select
 
@@ -328,7 +387,7 @@ export default function ProjectForm({
                                 <option value="YES">YES</option>
                             </select>
                         </div>
-                        <div className="flex flex-wrap w-2/5 ">
+                        <div className="flex flex-wrap w-1/5 ">
                             <label className='text-gray-400'>Mailing</label>
                             <select
 
@@ -339,7 +398,16 @@ export default function ProjectForm({
                                 <option value="NOT SEND">NOT SEND</option>
                             </select>
                         </div>
+                        <div className="flex flex-wrap w-1/5 ">
+                            <label className='text-gray-400'>Broker</label>
+                            <select
 
+                                value={brokerList}
+                                onChange={e => setBrokerList(e.target.value)}>
+                                <option value="">-select-</option>
+                                <option value="NO BROKER">NO BROKER</option>
+                            </select>
+                        </div>
                     </div>
                     <div className=' w-full'>
                         <label className='text-gray-400'>Internal Notes</label>
@@ -349,15 +417,6 @@ export default function ProjectForm({
                             onChange={e => setNotas(e.target.value)} />
                     </div>
                 </div>
-                <label className='text-gray-400'>Team</label>
-                <select
-                    className={errorFields.equipo ? 'input-error' : "border border-gray-200 bg-zinc-100/40"}
-                    value={equipo}
-                    onChange={e => hanldeEquipo(e)}>
-                    <option value="">-no selected-</option>
-                    <option value="Commercial">Commercial</option>
-                    <option value="TD">TD</option>
-                </select>
                 <label className='text-gray-400'>Contract Type</label>
                 <select
                     className={errorFields.contrato ? 'input-error' : "border border-gray-200 bg-zinc-100/40"}
@@ -386,20 +445,58 @@ export default function ProjectForm({
                 {/*  si selecciono equipo TD */}
                 {equipo === 'TD' && (
                     <>
-                    <label className='text-sm text-green-600 font-bold'>TD Filds</label>
+                        <label className='text-sm text-green-600 font-bold'>TD Filds</label>
                         <div className='flex flex-wrap gap-2 border border-green-600 p-2'>
                             <div>
-                                <label className='text-gray-400'>Sector</label>
+                                <label className='text-gray-400'>Sector TD</label>
                                 <select
                                     className="border border-gray-200 bg-zinc-100/40"
                                     value={sectorTD}
-                                    onChange={e => setSectorTD(e.target.value)}>
+                                    onChange={e => hanldeSectorTd(e)}>
                                     <option value="">-no seleccionado-</option>
                                     <option value="NBS AFRICA">NBS AFRICA</option>
                                     <option value="NBS LAC">NBS LAC</option>
                                     <option value="NBS SPAIN">NBS SPAIN</option>
                                     <option value="PLASTIC">PLASTIC</option>
                                     <option value="TBS">TBS</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label className='text-gray-400'>Service</label>
+                                <select
+                                    className="border border-gray-200 bg-zinc-100/40"
+                                    value={tdService}
+                                    onChange={e => hanldeTdService(e)}>
+                                    <option value="">-no seleccionado-</option>
+                                    <option value="CONS">CONS</option>
+                                    <option value="CPR">CPR</option>
+                                    <option value="Feasibility">Feasibility</option>
+                                    <option value="Implementation">Implementation</option>
+                                    <option value="Implementation + VAL">Implementation + VAL</option>
+                                    <option value="METHODOLOGY">METHODOLOGY</option>
+                                    <option value="PFA">PFA</option>
+                                    <option value="PRC">PRC</option>
+                                    <option value="VAL">VAL</option>
+                                    <option value="VAL/VER">VAL/VER</option>
+                                    <option value="VER">VER</option>
+                                    <option value="TRAD">TRAD</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label className='text-gray-400'>Type of Contract</label>
+                                <select
+                                    className="border border-gray-200 bg-zinc-100/40"
+                                    value={typeOfContract}
+                                    onChange={e => setTypeOfContract(e.target.value)}>
+                                    <option value="">-no seleccionado-</option>
+                                    <option value="Cancelled">Cancelled</option>
+                                    <option value="Consultancy">Consultancy</option>
+                                    <option value="Consultancy and PD">Consultancy and PD</option>
+                                    <option value="Consultancy + Trading">Consultancy + Trading</option>
+                                    <option value="Project Development">Project Development</option>
+                                    <option value="Technical Financial">Technical Financial</option>
+                                    <option value="Technical Investment">Technical Investment</option>
+                                    <option value="Trading">Trading</option>
                                 </select>
                             </div>
                             <div>
@@ -452,6 +549,22 @@ export default function ProjectForm({
                                     value={rpEndDate ? new Date(rpEndDate).toISOString().slice(0, 10) : rpEndDate}
                                     onChange={e => setRpEndDate(e.target.value)} />
                             </div>
+                            <div>
+                                <label className='text-gray-400'>Actual Data Vol</label>
+                                <input
+                                    type='number'
+                                    placeholder='ej: 4512'
+                                    value={actualDataVolume}
+                                    onChange={e => setActualDataVolume(e.target.value)} />
+                            </div>
+                            <div>
+                                <label className='text-gray-400'>Net Volume</label>
+                                <input
+                                    type='number'
+                                    placeholder='ej: 4512'
+                                    value={netVolume}
+                                    onChange={e => setNetVolume(e.target.value)} />
+                            </div>
                         </div>
                     </>
 
@@ -462,16 +575,27 @@ export default function ProjectForm({
 
                 <div className='flex flex-wrap gap-2'>
                     <div>
-                        <label className='text-gray-400'>Project ID</label>
+                        <label className='text-gray-400'>Project ID *</label>
                         <input
                             type='text'
                             placeholder='ej: 6877'
                             value={projectID}
                             className={errorFields.projectID ? 'input-error' : ''}
                             onChange={e => setProjectId(e.target.value)} />
+                        <span className='text-xs text-gray-400'>Set to TBA if there is no</span>
                     </div>
                     <div>
-                        <label className='text-gray-400'>Standard</label>
+                        <label className='text-gray-400'>Vintage * (year)</label>
+                        <input
+                            type='text'
+                            placeholder='ej: 2022'
+                            value={vintage}
+
+                            className={errorFields.vintage ? 'input-error' : ''}
+                            onChange={e => setVintage(e.target.value)} />
+                    </div>
+                    <div>
+                        <label className='text-gray-400'>Standard *</label>
                         <select
                             className={errorFields.standar ? "input-error" : " border border-gray-200 bg-zinc-100/40"}
                             value={standar}
@@ -488,6 +612,7 @@ export default function ProjectForm({
                             <option value="BioCarbon">BioCarbon</option>
                             <option value="A6.4">A6.4</option>
                             <option value="A6.2">A6.2</option>
+                            <option value="N/A">N/A</option>
                         </select>
                     </div>
                     <div>
@@ -502,6 +627,17 @@ export default function ProjectForm({
                         </select>
                     </div>
                     <div>
+                        <label className='text-gray-400'>CORSIA</label>
+                        <select
+                            className=" border border-gray-200 bg-zinc-100/40"
+                            value={corsia}
+                            onChange={e => setCorsia(e.target.value)}>
+                            <option value="">-no selected-</option>
+                            <option value="NO">No</option>
+                            <option value="YES">Yes</option>
+                        </select>
+                    </div>
+                    <div>
                         <label className='text-gray-400'>CCP</label>
                         <select
                             className=" border border-gray-200 bg-zinc-100/40"
@@ -512,37 +648,17 @@ export default function ProjectForm({
                             <option value="Approved">Approved</option>
                         </select>
                     </div>
-                    <div>
-                        <label className='text-gray-400'>TYPE</label>
-                        <select
-                            className=" border border-gray-200 bg-zinc-100/40"
-                            value={projectType}
-                            onChange={e => setProjectType(e.target.value)}>
-                            <option value="">-no seleccionado-</option>
-                            <option value="NBS">NBS</option>
-                            <option value="TBS">TBS</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label className='text-gray-400'>Vintage</label>
-                        <input
-                            type='text'
-                            placeholder='ej: 2022'
-                            value={vintage}
-
-                            className={errorFields.vintage ? 'input-error' : ''}
-                            onChange={e => setVintage(e.target.value)} />
-                    </div>
                 </div>
                 <div className='flex flex-wrap gap-2 '>
                     <div className='w-auto'>
-                        <label className='text-gray-400'>Volume</label>
+                        <label className='text-gray-400'>Volume *</label>
                         <input
                             type='number'
                             placeholder='ej: 4512'
                             value={volumen}
                             className={errorFields.volumen ? 'input-error' : ''}
                             onChange={e => setVolumen(e.target.value)} />
+                        <span className='text-xs text-gray-400'>Set to zero if there is no</span>
                     </div>
                     <div className='w-auto'>
                         <label className='text-gray-400'>Sell Trading Price (USD)</label>
@@ -578,7 +694,7 @@ export default function ProjectForm({
                     </div>
                 </div>
 
-                <label className='text-gray-400'>Project&apos;s Name</label>
+                <label className='text-gray-400'>Project&apos;s Name *</label>
                 <input
                     type='text'
                     className={errorFields.name ? 'input-error' : ''}
@@ -592,7 +708,7 @@ export default function ProjectForm({
                     value={projectLink}
                     onChange={e => setProjectLink(e.target.value)} />
 
-                <label className='text-gray-400'>Tech</label>
+                <label className='text-gray-400'>Tech *</label>
                 <select
                     className={errorFields.tech ? "input-error" : "border border-gray-200 bg-zinc-100/40"}
                     value={tech}
@@ -643,15 +759,23 @@ export default function ProjectForm({
                 <CountryPFSelect pais={pais} setPais={setPais} continente={continente} setContinente={setContinente} errorFields={errorFields} />
                 <div className='flex flex-wrap gap-2'>
                     <div className='w-32'>
-                        <label className='text-gray-400'>CORSIA</label>
+                        <label className='text-gray-400'>TYPE</label>
                         <select
                             className=" border border-gray-200 bg-zinc-100/40"
-                            value={corsia}
-                            onChange={e => setCorsia(e.target.value)}>
-                            <option value="">-no selected-</option>
-                            <option value="NO">No</option>
-                            <option value="YES">Yes</option>
+                            value={projectType}
+                            onChange={e => setProjectType(e.target.value)}>
+                            <option value="">-no seleccionado-</option>
+                            <option value="NBS">NBS</option>
+                            <option value="TBS">TBS</option>
                         </select>
+                    </div>
+                    <div >
+                        <label className='text-gray-400'>First CP date</label>
+                        <input
+                            type='date'
+                            className="flex border border-gray-200 bg-zinc-100/40 w-42"
+                            value={firstCPDate ? new Date(firstCPDate).toISOString().slice(0, 10) : firstCPDate}
+                            onChange={e => setFirstCPDate(e.target.value)} />
                     </div>
                     <div className='w-32'>
                         <label className='text-gray-400'>Regulated MKT</label>
@@ -677,14 +801,7 @@ export default function ProjectForm({
                             <option value="N/A">Clean</option>
                         </select>
                     </div>
-                    <div className='w-32'>
-                        <label className='text-gray-400'>First CP date</label>
-                        <input
-                            type='date'
-                            className="flex border border-gray-200 bg-zinc-100/40 w-32"
-                            value={firstCPDate ? new Date(firstCPDate).toISOString().slice(0, 10) : firstCPDate}
-                            onChange={e => setFirstCPDate(e.target.value)} />
-                    </div>
+
 
                 </div>
 
@@ -740,7 +857,7 @@ export default function ProjectForm({
 
                     </div>
                     <div className='col-span-1'>
-                        <label className='text-gray-400'>Stock</label>
+                        <label className='text-gray-400'>Stock *</label>
                         <select
                             className={errorFields.stock ? "input-error" : "border border-gray-200 bg-zinc-100/40"}
                             value={stock}
@@ -756,7 +873,7 @@ export default function ProjectForm({
                     placeholder='ex: Proyecto de TD '
                     value={notasExtra}
                     onChange={e => setNotasExtra(e.target.value)} />
-                <label className='text-gray-400'>Storage location</label>
+                <label className='text-gray-400'>Storage location (SAP)</label>
                 <select
                     className=" border border-gray-200 bg-zinc-100/40"
                     value={sede}

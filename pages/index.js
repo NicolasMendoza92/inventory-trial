@@ -8,6 +8,7 @@ import Project from "@/models/Projects";
 import HomeStandard from "@/components/HomeStandard";
 import HomeRegulated from "@/components/HomeRegulated";
 import HomeButtons from "@/components/HomeButtons";
+import HomeTD from "@/components/HomeTD";
 
 
 // TRAIGO LOS PROYECTOS CON GET SERVER SIDE PROPS PARA PODER USARLOS 
@@ -31,6 +32,7 @@ export default function Home({operations, projects}) {
        <HomeStandard projects={projects} operations={operations}/>
       <HomeButtons projects={projects}/>
       <HomeRegulated projects={projects} />
+      <HomeTD projects={projects} />
       <HomeStats operations={operations}/>
     </Layout>
   )

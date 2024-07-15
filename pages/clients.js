@@ -84,9 +84,6 @@ export default function Clients({ clients }) {
                         {enable === true && (
                             <Link className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500 " href={'/client/new'}> Add Client</Link>
                         )}
-                        {session.user?.email === 'wp.co@allcot.com' && (
-                            <Link className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500 " href={'/client/new'}> Add Client</Link>
-                        )}
                     </div>
                     <div className="relative overflow-x-auto">
                         <table className=" basic my-3">

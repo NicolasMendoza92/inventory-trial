@@ -20,39 +20,39 @@ export default function HomeStandard({ projects, operations }) {
 
     const handleBtnCdm = () => {
         setProjectSearched('cdm');
-        router.push('/inventary'); // Ajusta la ruta según tu configuración de enrutamiento
+        router.push('/inventary'); 
     };
     const handleBtnVcs = () => {
         setProjectSearched('vcs');
-        router.push('/inventary'); // Ajusta la ruta según tu configuración de enrutamiento
+        router.push('/inventary'); 
     };
     const handleBtnGs = () => {
         setProjectSearched('GS');
-        router.push('/inventary'); // Ajusta la ruta según tu configuración de enrutamiento
+        router.push('/inventary'); 
     };
     const handleBtnCer = () => {
         setProjectSearched('Cercarbono');
-        router.push('/inventary'); // Ajusta la ruta según tu configuración de enrutamiento
+        router.push('/inventary'); 
     };
     const handleBtnCar = () => {
         setProjectSearched('car');
-        router.push('/inventary'); // Ajusta la ruta según tu configuración de enrutamiento
+        router.push('/inventary'); 
     };
     const handleBtnIrec = () => {
         setProjectSearched('i-recs');
-        router.push('/inventary'); // Ajusta la ruta según tu configuración de enrutamiento
+        router.push('/inventary'); 
     };
     const handleBtnCsa = () => {
         setProjectSearched('CSA');
-        router.push('/inventary'); // Ajusta la ruta según tu configuración de enrutamiento
+        router.push('/inventary'); 
     };
     const handleBtnPlan = () => {
         setProjectSearched('plan vivo');
-        router.push('/inventary'); // Ajusta la ruta según tu configuración de enrutamiento
+        router.push('/inventary'); 
     };
     const handleBtnBio = () => {
         setProjectSearched('Bio carbon');
-        router.push('/inventary'); // Ajusta la ruta según tu configuración de enrutamiento
+        router.push('/inventary'); 
     };
 
     // Deliveries and payment del dia de hoy 

@@ -2,6 +2,9 @@ import mongoose, { Schema, model, models } from "mongoose";
 
 // creamos los modelos, para la conexion con la base de datos Mongoose-. 
 const projectSchema = new Schema({
+    creatorUser: {
+        type: String,
+    },
     projectID: {
         type: String,
         required: true,
@@ -26,72 +29,87 @@ const projectSchema = new Schema({
         type: String,
         require: true,
     },
-    pais:{
+    pais: {
         type: String,
         require: true,
     },
-    continente:{
+    continente: {
         type: String,
     },
-    corsia:{
+    corsia: {
         type: String,
     },
-    ccb:{
-        type:String,
-    },
-    ccp:{
-        type:String,
-    },
-    projectType:{
+    ccb: {
         type: String,
     },
-    colombianTax:{
-        type:String,
-    },
-    regulatedMarket:{
-        type:String,
-    },
-    misha:{
+    ccp: {
         type: String,
     },
-    mailingList:{
+    projectType: {
         type: String,
     },
-    sdg:{
+    colombianTax: {
         type: String,
     },
-    sdgSelected: [{ type: String }], 
-    sdgImages: [{ type: String }], 
-    sede:{
+    regulatedMarket: {
         type: String,
     },
-    contrato:{
+    misha: {
         type: String,
     },
-    equipo:{
+    mailingList: {
+        type: String,
+    },
+    brokerList: {
+        type: String,
+    },
+    sdg: {
+        type: String,
+    },
+    sdgSelected: [{ type: String }],
+    sdgImages: [{ type: String }],
+    sede: {
+        type: String,
+    },
+    contrato: {
+        type: String,
+    },
+    equipo: {
         type: String,
     },
     // TD fields
-    sectorTD:{
+    tdService: {
         type: String,
     },
-    status:{
+    typeOfContract: {
         type: String,
     },
-    stage:{
-        type: String,
-    },  
-    rpStartDate:{
+    sectorTD: {
         type: String,
     },
-    rpEndDate:{
+    status: {
         type: String,
     },
-    mktDate:{
+    stage: {
+        type: String,
+    },
+    rpStartDate: {
+        type: String,
+    },
+    rpEndDate: {
+        type: String,
+    },
+    actualDataVolume: {
+        type: Number,
+    },
+    netVolume: {
+        type: Number,
+    },
+    mktDate: {
         type: Date,
     },
     // Cambia a financial partner cuando se selecciona TD
-    proveedor:{
+    proveedor: {
         type: String,
     },
     precioVenta: {
@@ -106,26 +124,28 @@ const projectSchema = new Schema({
     purchasePrice: {
         type: Number,
     },
-    projectLink:{
+    projectLink: {
         type: String,
     },
-    // compartido con td
-    firstCPDate:{
+    firstCPDate: {
         type: String,
     },
-    disponible:{
+    disponible: {
         type: String,
     },
-    stock:{
+    stock: {
         type: String,
     },
-    notas:{
+    notas: {
         type: String,
-    } ,  
-    notasExtra:{
+    },
+    notasExtra: {
         type: String,
-    } , 
-    files: [{ type: String }], 
+    },
+    tdInfo: {
+        type: String,
+    },
+    files: [{ type: String }],
 },
     {
         timestamps: true,

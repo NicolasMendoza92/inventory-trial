@@ -20,9 +20,9 @@ export const TableOperations = () => {
         getAlloperations();
     }, [])
 
-    function getAlloperations() {
+    async function getAlloperations() {
         setIsLoading(true)
-        axios.get('/api/alloperations').then(res => {
+        await axios.get('/api/alloperations').then(res => {
             setAlloperations(res.data.allOperations)
         })
         setIsLoading(false)

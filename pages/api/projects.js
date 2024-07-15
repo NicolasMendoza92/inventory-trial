@@ -29,6 +29,7 @@ export default async function handle(req, res) {
         try {
             const {
                 projectID,
+                creatorUser,
                 standar,
                 vintage,
                 volumen,
@@ -60,16 +61,23 @@ export default async function handle(req, res) {
                 floorPrice,
                 mailingList,
                 equipo,
+                tdService,
+                typeOfContract,
+                actualDataVolume,
+                netVolume,
+                brokerList,
                 sectorTD,
                 status,
                 stage,
                 rpStartDate,
                 rpEndDate,
                 files,
+                tdInfo,
                 notasExtra
             } = req.body;
             const projectDoc = await Project.create({
                 projectID,
+                creatorUser,
                 standar,
                 vintage,
                 volumen,
@@ -99,6 +107,11 @@ export default async function handle(req, res) {
                 misha,
                 mailingList,
                 equipo,
+                tdService,
+                typeOfContract,
+                actualDataVolume,
+                netVolume,
+                brokerList,
                 sectorTD,
                 status,
                 stage,
@@ -107,7 +120,8 @@ export default async function handle(req, res) {
                 colombianTax,
                 regulatedMarket,
                 proveedor,
-                notasExtra
+                notasExtra,
+                tdInfo,
             })
             res.json(projectDoc);
         } catch (error) {
@@ -119,6 +133,7 @@ export default async function handle(req, res) {
     if (method === 'PUT') {
         const {
             projectID,
+            creatorUser,
             standar,
             vintage,
             volumen,
@@ -145,6 +160,11 @@ export default async function handle(req, res) {
             misha,
             mailingList,
             equipo,
+            tdService,
+            typeOfContract,
+            actualDataVolume,
+            netVolume,
+            brokerList,
             sectorTD,
             status,
             stage,
@@ -158,11 +178,13 @@ export default async function handle(req, res) {
             notas,
             files,
             notasExtra,
+            tdInfo,
             _id
         } = req.body;
         // los nombres de las propiedades son las mismas que las vbles, ahi ponogo lo que quiere actualizar (definimos dos parametros, el ID (identifica) y las prop que queremos cambiar)
         await Project.updateOne({ _id }, {
             projectID,
+            creatorUser,
             standar,
             vintage,
             volumen,
@@ -192,6 +214,11 @@ export default async function handle(req, res) {
             misha,
             mailingList,
             equipo,
+            tdService,
+            typeOfContract,
+            actualDataVolume,
+            netVolume,
+            brokerList,
             sectorTD,
             status,
             stage,
@@ -201,6 +228,7 @@ export default async function handle(req, res) {
             regulatedMarket,
             notas,
             notasExtra,
+            tdInfo,
             files
         });
         res.json(true);
