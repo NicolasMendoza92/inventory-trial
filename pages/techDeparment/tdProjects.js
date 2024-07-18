@@ -28,7 +28,7 @@ export default function TdProjects() {
 
   async function getProjects() {
     setIsLoading(true)
-    await axios.get('/api/projects').then(res => {
+    await axios.get('/api/allprojects').then(res => {
       setProjects(res.data.projects);
       setIsLoading(false)
     })
@@ -141,7 +141,7 @@ export default function TdProjects() {
             )}
             {projectFinded.map(project => (
               <tr key={project._id}>
-                 <td className="text-xs">{(project.name).slice(0, 25)}</td>
+                 <td >{(project.name).slice(0, 25)}</td>
                 <td>{project.sectorTD}</td>
                 <td>{project.projectID}</td>
                 <td>{project.tech}</td>

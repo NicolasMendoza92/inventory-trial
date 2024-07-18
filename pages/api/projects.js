@@ -15,8 +15,9 @@ export default async function handle(req, res) {
                 res.json(await Project.findOne({ _id: req.query.id }));
             } else {
                 const projects = await Project.find({}, null, { sort: { '_id': -1 } })
+                const projectsOk = projects.filter(proj => proj.status != "On hold")
                 res.json({
-                    projects,
+                    projectsOk,
                 })
             }
         } catch (error) {

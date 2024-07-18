@@ -18,7 +18,7 @@ export default function HomeTD({ projects }) {
     router.push('/techDeparment/tdProjects');
     };
     const handleBtnOnHold = () => {
-        setProjectSearched('On hold');
+        setProjectSearched('Forecasted');
     router.push('/techDeparment/tdProjects');
     };
 
@@ -26,7 +26,7 @@ export default function HomeTD({ projects }) {
     const tdProjects = projects.filter(p => p.tdInfo === 'Yes')
     const tdProjectsOngoing = projects.filter(p => p.tdInfo === 'Yes' && p.status === 'Ongoing')
     const tdProjectsCompleted = projects.filter(p => p.tdInfo === 'Yes' && p.status === 'Completed')
-    const tdProjectsOnhold = projects.filter(p => p.tdInfo === 'Yes' && p.status === 'On hold')
+    const tdProjectsForecasted = projects.filter(p => p.tdInfo === 'Yes' && p.status === 'Forecasted')
 
     // TD PROJECTS ONGOING BY STAGE
     const tdProjectsStage1 = tdProjectsOngoing.filter(p => p.stage === 'Stage 1 - Elaboration of documentation')
@@ -40,7 +40,7 @@ export default function HomeTD({ projects }) {
 
     const tdProjectsOngoingVol = tdProjectsOngoing.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const tdProjectsCompletedVol = tdProjectsCompleted.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
-    const tdProjectsOnholdVol = tdProjectsOnhold.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
+    const tdProjectsForecastedVol = tdProjectsForecasted.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
 
 
     // VOLUMEN BY STAGE
@@ -67,9 +67,9 @@ export default function HomeTD({ projects }) {
                         <div className="board-desc">belonging to {tdProjectsOngoing.length} projects. </div>
                     </div>
                     <div onClick={handleBtnOnHold} className="board-card-2">
-                        <h3 className="board-title-alert">ON HOLD</h3>
-                        <div className="board-number">{tdProjectsOnholdVol.toLocaleString('es-ES')}</div>
-                        <div className="board-desc">belonging to {tdProjectsOnhold.length} projects. </div>
+                        <h3 className="board-title-alert">FORECASTED</h3>
+                        <div className="board-number">{tdProjectsForecastedVol.toLocaleString('es-ES')}</div>
+                        <div className="board-desc">belonging to {tdProjectsForecasted.length} projects. </div>
                     </div>
                 </div>
             </div>

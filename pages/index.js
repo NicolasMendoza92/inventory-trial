@@ -26,13 +26,15 @@ export async function getServerSideProps() {
 
 export default function Home({operations, projects}) {
 
+  const projectsOk = projects.filter(proj => proj.status != "On hold")
+
   return (
     <Layout>
       <UserInfo/>
-       <HomeStandard projects={projects} operations={operations}/>
-      <HomeButtons projects={projects}/>
-      <HomeRegulated projects={projects} />
-      <HomeTD projects={projects} />
+       <HomeStandard projects={projectsOk} operations={operations}/>
+      <HomeButtons projects={projectsOk}/>
+      <HomeRegulated projects={projectsOk} />
+      <HomeTD projects={projectsOk} />
       <HomeStats operations={operations}/>
     </Layout>
   )

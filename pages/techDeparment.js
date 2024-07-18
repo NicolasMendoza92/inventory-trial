@@ -1,7 +1,6 @@
 import Layout from '@/components/layout'
 import Spinner from '@/components/Spinner';
 import { ProjectSearchContext } from '@/context/ProjectSearchContext';
-import isEnableUser from '@/lib/enableUser';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
@@ -11,7 +10,6 @@ import React, { useContext, useEffect, useState } from 'react'
 export default function techDeparment() {
 
   const { data: session } = useSession();
-  const enable = isEnableUser(session);
   const { setProjectSearched } = useContext(ProjectSearchContext);
 
   const router = useRouter();
@@ -26,7 +24,7 @@ export default function techDeparment() {
 
   async function getProjects() {
     setIsLoading(true)
-    await axios.get('/api/projects').then(res => {
+    await axios.get('/api/allprojects').then(res => {
       setProjects(res.data.projects);
       setIsLoading(false)
     })

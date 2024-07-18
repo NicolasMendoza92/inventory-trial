@@ -6,7 +6,6 @@ import isEnableUser from "@/lib/enableUser";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import React, { useContext } from 'react';
 import { useEffect, useState } from "react";
 
@@ -16,10 +15,6 @@ export default function Projects() {
   const { data: session } = useSession();
   const enable = isEnableUser(session);
 
-  const router = useRouter();
-  function goToLogin() {
-    router.push('/login')
-  }
 
   const [projects, setProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -32,7 +27,7 @@ export default function Projects() {
   function getProjects() {
     setIsLoading(true)
     axios.get('/api/projects').then(res => {
-      setProjects(res.data.projects);
+      setProjects(res.data.projectsOk);
       setIsLoading(false)
     })
   }
