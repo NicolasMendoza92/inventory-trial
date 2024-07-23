@@ -56,7 +56,7 @@ const ExportInventary = () => {
               <td>SUPPLIER</td>
               <td>TYPE</td>
               <td>INETRNAL NOTES</td>
-              <td>FLOOR PRICE</td>
+              <td>MINIMUN SELLING PRICE</td>
               <td>STANDARD</td>
               <td>ID</td>
               <td>NAME</td>
