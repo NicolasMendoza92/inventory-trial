@@ -83,7 +83,7 @@ export const TableProjects = () => {
         },
         {
             name: 'floorPrice',
-            label: 'Floor Price (USD)',
+            label: 'Min Selling Price (USD)',
             options: {
                 filter: false,
             }
