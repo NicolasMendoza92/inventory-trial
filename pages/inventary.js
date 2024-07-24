@@ -110,7 +110,7 @@ export default function Projects() {
             <td>Source</td>
               <td>Type</td>
               <td>Supplier</td>
-              <td>Floor Price(USD)</td>
+              <td>Minimun selling price(USD)</td>
               <td>Name</td>
               <td>Standard</td>
               <td>ID</td>
