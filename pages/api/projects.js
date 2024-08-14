@@ -73,6 +73,7 @@ export default async function handle(req, res) {
                 rpStartDate,
                 rpEndDate,
                 files,
+                icroa,
                 tdInfo,
                 notasExtra
             } = req.body;
@@ -120,6 +121,7 @@ export default async function handle(req, res) {
                 rpEndDate,
                 colombianTax,
                 regulatedMarket,
+                icroa,
                 proveedor,
                 notasExtra,
                 tdInfo,
@@ -178,6 +180,7 @@ export default async function handle(req, res) {
             purchasePrice,
             notas,
             files,
+            icroa,
             notasExtra,
             tdInfo,
             _id
@@ -228,6 +231,7 @@ export default async function handle(req, res) {
             colombianTax,
             regulatedMarket,
             notas,
+            icroa,
             notasExtra,
             tdInfo,
             files

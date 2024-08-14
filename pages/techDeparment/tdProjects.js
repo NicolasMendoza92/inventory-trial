@@ -132,7 +132,7 @@ export default function TdProjects() {
           <tbody>
             {isLoading && (
               <tr>
-                <td colSpan={15}>
+                <td colSpan={17}>
                   <div className="w-full flex justify-center py-4">
                     <Spinner />
                   </div>

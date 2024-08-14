@@ -211,6 +211,13 @@ export const TableProjects = () => {
             },
         },
         {
+            name: 'icroa',
+            options: {
+                filter: true,
+                display: 'false',
+            },
+        },
+        {
             name: 'continente',
             options: {
                 filter: true,

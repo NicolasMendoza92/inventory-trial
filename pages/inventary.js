@@ -123,6 +123,7 @@ export default function Projects() {
               <td>Corp. Price(USD)</td>
               <td>Purch. Price(USD)</td>
               <td>CCP</td>
+              <td>ICROA</td>
               <td>Availability</td>
               <td></td>
             </tr>
@@ -130,7 +131,7 @@ export default function Projects() {
           <tbody>
             {isLoading && (
               <tr>
-                <td colSpan={17}>
+                <td colSpan={18}>
                   <div className="w-full flex justify-center py-4">
                     <Spinner />
                   </div>
@@ -140,9 +141,10 @@ export default function Projects() {
             {projectFinded.map(project => (
               <tr key={project._id}>
                 <td className="text-xs">{project.equipo}</td>
-                <td>{project.contrato}
+                <td>
+                  {project.contrato}
                   {project.contrato === "MKT" ? (
-                    <> - ({new Date(project.mktDate).toLocaleString("GB-English", { dateStyle: "short" })}) </>
+                    <span className="text-xs"> - ({new Date(project.mktDate).toLocaleString("GB-English", { dateStyle: "short" })}) </span>
                   ) : null}
                 </td>
                 <td>{project.proveedor}</td>
@@ -164,6 +166,7 @@ export default function Projects() {
                 <td>{project.precioCorp}</td>
                 <td>{project.purchasePrice}</td>
                 <td>{project.ccp}</td>
+                <td>{project.icroa}</td>
                 <td className="hidden">{project.stock}</td>
                 <td className="hidden">{project.projectType}</td>
                 {/* <td>
@@ -174,7 +177,7 @@ export default function Projects() {
                   <></>
                 )}
                 {session?.user.email === 'demo@gmail.com' && (
-                  <td>
+                  <td className="flex py-2">
                     {/* aca le paso el id del proyecto, y por ende va a editar el volumen con ese id */}
                     <Link className="bg-green-600 text-white px-1 ms-1 rounded shadow-sm hover:bg-green-500" href={'/projects/operation/' + project._id}>
                       <div className="group relative w-max">
@@ -203,7 +206,7 @@ export default function Projects() {
                   </td>
                 )}
                 {enable === true &&
-                  <td>
+                  <td className="flex py-2">
                     {/* aca le paso el id del proyecto, y por ende va a editar el volumen con ese id */}
                     <Link className="bg-green-600 text-white px-1 ms-1 rounded shadow-sm hover:bg-green-500" href={'/projects/operation/' + project._id}>
                       <div className="group relative w-max">

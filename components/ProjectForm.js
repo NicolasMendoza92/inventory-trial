@@ -55,6 +55,7 @@ export default function ProjectForm({
     ccb: existingCcb,
     ccp: existingCcp,
     projectType: existingProjectType,
+    icroa: existingIcroa,
     regulatedMarket: existingRegulatedMarket,
     sdgSelected: existingSdgSelected,
     sdgImages: existingSdgImages,
@@ -100,6 +101,7 @@ export default function ProjectForm({
     const [firstCPDate, setFirstCPDate] = useState(existingFirstCPDate || '');
     const [ccb, setCcb] = useState(existingCcb || '');
     const [ccp, setCcp] = useState(existingCcp || '');
+    const [icroa, setIcroa] = useState(existingIcroa || '');
     const [projectType, setProjectType] = useState(existingProjectType || '');
     const [regulatedMarket, setRegulatedMarket] = useState(existingRegulatedMarket || '');
     const [sede, setSede] = useState(existingSede || '');
@@ -149,7 +151,7 @@ export default function ProjectForm({
                 brokerList, status, stage, rpStartDate,
                 rpEndDate, mailingList, sectorTD, ccb, ccp,
                 projectType, misha, regulatedMarket,
-                notas, files, notasExtra, tdInfo
+                notas, files, notasExtra, tdInfo, icroa
             }
 
             let hasError = false;
@@ -767,6 +769,17 @@ export default function ProjectForm({
                             <option value="">-no seleccionado-</option>
                             <option value="NBS">NBS</option>
                             <option value="TBS">TBS</option>
+                        </select>
+                    </div>
+                    <div className='w-32'>
+                        <label className='text-gray-400'>ICROA</label>
+                        <select
+                            className=" border border-gray-200 bg-zinc-100/40"
+                            value={icroa}
+                            onChange={e => setIcroa(e.target.value)}>
+                            <option value="">-no seleccionado-</option>
+                            <option value="YES">YES</option>
+                            <option value="NO">NO</option>
                         </select>
                     </div>
                     <div >

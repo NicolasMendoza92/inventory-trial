@@ -184,8 +184,8 @@ export default function ReservForm({
                             <option value="">-no selected-</option>
                             <option value="Danna">Danna</option>
                             <option value="Helibeth">Helibeth</option>
-                            <option value="Mary">Mary</option>
-                            <option value="Monica">Monica</option>
+                            <option value="Nicolas">Nicolas</option>
+                            <option value="Laura">Laura</option>
                             <option value="William">William</option>
                         </select>
                     </div>
