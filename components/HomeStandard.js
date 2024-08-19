@@ -65,7 +65,6 @@ export default function HomeStandard({ projects, operations }) {
     const cdmProjectsFuture = projects.filter(p => p.standar === 'CDM' && p.stock === 'Future')
     const cdmProjectsOwn = projects.filter(p => p.standar === 'CDM' && p.contrato === 'Contrato')
     const cdmProjectsMkt = projects.filter(p => p.standar === 'CDM' && p.contrato === 'MKT')
-    const cdmProjectsMisha = projects.filter(p => p.standar === 'CDM' && p.misha === 'YES')
 
     // VCS PROJECTS
     const vcsProjects = projects.filter(p => p.standar === 'VCS')
@@ -73,7 +72,6 @@ export default function HomeStandard({ projects, operations }) {
     const vcsProjectsFuture = projects.filter(p => p.standar === 'VCS' && p.stock === 'Future')
     const vcsProjectsOwn = projects.filter(p => p.standar === 'VCS' && p.contrato === 'Contrato')
     const vcsProjectsMkt = projects.filter(p => p.standar === 'VCS' && p.contrato === 'MKT')
-    const vcsProjectsMisha = projects.filter(p => p.standar === 'VCS' && p.misha === 'YES')
 
     // GS PROJECTS
     const gsProjects = projects.filter(p => p.standar === 'GS')
@@ -81,7 +79,6 @@ export default function HomeStandard({ projects, operations }) {
     const gsProjectsFuture = projects.filter(p => p.standar === 'GS' && p.stock === 'Future')
     const gsProjectsOwn = projects.filter(p => p.standar === 'GS' && p.contrato === 'Contrato')
     const gsProjectsMkt = projects.filter(p => p.standar === 'GS' && p.contrato === 'MKT')
-    const gsProjectsMisha = projects.filter(p => p.standar === 'GS' && p.misha === 'YES')
 
     // IRECS PROJECTS
     const irecsProjects = projects.filter(p => p.standar === 'I-RECs')
@@ -89,7 +86,6 @@ export default function HomeStandard({ projects, operations }) {
     const irecsProjectsFuture = projects.filter(p => p.standar === 'I-RECs' && p.stock === 'Future')
     const irecsProjectsOwn = projects.filter(p => p.standar === 'I-RECs' && p.contrato === 'Contrato')
     const irecsProjectsMkt = projects.filter(p => p.standar === 'I-RECs' && p.contrato === 'MKT')
-    const irecsProjectsMisha = projects.filter(p => p.standar === 'I-RECs' && p.misha === 'YES')
 
     // CERCARBONO PROJECTS
     const cercarbonoProjects = projects.filter(p => p.standar === 'CERCARBONO')
@@ -97,7 +93,6 @@ export default function HomeStandard({ projects, operations }) {
     const cercarbonoProjectsFuture = projects.filter(p => p.standar === 'CERCARBONO' && p.stock === 'Future')
     const cercarbonoProjectsOwn = projects.filter(p => p.standar === 'CERCARBONO' && p.contrato === 'Contrato')
     const cercarbonoProjectsMkt = projects.filter(p => p.standar === 'CERCARBONO' && p.contrato === 'MKT')
-    const cercarbonoProjectsMisha = projects.filter(p => p.standar === 'CERCARBONO' && p.misha === 'YES')
 
     // CSA PROJECTS
     const csaProjects = projects.filter(p => p.standar === 'CSA')
@@ -105,7 +100,6 @@ export default function HomeStandard({ projects, operations }) {
     const csaProjectsFuture = projects.filter(p => p.standar === 'CSA' && p.stock === 'Future')
     const csaProjectsOwn = projects.filter(p => p.standar === 'CSA' && p.contrato === 'Contrato')
     const csaProjectsMkt = projects.filter(p => p.standar === 'CSA' && p.contrato === 'MKT')
-    const csaProjectsMisha = projects.filter(p => p.standar === 'CSA' && p.misha === 'YES')
 
     // CAR PROJECTS
     const carProjects = projects.filter(p => p.standar === 'CAR')
@@ -113,7 +107,6 @@ export default function HomeStandard({ projects, operations }) {
     const carProjectsFuture = projects.filter(p => p.standar === 'CAR' && p.stock === 'Future')
     const carProjectsOwn = projects.filter(p => p.standar === 'CAR' && p.contrato === 'Contrato')
     const carProjectsMkt = projects.filter(p => p.standar === 'CAR' && p.contrato === 'MKT')
-    const carProjectsMisha = projects.filter(p => p.standar === 'CAR' && p.misha === 'YES')
 
     // BIO CARBON PROJECTS
     const bioCarbonProjects = projects.filter(p => p.standar === 'BioCarbon')
@@ -121,7 +114,6 @@ export default function HomeStandard({ projects, operations }) {
     const bioCarbonProjectsFuture = projects.filter(p => p.standar === 'BioCarbon' && p.stock === 'Future')
     const bioCarbonProjectsOwn = projects.filter(p => p.standar === 'BioCarbon' && p.contrato === 'Contrato')
     const bioCarbonProjectsMkt = projects.filter(p => p.standar === 'BioCarbon' && p.contrato === 'MKT')
-    const bioCarbonProjectsMisha = projects.filter(p => p.standar === 'BioCarbon' && p.misha === 'YES')
 
     // PLAN VIVO PROJECTS
     const planVivoProjects = projects.filter(p => p.standar === 'PLAN VIVO')
@@ -129,7 +121,6 @@ export default function HomeStandard({ projects, operations }) {
     const planVivoProjectsFuture = projects.filter(p => p.standar === 'PLAN VIVO' && p.stock === 'Future')
     const planVivoProjectsOwn = projects.filter(p => p.standar === 'PLAN VIVO' && p.contrato === 'Contrato')
     const planVivoProjectsMkt = projects.filter(p => p.standar === 'PLAN VIVO' && p.contrato === 'MKT')
-    const planVivoProjectsMisha = projects.filter(p => p.standar === 'PLAN VIVO' && p.misha === 'YES')
 
 
     // despues de crear el array con map de los totales, se los suma usnado reduce
@@ -138,72 +129,55 @@ export default function HomeStandard({ projects, operations }) {
     const cdmVolumeFuture = cdmProjectsFuture.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const cdmVolumeOwn = cdmProjectsOwn.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const cdmVolumeMkt = cdmProjectsMkt.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
-    const cdmVolumeMisha = cdmProjectsMisha.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
-    const cdmVolumeAll = cdmVolume - cdmVolumeMisha
 
     const vcsVolume = vcsProjects.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const vcsVolumeNow = vcsProjectsNow.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const vcsVolumeFuture = vcsProjectsFuture.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const vcsVolumeOwn = vcsProjectsOwn.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const vcsVolumeMkt = vcsProjectsMkt.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
-    const vcsVolumeMisha = vcsProjectsMisha.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
-    const vcsVolumeAll = vcsVolume - vcsVolumeMisha
 
     const gsVolume = gsProjects.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const gsVolumeNow = gsProjectsNow.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const gsVolumeFuture = gsProjectsFuture.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const gsVolumeOwn = gsProjectsOwn.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const gsVolumeMkt = gsProjectsMkt.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
-    const gsVolumeMisha = gsProjectsMisha.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
-    const gsVolumeAll = gsVolume - gsVolumeMisha
 
     const irecsVolume = irecsProjects.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const irecsVolumeNow = irecsProjectsNow.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const irecsVolumeFuture = irecsProjectsFuture.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const irecsVolumeOwn = irecsProjectsOwn.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const irecsVolumeMkt = irecsProjectsMkt.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
-    const irecsVolumeMisha = irecsProjectsMisha.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
-    const irecsVolumeAll = irecsVolume - irecsVolumeMisha
 
     const cercarbonoVolume = cercarbonoProjects.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const cercarbonoVolumeNow = cercarbonoProjectsNow.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const cercarbonoVolumeFuture = cercarbonoProjectsFuture.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const cercarbonoVolumeOwn = cercarbonoProjectsOwn.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const cercarbonoVolumeMkt = cercarbonoProjectsMkt.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
-    const cercarbonoVolumeMisha = cercarbonoProjectsMisha.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
-    const cercarbonoVolumeAll = cercarbonoVolume - cercarbonoVolumeMisha
 
     const csaVolume = csaProjects.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const csaVolumeNow = csaProjectsNow.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const csaVolumeFuture = csaProjectsFuture.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const csaVolumeOwn = csaProjectsOwn.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const csaVolumeMkt = csaProjectsMkt.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
-    const csaVolumeMisha = csaProjectsMisha.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
-    const csaVolumeAll = csaVolume - csaVolumeMisha
 
     const carVolume = carProjects.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const carVolumeNow = carProjectsNow.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const carVolumeFuture = carProjectsFuture.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const carVolumeOwn = carProjectsOwn.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const carVolumeMkt = carProjectsMkt.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
-    const carVolumeMisha = carProjectsMisha.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
-    const carVolumeAll = carVolume - carVolumeMisha
 
     const bioCarbonVolume = bioCarbonProjects.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const bioCarbonVolumeNow = bioCarbonProjectsNow.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const bioCarbonVolumeFuture = bioCarbonProjectsFuture.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const bioCarbonVolumeOwn = bioCarbonProjectsOwn.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const bioCarbonVolumeMkt = bioCarbonProjectsMkt.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
-    const bioCarbonVolumeMisha = bioCarbonProjectsMisha.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
-    const bioCarbonVolumeAll = bioCarbonVolume - bioCarbonVolumeMisha
 
     const planVivoVolume = planVivoProjects.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const planVivoVolumeNow = planVivoProjectsNow.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const planVivoVolumeFuture = planVivoProjectsFuture.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const planVivoVolumeOwn = planVivoProjectsOwn.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const planVivoVolumeMkt = planVivoProjectsMkt.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
-    const planVivoVolumeMisha = planVivoProjectsMisha.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
-    const planVivoVolumeAll = planVivoVolume - planVivoVolumeMisha
+
 
     return (
         <div className="">
@@ -233,17 +207,6 @@ export default function HomeStandard({ projects, operations }) {
                     </button>
                     {showMoreCdm &&
                         <>
-                            <div className="board-desc">Procured by </div>
-                            <div className="flex justify-center gap-3">
-                                <div className="text-2xl font-bold text-secondary gap-2">
-                                    <span className="text-xs text-gray-700 me-1">ALLCOT</span>
-                                    {cdmVolumeAll.toLocaleString('es-ES')}
-                                </div>
-                                <div className="text-2xl font-bold text-secondary gap-2">
-                                    <span className="text-xs text-gray-700 me-1">Misha</span>
-                                    {cdmVolumeMisha.toLocaleString('es-ES')}
-                                </div>
-                            </div>
                             <div className="board-desc">Availability </div>
                             <div className="flex justify-center gap-3">
                                 <div className="text-2xl font-bold text-secondary gap-2">
@@ -279,17 +242,6 @@ export default function HomeStandard({ projects, operations }) {
                     </button>
                     {showMoreVcs &&
                         <>
-                            <div className="board-desc">Procured by </div>
-                            <div className="flex justify-center gap-3">
-                                <div className="text-2xl font-bold text-secondary gap-2">
-                                    <span className="text-xs text-gray-700 me-1">ALLCOT</span>
-                                    {vcsVolumeAll.toLocaleString('es-ES')}
-                                </div>
-                                <div className="text-2xl font-bold text-secondary gap-2">
-                                    <span className="text-xs text-gray-700 me-1">Misha</span>
-                                    {vcsVolumeMisha.toLocaleString('es-ES')}
-                                </div>
-                            </div>
                             <div className="board-desc">Availability </div>
                             <div className="flex justify-center gap-3">
                                 <div className="text-2xl font-bold text-secondary gap-2">
@@ -325,17 +277,6 @@ export default function HomeStandard({ projects, operations }) {
                     </button>
                     {showMoreGs &&
                         <>
-                            <div className="board-desc">Procured by </div>
-                            <div className="flex justify-center gap-3">
-                                <div className="text-2xl font-bold text-secondary gap-2">
-                                    <span className="text-xs text-gray-700 me-1">ALLCOT</span>
-                                    {gsVolumeAll.toLocaleString('es-ES')}
-                                </div>
-                                <div className="text-2xl font-bold text-secondary gap-2">
-                                    <span className="text-xs text-gray-700 me-1">Misha</span>
-                                    {gsVolumeMisha.toLocaleString('es-ES')}
-                                </div>
-                            </div>
                             <div className="board-desc">Availability </div>
                             <div className="flex justify-center gap-3">
                                 <div className="text-2xl font-bold text-secondary gap-2">
@@ -371,17 +312,6 @@ export default function HomeStandard({ projects, operations }) {
                     </button>
                     {showMoreCer &&
                         <>
-                            <div className="board-desc">Procured by </div>
-                            <div className="flex justify-center gap-3">
-                                <div className="text-2xl font-bold text-secondary gap-2">
-                                    <span className="text-xs text-gray-700 me-1">ALLCOT</span>
-                                    {cercarbonoVolumeAll.toLocaleString('es-ES')}
-                                </div>
-                                <div className="text-2xl font-bold text-secondary gap-2">
-                                    <span className="text-xs text-gray-700 me-1">Misha</span>
-                                    {cercarbonoVolumeMisha.toLocaleString('es-ES')}
-                                </div>
-                            </div>
                             <div className="board-desc">Availability </div>
                             <div className="flex justify-center gap-3">
                                 <div className="text-2xl font-bold text-secondary gap-2">
@@ -417,17 +347,6 @@ export default function HomeStandard({ projects, operations }) {
                     </button>
                     {showMoreIrec &&
                         <>
-                            <div className="board-desc">Procured by </div>
-                            <div className="flex justify-center gap-3">
-                                <div className="text-2xl font-bold text-secondary gap-2">
-                                    <span className="text-xs text-gray-700 me-1">ALLCOT</span>
-                                    {irecsVolumeAll.toLocaleString('es-ES')}
-                                </div>
-                                <div className="text-2xl font-bold text-secondary gap-2">
-                                    <span className="text-xs text-gray-700 me-1">Misha</span>
-                                    {irecsVolumeMisha.toLocaleString('es-ES')}
-                                </div>
-                            </div>
                             <div className="board-desc">Availability </div>
                             <div className="flex justify-center gap-3">
                                 <div className="text-2xl font-bold text-secondary gap-2">
@@ -463,17 +382,6 @@ export default function HomeStandard({ projects, operations }) {
                     </button>
                     {showMoreCsa &&
                         <>
-                            <div className="board-desc">Procured by </div>
-                            <div className="flex justify-center gap-3">
-                                <div className="text-2xl font-bold text-secondary gap-2">
-                                    <span className="text-xs text-gray-700 me-1">ALLCOT</span>
-                                    {csaVolumeAll.toLocaleString('es-ES')}
-                                </div>
-                                <div className="text-2xl font-bold text-secondary gap-2">
-                                    <span className="text-xs text-gray-700 me-1">Misha</span>
-                                    {csaVolumeMisha.toLocaleString('es-ES')}
-                                </div>
-                            </div>
                             <div className="board-desc">Availability </div>
                             <div className="flex justify-center gap-3">
                                 <div className="text-2xl font-bold text-secondary gap-2">
@@ -509,17 +417,6 @@ export default function HomeStandard({ projects, operations }) {
                     </button>
                     {showMorePlan &&
                         <>
-                            <div className="board-desc">Procured by </div>
-                            <div className="flex justify-center gap-3">
-                                <div className="text-2xl font-bold text-secondary gap-2">
-                                    <span className="text-xs text-gray-700 me-1">ALLCOT</span>
-                                    {planVivoVolumeAll.toLocaleString('es-ES')}
-                                </div>
-                                <div className="text-2xl font-bold text-secondary gap-2">
-                                    <span className="text-xs text-gray-700 me-1">Misha</span>
-                                    {planVivoVolumeMisha.toLocaleString('es-ES')}
-                                </div>
-                            </div>
                             <div className="board-desc">Availability </div>
                             <div className="flex justify-center gap-3">
                                 <div className="text-2xl font-bold text-secondary gap-2">
@@ -555,17 +452,6 @@ export default function HomeStandard({ projects, operations }) {
                     </button>
                     {showMoreCar &&
                         <>
-                            <div className="board-desc">Procured by </div>
-                            <div className="flex justify-center gap-3">
-                                <div className="text-2xl font-bold text-secondary gap-2">
-                                    <span className="text-xs text-gray-700 me-1">ALLCOT</span>
-                                    {carVolumeAll.toLocaleString('es-ES')}
-                                </div>
-                                <div className="text-2xl font-bold text-secondary gap-2">
-                                    <span className="text-xs text-gray-700 me-1">Misha</span>
-                                    {carVolumeMisha.toLocaleString('es-ES')}
-                                </div>
-                            </div>
                             <div className="board-desc">Availability </div>
                             <div className="flex justify-center gap-3">
                                 <div className="text-2xl font-bold text-secondary gap-2">
@@ -601,17 +487,6 @@ export default function HomeStandard({ projects, operations }) {
                     </button>
                     {showMoreBio &&
                         <>
-                            <div className="board-desc">Procured by </div>
-                            <div className="flex justify-center gap-3">
-                                <div className="text-2xl font-bold text-secondary gap-2">
-                                    <span className="text-xs text-gray-700 me-1">ALLCOT</span>
-                                    {bioCarbonVolumeAll.toLocaleString('es-ES')}
-                                </div>
-                                <div className="text-2xl font-bold text-secondary gap-2">
-                                    <span className="text-xs text-gray-700 me-1">Misha</span>
-                                    {bioCarbonVolumeMisha.toLocaleString('es-ES')}
-                                </div>
-                            </div>
                             <div className="board-desc">Availability </div>
                             <div className="flex justify-center gap-3">
                                 <div className="text-2xl font-bold text-secondary gap-2">
