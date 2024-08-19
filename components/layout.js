@@ -14,7 +14,7 @@ export default function Layout({ children }) {
   }
 
   return (
-    <div className="bg-green-600 min-h-screen ">
+    <div className="bg-secondary min-h-screen ">
       {/* el hmaburgesa estara d-block en pantallas md  */}
       <div className="block md:hidden flex items-center p-4">
         <button onClick={collapseData}>
@@ -23,14 +23,12 @@ export default function Layout({ children }) {
           </svg>
         </button>
         <div className="flex grow justify-center align-center">
-          <div className='flex gap-1 mb-3' >
-            <Image className='h-10' src='/icons/allcot_icon.png' alt="icono allcot" priority={false} width={32} height={24}></Image>
-          </div>
+          Logo
         </div>
       </div>
       <div>
         <Nav showNav={showNav} setShowNav={setShowNav} />
-        <div className="bg-white flex-grow ms-2 mt-2 mr-2 mb-3 rounded-lg p-4 ">
+        <div className="bg-primary flex-grow ms-2 mt-2 mr-2 mb-3 rounded-lg p-4 ">
           {children}
         </div>
       </div>

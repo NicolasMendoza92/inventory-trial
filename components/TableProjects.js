@@ -181,13 +181,6 @@ export const TableProjects = () => {
             },
         },
         {
-            name: 'misha',
-            options: {
-                filter: true,
-                display: 'false',
-            },
-        },
-        {
             name: 'stock',
             options: {
                 filter: true,
@@ -205,13 +198,6 @@ export const TableProjects = () => {
         },
         {
             name: 'projectType',
-            options: {
-                filter: true,
-                display: 'false',
-            },
-        },
-        {
-            name: 'icroa',
             options: {
                 filter: true,
                 display: 'false',

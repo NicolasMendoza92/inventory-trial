@@ -86,7 +86,7 @@ export default function TdProjects() {
         )}
         {enable === true && (
           <>
-            <Link className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500 " href={'/projects/new'}> New project</Link>
+            <Link className="bg-secondary text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-secondary/50 " href={'/projects/new'}> New project</Link>
             <div className="flex justify-end">
               <div className="flex justify-start items-center">
                 <input
@@ -111,7 +111,6 @@ export default function TdProjects() {
           <thead>
             <tr>
               <td>Name</td>
-              <td>Sector</td>
               <td>ID</td>
               <td>Tech</td>
               <td>Country</td>
@@ -142,7 +141,6 @@ export default function TdProjects() {
             {projectFinded.map(project => (
               <tr key={project._id}>
                  <td >{(project.name).slice(0, 25)}</td>
-                <td>{project.sectorTD}</td>
                 <td>{project.projectID}</td>
                 <td>{project.tech}</td>
                 <td>{project.pais}</td>

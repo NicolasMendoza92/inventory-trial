@@ -57,10 +57,6 @@ export const TableTdProjects = () => {
             },
         },
         {
-            name: 'Sector',
-            label: 'sectorTD',
-        },
-        {
             name: 'projectID',
             label: 'ID',
             options: {

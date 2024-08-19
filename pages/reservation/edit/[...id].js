@@ -127,7 +127,7 @@ export default function EditReservePage() {
                 <div className="flex justify-center">
                     <div className="shadow-md p-3 bg-zince-300/10 flex items-center gap-2 m-3">
                         <h1>You must be logged in to edit reservations</h1>
-                        <button className="bg-green-600 rounded-lg text-white font-bold px-6 py-2" onClick={goToLogin}> Login </button>
+                        <button className="bg-secondary rounded-lg text-white font-bold px-6 py-2" onClick={goToLogin}> Login </button>
                     </div>
                 </div>
             }
@@ -138,7 +138,7 @@ export default function EditReservePage() {
                             <p> Edit reservation </p>
                         </div>
                         <div className='flex gap-2'>
-                            {session.user?.email === 'wp.co@allcot.com' ? (
+
                                 <>
                                     <button className="bg-gray-300 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-gray-200" >
                                         <Link href={'/reservations'}>
@@ -147,27 +147,14 @@ export default function EditReservePage() {
                                             </svg>
                                         </Link>
                                     </button>
-                                    <button onClick={() => deleteReserve(id)} className="bg-red-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-red-500" >
-                                        Delete
-                                    </button>
-                                </>
-                            ) :
-                                <>
-                                    <button className="bg-gray-300 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-gray-200" >
-                                        <Link href={'/reservations'}>
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
-                                            </svg>
-                                        </Link>
-                                    </button>
-                                    <button className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500" onClick={() => createOperation(id)} >
+                                    <button className="bg-secondary text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-secondary/50" onClick={() => createOperation(id)} >
                                         Convert into a sale
                                     </button>
                                     <button onClick={() => deleteReserve(id)} className="bg-red-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-red-500" >
                                         Delete
                                     </button>
                                 </>
-                            }
+                            
                         </div>
                     </div>
                     {

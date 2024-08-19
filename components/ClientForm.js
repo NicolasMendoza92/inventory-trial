@@ -92,7 +92,7 @@ export default function ClientForm({
             <form onSubmit={newClient}>
                 <div className='flex flex-wrap gap-3'>
                     <div className='w-96'>
-                        <label className='text-gray-400'>Name</label>
+                        <label className='text-secondary_b'>Name</label>
                         <input
                             type='text'
                             placeholder='ej: NE Climate A/S'
@@ -100,27 +100,26 @@ export default function ClientForm({
                             onChange={e => setNombreCliente(e.target.value)} />
                     </div>
                     <div className='w-96'>
-                        <label className='text-gray-400'>Main Contact</label>
+                        <label className='text-secondary_b'>Name Contact</label>
                         <input
                             type='text'
-                            placeholder='ej: neclimate@gmail.com'
+                            placeholder='ej: Jhon Doe'
                             value={mainContact}
                             onChange={e => setMainContact(e.target.value)} />
                     </div>
                     <div className='w-96'>
-                        <label className='text-gray-400'>Contact</label>
+                        <label className='text-secondary_b'>Email Contact</label>
                         <input
                             type='text'
-                            placeholder='ej: Lionel Messi '
+                            placeholder='ej: jhon@mail.com '
                             value={contacto}
                             onChange={e => setContacto(e.target.value)} />
                     </div>
                 </div>
                 <div className='grid grid-cols-1 md:grid-cols-6 gap-2'>
                     <div>
-                        <label className='text-gray-400'>Type</label>
+                        <label className='text-secondary_b'>Type</label>
                         <select
-                            className="flex border border-gray-200 bg-zinc-100/40"
                             value={tipoCliente}
                             onChange={e => setTipoCliente(e.target.value)}>
                             <option value="">-no selected-</option>
@@ -135,9 +134,8 @@ export default function ClientForm({
                         </select>
                     </div>
                     <div>
-                        <label className='text-gray-400'>Division</label>
+                        <label className='text-secondary_b'>Division</label>
                         <select
-                            className="flex border border-gray-200 bg-zinc-100/40"
                             value={division}
                             onChange={e => setDivision(e.target.value)}>
                             <option value="">-no selected-</option>
@@ -151,7 +149,7 @@ export default function ClientForm({
                         <CountryClient paisCliente={paisCliente} setPaisCliente={setPaisCliente} />
                     </div>
                 </div>
-                <label className='text-gray-400'>Notas</label>
+                <label className='text-secondary_b'>Notas</label>
                 <textarea
                     placeholder='ej: account number, SAP ID, more contacts... etc '
                     value={comentarios}
@@ -161,7 +159,7 @@ export default function ClientForm({
                         {error}
                     </div>
                 )}
-                <button type="submit" className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500 focus:outline-none focus:ring focus:ring-green-400">
+                <button type="submit" className="bg-secondary text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-secondary/50 focus:outline-none focus:ring focus:ring-primary_b">
                     Save
                 </button>
                 {isLoading && (

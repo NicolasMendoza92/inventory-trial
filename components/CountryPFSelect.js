@@ -260,9 +260,9 @@ export default function CountryPFSelect({ pais, setPais, setContinente, continen
     return (
         <div>
             <div>
-                <label className='text-gray-400'>Host Country *</label>
+                <label className='text-secondary_b'>Host Country *</label>
                 <select
-                    className={errorFields.pais ? "input-error" : "border border-gray-200 bg-zinc-100/40"}
+                    className={errorFields.pais ? "input-error" : ""}
                     value={pais}
                     
                     onChange={handleCountryChange}>
@@ -273,7 +273,7 @@ export default function CountryPFSelect({ pais, setPais, setContinente, continen
                 </select>
             </div>
             <div>
-                <label className='text-gray-400' >Continent </label>
+                <label className='text-secondary_b' >Continent </label>
                 <input type="text" value={continente} readOnly />
             </div>
         </div>

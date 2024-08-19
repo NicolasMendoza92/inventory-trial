@@ -13,8 +13,8 @@ export default function App({
     return (
         <>
             <Head>
-                <title>APP ALLCOT Inventory</title>
-                <link rel="icon" href="icons/allcot_icon.png" sizes="any" />
+                <title>Inventory</title>
+                <link rel="icon" href="" sizes="any" />
             </Head>
             <SessionProvider session={session}>
                 <ProjectSearchProvider>

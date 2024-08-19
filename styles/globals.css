@@ -8,18 +8,18 @@ body {
 }
 
 .home-stats-titles{
-  @apply text-green-600 text-2xl text-center m-2 uppercase font-semibold;
+  @apply text-secondary text-2xl text-center m-2 uppercase font-semibold;
 }
 .adverts-pending{
-  @apply text-black text-2xl text-center m-2 font-semibold;
+  @apply text-secondary_b text-2xl text-center m-2 font-semibold;
 }
 
 p{
-  @apply text-green-600 text-3xl;
+  @apply text-secondary text-3xl;
 }
 
 input, textarea, select {
-  @apply py-2 w-full bg-zinc-100/40 border border-gray-200 ;
+  @apply py-2 w-full border border-primary_b rounded-md ;
 }
 
 table.basic{
@@ -28,55 +28,55 @@ table.basic{
 table.basic thead tr td,
 table.basic thead tr th
 {
-  @apply text-xs text-gray-800 bg-green-100 uppercase border border-gray-200 border-gray-200 px-1 ;
+  @apply text-xs text-primary_b bg-primary uppercase border border-primary_b border-primary_b px-1 ;
 }
 table.basic tr td{
-  @apply px-1  border border-gray-200;
+  @apply px-1  border border-primary_b;
 }
 table.basic a{
   @apply px-1 rounded-sm inline-flex items-center gap-1 text-xs;
 }
 .nota-imp{
-  @apply text-gray-400 text-xs;
+  @apply text-primary_b text-xs;
 }
 .range_input{
-  accent-color: green;
+  accent-color: orange;
 }
 .board-grid {
   @apply grid  grid-cols-1 md:grid-cols-3 gap-4;
 }
 .board-card{
-  @apply bg-white shadow-md p-4 text-green-600 text-center;
+  @apply bg-white shadow-md p-4  text-center rounded-md;
 }
 .board-card-2{
-  @apply bg-green-100 rounded-md shadow-md p-4 text-green-600 text-center cursor-pointer hover:bg-green-200;
+  @apply bg-white rounded-md shadow-md p-4 text-center cursor-pointer hover:bg-primary_b/50;
 }
 .board-card-alert{
-  @apply bg-red-100 shadow-md p-1 text-black text-center;
+  @apply bg-red-100 shadow-md p-1 text-primary_b text-center;
 }
 .board-card-link{
-  @apply  shadow-md p-4 text-center cursor-pointer hover:bg-green-200;
+  @apply bg-white shadow-md p-4 text-center cursor-pointer hover:bg-primary_b/50;
 }
 .board-title{
-  @apply uppercase text-gray-500 font-bold text-xs text-center;
+  @apply uppercase text-secondary font-bold text-xs text-center;
 }
 .board-title-alert{
-  @apply uppercase text-gray-500 font-bold text-base text-center;
+  @apply uppercase text-secondary font-bold text-base text-center;
 }
 .board-title-std{
-  @apply uppercase bg-green-100 text-gray-500 font-bold text-xl rounded-md text-center cursor-pointer hover:bg-green-200;
+  @apply uppercase bg-primary text-secondary font-bold text-xl rounded-md text-center cursor-pointer hover:bg-primary_b/50;
 }
 .board-number{
-  @apply text-3xl text-center text-green-600 font-bold my-1;
+  @apply text-3xl text-center text-secondary font-bold my-1;
 }
 .board-number-alert{
   @apply text-4xl text-center text-red-600  font-bold my-1;
 }
 .board-desc{
-  @apply text-xs text-gray-400;
+  @apply text-xs text-secondary_b;
 }
 .square-client{
-  @apply bg-white shadow-md p-4 text-green-700 text-center;
+  @apply bg-white shadow-md p-4 text-primary_b text-center;
 }
 
 /* ESTILOS TRADICIONALES */
@@ -101,6 +101,8 @@ table.basic a{
 /* Handle errors en los missing inputs  */
 .input-error {
   border: 2px solid red;
+  background-color: rgb(190, 147, 147);
+  color: white;
 }
 
 .error {

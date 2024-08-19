@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 export default function Nav({ showNav, setShowNav }) {
 
     const inactiveLink = 'flex gap-1 p-1 text-white';
-    const activeLink = 'flex gap-1 p-1 text-green-300 rounded';
+    const activeLink = 'flex gap-1 p-1 text-primary_b rounded';
     const [hoy, setHoy] = useState(null)
 
     useEffect(() => {
@@ -26,7 +26,7 @@ export default function Nav({ showNav, setShowNav }) {
     }
 
     return (
-        <div className={(showNav ? 'left-0 flex-col' : '-left-full flex-wrap ') + ' flex top-0 p-3 bg-green-600 fixed w-full h-full gap-3 p-3 md:static md:w-auto transition-all z-10 '}>
+        <div className={(showNav ? 'left-0 flex-col' : '-left-full flex-wrap ') + ' flex top-0 p-3 bg-secondary fixed w-full h-full gap-3 p-3 md:static md:w-auto transition-all z-10 '}>
             <div className="flex items-center justify-between ">
                 <div className="block md:hidden flex ">
                     <button onClick={collapseData}>
@@ -35,8 +35,8 @@ export default function Nav({ showNav, setShowNav }) {
                         </svg>
                     </button>
                 </div>
-                <Link href={"/"} className='flex gap-1' >
-                    <Image className='h-9' src='/icons/allcot_icon.png' alt="logo allcot" width={32} height={24}></Image>
+                <Link href={"/"} className='flex gap-1 text-primary' >
+                    LOGO
                 </Link>
             </div>
             <Link href={"/"} className={pathname === ('/') ? activeLink : inactiveLink}>
@@ -45,7 +45,7 @@ export default function Nav({ showNav, setShowNav }) {
                 </svg>
                 Dashboard
             </Link>
-            <Link href={"/inventary"} className={pathname.includes('/inventary') ? activeLink : inactiveLink}>
+            <Link href={"/inventory"} className={pathname.includes('/inventory') ? activeLink : inactiveLink}>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0l-3-3m3 3l3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
                 </svg>
@@ -74,7 +74,7 @@ export default function Nav({ showNav, setShowNav }) {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z" />
                 </svg>
 
-                TD
+                Tech Deparment
             </Link>
             <div className=" flex items-center text-white ms-auto ">
                 {hoy}

@@ -164,9 +164,8 @@ export default function ReservForm({
             <form onSubmit={newReserve}>
                 <div className='grid grid-cols-1 md:grid-cols-6 gap-2'>
                     <div>
-                        <label className='text-gray-400'>Team</label>
+                        <label className='text-secondary_b'>Team</label>
                         <select
-                            className="flex border border-gray-200 bg-zinc-100/40"
                             value={team}
                             onChange={e => setTeam(e.target.value)}>
                             <option value="">-no selected-</option>
@@ -176,23 +175,20 @@ export default function ReservForm({
                         </select>
                     </div>
                     <div>
-                        <label className='text-gray-400'>Own</label>
+                        <label className='text-secondary_b'>Own</label>
                         <select
-                            className="flex border border-gray-200 bg-zinc-100/40"
                             value={reserveOwn}
                             onChange={e => setReserveOwn(e.target.value)}>
                             <option value="">-no selected-</option>
-                            <option value="Danna">Danna</option>
-                            <option value="Helibeth">Helibeth</option>
-                            <option value="Nicolas">Nicolas</option>
-                            <option value="Laura">Laura</option>
-                            <option value="William">William</option>
+                            <option value="User1">User1</option>
+                            <option value="User2">User2</option>
+                            <option value="User3">User3</option>
                         </select>
                     </div>
                 </div>
                 <div className='flex-wrap'>
-                    <label className='text-gray-400'>Client</label>
-                    <select className="flex border border-gray-200 bg-zinc-100/40" value={customer} onChange={e => setCustomer(e.target.value)}>
+                    <label className='text-secondary_b'>Client</label>
+                    <select value={customer} onChange={e => setCustomer(e.target.value)}>
                         <option value="">-no selected-</option>
                         {allClients.length > 0 && allClients.map(cli => (
                             <option key={cli._id} value={cli.nombreCliente}>{cli.nombreCliente}</option>
@@ -201,7 +197,7 @@ export default function ReservForm({
                 </div>
                 <div className='grid grid-cols-1 md:grid-cols-6 gap-2'>
                     <div >
-                        <label className='text-gray-400'>Reserve price (USD)</label>
+                        <label className='text-secondary_b'>Reserve price (USD)</label>
                         <input
                             type='number'
                             placeholder='ej: 3.20 '
@@ -209,7 +205,7 @@ export default function ReservForm({
                             onChange={e => setPrice(e.target.value)} />
                     </div>
                     <div >
-                        <label className='text-gray-400'>Volume</label>
+                        <label className='text-secondary_b'>Volume</label>
                         <input
                             type='number'
                             placeholder='ej: 4512'
@@ -219,9 +215,8 @@ export default function ReservForm({
                 </div>
                 <div className='grid grid-cols-1 md:grid-cols-6 gap-2'>
                     <div >
-                        <label className='text-gray-400'>Status</label>
+                        <label className='text-secondary_b'>Status</label>
                         <select
-                            className="flex border border-gray-200 bg-zinc-100/40"
                             value={status}
                             onChange={e => setStatus(e.target.value)}>
                             <option value="">-no selected-</option>
@@ -230,18 +225,17 @@ export default function ReservForm({
                         </select>
                     </div>
                     <div >
-                        <label className='text-gray-400'>Expiration date</label>
+                        <label className='text-secondary_b'>Expiration date</label>
                         <input
                             type='date'
-                            className="flex border border-gray-200 bg-zinc-100/40"
                             value={expiration? new Date (expiration).toISOString().slice(0, 10): expiration}
                             min={disablePastDate()}
                             onChange={e => setExpiration(e.target.value)} />
                     </div>
                 </div>
-                <label className='text-gray-400'>Comments</label>
+                <label className='text-secondary_b'>Comments</label>
                 <textarea
-                    placeholder='ej: creditos de Misha '
+                    placeholder='Some text here '
                     value={comments}
                     onChange={e => setComments(e.target.value)} />
                 {error && (
@@ -249,7 +243,7 @@ export default function ReservForm({
                         {error}
                     </div>
                 )}
-                <button type="submit" className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500 focus:outline-none focus:ring focus:ring-green-400">
+                <button type="submit" className="bg-secondary text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-secondary/50 focus:outline-none focus:ring focus:ring-primary_b">
                     Save
                 </button>
             </form>

@@ -3,7 +3,7 @@ import * as XLSX from "xlsx";
 import Spinner from "./Spinner";
 import axios from "axios";
 
-const ExportInventary = () => {
+const Exportinventory = () => {
 
   // creo states para guardar todas las operaciones 
   const [allprojects, setAllprojects] = useState([]);
@@ -38,7 +38,7 @@ const ExportInventary = () => {
   return (
     <>
       {!loading ? (
-        <button className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500 " onClick={handleDownload}>
+        <button className="bg-secondary text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-secondary/50 " onClick={handleDownload}>
           Export excel
         </button>
       ) : (
@@ -51,8 +51,6 @@ const ExportInventary = () => {
           <thead>
             <tr>
               <td>TEAM</td>
-              <td>MAILING</td>
-              <td>BROKER LIST</td>
               <td>SUPPLIER</td>
               <td>TYPE</td>
               <td>INETRNAL NOTES</td>
@@ -71,20 +69,16 @@ const ExportInventary = () => {
               <td>PURCHASE PRICE</td>
               <td>CCP</td>
               <td>SDG</td>
-              <td>MISHA</td>
               <td>NOTES</td>
               <td>P.TYPE</td>
               <td>MARKET</td>
               <td>AVAILABILITY</td>
-              <td>SITE</td>
             </tr>
           </thead>
           <tbody>
             {allprojects.map(pr => (
               <tr key={pr._id}>
                 <td>{pr.equipo}</td>
-                <td>{pr.mailingList}</td>
-                <td>{pr.brokerList}</td>
                 <td>{pr.proveedor}</td>
                 <td>{pr.contrato}</td>
                 <td>{pr.notas}</td>
@@ -107,12 +101,10 @@ const ExportInventary = () => {
                 <td>
                   {pr.sdgSelected.map(s => <React.Fragment key={s}>{s}*</React.Fragment>)}
                 </td>
-                <td>{pr.misha}</td>
                 <td>{pr.notasExtra}</td>
                 <td>{pr.projectType}</td>
                 <td>{pr.regulatedMarket}</td>
                 <td>{pr.stock}</td>
-                <td>{pr.sede}</td>
               </tr>
             ))}
           </tbody>
@@ -122,4 +114,4 @@ const ExportInventary = () => {
   );
 };
 
-export default ExportInventary;
+export default Exportinventory;

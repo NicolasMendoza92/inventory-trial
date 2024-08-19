@@ -41,7 +41,7 @@ const ExportTdProjects = () => {
   return (
     <>
       {!loading ? (
-        <button className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500 " onClick={handleDownload}>
+        <button className="bg-secondary text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-secondary/50 " onClick={handleDownload}>
           Export excel
         </button>
       ) : (

@@ -1,4 +1,4 @@
-import ExportInventary from "@/components/ExportInventary";
+import Exportinventory from "@/components/Exportinventory";
 import Spinner from "@/components/Spinner";
 import Layout from "@/components/layout";
 import { ProjectSearchContext } from "@/context/ProjectSearchContext";
@@ -78,12 +78,12 @@ export default function Projects() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z" />
               </svg>
             </Link>
-            <ExportInventary />
+            <Exportinventory />
           </div>
         )}
         {enable === true && (
           <>
-            <Link className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500 " href={'/projects/new'}> New project</Link>
+            <Link className="bg-secondary text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-secondary/50 " href={'/projects/new'}> New project</Link>
             <div className="flex justify-end">
               <div className="flex justify-start items-center">
                 <input
@@ -98,7 +98,7 @@ export default function Projects() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z" />
                 </svg>
               </Link>
-              <ExportInventary />
+              <Exportinventory />
             </div>
           </>
         )}
@@ -179,7 +179,7 @@ export default function Projects() {
                 {session?.user.email === 'demo@gmail.com' && (
                   <td className="flex py-2">
                     {/* aca le paso el id del proyecto, y por ende va a editar el volumen con ese id */}
-                    <Link className="bg-green-600 text-white px-1 ms-1 rounded shadow-sm hover:bg-green-500" href={'/projects/operation/' + project._id}>
+                    <Link className="bg-secondary text-white px-1 ms-1 rounded shadow-sm hover:bg-secondary/50" href={'/projects/operation/' + project._id}>
                       <div className="group relative w-max">
                         <button>
                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -208,7 +208,7 @@ export default function Projects() {
                 {enable === true &&
                   <td className="flex py-2">
                     {/* aca le paso el id del proyecto, y por ende va a editar el volumen con ese id */}
-                    <Link className="bg-green-600 text-white px-1 ms-1 rounded shadow-sm hover:bg-green-500" href={'/projects/operation/' + project._id}>
+                    <Link className="bg-secondary text-white px-1 ms-1 rounded shadow-sm hover:bg-secondary/50" href={'/projects/operation/' + project._id}>
                       <div className="group relative w-max">
                         <button>
                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

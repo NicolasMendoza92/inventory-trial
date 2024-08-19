@@ -27,7 +27,7 @@ export default function DeleteProjectPage() {
 
     async function deleteProject() {
         await axios.delete('/api/projects?id=' + id);
-        router.push('/inventary')
+        router.push('/inventory')
     }
 
     function goToLogin() {
@@ -40,7 +40,7 @@ export default function DeleteProjectPage() {
                 <div className="flex justify-center">
                     <div className="shadow-md p-3 bg-zince-300/10 flex items-center gap-2 m-3">
                         <h1>You must be logged in to handle inventory</h1>
-                        <button className="bg-green-600 rounded-lg text-white font-bold px-6 py-2" onClick={goToLogin}> Login </button>
+                        <button className="bg-secondary rounded-lg text-white font-bold px-6 py-2" onClick={goToLogin}> Login </button>
                     </div>
                 </div>
             }

@@ -123,7 +123,7 @@ export default function techDeparment() {
     <Layout>
       {isLoading ? <div className='flex justify-center items-center m-auto'><Spinner /></div> : <>
         <div className='flex justify-center'>
-          <Link className=" bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500 " href={'/techDeparment/tdProjects'}> See Project list</Link>
+          <Link className=" bg-secondary text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-secondary/50 " href={'/techDeparment/tdProjects'}> See Project list</Link>
         </div>
 
         <div className="p-3">

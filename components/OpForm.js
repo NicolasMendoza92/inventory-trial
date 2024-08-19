@@ -261,7 +261,7 @@ export default function OpForm({
     return (
         <div>
             {!relatedProjectID && (
-                <div className='shadow-lg   bg-zince-300/10 flex flex-col items-start gap-2 m-3' >
+                <div className='shadow-lg bg-white flex flex-col items-start gap-2 m-3 rounded-md' >
                     <div> {standar} {projectID} {name} - {pais}</div>
                     <div>Vintage: {vintage}</div>
                     <div>Volume available: <b>{volumen}</b> </div>
@@ -272,9 +272,8 @@ export default function OpForm({
             )}
             <form onSubmit={newSale}>
                 <div className='flex-wrap'>
-                    <label className='text-gray-400'>Transaction</label>
+                    <label className='text-secondary_b'>Transaction</label>
                     <select
-                        className="flex border border-gray-200 bg-zinc-100/40"
                         value={transaction}
                         onChange={e => handleTrasnsaction(e)}>
                         <option value="">-no selected-</option>
@@ -283,9 +282,8 @@ export default function OpForm({
                     </select>
                 </div>
                 <div className='flex-wrap'>
-                    <label className='text-gray-400'>Team</label>
+                    <label className='text-secondary_b'>Team</label>
                     <select
-                        className="flex border border-gray-200 bg-zinc-100/40"
                         value={equipo}
                         onChange={e => setEquipo(e.target.value)}>
                         <option value="">-no selected-</option>
@@ -295,8 +293,8 @@ export default function OpForm({
                     </select>
                 </div>
                 <div className='flex-wrap'>
-                    <label className='text-gray-400'>Client</label>
-                    <select className="flex border border-gray-200 bg-zinc-100/40" value={cliente} onChange={e => setCliente(e.target.value)}>
+                    <label className='text-secondary_b'>Client</label>
+                    <select  value={cliente} onChange={e => setCliente(e.target.value)}>
                         <option value="">-no selected-</option>
                         {allClients.length > 0 && allClients.map(cli => (
                             <option key={cli._id} value={cli.nombreCliente}>{cli.nombreCliente}</option>
@@ -305,8 +303,8 @@ export default function OpForm({
                 </div>
                 <div className='grid md:grid-cols-2 gap-2 items-center'>
                     <div>
-                        {transaction === 'Sale' && <label className='text-gray-400'>Sell price (USD)</label>}
-                        {transaction === 'Purchase' && <label className='text-gray-400'>Purchase price (USD)</label>}
+                        {transaction === 'Sale' && <label className='text-secondary_b'>Sell price (USD)</label>}
+                        {transaction === 'Purchase' && <label className='text-secondary_b'>Purchase price (USD)</label>}
                         <input
                             type='number'
                             placeholder='ex: 3.20 '
@@ -316,18 +314,18 @@ export default function OpForm({
 
                     {transaction === 'Sale' &&
                         <div>
-                            <label className='text-gray-400'>Vs price (USD)</label>
+                            <label className='text-secondary_b'>Vs price (USD)</label>
                             <input
                                 type='number'
                                 placeholder='Place here the purchase price, ex: 1.60 '
                                 value={versusPrice}
                                 onChange={e => setVersusPrice(e.target.value)} />
-                            <span className='text-gray-400 text-xs'>To calculate the net profit, place here, the price at which this project was purchased.</span>
+                            <span className='text-secondary_b text-xs'>To calculate the net profit, place here, the price at which this project was purchased.</span>
                         </div>
                     }
                 </div>
                 <div className='flex-wrap'>
-                    <label className='text-gray-400'>Volume</label>
+                    <label className='text-secondary_b'>Volume</label>
                     <input
                         type='number'
                         placeholder='ej: 4512'
@@ -336,9 +334,8 @@ export default function OpForm({
                 </div>
                 <div className='flex gap-2'>
                     <div className='flex-wrap'>
-                        <label className='text-gray-400'>Delivery Status</label>
+                        <label className='text-secondary_b'>Delivery Status</label>
                         <select
-                            className="flex border border-gray-200 bg-zinc-100/40"
                             value={delivery}
                             onChange={e => handleDelivery(e)}>
                             <option value="">-no selected-</option>
@@ -349,10 +346,9 @@ export default function OpForm({
                     <div>
                         {delivery === "Pending" && (
                             <>
-                                <label className='text-gray-400'>Delivery date</label>
+                                <label className='text-secondary_b'>Delivery date</label>
                                 <input
                                     type='date'
-                                    className="flex border border-gray-200 bg-zinc-100/40"
                                     value={deliveryDate ? new Date(deliveryDate).toISOString().slice(0, 10) : deliveryDate}
                                     min={disablePastDate()}
                                     onChange={e => setDeliveryDate(e.target.value)} />
@@ -366,9 +362,8 @@ export default function OpForm({
                 </div>
                 <div className='flex gap-2'>
                     <div className='flex-wrap'>
-                        <label className='text-gray-400'>Payment Status</label>
+                        <label className='text-secondary_b'>Payment Status</label>
                         <select
-                            className="flex border border-gray-200 bg-zinc-100/40"
                             value={payment}
                             onChange={e => handlePayment(e)}>
                             <option value="">-no selected-</option>
@@ -379,10 +374,9 @@ export default function OpForm({
                     <div>
                         {payment === "Pending" && (
                             <>
-                                <label className='text-gray-400'>Payment date</label>
+                                <label className='text-secondary_b'>Payment date</label>
                                 <input
                                     type='date'
-                                    className="flex border border-gray-200 bg-zinc-100/40"
                                     value={paymentDate ? new Date(paymentDate).toISOString().slice(0, 10) : paymentDate}
                                     min={disablePastDate()}
                                     onChange={e => setPaymentDate(e.target.value)} />
@@ -393,9 +387,9 @@ export default function OpForm({
                         )}
                     </div>
                 </div>
-                <label className='text-gray-400'>Notes</label>
+                <label className='text-secondary_b'>Notes</label>
                 <textarea
-                    placeholder='ej: creditos de Misha '
+                    placeholder='ex: credits for someone '
                     value={detalles}
                     onChange={e => setDetalles(e.target.value)} />
                 {session.user.email === 'demo@gmail.com' ? (
@@ -417,7 +411,7 @@ export default function OpForm({
                                 <Spinner />
                             </div>
                         )}
-                        <label className="w-20 h-20 cursor-pointer text-center flex flex-col items-center justify-center text-sm gap-1 rounded-sm bg-white shadow-sm border border text-gray-400">
+                        <label className="w-20 h-20 cursor-pointer text-center flex flex-col items-center justify-center text-sm gap-1 rounded-sm bg-white shadow-sm border border text-secondary_b">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
                             </svg>
@@ -427,7 +421,7 @@ export default function OpForm({
                             <input type="file" onChange={uploadFiles} className="hidden" />
                         </label>
                         {!archivos?.length && (
-                            <div className='text-gray-400'> No attached files </div>
+                            <div className='text-secondary_b'> No attached files </div>
                         )}
                     </div>
                 </>}
@@ -438,7 +432,7 @@ export default function OpForm({
                 )}
                 {session.user.email === 'demo@gmail.com' ? (
                     <h1 className='bg-red-300 text-center'>you are not enabled to save changes </h1>
-                ) : <button type="submit" className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500 focus:outline-none focus:ring focus:ring-green-400">
+                ) : <button type="submit" className="bg-secondary text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-secondary/50 focus:outline-none focus:ring focus:ring-primary_b">
                     Save
                 </button>}
 

@@ -6,7 +6,6 @@ import { mongooseConnect } from "@/lib/mongoose";
 import Operation from "@/models/Operation";
 import Project from "@/models/Projects";
 import HomeStandard from "@/components/HomeStandard";
-import HomeRegulated from "@/components/HomeRegulated";
 import HomeButtons from "@/components/HomeButtons";
 import HomeTD from "@/components/HomeTD";
 
@@ -31,9 +30,8 @@ export default function Home({operations, projects}) {
   return (
     <Layout>
       <UserInfo/>
-       <HomeStandard projects={projectsOk} operations={operations}/>
+      <HomeStandard projects={projectsOk} operations={operations}/>
       <HomeButtons projects={projectsOk}/>
-      <HomeRegulated projects={projectsOk} />
       <HomeTD projects={projectsOk} />
       <HomeStats operations={operations}/>
     </Layout>

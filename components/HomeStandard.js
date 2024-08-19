@@ -20,39 +20,39 @@ export default function HomeStandard({ projects, operations }) {
 
     const handleBtnCdm = () => {
         setProjectSearched('cdm');
-        router.push('/inventary'); 
+        router.push('/inventory'); 
     };
     const handleBtnVcs = () => {
         setProjectSearched('vcs');
-        router.push('/inventary'); 
+        router.push('/inventory'); 
     };
     const handleBtnGs = () => {
         setProjectSearched('GS');
-        router.push('/inventary'); 
+        router.push('/inventory'); 
     };
     const handleBtnCer = () => {
         setProjectSearched('Cercarbono');
-        router.push('/inventary'); 
+        router.push('/inventory'); 
     };
     const handleBtnCar = () => {
         setProjectSearched('car');
-        router.push('/inventary'); 
+        router.push('/inventory'); 
     };
     const handleBtnIrec = () => {
         setProjectSearched('i-recs');
-        router.push('/inventary'); 
+        router.push('/inventory'); 
     };
     const handleBtnCsa = () => {
         setProjectSearched('CSA');
-        router.push('/inventary'); 
+        router.push('/inventory'); 
     };
     const handleBtnPlan = () => {
         setProjectSearched('plan vivo');
-        router.push('/inventary'); 
+        router.push('/inventory'); 
     };
     const handleBtnBio = () => {
         setProjectSearched('Bio carbon');
-        router.push('/inventary'); 
+        router.push('/inventory'); 
     };
 
     // Deliveries and payment del dia de hoy 
@@ -221,36 +221,36 @@ export default function HomeStandard({ projects, operations }) {
                     <div className="flex justify-center gap-3">
                         <div>
                             <span className="text-xs text-gray-700">Own</span>
-                            <div className="text-2xl font-bold text-green-600">{cdmVolumeOwn.toLocaleString('es-ES')}</div>
+                            <div className="text-2xl font-bold text-secondary">{cdmVolumeOwn.toLocaleString('es-ES')}</div>
                         </div>
                         <div>
                             <span className="text-xs text-gray-700">MKT Agreement</span>
-                            <div className="text-2xl font-bold text-green-600">{cdmVolumeMkt.toLocaleString('es-ES')}</div>
+                            <div className="text-2xl font-bold text-secondary">{cdmVolumeMkt.toLocaleString('es-ES')}</div>
                         </div>
                     </div>
-                    <button onClick={() => setShowMoreCdm(!showMoreCdm)} className="text-xs text-gray-600 font-bold cursor-pointer hover:text-green-600">
+                    <button onClick={() => setShowMoreCdm(!showMoreCdm)} className="text-xs text-gray-600 font-bold cursor-pointer hover:text-secondary">
                         {showMoreCdm ? 'See Less' : 'See More...'}
                     </button>
                     {showMoreCdm &&
                         <>
                             <div className="board-desc">Procured by </div>
                             <div className="flex justify-center gap-3">
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">ALLCOT</span>
                                     {cdmVolumeAll.toLocaleString('es-ES')}
                                 </div>
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">Misha</span>
                                     {cdmVolumeMisha.toLocaleString('es-ES')}
                                 </div>
                             </div>
                             <div className="board-desc">Availability </div>
                             <div className="flex justify-center gap-3">
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">Now</span>
                                     {cdmVolumeNow.toLocaleString('es-ES')}
                                 </div>
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">Future</span>
                                     {cdmVolumeFuture.toLocaleString('es-ES')}
                                 </div>
@@ -267,36 +267,36 @@ export default function HomeStandard({ projects, operations }) {
                     <div className="flex justify-center gap-3">
                         <div>
                             <span className="text-xs text-gray-700">Own</span>
-                            <div className="text-2xl font-bold text-green-600">{vcsVolumeOwn.toLocaleString('es-ES')}</div>
+                            <div className="text-2xl font-bold text-secondary">{vcsVolumeOwn.toLocaleString('es-ES')}</div>
                         </div>
                         <div>
                             <span className="text-xs text-gray-700">MKT Agreement</span>
-                            <div className="text-2xl font-bold text-green-600">{vcsVolumeMkt.toLocaleString('es-ES')}</div>
+                            <div className="text-2xl font-bold text-secondary">{vcsVolumeMkt.toLocaleString('es-ES')}</div>
                         </div>
                     </div>
-                    <button onClick={() => setShowMoreVcs(!showMoreVcs)} className="text-xs text-gray-600 font-bold cursor-pointer hover:text-green-600">
+                    <button onClick={() => setShowMoreVcs(!showMoreVcs)} className="text-xs text-gray-600 font-bold cursor-pointer hover:text-secondary">
                         {showMoreVcs ? 'See Less' : 'See More...'}
                     </button>
                     {showMoreVcs &&
                         <>
                             <div className="board-desc">Procured by </div>
                             <div className="flex justify-center gap-3">
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">ALLCOT</span>
                                     {vcsVolumeAll.toLocaleString('es-ES')}
                                 </div>
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">Misha</span>
                                     {vcsVolumeMisha.toLocaleString('es-ES')}
                                 </div>
                             </div>
                             <div className="board-desc">Availability </div>
                             <div className="flex justify-center gap-3">
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">Now</span>
                                     {vcsVolumeNow.toLocaleString('es-ES')}
                                 </div>
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">Future</span>
                                     {vcsVolumeFuture.toLocaleString('es-ES')}
                                 </div>
@@ -313,36 +313,36 @@ export default function HomeStandard({ projects, operations }) {
                     <div className="flex justify-center gap-3">
                         <div>
                             <span className="text-xs text-gray-700">Own</span>
-                            <div className="text-2xl font-bold text-green-600">{gsVolumeOwn.toLocaleString('es-ES')}</div>
+                            <div className="text-2xl font-bold text-secondary">{gsVolumeOwn.toLocaleString('es-ES')}</div>
                         </div>
                         <div>
                             <span className="text-xs text-gray-700">MKT Agreement</span>
-                            <div className="text-2xl font-bold text-green-600">{gsVolumeMkt.toLocaleString('es-ES')}</div>
+                            <div className="text-2xl font-bold text-secondary">{gsVolumeMkt.toLocaleString('es-ES')}</div>
                         </div>
                     </div>
-                    <button onClick={() => setShowMoreGs(!showMoreGs)} className="text-xs text-gray-600 font-bold cursor-pointer hover:text-green-600">
+                    <button onClick={() => setShowMoreGs(!showMoreGs)} className="text-xs text-gray-600 font-bold cursor-pointer hover:text-secondary">
                         {showMoreGs ? 'See Less' : 'See More...'}
                     </button>
                     {showMoreGs &&
                         <>
                             <div className="board-desc">Procured by </div>
                             <div className="flex justify-center gap-3">
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">ALLCOT</span>
                                     {gsVolumeAll.toLocaleString('es-ES')}
                                 </div>
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">Misha</span>
                                     {gsVolumeMisha.toLocaleString('es-ES')}
                                 </div>
                             </div>
                             <div className="board-desc">Availability </div>
                             <div className="flex justify-center gap-3">
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">Now</span>
                                     {gsVolumeNow.toLocaleString('es-ES')}
                                 </div>
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">Future</span>
                                     {gsVolumeFuture.toLocaleString('es-ES')}
                                 </div>
@@ -359,36 +359,36 @@ export default function HomeStandard({ projects, operations }) {
                     <div className="flex justify-center gap-3">
                         <div>
                             <span className="text-xs text-gray-700">Own</span>
-                            <div className="text-2xl font-bold text-green-600">{cercarbonoVolumeOwn.toLocaleString('es-ES')}</div>
+                            <div className="text-2xl font-bold text-secondary">{cercarbonoVolumeOwn.toLocaleString('es-ES')}</div>
                         </div>
                         <div>
                             <span className="text-xs text-gray-700">MKT Agreement</span>
-                            <div className="text-2xl font-bold text-green-600">{cercarbonoVolumeMkt.toLocaleString('es-ES')}</div>
+                            <div className="text-2xl font-bold text-secondary">{cercarbonoVolumeMkt.toLocaleString('es-ES')}</div>
                         </div>
                     </div>
-                    <button onClick={() => setShowMoreCer(!showMoreCer)} className="text-xs text-gray-600 font-bold cursor-pointer hover:text-green-600">
+                    <button onClick={() => setShowMoreCer(!showMoreCer)} className="text-xs text-gray-600 font-bold cursor-pointer hover:text-secondary">
                         {showMoreCer ? 'See Less' : 'See More...'}
                     </button>
                     {showMoreCer &&
                         <>
                             <div className="board-desc">Procured by </div>
                             <div className="flex justify-center gap-3">
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">ALLCOT</span>
                                     {cercarbonoVolumeAll.toLocaleString('es-ES')}
                                 </div>
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">Misha</span>
                                     {cercarbonoVolumeMisha.toLocaleString('es-ES')}
                                 </div>
                             </div>
                             <div className="board-desc">Availability </div>
                             <div className="flex justify-center gap-3">
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">Now</span>
                                     {cercarbonoVolumeNow.toLocaleString('es-ES')}
                                 </div>
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">Future</span>
                                     {cercarbonoVolumeFuture.toLocaleString('es-ES')}
                                 </div>
@@ -405,36 +405,36 @@ export default function HomeStandard({ projects, operations }) {
                     <div className="flex justify-center gap-3">
                         <div>
                             <span className="text-xs text-gray-700">Own</span>
-                            <div className="text-2xl font-bold text-green-600">{irecsVolumeOwn.toLocaleString('es-ES')}</div>
+                            <div className="text-2xl font-bold text-secondary">{irecsVolumeOwn.toLocaleString('es-ES')}</div>
                         </div>
                         <div>
                             <span className="text-xs text-gray-700">MKT Agreement</span>
-                            <div className="text-2xl font-bold text-green-600">{irecsVolumeMkt.toLocaleString('es-ES')}</div>
+                            <div className="text-2xl font-bold text-secondary">{irecsVolumeMkt.toLocaleString('es-ES')}</div>
                         </div>
                     </div>
-                    <button onClick={() => setShowMoreIrec(!showMoreIrec)} className="text-xs text-gray-600 font-bold cursor-pointer hover:text-green-600">
+                    <button onClick={() => setShowMoreIrec(!showMoreIrec)} className="text-xs text-gray-600 font-bold cursor-pointer hover:text-secondary">
                         {showMoreIrec ? 'See Less' : 'See More...'}
                     </button>
                     {showMoreIrec &&
                         <>
                             <div className="board-desc">Procured by </div>
                             <div className="flex justify-center gap-3">
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">ALLCOT</span>
                                     {irecsVolumeAll.toLocaleString('es-ES')}
                                 </div>
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">Misha</span>
                                     {irecsVolumeMisha.toLocaleString('es-ES')}
                                 </div>
                             </div>
                             <div className="board-desc">Availability </div>
                             <div className="flex justify-center gap-3">
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">Now</span>
                                     {irecsVolumeNow.toLocaleString('es-ES')}
                                 </div>
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">Future</span>
                                     {irecsVolumeFuture.toLocaleString('es-ES')}
                                 </div>
@@ -451,36 +451,36 @@ export default function HomeStandard({ projects, operations }) {
                     <div className="flex justify-center gap-3">
                         <div>
                             <span className="text-xs text-gray-700">Own</span>
-                            <div className="text-2xl font-bold text-green-600">{csaVolumeOwn.toLocaleString('es-ES')}</div>
+                            <div className="text-2xl font-bold text-secondary">{csaVolumeOwn.toLocaleString('es-ES')}</div>
                         </div>
                         <div>
                             <span className="text-xs text-gray-700">MKT Agreement</span>
-                            <div className="text-2xl font-bold text-green-600">{csaVolumeMkt.toLocaleString('es-ES')}</div>
+                            <div className="text-2xl font-bold text-secondary">{csaVolumeMkt.toLocaleString('es-ES')}</div>
                         </div>
                     </div>
-                    <button onClick={() => setShowMoreCsa(!showMoreCsa)} className="text-xs text-gray-600 font-bold cursor-pointer hover:text-green-600">
+                    <button onClick={() => setShowMoreCsa(!showMoreCsa)} className="text-xs text-gray-600 font-bold cursor-pointer hover:text-secondary">
                         {showMoreCsa ? 'See Less' : 'See More...'}
                     </button>
                     {showMoreCsa &&
                         <>
                             <div className="board-desc">Procured by </div>
                             <div className="flex justify-center gap-3">
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">ALLCOT</span>
                                     {csaVolumeAll.toLocaleString('es-ES')}
                                 </div>
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">Misha</span>
                                     {csaVolumeMisha.toLocaleString('es-ES')}
                                 </div>
                             </div>
                             <div className="board-desc">Availability </div>
                             <div className="flex justify-center gap-3">
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">Now</span>
                                     {csaVolumeNow.toLocaleString('es-ES')}
                                 </div>
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">Future</span>
                                     {csaVolumeFuture.toLocaleString('es-ES')}
                                 </div>
@@ -497,36 +497,36 @@ export default function HomeStandard({ projects, operations }) {
                     <div className="flex justify-center gap-3">
                         <div>
                             <span className="text-xs text-gray-700">Own</span>
-                            <div className="text-2xl font-bold text-green-600">{planVivoVolumeOwn.toLocaleString('es-ES')}</div>
+                            <div className="text-2xl font-bold text-secondary">{planVivoVolumeOwn.toLocaleString('es-ES')}</div>
                         </div>
                         <div>
                             <span className="text-xs text-gray-700">MKT Agreement</span>
-                            <div className="text-2xl font-bold text-green-600">{planVivoVolumeMkt.toLocaleString('es-ES')}</div>
+                            <div className="text-2xl font-bold text-secondary">{planVivoVolumeMkt.toLocaleString('es-ES')}</div>
                         </div>
                     </div>
-                    <button onClick={() => setShowMorePlan(!showMorePlan)} className="text-xs text-gray-600 font-bold cursor-pointer hover:text-green-600">
+                    <button onClick={() => setShowMorePlan(!showMorePlan)} className="text-xs text-gray-600 font-bold cursor-pointer hover:text-secondary">
                         {showMorePlan ? 'See Less' : 'See More...'}
                     </button>
                     {showMorePlan &&
                         <>
                             <div className="board-desc">Procured by </div>
                             <div className="flex justify-center gap-3">
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">ALLCOT</span>
                                     {planVivoVolumeAll.toLocaleString('es-ES')}
                                 </div>
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">Misha</span>
                                     {planVivoVolumeMisha.toLocaleString('es-ES')}
                                 </div>
                             </div>
                             <div className="board-desc">Availability </div>
                             <div className="flex justify-center gap-3">
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">Now</span>
                                     {planVivoVolumeNow.toLocaleString('es-ES')}
                                 </div>
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">Future</span>
                                     {planVivoVolumeFuture.toLocaleString('es-ES')}
                                 </div>
@@ -543,36 +543,36 @@ export default function HomeStandard({ projects, operations }) {
                     <div className="flex justify-center gap-3">
                         <div>
                             <span className="text-xs text-gray-700">Own</span>
-                            <div className="text-2xl font-bold text-green-600">{carVolumeOwn.toLocaleString('es-ES')}</div>
+                            <div className="text-2xl font-bold text-secondary">{carVolumeOwn.toLocaleString('es-ES')}</div>
                         </div>
                         <div>
                             <span className="text-xs text-gray-700">MKT Agreement</span>
-                            <div className="text-2xl font-bold text-green-600">{carVolumeMkt.toLocaleString('es-ES')}</div>
+                            <div className="text-2xl font-bold text-secondary">{carVolumeMkt.toLocaleString('es-ES')}</div>
                         </div>
                     </div>
-                    <button onClick={() => setShowMoreCar(!showMoreCar)} className="text-xs text-gray-600 font-bold cursor-pointer hover:text-green-600">
+                    <button onClick={() => setShowMoreCar(!showMoreCar)} className="text-xs text-gray-600 font-bold cursor-pointer hover:text-secondary">
                         {showMoreCar ? 'See Less' : 'See More...'}
                     </button>
                     {showMoreCar &&
                         <>
                             <div className="board-desc">Procured by </div>
                             <div className="flex justify-center gap-3">
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">ALLCOT</span>
                                     {carVolumeAll.toLocaleString('es-ES')}
                                 </div>
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">Misha</span>
                                     {carVolumeMisha.toLocaleString('es-ES')}
                                 </div>
                             </div>
                             <div className="board-desc">Availability </div>
                             <div className="flex justify-center gap-3">
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">Now</span>
                                     {carVolumeNow.toLocaleString('es-ES')}
                                 </div>
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">Future</span>
                                     {carVolumeFuture.toLocaleString('es-ES')}
                                 </div>
@@ -589,36 +589,36 @@ export default function HomeStandard({ projects, operations }) {
                     <div className="flex justify-center gap-3">
                         <div>
                             <span className="text-xs text-gray-700">Own</span>
-                            <div className="text-2xl font-bold text-green-600">{bioCarbonVolumeOwn.toLocaleString('es-ES')}</div>
+                            <div className="text-2xl font-bold text-secondary">{bioCarbonVolumeOwn.toLocaleString('es-ES')}</div>
                         </div>
                         <div>
                             <span className="text-xs text-gray-700">MKT Agreement</span>
-                            <div className="text-2xl font-bold text-green-600">{bioCarbonVolumeMkt.toLocaleString('es-ES')}</div>
+                            <div className="text-2xl font-bold text-secondary">{bioCarbonVolumeMkt.toLocaleString('es-ES')}</div>
                         </div>
                     </div>
-                    <button onClick={() => setShowMoreBio(!showMoreBio)} className="text-xs text-gray-600 font-bold cursor-pointer hover:text-green-600">
+                    <button onClick={() => setShowMoreBio(!showMoreBio)} className="text-xs text-gray-600 font-bold cursor-pointer hover:text-secondary">
                         {showMoreBio ? 'See Less' : 'See More...'}
                     </button>
                     {showMoreBio &&
                         <>
                             <div className="board-desc">Procured by </div>
                             <div className="flex justify-center gap-3">
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">ALLCOT</span>
                                     {bioCarbonVolumeAll.toLocaleString('es-ES')}
                                 </div>
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">Misha</span>
                                     {bioCarbonVolumeMisha.toLocaleString('es-ES')}
                                 </div>
                             </div>
                             <div className="board-desc">Availability </div>
                             <div className="flex justify-center gap-3">
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">Now</span>
                                     {bioCarbonVolumeNow.toLocaleString('es-ES')}
                                 </div>
-                                <div className="text-2xl font-bold text-green-600 gap-2">
+                                <div className="text-2xl font-bold text-secondary gap-2">
                                     <span className="text-xs text-gray-700 me-1">Future</span>
                                     {bioCarbonVolumeFuture.toLocaleString('es-ES')}
                                 </div>

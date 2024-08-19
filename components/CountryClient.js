@@ -5,7 +5,6 @@ export default function CountryClient({ paisCliente, setPaisCliente }) {
         <div>
             <label className='text-gray-400'>Country</label>
             <select
-                className=" border border-gray-200 bg-zinc-100/40"
                 value={paisCliente}
                 onChange={e => setPaisCliente(e.target.value)}>
                 <option value="">-no selected-</option>
