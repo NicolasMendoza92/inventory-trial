@@ -1,4 +1,5 @@
-import Exportinventory from "@/components/Exportinventory";
+
+import Exportinventory from "@/components/ExportInventory";
 import Spinner from "@/components/Spinner";
 import Layout from "@/components/layout";
 import { ProjectSearchContext } from "@/context/ProjectSearchContext";
