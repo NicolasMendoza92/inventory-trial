@@ -81,13 +81,6 @@ export default function techDeparment() {
   const tdProjectsForecasted = projects.filter(p => p.tdInfo === 'Yes' && p.status === 'Forecasted')
   const tdProjectsOnhold = projects.filter(p => p.tdInfo === 'Yes' && p.status === 'On hold')
 
-  // TD PROJECTS BY SECTOR
-  const tdProjectsNbsAfrica = tdProjects.filter(p => p.sectorTD === 'NBS AFRICA')
-  const tdProjectsNbsLac = tdProjects.filter(p => p.sectorTD === 'NBS LAC')
-  const tdProjectsNbsSpain = tdProjects.filter(p => p.sectorTD === 'NBS SPAIN')
-  const tdProjectsPlastic = tdProjects.filter(p => p.sectorTD === 'PLASTIC')
-  const tdProjectsTbs = tdProjects.filter(p => p.sectorTD === 'TBS')
-
   // TD PROJECTS ONGOING BY STAGE
   const tdProjectsStage1 = tdProjectsOngoing.filter(p => p.stage === 'Stage 1 - Elaboration of documentation')
   const tdProjectsStage2 = tdProjectsOngoing.filter(p => p.stage === 'Stage 2 - Validation/Verification process')
@@ -103,13 +96,6 @@ export default function techDeparment() {
   const tdProjectsCancelledVol = tdProjectsCancelled.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
   const tdProjectsForecastedVol = tdProjectsForecasted.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
   const tdProjectsOnholdVol = tdProjectsOnhold.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
-
-  // VOLUMEN BY SECTOR
-  const tdProjectsNbsAfricaVol = tdProjectsNbsAfrica.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
-  const tdProjectsNbsLacVol = tdProjectsNbsLac.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
-  const tdProjectsNbsSpainVol = tdProjectsNbsSpain.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
-  const tdProjectsPlasticVol = tdProjectsPlastic.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
-  const tdProjectsTbsVol = tdProjectsTbs.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
 
   // VOLUMEN BY STAGE
   const tdProjectsStage1Vol = tdProjectsStage1.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
@@ -127,34 +113,6 @@ export default function techDeparment() {
         </div>
 
         <div className="p-3">
-          <h1 className="home-stats-titles mt-3">SECTOR</h1>
-          <div className="board-grid">
-            <div onClick={handleBtnNbsAfrica} className="board-card-2">
-              <h3 className="board-title-alert ">NBS AFRICA</h3>
-              <div className="board-number">{tdProjectsNbsAfricaVol.toLocaleString('es-ES')}</div>
-              <div className="board-desc">belonging to {tdProjectsNbsAfrica.length} projects. </div>
-            </div>
-            <div onClick={handleBtnNbsLac} className="board-card-2">
-              <div className="board-title-alert ">NBS LAC</div>
-              <div className="board-number">{tdProjectsNbsLacVol.toLocaleString('es-ES')}</div>
-              <div className="board-desc">belonging to {tdProjectsNbsLac.length} projects. </div>
-            </div>
-            <div onClick={handleBtnNbsSpain} className="board-card-2">
-              <h3 className="board-title-alert">NBS SPAIN</h3>
-              <div className="board-number">{tdProjectsNbsSpainVol.toLocaleString('es-ES')}</div>
-              <div className="board-desc">belonging to {tdProjectsNbsSpain.length} projects. </div>
-            </div>
-            <div onClick={handleBtnPlastic} className="board-card-2">
-              <h3 className="board-title-alert">PLASTIC</h3>
-              <div className="board-number">{tdProjectsPlasticVol.toLocaleString('es-ES')}</div>
-              <div className="board-desc">belonging to {tdProjectsPlastic.length} projects. </div>
-            </div>
-            <div onClick={handleBtnTbs} className="board-card-2">
-              <h3 className="board-title-alert">TBS</h3>
-              <div className="board-number">{tdProjectsTbsVol.toLocaleString('es-ES')}</div>
-              <div className="board-desc">belonging to {tdProjectsTbs.length} projects. </div>
-            </div>
-          </div>
           <h1 className="home-stats-titles mt-3">STATUS</h1>
           <div className="board-grid">
             <div onClick={handleBtnComplete} className="board-card-2">
