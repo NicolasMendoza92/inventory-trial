@@ -119,7 +119,7 @@ export default function Operations() {
                     <td>{(op.projectData?.nameProject).slice(0, 25)}</td>
                     <td>{op.projectData?.vintageOp}</td>
                     <td>{op.precio}</td>
-                    <td>{(op.quantity).toLocaleString('es-ES')}</td>
+                    <td>{op.quantity}</td>
                     {op.delivery === 'Done' &&
                       <td><b style={{ color: 'green', fontSize: '15px' }} >Done</b></td>
                     }

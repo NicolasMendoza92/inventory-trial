@@ -162,7 +162,7 @@ export default function Projects() {
                 <td>{project.tech}</td>
                 <td>{project.pais}</td>
                 <td>{project.corsia}</td>
-                <td>{(project.volumen).toLocaleString('es-ES')}</td>
+                <td>{project.volumen}</td>
                 <td>{project.precioVenta}</td>
                 <td>{project.precioCorp}</td>
                 <td>{project.purchasePrice}</td>
